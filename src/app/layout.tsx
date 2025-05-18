@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`vsc-initialized antialiased text-zinc-200 `}
+        className={`vsc-initialized antialiased text-zinc-200 relative`}
       >
         <Header />
         {children}

@@ -1,14 +1,14 @@
 'use client'
 
 import { motion, useAnimation } from "motion/react";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { useEffect } from "react";
 
 type MenuButtonProps = {
   isMenuOpen: boolean;
-  setIsMenuOpen: Dispatch<SetStateAction<boolean>>
+  toggleMenu: () => void;
 }
 
-const MenuButton = ({ isMenuOpen, setIsMenuOpen }: MenuButtonProps) => {
+const MenuButton = ({ isMenuOpen, toggleMenu }: MenuButtonProps) => {
   const path1Controls = useAnimation();
   const path2Controls = useAnimation();
 
@@ -29,14 +29,17 @@ const MenuButton = ({ isMenuOpen, setIsMenuOpen }: MenuButtonProps) => {
       document.body.classList.add("overflow-hidden");
       return;
     }
-    
+
     path1Controls.start(path1Variants.closed)
     path2Controls.start(path2Variants.closed)
     document.body.classList.remove("overflow-hidden");
   }, [isMenuOpen]);
 
   return (
-    <div onClick={() => setIsMenuOpen(prev => !prev)} className="relative justify-self-center flex flex-col gap-2 cursor-pointer stroke-2 z-50 stroke-zinc-200 sm:hidden">
+    <div
+      onClick={toggleMenu}
+      className="relative justify-self-center flex flex-col gap-2 cursor-pointer stroke-2 z-50 stroke-zinc-200"
+    >
       <svg width={24} height={24} viewBox="0 0 24 24">
         <motion.path {...path1Variants.closed} animate={path1Controls} transition={{ duration: 0.2 }} />
         <motion.path {...path2Variants.closed} animate={path2Controls} transition={{ duration: 0.2 }} />
@@ -44,5 +47,6 @@ const MenuButton = ({ isMenuOpen, setIsMenuOpen }: MenuButtonProps) => {
     </div>
   )
 }
+
 
 export default MenuButton;

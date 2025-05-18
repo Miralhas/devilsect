@@ -13,36 +13,34 @@ type MobileMenuProps = {
 
 const MobileMenu = ({ containerRef, toggleMenu }: MobileMenuProps) => {
   return (
-    <>
-      <motion.div
-        className="bg-[#111111] w-full h-[400px] absolute z-10 origin-top-right lg:hidden"
-        initial={{ opacity: 0, scaleY: 0, scaleX: 1 }}
-        animate={{ opacity: 1, scaleY: 1, scaleX: 1 }}
-        exit={{ opacity: 0, scaleY: 0, scaleX: 1 }}
-        transition={{ duration: .5, type: "spring" }}
-        ref={containerRef}
-        key="modal"
-      >
-        <ul className="p-4 text-foreground/70 flex flex-col gap-2" onClick={toggleMenu}>
+    <motion.div
+      className="bg-secondary w-full h-[400px] absolute z-10 origin-top-right lg:hidden shadow-2xl"
+      initial={{ opacity: 0, scaleY: 0, scaleX: 1 }}
+      animate={{ opacity: 1, scaleY: 1, scaleX: 1 }}
+      exit={{ opacity: 0, scaleY: 0, scaleX: 1 }}
+      transition={{ duration: .5, type: "spring" }}
+      ref={containerRef}
+      key="modal"
+    >
+      <ul className="p-4 text-foreground/70 flex flex-col gap-2" onClick={toggleMenu}>
 
-          <li className="flex w-full items-center">
-            <SearchInput />
+        <li className="flex w-full items-center">
+          <SearchInput />
+        </li>
+
+        {LEFT_SIDE_NAV_LINKS.map((link, index) => (
+          <li key={link.title + "_" + index} className="w-full flex" >
+            <NavItem {...link} />
           </li>
+        ))}
 
-          {LEFT_SIDE_NAV_LINKS.map((link, index) => (
-            <li key={link.title + "_" + index} className="w-full flex" >
-              <NavItem {...link} />
-            </li>
-          ))}
+        <Separator className="my-2" />
 
-          <Separator className="my-2" />
-
-          <li className="flex w-full items-center">
-            <NavItem href="/account/library" title="Library" icon={BookOpenText} />
-          </li>
-        </ul>
-      </motion.div>
-    </>
+        <li className="flex w-full items-center">
+          <NavItem href="/account/library" title="Library" icon={BookOpenText} />
+        </li>
+      </ul>
+    </motion.div>
   )
 }
 

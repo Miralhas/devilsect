@@ -117,12 +117,14 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
 * {
-	scrollbar-color: rgba(84, 8, 19, 0.8) #000000;
-	scrollbar-width: thin;
+  scrollbar-color: rgba(84, 8, 19, 0.8) #000000;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
 }

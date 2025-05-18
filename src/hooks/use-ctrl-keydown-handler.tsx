@@ -7,7 +7,7 @@ type HookProps<T> = {
   key: string;
 }
 
-function UseCrtlKeyDownHandler<T extends RefObject<HTMLElement | null>>({ elementRef, key }: HookProps<T>) {
+function useCrtlKeyDownHandler<T extends RefObject<HTMLElement | null>>({ elementRef, key }: HookProps<T>) {
   useEffect(() => {
     const keyDownHandler = (e: globalThis.KeyboardEvent) => {
       if (e.ctrlKey && e.key === key) {
@@ -25,4 +25,4 @@ function UseCrtlKeyDownHandler<T extends RefObject<HTMLElement | null>>({ elemen
   }, [elementRef, key]);
 }
 
-export default UseCrtlKeyDownHandler;
+export default useCrtlKeyDownHandler;

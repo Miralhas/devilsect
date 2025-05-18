@@ -1,14 +1,14 @@
 'use client'
 
+import useCrtlKeyDownHandler from "@/hooks/use-ctrl-keydown-handler";
 import { Search } from "lucide-react";
-import { Button } from "../ui/button";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
-import UseCrtlKeyDownHandler from "@/hooks/use-ctrl-keydown-handler";
+import { useRef } from "react";
+import { Button } from "../ui/button";
 
 const SearchInput = () => {
   const searchRef = useRef<HTMLButtonElement>(null);
-  UseCrtlKeyDownHandler({ elementRef: searchRef, key: "k" });
+  useCrtlKeyDownHandler({ elementRef: searchRef, key: "k" });
 
   return (
     <>

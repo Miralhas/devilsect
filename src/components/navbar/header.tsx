@@ -73,9 +73,9 @@ const Header = () => {
       className="bg-zinc-950 w-full border-b-2 border-secondary shadow-2xl sticky top-0"
     >
       <nav className="mx-auto w-full max-w-[1440px] flex items-center p-3 md:p-4 gap-4 relative">
-        <Link href="/" className="mr-6 transition-all mt-[3px] items-center ease-in duration-200 flex gap-1 hover:opacity-80 hover:scale-[1.03]">
-          <Image src="/devilsect-logo.png" width={25} height={25} quality={100} alt="Website logo" className="ml-2 w-auto h-7 xs:h-9" />
-          <span className="text-base xs:text-2xl uppercase tracking-widest font-bold bg-gradient-to-r from-red-700/80 to-primary/70 bg-clip-text text-transparent">
+        <Link href="/" className="mr-6 transition-all mt-[3px] items-center ease-in duration-200 flex gap-1.5 hover:opacity-80 hover:scale-[1.03]">
+          <Image src="/devilsect-logo.png" width={25} height={25} quality={100} alt="Website logo" className="ml-2 w-auto h-7 xs:h-8" />
+          <span className="text-base xs:text-2xl uppercase tracking-widest bg-gradient-to-r from-red-700/80 to-primary/70 bg-clip-text text-transparent font-tilt-warp">
             DevilSect
           </span>
         </Link>
@@ -83,7 +83,7 @@ const Header = () => {
         <div className="hidden lg:flex items-center gap-4">
           {LEFT_SIDE_NAV_LINKS.map((link, index) => (
             <Link href={link.href} key={link.title + "_" + index} className="flex items-center gap-1 relative text-sm xl:text-base font-medium tracking-wide text-foreground/70 hover:text-foreground top-[1px] transition-all ease-in duration-200">
-              {link.icon ? <link.icon className="size-4 xl:mt-1" /> : null}
+              {link.icon ? <link.icon className="size-4" /> : null}
               {link.title}
             </Link>
           ))}

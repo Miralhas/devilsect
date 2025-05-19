@@ -1,16 +1,16 @@
 'use client'
 
+import { loginAction } from "@/api/authentication/actions";
 import {
   Alert,
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert";
-import { loginAction } from "@/lib/api/authentication/actions";
 import { LoginInput, loginSchema } from "@/lib/schemas/login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
-import { startTransition, useActionState, useEffect } from "react";
+import { startTransition, useActionState } from "react";
 import { useForm } from "react-hook-form";
 import AuthenticationInput from "../ui/authentication-input";
 import { Button } from "../ui/button";
@@ -31,22 +31,16 @@ const LoginForm = () => {
   const { errors: clientErrors, isSubmitSuccessful } = form.formState;
 
   const onSubmit = form.handleSubmit((data: LoginInput) => {
-    const formData = new FormData();
-
-    Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
-
     startTransition(() => {
       formAction(data);
     });
   });
 
-  useEffect(() => {
-    if (isSubmitSuccessful && formState.success) {
-      reset();
-    }
-  }, [reset, isSubmitSuccessful, formState.success]);
+  // useEffect(() => {
+  //   if (isSubmitSuccessful && formState.success) {
+  //     reset();
+  //   }
+  // }, [reset, isSubmitSuccessful, formState.success]);
 
   return (
     <form

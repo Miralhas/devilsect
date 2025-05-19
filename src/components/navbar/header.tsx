@@ -95,12 +95,12 @@ const Header = () => {
             <SearchInput />
           </div>
 
-          <Link href="/account/library" className="hidden sm:flex text-foreground/70 hover:text-foreground items-center gap-2 relative group hover:scale-[1.03]">
+          <Link href="/account/library" className="hidden sm:flex transition-transform duration-100 ease-out transform  text-foreground/70 hover:text-foreground items-center gap-2 relative group hover:scale-[1.03]">
             <BookOpenText className="size-5" />
             <span className="text-sm mb-[2px] font-semibold sr-only md:not-sr-only">Library</span>
           </Link>
 
-          <Link href="/account/inbox" className="flex items-center gap-2 group hover:scale-[1.03] text-foreground/70 hover:text-foreground">
+          <Link href="/account/inbox" className="transition-transform duration-100 ease-out transform flex items-center gap-2 group hover:scale-[1.03] text-foreground/70 hover:text-foreground">
             <div className="relative">
               <span className="text-white rounded-full absolute -top-[11px] -right-[9px] text-[10px] bg-red-900/80 border border-red-500 px-[5px] w-fit h-fit flex items-center justify-center">
                 <span className="relative bottom-[1px]">3</span>

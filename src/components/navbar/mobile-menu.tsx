@@ -46,7 +46,7 @@ const MobileMenu = ({ containerRef, toggleMenu }: MobileMenuProps) => {
 
 const NavItem = (link: NavLink) => {
   return (
-    <Link href={link.href} className="flex items-center gap-2 relative text-base font-medium tracking-wide text-foreground/70 hover:text-foreground top-[1px] ease-in duration-200 w-full transition-colors p-2 hover:bg-secondary/70 hover:rounded-sm">
+    <Link href={link.href} className="flex items-center gap-2 relative text-base font-medium tracking-wide text-foreground/70 hover:text-foreground top-[1px] ease-in duration-200 w-full transition-colors p-2 hover:bg-background hover:rounded-sm">
       {link.icon ? <link.icon className="size-6 " /> : null}
       {link.title}
     </Link>

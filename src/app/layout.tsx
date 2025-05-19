@@ -1,6 +1,5 @@
-import Header from "@/components/navbar/header";
 import type { Metadata } from "next";
-import { Manrope, Roboto, Tilt_Warp } from 'next/font/google'
+import { Manrope, Roboto, Tilt_Warp } from 'next/font/google';
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -35,7 +34,6 @@ export default function RootLayout({
       <body
         className={`vsc-initialized antialiased text-zinc-200 relative font-main`}
       >
-        <Header />
         {children}
       </body>
     </html>

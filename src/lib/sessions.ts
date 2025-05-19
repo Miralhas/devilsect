@@ -1,9 +1,17 @@
 import 'server-only'
+
 import { cookies } from 'next/headers'
 import { ApiLoginResponse } from '@/types/api'
 import { REFRESH_TOKEN_COOKIE_NAME, SESSION_COOKIE_NAME } from './constants';
 
 const MILLISECONDS = 1000;
+
+export const getSesstion = async () => {
+  const cookieStore = await cookies();
+  const session = cookieStore.get(SESSION_COOKIE_NAME);
+  if (!session) return undefined;
+  return session;
+}
  
 export async function createSession(data: ApiLoginResponse) {
   const cookieStore = await cookies();
@@ -29,7 +37,7 @@ export async function createSession(data: ApiLoginResponse) {
 }
 
 export async function deleteSession() {
-  const cookieStore = await cookies()
+  const cookieStore = await cookies();
   cookieStore.delete(SESSION_COOKIE_NAME);
   cookieStore.delete(REFRESH_TOKEN_COOKIE_NAME);
 }

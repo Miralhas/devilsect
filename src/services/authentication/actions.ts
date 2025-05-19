@@ -2,7 +2,7 @@
 
 import { env } from '@/env';
 import { LoginInput, loginSchema } from '@/lib/schemas/login';
-import { createSession } from '@/lib/sessions';
+import { createSession, deleteSession } from '@/lib/sessions';
 import { ApiLoginResponse, ApiResponseError } from '@/types/api';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -40,12 +40,14 @@ export const loginAction = async (prevState: unknown, payload: LoginInput): Prom
   }
 
   const data: ApiLoginResponse = await res.json();
-  
+
   await createSession(data);
 
   revalidatePath("/");
   redirect("/");
 }
 
-// Username:715505@ecenglish.online
-// Password: Learn123
+export const logoutAction = async () => {
+  await deleteSession();
+  redirect("/");
+}

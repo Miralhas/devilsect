@@ -1,12 +1,12 @@
 'use client'
 
-import { loginAction } from "@/api/authentication/actions";
 import {
   Alert,
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert";
 import { LoginInput, loginSchema } from "@/lib/schemas/login";
+import { loginAction } from "@/services/authentication/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
@@ -22,25 +22,19 @@ const LoginForm = () => {
 
   console.log(formState.errors)
 
-  const { reset, ...form } = useForm<LoginInput>({
+  const { ...form } = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: "", password: "" },
     mode: "onSubmit"
   });
 
-  const { errors: clientErrors, isSubmitSuccessful } = form.formState;
+  const { errors: clientErrors } = form.formState;
 
   const onSubmit = form.handleSubmit((data: LoginInput) => {
     startTransition(() => {
       formAction(data);
     });
   });
-
-  // useEffect(() => {
-  //   if (isSubmitSuccessful && formState.success) {
-  //     reset();
-  //   }
-  // }, [reset, isSubmitSuccessful, formState.success]);
 
   return (
     <form

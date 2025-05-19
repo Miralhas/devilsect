@@ -1,13 +1,13 @@
 'use client'
 
 import { Book, BookOpenText, Gem, LucideIcon, Mail, RefreshCcw } from "lucide-react";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import MenuButton from "./menu-button";
 import MobileMenu from "./mobile-menu";
 import SearchInput from "./search-input";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 
 export type NavLink = {
   title: string;
@@ -21,7 +21,7 @@ export const LEFT_SIDE_NAV_LINKS: NavLink[] = [
   { title: "Updates", href: "/latest-updates", icon: RefreshCcw },
 ]
 
-const Header = () => {
+const Header = ({ children }: PropsWithChildren) => {
   const [isNavHidden, setIsNavHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -95,27 +95,7 @@ const Header = () => {
             <SearchInput />
           </div>
 
-          <Link href="/account/library" className="hidden sm:flex transition-transform duration-100 ease-out transform  text-foreground/70 hover:text-foreground items-center gap-2 relative group hover:scale-[1.03]">
-            <BookOpenText className="size-5" />
-            <span className="text-sm mb-[2px] font-semibold sr-only md:not-sr-only">Library</span>
-          </Link>
-
-          <Link href="/account/inbox" className="transition-transform duration-100 ease-out transform flex items-center gap-2 group hover:scale-[1.03] text-foreground/70 hover:text-foreground">
-            <div className="relative">
-              <span className="text-white rounded-full absolute -top-[11px] -right-[9px] text-[10px] bg-red-900/80 border border-red-500 px-[5px] w-fit h-fit flex items-center justify-center">
-                <span className="relative bottom-[1px]">3</span>
-              </span>
-              <Mail className="size-5" />
-            </div>
-            <span className="text-sm mb-[2px] font-semibold sr-only">Inbox</span>
-          </Link>
-
-
-          <div className="w-px h-4 bg-zinc-700" />
-
-          <Link href="/login" className="flex items-center gap-2 hover:underline">
-            <Image src="https://github.com/miralhas.png" width={30} height={30} alt="account image" className="rounded-full size-9" />
-          </Link>
+          {children}
 
           <div className="flex gap-4 items-center lg:hidden">
             <div className="w-px h-4 bg-zinc-700 lg:hidden" />

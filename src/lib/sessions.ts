@@ -15,10 +15,9 @@ import {
 
 const publicKeyPromise = importSPKI(env.PUBLIC_KEY, SESSION_ENCRYPTION_ALGORITHM);
 
-export const getSesstion = async () => {
+export const getSession = async () => {
   const cookieStore = await cookies();
   const session = cookieStore.get(SESSION_COOKIE_NAME);
-  if (!session) return undefined;
   return session;
 }
 

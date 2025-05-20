@@ -1,13 +1,14 @@
 'use client'
 
-import { Book, BookOpenText, Gem, LucideIcon, Mail, RefreshCcw } from "lucide-react";
+import { Book, Gem, LucideIcon, RefreshCcw } from "lucide-react";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import MenuButton from "./menu-button";
 import MobileMenu from "./mobile-menu";
 import SearchInput from "./search-input";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
+import UserLinks from "./user-links";
 
 export type NavLink = {
   title: string;
@@ -82,7 +83,7 @@ const Header = () => {
 
         <div className="hidden lg:flex items-center gap-4">
           {LEFT_SIDE_NAV_LINKS.map((link, index) => (
-            <Link href={link.href} key={link.title + "_" + index} className="flex items-center gap-1 relative text-sm xl:text-base font-medium tracking-wide text-foreground/70 hover:text-foreground top-[1px] transition-all ease-in duration-200">
+            <Link href={link.href} key={link.title + "_" + index} className="flex items-center gap-1 relative text-sm xl:text-base font-light tracking-wide text-foreground/80 hover:text-foreground top-[1px] transition-all ease-in duration-200">
               {link.icon ? <link.icon className="size-4" /> : null}
               {link.title}
             </Link>
@@ -95,27 +96,7 @@ const Header = () => {
             <SearchInput />
           </div>
 
-          <Link href="/account/library" className="hidden sm:flex text-foreground/70 hover:text-foreground items-center gap-2 relative group hover:scale-[1.03]">
-            <BookOpenText className="size-5" />
-            <span className="text-sm mb-[2px] font-semibold sr-only md:not-sr-only">Library</span>
-          </Link>
-
-          <Link href="/account/inbox" className="flex items-center gap-2 group hover:scale-[1.03] text-foreground/70 hover:text-foreground">
-            <div className="relative">
-              <span className="text-white rounded-full absolute -top-[11px] -right-[9px] text-[10px] bg-red-900/80 border border-red-500 px-[5px] w-fit h-fit flex items-center justify-center">
-                <span className="relative bottom-[1px]">3</span>
-              </span>
-              <Mail className="size-5" />
-            </div>
-            <span className="text-sm mb-[2px] font-semibold sr-only">Inbox</span>
-          </Link>
-
-
-          <div className="w-px h-4 bg-zinc-700" />
-
-          <Link href="/login" className="flex items-center gap-2 hover:underline">
-            <Image src="https://github.com/miralhas.png" width={30} height={30} alt="account image" className="rounded-full size-9" />
-          </Link>
+          <UserLinks />
 
           <div className="flex gap-4 items-center lg:hidden">
             <div className="w-px h-4 bg-zinc-700 lg:hidden" />

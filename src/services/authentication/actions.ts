@@ -81,7 +81,7 @@ export const signupAction = async (prevState: AuthenticationFormState, payload: 
 
     if (!res.ok) {
       const data: ApiResponseError = await res.json();
-      const errors: AuthenticationFormState["errors"] = { error: [data.detail ?? DEFAULT_LOGIN_ERROR_MESSAGE] };
+      const errors: AuthenticationFormState["errors"] = { error: [data.detail ?? DEFAULT_SIGNUP_ERROR_MESSAGE] };
       if (data?.errors?.email) errors["email"] = [data.errors?.email];
       if (data?.errors?.password) errors["password"] = [data.errors?.password];
       if (data?.errors?.username) errors["username"] = [data.errors?.username];

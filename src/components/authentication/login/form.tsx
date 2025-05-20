@@ -5,20 +5,23 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert";
+import AuthenticationInput from "@/components/ui/authentication-input";
+import { Button } from "@/components/ui/button";
+import GoogleIcon from "@/components/ui/google-icon";
+import { Label } from "@/components/ui/label";
 import { LoginInput, loginSchema } from "@/lib/schemas/login";
 import { loginAction } from "@/services/authentication/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
-import { startTransition, useActionState } from "react";
+import { startTransition, useActionState, useState } from "react";
 import { useForm } from "react-hook-form";
-import AuthenticationInput from "../ui/authentication-input";
-import { Button } from "../ui/button";
-import GoogleIcon from "../ui/google-icon";
-import { Label } from "../ui/label";
 
 const LoginForm = () => {
   const [formState, formAction, isPending] = useActionState(loginAction, { success: false });
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = () => setShowPassword(prev => !prev);
 
   const { ...form } = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
@@ -44,7 +47,7 @@ const LoginForm = () => {
             <AlertCircle className="h-4 w-4" />
             <AlertTitle className="font-semibold mb-1">Error Logging In</AlertTitle>
             <AlertDescription className="font-light tracking-wider">
-              {formState.errors.error}
+              {formState.errors.error}.
             </AlertDescription>
           </Alert>
         ) : null}
@@ -73,14 +76,20 @@ const LoginForm = () => {
               <Label htmlFor="password" className="font-semibold text-muted-foreground">Password</Label>
               <Link href="/reset-password" className="font-medium leading-none text-muted-foreground text-xs transition-colors duration-100 hover:text-accent-foreground">Forgot password?</Link>
             </div>
-            <AuthenticationInput
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              disabled={isPending}
-              aria-invalid={Boolean(clientErrors.password) || Boolean(formState.errors?.password)}
-              {...form.register("password")}
-            />
+            <div className="w-full relative">
+              <AuthenticationInput
+                id="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="••••••••"
+                disabled={isPending}
+                aria-invalid={Boolean(clientErrors.password) || Boolean(formState.errors?.password)}
+                className="pr-9"
+                {...form.register("password")}
+              />
+              <span className="absolute right-0 top-0 m-2.5 mr-4 text-muted-foreground cursor-pointer hover:text-accent-foreground/90 transition-colors duration-200" onClick={toggleShowPassword}>
+                {showPassword ?  <EyeOffIcon className="size-4" /> : <EyeIcon className="size-4" />}
+              </span>
+            </div>
             {clientErrors.password ? (
               <p className="text-red-700/80 text-sm">{clientErrors.password.message}</p>
             ) : null}

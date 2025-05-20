@@ -20,8 +20,6 @@ import { Label } from "../ui/label";
 const LoginForm = () => {
   const [formState, formAction, isPending] = useActionState(loginAction, { success: false });
 
-  console.log(formState.errors)
-
   const { ...form } = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: "abc@gmail.com", password: "1234" },

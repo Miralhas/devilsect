@@ -2,12 +2,11 @@ import 'server-only';
 
 import { env } from '@/env';
 import { ApiLoginResponse } from '@/types/api';
-import { Role, User } from '@/types/authentication';
+import { CustomJwtPayload } from '@/types/session';
 import { importSPKI, jwtVerify, JWTVerifyResult } from 'jose';
 import { cookies } from 'next/headers';
-import { REFRESH_TOKEN_COOKIE_NAME, SESSION_COOKIE_NAME } from './constants';
-import { CustomJwtPayload } from '@/types/session';
 import { cache } from 'react';
+import { REFRESH_TOKEN_COOKIE_NAME, SESSION_COOKIE_NAME } from './constants';
 
 const MILLISECONDS = 1000;
 

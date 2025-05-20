@@ -1,10 +1,18 @@
-import 'server-only'
+import 'server-only';
 
-import { cookies } from 'next/headers'
-import { ApiLoginResponse } from '@/types/api'
+import { env } from '@/env';
+import { ApiLoginResponse } from '@/types/api';
+import { Role, User } from '@/types/authentication';
+import { importSPKI, jwtVerify, JWTVerifyResult } from 'jose';
+import { cookies } from 'next/headers';
 import { REFRESH_TOKEN_COOKIE_NAME, SESSION_COOKIE_NAME } from './constants';
+import { CustomJwtPayload } from '@/types/session';
+import { cache } from 'react';
 
 const MILLISECONDS = 1000;
+
+const secretKey = env.PUBLIC_KEY;
+const publicKeyPromise = importSPKI(secretKey, "RS256");
 
 export const getSesstion = async () => {
   const cookieStore = await cookies();
@@ -12,13 +20,13 @@ export const getSesstion = async () => {
   if (!session) return undefined;
   return session;
 }
- 
+
 export async function createSession(data: ApiLoginResponse) {
   const cookieStore = await cookies();
 
   const sessionExpiresAt = new Date(Date.now() + (data.accessTokenExpiresIn * MILLISECONDS));
   const refreshTokenExpiresAt = new Date(Date.now() + (data.refreshTokenExpiresIn * MILLISECONDS));
- 
+
   cookieStore.set(SESSION_COOKIE_NAME, data.accessToken, {
     httpOnly: true,
     secure: true,
@@ -27,7 +35,7 @@ export async function createSession(data: ApiLoginResponse) {
     path: '/',
   });
 
-    cookieStore.set(REFRESH_TOKEN_COOKIE_NAME, data.refreshToken, {
+  cookieStore.set(REFRESH_TOKEN_COOKIE_NAME, data.refreshToken, {
     httpOnly: true,
     secure: true,
     expires: refreshTokenExpiresAt,
@@ -41,3 +49,19 @@ export async function deleteSession() {
   cookieStore.delete(SESSION_COOKIE_NAME);
   cookieStore.delete(REFRESH_TOKEN_COOKIE_NAME);
 }
+
+export const decrypt = cache(async (session: string | undefined = '') => {
+  if (!session) return undefined;
+  try {
+    const publicKey = await publicKeyPromise;
+
+    const { payload } = await jwtVerify(session, publicKey, {
+      issuer: "stalkers"
+    }) as JWTVerifyResult & { payload: CustomJwtPayload };
+
+    return payload;
+  } catch (error) {
+    console.log('Failed to verify session');
+    return undefined;
+  }
+});

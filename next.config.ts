@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
       new URL(`${env.APP_URL}/**`)
     ],
   },
+
 };
 
 export default nextConfig;

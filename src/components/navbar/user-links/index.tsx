@@ -1,14 +1,18 @@
-import { BookOpenText, Mail } from "lucide-react";
+'use client'
+
+import LoginButton from "@/components/navbar/login-button";
+import { BookOpenText } from "lucide-react";
 import Link from "next/link";
 import UserAccount from "./user-account";
-import { getCurrentUser } from "@/services/authentication/queries";
-import LoginButton from "@/components/navbar/login-button";
 import UserInbox from "./user-inbox";
+import { useCurrentUserQuery } from "@/services/authentication/client-queries";
 
-const UserLinks = async () => {
-  const user = await getCurrentUser();
+const UserLinks = () => {
+  const { data, isLoading, isError } = useCurrentUserQuery();
 
-  if (!user) return <LoginButton />
+  if (isLoading || isError) {
+    return <LoginButton />
+  }
 
   return (
     <>
@@ -17,11 +21,11 @@ const UserLinks = async () => {
         <span className="text-sm mb-[2px] font-semibold sr-only md:not-sr-only">Library</span>
       </Link>
 
-      <UserInbox user={user} />
+      <UserInbox />
 
       <div className="w-px h-4 bg-zinc-700" />
 
-      <UserAccount user={user} />
+      <UserAccount user={data!} />
     </>
   )
 }

@@ -1,13 +1,14 @@
 'use client'
 
-import { Book, BookOpenText, Gem, LucideIcon, Mail, RefreshCcw } from "lucide-react";
+import { Book, Gem, LucideIcon, RefreshCcw } from "lucide-react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { PropsWithChildren, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MenuButton from "./menu-button";
 import MobileMenu from "./mobile-menu";
 import SearchInput from "./search-input";
+import UserLinks from "./user-links";
 
 export type NavLink = {
   title: string;
@@ -21,7 +22,7 @@ export const LEFT_SIDE_NAV_LINKS: NavLink[] = [
   { title: "Updates", href: "/latest-updates", icon: RefreshCcw },
 ]
 
-const Header = ({ children }: PropsWithChildren) => {
+const Header = () => {
   const [isNavHidden, setIsNavHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -95,7 +96,7 @@ const Header = ({ children }: PropsWithChildren) => {
             <SearchInput />
           </div>
 
-          {children}
+          <UserLinks />
 
           <div className="flex gap-4 items-center lg:hidden">
             <div className="w-px h-4 bg-zinc-700 lg:hidden" />

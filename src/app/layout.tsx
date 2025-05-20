@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Roboto, Tilt_Warp } from 'next/font/google';
 import "./globals.css";
+import Providers from "@/components/providers";
 
 export const metadata: Metadata = {
   title: "Devil Sect | Read Free Webnovels and Light Novels Online",
@@ -34,7 +35,9 @@ export default function RootLayout({
       <body
         className={`vsc-initialized antialiased text-zinc-200 relative font-main`}
       >
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

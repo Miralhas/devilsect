@@ -49,5 +49,4 @@ export const loginAction = async (prevState: unknown, payload: LoginInput): Prom
 
 export const logoutAction = async () => {
   await deleteSession();
-  redirect("/");
 }

@@ -8,5 +8,5 @@ export type CustomJwtPayload = {
   nbf?: number;
   exp?: number;
   iat?: number;
-  user?: User
+  user?: User;
 }

@@ -6,17 +6,18 @@ import { CustomJwtPayload } from '@/types/session';
 import { importSPKI, jwtVerify, JWTVerifyResult } from 'jose';
 import { cookies } from 'next/headers';
 import { cache } from 'react';
-import { REFRESH_TOKEN_COOKIE_NAME, SESSION_COOKIE_NAME } from './constants';
+import {
+  MILLISECONDS,
+  REFRESH_TOKEN_COOKIE_NAME,
+  SESSION_COOKIE_NAME,
+  SESSION_ENCRYPTION_ALGORITHM
+} from './constants';
 
-const MILLISECONDS = 1000;
+const publicKeyPromise = importSPKI(env.PUBLIC_KEY, SESSION_ENCRYPTION_ALGORITHM);
 
-const secretKey = env.PUBLIC_KEY;
-const publicKeyPromise = importSPKI(secretKey, "RS256");
-
-export const getSesstion = async () => {
+export const getSession = async () => {
   const cookieStore = await cookies();
   const session = cookieStore.get(SESSION_COOKIE_NAME);
-  if (!session) return undefined;
   return session;
 }
 
@@ -59,6 +60,7 @@ export const decrypt = cache(async (session: string | undefined = '') => {
     }) as JWTVerifyResult & { payload: CustomJwtPayload };
 
     return payload;
+    // eslint-disable-next-line
   } catch (error) {
     console.log('Failed to verify session');
     return undefined;

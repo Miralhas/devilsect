@@ -7,7 +7,7 @@ const SignupPage = () => {
   return (
     <div className="h-screen flex justify-center items-center p-4 w-full relative">
       <BlurCenter opacity="low" />
-      <div className="w-full max-w-[400px] border border-neutral-900 bg-secondary/60 rounded-lg overflow-hidden p-1 transition-all duration-300 space-y-2 relative backdrop-blur-sm z-50">
+      <div className="w-full max-w-md border border-neutral-900 bg-secondary/60 rounded-lg overflow-hidden p-1 transition-all duration-300 space-y-2 relative backdrop-blur-sm z-50">
         <div className="flex flex-col gap-1.5 p-4">
           <Link href="/" className="transition-opacity duration-300 opacity-100 hover:opacity-65 self-start">
             <Image src="/devilsect-logo.png" width={50} height={50} quality={100} className="size-9" alt="Home" />

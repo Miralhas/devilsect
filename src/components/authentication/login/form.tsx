@@ -25,7 +25,7 @@ const LoginForm = () => {
 
   const { ...form } = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: "abc@gmail.com", password: "1234" },
+    defaultValues: { email: "", password: "" },
     mode: "onSubmit"
   });
 
@@ -51,58 +51,55 @@ const LoginForm = () => {
             </AlertDescription>
           </Alert>
         ) : null}
-        <div className="grid gap-3">
-          <>
-            <Label htmlFor="email" className="font-semibold text-muted-foreground">Email</Label>
-            <AuthenticationInput
-              id="email"
-              placeholder="example@email.com"
-              disabled={isPending}
-              aria-invalid={Boolean(clientErrors.email) || Boolean(formState.errors?.email)}
-              {...form.register("email")}
-            />
-            {clientErrors.email ? (
-              <p className="text-red-700/80 text-sm">{clientErrors.email.message}</p>
-            ) : null}
-            {formState.errors?.email ? (
-              <p className="text-red-700/80 text-sm">{formState.errors.email.join(',')}</p>
-            ) : null}
-          </>
 
+        <div className="grid gap-3">
+          <Label htmlFor="email" className="font-semibold text-muted-foreground">Email</Label>
+          <AuthenticationInput
+            id="email"
+            placeholder="example@email.com"
+            disabled={isPending}
+            aria-invalid={Boolean(clientErrors.email) || Boolean(formState.errors?.email)}
+            {...form.register("email")}
+          />
+          {clientErrors.email ? (
+            <p className="text-red-700/80 text-sm">{clientErrors.email.message}</p>
+          ) : null}
+          {formState.errors?.email ? (
+            <p className="text-red-700/80 text-sm">{formState.errors.email.join(',')}</p>
+          ) : null}
         </div>
+
         <div className="grid gap-3">
-          <>
-            <div className="flex justify-between">
-              <Label htmlFor="password" className="font-semibold text-muted-foreground">Password</Label>
-              <Link href="/reset-password" className="font-medium leading-none text-muted-foreground text-xs transition-colors duration-100 hover:text-accent-foreground">Forgot password?</Link>
-            </div>
-            <div className="w-full relative">
-              <AuthenticationInput
-                id="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="••••••••"
-                disabled={isPending}
-                aria-invalid={Boolean(clientErrors.password) || Boolean(formState.errors?.password)}
-                className="pr-9"
-                {...form.register("password")}
-              />
-              <span className="absolute right-0 top-0 m-2.5 mr-4 text-muted-foreground cursor-pointer hover:text-accent-foreground/90 transition-colors duration-200" onClick={toggleShowPassword}>
-                {showPassword ?  <EyeOffIcon className="size-4" /> : <EyeIcon className="size-4" />}
-              </span>
-            </div>
-            {clientErrors.password ? (
-              <p className="text-red-700/80 text-sm">{clientErrors.password.message}</p>
-            ) : null}
-            {formState.errors?.password ? (
-              <p className="text-red-700/80 text-sm">{formState.errors.password.join('. ')}</p>
-            ) : null}
-          </>
-
-
+          <div className="flex justify-between">
+            <Label htmlFor="password" className="font-semibold text-muted-foreground">Password</Label>
+            <Link href="/reset-password" className="font-medium leading-none text-muted-foreground text-xs transition-colors duration-100 hover:text-accent-foreground">Forgot password?</Link>
+          </div>
+          <div className="w-full relative">
+            <AuthenticationInput
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="••••••••"
+              disabled={isPending}
+              aria-invalid={Boolean(clientErrors.password) || Boolean(formState.errors?.password)}
+              className="pr-9"
+              {...form.register("password")}
+            />
+            <span
+              className="absolute right-0 top-0 m-2.5 mr-4 text-muted-foreground cursor-pointer hover:text-accent-foreground/90 transition-colors duration-200"
+              onClick={toggleShowPassword}>
+              {showPassword ? <EyeOffIcon className="size-4" /> : <EyeIcon className="size-4" />}
+            </span>
+          </div>
+          {clientErrors.password ? (
+            <p className="text-red-700/80 text-sm">{clientErrors.password.message}</p>
+          ) : null}
+          {formState.errors?.password ? (
+            <p className="text-red-700/80 text-sm">{formState.errors.password.join('. ')}</p>
+          ) : null}
         </div>
 
         <Button variant="cool" type="submit" disabled={isPending}>
-          {isPending ? (<span className="animate-pulse">Logging in...</span>) : "Login"}
+          {isPending ? <span className="animate-pulse">Logging in...</span> : "Login"}
         </Button>
 
         <div className="flex justify-center items-center text-xs text-muted-foreground uppercase font-roboto leading-none tracking-wide">

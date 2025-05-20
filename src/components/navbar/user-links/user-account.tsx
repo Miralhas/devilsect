@@ -53,20 +53,16 @@ const UserAccount = ({ user }: { user: User }) => {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator className="mt-3" />
-        {/* <form action={logoutAction}> */}
         <DropdownMenuItem className="flex items-center" onClick={handleLogout}>
-          {/* <Button variant="ghost"> */}
           <LogOutIcon className="text-zinc-200 mt-[2px]" />
           Log out
-          {/* </Button> */}
         </DropdownMenuItem>
-        {/* </form> */}
       </DropdownMenuContent>
     </DropdownMenu>
   )
 }
 
-const ImageWithFallback = ({ fallback = "/devilsect-logo.png", alt, src, ...props }: ImageProps & { fallback?: string }) => {
+const ImageWithFallback = ({ fallback = "/yin-yang.png", alt, src, ...props }: ImageProps & { fallback?: string }) => {
   const [error, setError] = useState(false);
 
   return (

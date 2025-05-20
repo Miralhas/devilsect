@@ -24,24 +24,22 @@ const SignupForm = () => {
   const toggleShowPassword = () => setShowPassword(prev => !prev);
   const toggleShowConfirmPassword = () => setShowConfirmPassword(prev => !prev);
 
-  const { ...form } = useForm<SignupInput>({
+  const form = useForm<SignupInput>({
     resolver: zodResolver(signUpSchema),
-    defaultValues: { email: "abc@gmail.com", username: "miggas", password: "1234", confirmPassword: "1234" },
-    // defaultValues: { email: "", username: "", password: "", confirmPassword: "" },
+    defaultValues: { email: "", username: "", password: "", confirmPassword: "" },
     mode: "onSubmit"
   });
 
   const { errors: clientErrors } = form.formState;
 
   const onSubmit = form.handleSubmit((data: SignupInput) => {
-    startTransition(() => {
-      formAction(data);
-    });
+    startTransition(() => formAction(data));
   });
 
   return (
     <form onSubmit={onSubmit}>
       <div className="flex flex-col gap-5">
+        
         {formState.errors?.error ? (
           <Alert variant="destructive" className="bg-primary/20 border border-accent/70 rounded-sm text-red-700">
             <AlertCircle className="h-4 w-4" />
@@ -99,7 +97,9 @@ const SignupForm = () => {
               className="pr-9"
               {...form.register("password")}
             />
-            <span className="absolute right-0 top-0 m-2.5 mr-4 text-muted-foreground cursor-pointer hover:text-accent-foreground/90 transition-colors duration-200" onClick={toggleShowPassword}>
+            <span
+              className="absolute right-0 top-0 m-2.5 mr-4 text-muted-foreground cursor-pointer hover:text-accent-foreground/90 transition-colors duration-200"
+              onClick={toggleShowPassword}>
               {showPassword ? <EyeOffIcon className="size-4" /> : <EyeIcon className="size-4" />}
             </span>
           </div>

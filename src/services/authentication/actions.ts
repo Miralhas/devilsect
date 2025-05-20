@@ -87,13 +87,21 @@ export const signupAction = async (prevState: AuthenticationFormState, payload: 
       if (data?.errors?.username) errors["username"] = [data.errors?.username];
       return { errors, success: false, fields: parsed.data };
     }
+
+    // Login action will try to redirect. Thats why it's needed to wrap inside a try catch block.
+    try {
+      await loginAction(undefined, { email: parsed.data.email, password: parsed.data.password } as LoginInput);
+    // eslint-disable-next-line
+    } catch (error) {
+    }
+
   } catch (error) {
     console.log(error);
     const errors: AuthenticationFormState["errors"] = { error: [DEFAULT_SIGNUP_ERROR_MESSAGE] }
     return { errors, success: false, fields: parsed.data };
   }
 
-  redirect("/signup");
+  redirect("/");
 }
 
 export const logoutAction = async () => {

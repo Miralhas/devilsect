@@ -13,7 +13,7 @@ const UserInbox = () => {
       <div className="relative">
         {isLoading || isError || !hasNotifications ? null : (
           <span className="text-white rounded-full absolute -top-[11px] -right-[9px] text-[10px] bg-red-900/80 border border-red-500 px-[5px] w-fit h-fit flex items-center justify-center">
-            <span className="relative bottom-[1px]">{data?.count}</span>
+            <span className="relative bottom-[1px]">{data.count}</span>
           </span>
         )}
         <Mail className={cn("size-5 group-hover:text-foreground", {"text-zinc-500": !hasNotifications})} />

@@ -11,7 +11,7 @@ export const GET = async () => {
 
   if (!session) {
     await deleteSession();
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+    return NextResponse.json({ error: 'Unauthorized: Missing or invalid session' }, { status: 401 })
   }
 
   const res = await fetch(env.NEXT_PUBLIC_BASE_URL + "/users/notifications/unread-count", {

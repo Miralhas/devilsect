@@ -1,4 +1,4 @@
-import { decrypt } from '@/lib/sessions';
+import { decrypt, deleteSession } from '@/lib/sessions';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -12,6 +12,7 @@ export default async function middleware(req: NextRequest) {
   const session = await decrypt(cookie);
 
   if (isProtectedRoute && !session?.sub) {
+    await deleteSession();
     return NextResponse.redirect(new URL('/login', req.nextUrl));
   }
 

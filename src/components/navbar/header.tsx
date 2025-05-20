@@ -83,7 +83,7 @@ const Header = () => {
 
         <div className="hidden lg:flex items-center gap-4">
           {LEFT_SIDE_NAV_LINKS.map((link, index) => (
-            <Link href={link.href} key={link.title + "_" + index} className="flex items-center gap-1 relative text-sm xl:text-base font-medium tracking-wide text-foreground/70 hover:text-foreground top-[1px] transition-all ease-in duration-200">
+            <Link href={link.href} key={link.title + "_" + index} className="flex items-center gap-1 relative text-sm xl:text-base font-light tracking-wide text-foreground/80 hover:text-foreground top-[1px] transition-all ease-in duration-200">
               {link.icon ? <link.icon className="size-4" /> : null}
               {link.title}
             </Link>

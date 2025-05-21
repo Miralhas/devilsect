@@ -8,7 +8,6 @@ import { cookies } from "next/headers";
 
 export const getCurrentUser = async (): Promise<User | undefined> => {
   const cookieStore = await cookies();
-  await new Promise(resolve => setTimeout(resolve, 2000));
   const session = cookieStore.get(SESSION_COOKIE_NAME);
 
   // return undefined if there is no current user

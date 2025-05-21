@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/alert";
 import AuthenticationInput from "@/components/ui/authentication-input";
 import { Button } from "@/components/ui/button";
-import GoogleIcon from "@/components/ui/google-icon";
 import { Label } from "@/components/ui/label";
 import { SignupInput, signUpSchema } from "@/lib/schemas/signup";
 import { signupAction } from "@/services/authentication/actions";
@@ -15,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";
 import { startTransition, useActionState, useState } from "react";
 import { useForm } from "react-hook-form";
+import GoogleAuthButton from "../google-auth-button";
 
 const SignupForm = () => {
   const [formState, formAction, isPending] = useActionState(signupAction, { success: false });
@@ -143,10 +143,7 @@ const SignupForm = () => {
         </div>
 
         <div className="grid">
-          <Button className="gap-4" variant="cool-secondary" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
-            <GoogleIcon />
-            Google
-          </Button>
+          <GoogleAuthButton />
         </div>
       </div>
     </form >

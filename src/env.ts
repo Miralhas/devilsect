@@ -8,10 +8,12 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_BASE_URL: z.string().url(),
+    NEXT_PUBLIC_BASE_URL_WITHOUT_SUFFIX: z.string().url(),
   },
   runtimeEnv: {
     APP_URL: process.env.APP_URL,
     PUBLIC_KEY: process.env.PUBLIC_KEY,
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+    NEXT_PUBLIC_BASE_URL_WITHOUT_SUFFIX: process.env.NEXT_PUBLIC_BASE_URL_WITHOUT_SUFFIX,
   },
 });

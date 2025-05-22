@@ -8,12 +8,12 @@ import { cookies } from 'next/headers';
 import { cache } from 'react';
 import {
   MILLISECONDS,
-  REFRESH_TOKEN_COOKIE_NAME,
   SESSION_COOKIE_NAME,
   SESSION_ENCRYPTION_ALGORITHM
 } from './constants';
 
 const publicKeyPromise = importSPKI(env.PUBLIC_KEY, SESSION_ENCRYPTION_ALGORITHM);
+const SESSION_EXPIRATION_SECONDS = 60 * 60 * 24 * 7;
 
 export const getSession = async () => {
   const cookieStore = await cookies();
@@ -24,8 +24,7 @@ export const getSession = async () => {
 export async function createSession(data: ApiLoginResponse) {
   const cookieStore = await cookies();
 
-  const sessionExpiresAt = new Date(Date.now() + (data.accessTokenExpiresIn * MILLISECONDS));
-  const refreshTokenExpiresAt = new Date(Date.now() + (data.refreshTokenExpiresIn * MILLISECONDS));
+  const sessionExpiresAt = new Date(Date.now() + (SESSION_EXPIRATION_SECONDS * MILLISECONDS));
 
   cookieStore.set(SESSION_COOKIE_NAME, data.accessToken, {
     httpOnly: true,
@@ -34,11 +33,17 @@ export async function createSession(data: ApiLoginResponse) {
     sameSite: 'lax',
     path: '/',
   });
+}
 
-  cookieStore.set(REFRESH_TOKEN_COOKIE_NAME, data.refreshToken, {
+export async function updateSession(session: string) {
+  const cookieStore = await cookies();
+  
+  const sessionExpiresAt = new Date(Date.now() + (SESSION_EXPIRATION_SECONDS * MILLISECONDS));
+
+  cookieStore.set(SESSION_COOKIE_NAME, session, {
     httpOnly: true,
     secure: true,
-    expires: refreshTokenExpiresAt,
+    expires: sessionExpiresAt,
     sameSite: 'lax',
     path: '/',
   });
@@ -47,7 +52,6 @@ export async function createSession(data: ApiLoginResponse) {
 export async function deleteSession() {
   const cookieStore = await cookies();
   cookieStore.delete(SESSION_COOKIE_NAME);
-  cookieStore.delete(REFRESH_TOKEN_COOKIE_NAME);
 }
 
 export const decrypt = cache(async (session: string | undefined = '') => {

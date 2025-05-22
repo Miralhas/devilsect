@@ -9,8 +9,6 @@ export type ApiResponseError = {
 
 export type ApiLoginResponse = {
   accessToken: string;
-  refreshToken: string;
   accessTokenExpiresIn: number;
-  refreshTokenExpiresIn: number;
 }
 

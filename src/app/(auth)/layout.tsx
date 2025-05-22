@@ -8,8 +8,8 @@ const AuthLayout = async ({ children }: PropsWithChildren) => {
   if (user) redirect("/");
   return (
     <>
-      <div className="h-screen flex justify-center items-center p-4 w-full relative">
-        <BlurCenter opacity="low" />
+      <div className="min-h-screen flex justify-center items-center p-4 w-full relative">
+        <BlurCenter opacity="medium" />
         {children}
       </div>
     </>

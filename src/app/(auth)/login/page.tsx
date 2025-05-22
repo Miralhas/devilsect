@@ -1,3 +1,5 @@
+'use client'
+
 import LoginForm from "@/components/authentication/login/form";
 import Image from "next/image";
 import Link from "next/link";

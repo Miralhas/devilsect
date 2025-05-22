@@ -45,7 +45,7 @@ const SendEmailForm = ({ actionErrors, clientErrors, onSubmit, register, isPendi
           </div>
         </form>
         <div className="flex justify-center text-sm gap-1 font-medium leading-relaxed">
-          Remember your password? <Link href="/signup" className="transition-colors duration-200 hover:text-red-800 underline">Sign in</Link>
+          Remember your password? <Link href="/login" className="transition-colors duration-200 hover:text-red-800 underline">Sign in</Link>
         </div>
       </div>
     </>

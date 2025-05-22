@@ -11,7 +11,7 @@ const UserLinks = () => {
   const { data, isLoading, isError } = useCurrentUserQuery();
 
   if (isLoading || isError || !data) {
-    return <LoginButton />
+    return <LoginButton isLoading={isLoading} />
   }
 
   return (

@@ -6,8 +6,6 @@
 @theme inline {
   --breakpoint-xs: 26.563rem; /* 425px */
   
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
   --font-main: var(--font-manrope);
   --font-roboto: var(--font-roboto);
   --font-tilt-warp: var(--font-tilt-warp);

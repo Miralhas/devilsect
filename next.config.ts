@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
       new URL(`${env.APP_URL}/**`)
     ],
   },
+  experimental: {
+    authInterrupts: true,
+  },
 
 };
 

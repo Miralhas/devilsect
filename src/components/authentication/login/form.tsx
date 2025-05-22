@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/alert";
 import AuthenticationInput from "@/components/ui/authentication-input";
 import { Button } from "@/components/ui/button";
-import GoogleIcon from "@/components/ui/google-icon";
 import { Label } from "@/components/ui/label";
 import { LoginInput, loginSchema } from "@/lib/schemas/login";
 import { loginAction } from "@/services/authentication/actions";
@@ -16,6 +15,7 @@ import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
 import { startTransition, useActionState, useState } from "react";
 import { useForm } from "react-hook-form";
+import GoogleAuthButton from "../google-auth-button";
 
 const LoginForm = () => {
   const [formState, formAction, isPending] = useActionState(loginAction, { success: false });
@@ -32,9 +32,7 @@ const LoginForm = () => {
   const { errors: clientErrors } = form.formState;
 
   const onSubmit = form.handleSubmit((data: LoginInput) => {
-    startTransition(() => {
-      formAction(data);
-    });
+    startTransition(() => formAction(data));
   });
 
   return (
@@ -107,10 +105,7 @@ const LoginForm = () => {
         </div>
 
         <div className="grid">
-          <Button className="gap-4" variant="cool-secondary" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
-            <GoogleIcon />
-            Google
-          </Button>
+          <GoogleAuthButton />
         </div>
       </div>
     </form >

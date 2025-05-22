@@ -5,7 +5,6 @@ import { LoginInput, loginSchema } from '@/lib/schemas/login';
 import { SignupInput, signUpSchema } from '@/lib/schemas/signup';
 import { createSession, deleteSession } from '@/lib/sessions';
 import { ApiLoginResponse, ApiResponseError } from '@/types/api';
-import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 type AuthenticationFormState = {
@@ -48,8 +47,7 @@ export const loginAction = async (prevState: unknown, payload: LoginInput): Prom
     const data: ApiLoginResponse = await res.json();
 
     await createSession(data);
-    revalidatePath("/");
-
+    
   } catch (err) {
     console.log(err)
     const errors: AuthenticationFormState["errors"] = { error: [DEFAULT_LOGIN_ERROR_MESSAGE] }

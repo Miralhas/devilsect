@@ -128,7 +128,7 @@ export const sendResetPasswordEmailAction = async (prevState: AuthenticationForm
 
     if (!res.ok) {
       const data: ApiResponseError = await res.json();
-      const errors: AuthenticationFormState["errors"] = { error: [data.detail ?? DEFAULT_SIGNUP_ERROR_MESSAGE] };
+      const errors: AuthenticationFormState["errors"] = { error: [data.detail ?? DEFAULT_RESET_PASSWORD_ERROR_MESSAGE] };
       if (data?.errors?.email) errors["email"] = [data.errors?.email];
       return { errors, success: false, fields: parsed.data };
     }
@@ -137,7 +137,7 @@ export const sendResetPasswordEmailAction = async (prevState: AuthenticationForm
 
   } catch (error) {
     console.log(error);
-    const errors: AuthenticationFormState["errors"] = { error: [DEFAULT_SIGNUP_ERROR_MESSAGE] }
+    const errors: AuthenticationFormState["errors"] = { error: [DEFAULT_RESET_PASSWORD_ERROR_MESSAGE] }
     return { errors, success: false, fields: parsed.data };
   }
 

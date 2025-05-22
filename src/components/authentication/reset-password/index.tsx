@@ -7,7 +7,7 @@ import { startTransition, useActionState } from "react";
 import { useForm } from "react-hook-form";
 import ResetPasswordForm from "./reset-password-form";
 import SendEmailForm from "./send-email-form";
-import SuccessFullPasswordReset from "./successfull-password-reset";
+import SuccessFullPasswordReset from "./successful-password-reset";
 
 const ResetPassword = () => {
   const [sendEmailState, sendEmailAction, isSendEmailPending] = useActionState(sendResetPasswordEmailAction, { success: false });

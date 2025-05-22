@@ -4,6 +4,8 @@ import { Label } from "@/components/ui/label";
 import { SendResetPasswordInput } from "@/lib/schemas/reset-password";
 import Link from "next/link";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 type SendEmailFormProps = {
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
@@ -22,6 +24,15 @@ const SendEmailForm = ({ actionErrors, clientErrors, onSubmit, register, isPendi
           Enter your email address and we&apos;ll send you a verification code to reset your password.
         </p>
         <form onSubmit={onSubmit} className="space-y-4">
+          {actionErrors?.error ? (
+            <Alert variant="destructive" className="bg-primary/20 border border-accent/70 rounded-sm text-red-700">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle className="font-semibold mb-1">Error Reseting Password</AlertTitle>
+              <AlertDescription className="font-light tracking-wider">
+                {actionErrors.error}
+              </AlertDescription>
+            </Alert>
+          ) : null}
           <div className="grid gap-3">
             <Label htmlFor="email" className="text-muted-foreground">Email</Label>
             <AuthenticationInput

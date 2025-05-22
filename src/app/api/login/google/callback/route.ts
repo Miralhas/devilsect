@@ -45,7 +45,7 @@ export async function GET(request: Request) {
 
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("X-Google-Secret", env.GOOGLE_CLIENT_STALKERS_API_SECRECT);
+  myHeaders.append("X-Google-Secret", env.GOOGLE_CLIENT_STALKERS_API_SECRET);
 
   const res = await fetch(`${env.APP_URL}/auth/google`, {
     method: "POST",

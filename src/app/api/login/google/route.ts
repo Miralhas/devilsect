@@ -16,6 +16,7 @@ export async function GET() {
 		maxAge: 60 * 10, // 10 minutes
 		sameSite: "lax"
 	});
+  
 	cookieStore.set("google_code_verifier", codeVerifier, {
 		path: "/",
 		httpOnly: true,

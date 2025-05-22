@@ -1,7 +1,7 @@
+import Providers from "@/components/providers";
 import type { Metadata } from "next";
 import { Manrope, Roboto, Tilt_Warp } from 'next/font/google';
 import "./globals.css";
-import Providers from "@/components/providers";
 
 export const metadata: Metadata = {
   title: "Devil Sect | Read Free Webnovels and Light Novels Online",

@@ -9,13 +9,13 @@ import { toast } from "sonner";
 const SuccessFullPasswordReset = () => {
   useEffect(() => {
     toast.success("Successfull Password Reset",
-      { description: "Your password has been reset succesfully" }
+      { description: "Your password has been reset successfully" }
     );
   }, []);
 
   return (
     <div className="w-full space-y-8 mt-6 font-roboto pb-4">
-      <h1 className="text-2xl font-bold tracking-tight text-accent-foreground text-center">Password Reset Successfull</h1>
+      <h1 className="text-2xl font-bold tracking-tight text-accent-foreground text-center">Password Reset Successful</h1>
       <div className="flex flex-col gap-4 w-full justify-center items-center">
         <div className="rounded-full border-2 border-green-500 bg-green-500/10 p-8">
           <Check className="size-10 text-green-500" />

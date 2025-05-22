@@ -9,7 +9,7 @@ const AuthLayout = async ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="min-h-screen flex justify-center items-center p-4 w-full relative">
-        <BlurCenter opacity="medium" />
+        <BlurCenter opacity="low" />
         {children}
       </div>
     </>

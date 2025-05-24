@@ -14,7 +14,7 @@ type MobileMenuProps = {
 const MobileMenu = ({ containerRef, toggleMenu }: MobileMenuProps) => {
   return (
     <motion.div
-      className="bg-[#101010] w-full h-[400px] absolute z-10 origin-top-right lg:hidden shadow-2xl"
+      className="bg-secondary w-full h-[400px] absolute z-10 origin-top-right lg:hidden shadow-2xl"
       initial={{ opacity: 0, scaleY: 0, scaleX: 1 }}
       animate={{ opacity: 1, scaleY: 1, scaleX: 1 }}
       exit={{ opacity: 0, scaleY: 0, scaleX: 1 }}
@@ -46,8 +46,8 @@ const MobileMenu = ({ containerRef, toggleMenu }: MobileMenuProps) => {
 
 const NavItem = (link: NavLink) => {
   return (
-    <Link href={link.href} className="flex items-center gap-2 relative text-base font-medium tracking-wide text-foreground/70 hover:text-foreground top-[1px] ease-in duration-200 w-full transition-colors p-2 hover:bg-secondary/70 hover:rounded-sm">
-      {link.icon ? <link.icon className="size-6 " /> : null}
+    <Link href={link.href} className="flex items-center gap-2 relative text-base font-light tracking-wide text-foreground/80 hover:text-foreground top-[1px] ease-in duration-200 w-full transition-colors p-2 hover:bg-background hover:rounded-sm">
+      {link.icon ? <link.icon className="size-5 " /> : null}
       {link.title}
     </Link>
   )

@@ -1,10 +1,28 @@
-import Header from "@/components/navbar/header";
+import Providers from "@/components/providers";
 import type { Metadata } from "next";
+import { Manrope, Roboto, Tilt_Warp } from 'next/font/google';
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner"
 
 export const metadata: Metadata = {
-  title: {template: `%s | Devil Sect`, default: "Read Free Webnovels and Light Novels Online | Devil Sect"},
+  title: "Devil Sect | Read Free Webnovels and Light Novels Online",
 }
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+});
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  variable: "--font-roboto",
+});
+
+const tiltWarp = Tilt_Warp({
+  subsets: ["latin"],
+  variable: "--font-tilt-warp",
+  weight: "400"
+});
 
 export default function RootLayout({
   children,
@@ -12,12 +30,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en"
+      className={`${manrope.variable} ${roboto.variable} ${tiltWarp.variable}`}
+    >
       <body
-        className={`vsc-initialized antialiased text-zinc-200 relative`}
+        className={`vsc-initialized antialiased text-zinc-200 relative font-main`}
       >
-        <Header />
-        {children}
+        <Providers>
+          {children}
+        </Providers>
+        <Toaster richColors />
       </body>
     </html>
   );

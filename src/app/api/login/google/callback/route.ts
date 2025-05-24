@@ -56,6 +56,7 @@ export async function GET(request: Request) {
 
   if (!res.ok) {
     console.error("Google Authentication failed with a status of: " + res.status);
+    redirect("/error");
   }
 
   const data: ApiLoginResponse = await res.json();

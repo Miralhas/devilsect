@@ -11,7 +11,7 @@ export const GET = async () => {
     return NextResponse.json({ error: 'Unauthorized: Missing or invalid session' }, { status: 401 })
   }
 
-  const res = await fetch(env.NEXT_PUBLIC_BASE_URL + "/users/notifications/unread-count", {
+  const res = await fetch(env.APP_URL + "/users/notifications/unread-count", {
     method: "GET",
     headers: { "Authorization": `Bearer ${session.value}` },
   });

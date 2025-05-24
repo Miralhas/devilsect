@@ -23,7 +23,7 @@ const LoginForm = () => {
 
   const toggleShowPassword = () => setShowPassword(prev => !prev);
 
-  const { ...form } = useForm<LoginInput>({
+  const form = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: "", password: "" },
     mode: "onSubmit"

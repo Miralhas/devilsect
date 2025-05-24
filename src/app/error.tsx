@@ -2,19 +2,8 @@
  
 import NextError from 'next/error';
  
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
-  reset: () => void
-}) {
-  // useEffect(() => {
-  //   // Log the error to an error reporting service
-  //   console.error(error)
-  // }, [error])
- 
-  return (
+export default function Error() {
+   return (
     <div>
       {/* `NextError` is the default Next.js error page component. Its type
       definition requires a `statusCode` prop. However, since the App Router

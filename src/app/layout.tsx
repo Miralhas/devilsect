@@ -1,6 +1,6 @@
 import Providers from "@/components/providers";
 import type { Metadata } from "next";
-import { Manrope, Roboto, Tilt_Warp } from 'next/font/google';
+import { Manrope, Roboto, Tilt_Warp, Inter } from 'next/font/google';
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner"
 
@@ -11,6 +11,12 @@ export const metadata: Metadata = {
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
+});
+
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 const roboto = Roboto({
@@ -31,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en"
-      className={`${manrope.variable} ${roboto.variable} ${tiltWarp.variable}`}
+      className={`${manrope.variable} ${roboto.variable} ${tiltWarp.variable} ${inter.variable}`}
     >
       <body
         className={`vsc-initialized antialiased text-zinc-200 relative font-main`}

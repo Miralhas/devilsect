@@ -13,7 +13,6 @@ export default async function middleware(req: NextRequest) {
   const session = await decrypt(cookie);
 
   if (cookie && session?.sub) {
-    console.log("Updating session of user: " + session.user?.email)
     await updateSession(cookie);
   }
 

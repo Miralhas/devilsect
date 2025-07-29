@@ -18,25 +18,25 @@ const CarouselNovel = () => {
   return (
     <>
       <Carousel
-        className="w-full max-w-[740px]"
+        className="w-full lg:w-[62%] grid" 
       opts={{
-        loop: true,
+        loop: false,
       }}
       plugins={[Autoplay({ delay: 6000 })]}
       >
-        <CarouselContent className="font-inter">
+        <CarouselContent className="h-64">
           {BANNERS.map((banner, index) => (
             <CarouselItem key={index}>
-              <div className="h-64 relative rounded-lg overflow-hidden bg-black">
+              <div className="h-full relative rounded-lg overflow-hidden bg-black">
                 <div className="absolute z-[1] top-0 h-full w-full overflow-hidden rounded-12">
                   <img src={banner.src} alt="novel banner" className="w-full object-cover h-[95%] object-center opacity-40" />
                 </div>
 
                 <div className="absolute w-full max-w-[200px] z-[2] right-0 md:right-8 top-1 overflow-hidden">
-                  <img src={banner.mc} alt="" className="w-full h-full max-h-[220px] object-contain" />
+                  <img src={banner.mc} alt="novel main character" className="w-full h-full max-h-[280px] object-contain" />
                 </div>
 
-                <div className="absolute bottom-3 z-[3] h-full md:h-24 w-full ">
+                <div className="absolute bottom-0 z-[3] h-full md:h-24 w-full ">
                   <div className="h-full bg-gradient-to-t from-black to-transparent"></div>
                 </div>
 
@@ -55,7 +55,7 @@ const CarouselNovel = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div className="w-full my-2 gap-6 flex justify-center">
+        <div className="w-full mt-auto gap-6 flex justify-center">
           <CarouselPrevious className="rounded-md size-7" variant="cool-secondary" />
           <CarouselDots className="w-auto" />
           <CarouselNext className="rounded-md size-7" variant="cool-secondary" />

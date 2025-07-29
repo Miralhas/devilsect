@@ -71,7 +71,7 @@ const Header = () => {
       }}
       animate={isNavHidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
-      className="bg-zinc-950 w-full border-b-2 border-secondary shadow-2xl sticky top-0"
+      className="bg-zinc-950 w-full border-b-2 border-secondary shadow-2xl sticky top-0 z-50"
     >
       <nav className="mx-auto w-full max-w-[1440px] flex items-center p-3 md:p-4 gap-4 relative">
         <LogoLink />

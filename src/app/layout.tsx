@@ -1,8 +1,9 @@
 import Providers from "@/components/providers";
+import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
-import { Manrope, Roboto, Tilt_Warp, Inter } from 'next/font/google';
+import { Inter, Manrope, Roboto, Tilt_Warp } from 'next/font/google';
+import "./embla.css";
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner"
 
 export const metadata: Metadata = {
   title: "Devil Sect | Read Free Webnovels and Light Novels Online",

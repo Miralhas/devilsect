@@ -1,3 +1,4 @@
+import { DisplayStatus, NovelStatus } from "@/types/novel";
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -5,3 +6,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 export const delay = async (ms: number) => await new Promise(resolve => setTimeout(resolve, ms));
+
+export const statusMap: Record<NovelStatus, DisplayStatus> = {
+  COMPLETED: 'Completed',
+  ON_GOING: "On Going"
+};
+
+// https://stackoverflow.com/a/64777515/30371438
+export function arrayChuncker<T>(arr: T[], size: number): T[][] {
+  return [...Array(Math.ceil(arr.length / size))].map((_, i) =>
+    arr.slice(size * i, size + size * i)
+  );
+} 

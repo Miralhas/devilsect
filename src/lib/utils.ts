@@ -11,3 +11,10 @@ export const statusMap: Record<NovelStatus, DisplayStatus> = {
   COMPLETED: 'Completed',
   ON_GOING: "On Going"
 };
+
+// https://stackoverflow.com/a/64777515/30371438
+export function arrayChuncker<T>(arr: T[], size: number): T[][] {
+  return [...Array(Math.ceil(arr.length / size))].map((_, i) =>
+    arr.slice(size * i, size + size * i)
+  );
+} 

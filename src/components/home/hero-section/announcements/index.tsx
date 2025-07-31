@@ -41,7 +41,7 @@ const Announcements = () => {
       <div className="flex justify-between items-center">
         <div className="flex gap-2 items-center">
           <Megaphone className="size-5 md:size-7" fill="" />
-          <p className="sm:text-2xl font-semibold tracking-tight">Announcements</p>
+          <p className="text-lg sm:text-2xl font-semibold tracking-tight">Announcements</p>
         </div>
         <Link href="/" className="text-sm sm:text-base text-muted-foreground font-medium">View all</Link>
       </div>

@@ -4,13 +4,14 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --breakpoint-xs: 26.563rem; /* 425px */
-  
-  --font-main: var(--font-manrope);
+  --breakpoint-xs: 26.563rem;
+  /* 425px */
+
+  --font-main: var(--font-inter);
   --font-roboto: var(--font-roboto);
   --font-tilt-warp: var(--font-tilt-warp);
   --font-inter: var(--font-inter);
-  
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -131,4 +132,12 @@
   scrollbar-color: rgba(84, 8, 19, 0.8) #000000;
   scrollbar-width: thin;
   scroll-behavior: smooth;
+}
+
+.book-cover {
+  background: linear-gradient(157.66deg, #0000, #0000001a);
+  box-shadow: inset 0 0 0 .5px #000000e6, inset 1px 1px 4px #fff9, inset -2px -4px 12px #0003;
+  border-radius: 0 6px 6px 0;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
 }

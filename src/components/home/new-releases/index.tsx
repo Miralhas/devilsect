@@ -10,10 +10,10 @@ const NewReleases = async () => {
   return (
     <section className="w-full space-y-4">
       <div className="flex justify-between items-baseline">
-        <p className="text-lg md:text-3xl font-bold tracking-tight">New Releases</p>
+        <p className="text-lg md:text-3xl font-semibold tracking-tight">New Releases</p>
         <Link href="/" className="text-sm md:text-base text-muted-foreground hover:text-zinc-200 transition-colors duration-200">All Releases</Link>
       </div>
-      <div className="flex flex-col lg:flex-row gap-4 md:gap-6">
+      <div className="flex flex-col lg:flex-row gap-6">
         <ReleasesCardHorizontal {...res} />
         <ReleasesGrid {...res} />
       </div>

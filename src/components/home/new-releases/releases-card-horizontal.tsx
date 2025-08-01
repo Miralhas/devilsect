@@ -3,6 +3,7 @@ import { statusMap } from "@/lib/utils";
 import { NovelSummary } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
 import { BookOpenText, StarIcon } from "lucide-react";
+import Image from "next/image";
 
 const ReleasesCardHorizontal = (res: PaginatedQuery<NovelSummary[]>) => {
   return (
@@ -10,11 +11,15 @@ const ReleasesCardHorizontal = (res: PaginatedQuery<NovelSummary[]>) => {
       <div className="flex flex-1 flex-col gap-3.5 h-full">
         {res.results.slice(0, 4).map((novel, index) => (
           <div className="group w-full p-2 px-3 border hover:border-accent/60 hover:bg-primary/10 rounded-xl bg-muted-foreground/5 flex gap-3 items-center transition-all duration-[400ms] ease-in-out hover:translate-x-1 hover:-translate-y-1" key={index}>
-            <div className="aspect-[5/6] max-h-[75px] overflow-hidden rounded-lg relative">
-              <img
+            <div className="aspect-[5/6] h-[75px] overflow-hidden rounded-lg relative">
+              <Image
                 src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
                 alt={novel.title + " cover"}
+                loading="lazy"
                 className="w-full h-auto object-cover object-center align-middle duration-500 transition-transform ease-in-out group-hover:scale-110"
+                height={75}
+                width={62.5}
+                // fill
               />
               <div className="absolute inset-0 rounded-r-5 book-cover" />
             </div>

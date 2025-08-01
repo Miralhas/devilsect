@@ -1,4 +1,4 @@
-import { SortKey } from "@/lib/schemas/novel-summaies-params-schema";
+import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
 import { getNovelSummariesPaginated } from "@/services/novels/server-queries";
 import Link from "next/link";
 import ReleasesCardHorizontal from "./releases-card-horizontal";

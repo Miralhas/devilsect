@@ -6,7 +6,7 @@ import { BookOpenText, StarIcon } from "lucide-react";
 const NovelCard = ({ author, ratingValue, status, title, slug }: NovelSummary) => {
   return (
     <div className="group space-y-2">
-      <div className="relative aspect-[3/4] overflow-hidden rounded-r-md shadow-sm transition-all duration-300 ease-in-out group-hover:-translate-y-2 group-hover:shadow-md shadow-accent">
+      <div className="relative aspect-[2/3] overflow-hidden rounded-r-md shadow-sm transition-all duration-300 ease-in-out group-hover:-translate-y-2 group-hover:shadow-md shadow-accent">
         <img
           src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${slug}/image`}
           alt={`${title} cover`}

@@ -73,7 +73,7 @@ const Header = () => {
       transition={{ duration: 0.35, ease: "easeInOut" }}
       className="bg-zinc-950 w-full border-b-2 border-secondary shadow-2xl sticky top-0 z-50"
     >
-      <nav className="mx-auto w-full max-w-[1440px] flex items-center p-3 md:p-4 gap-4 relative">
+      <nav className="mx-auto w-full max-w-[1280px] flex items-center p-3 md:p-4 gap-4 relative">
         <LogoLink />
 
         <div className="hidden lg:flex items-center gap-4">

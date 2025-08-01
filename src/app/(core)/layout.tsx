@@ -6,7 +6,7 @@ const CoreLayout = async ({ children }: PropsWithChildren) => {
   return (
     <>
       <Header />
-      <div className="mx-auto w-full max-w-[1440px] grid gap-5 p-4">
+      <div className="mx-auto w-full max-w-[1280px] grid gap-5 p-4">
         {children}
       </div>
       <Footer />

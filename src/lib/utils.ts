@@ -17,4 +17,19 @@ export function arrayChuncker<T>(arr: T[], size: number): T[][] {
   return [...Array(Math.ceil(arr.length / size))].map((_, i) =>
     arr.slice(size * i, size + size * i)
   );
-} 
+};
+
+export const buildQueryString = <T extends Record<string, string | number | boolean | undefined>>(
+  params: T
+): string => {
+  const searchParams = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== "" && value !== null) {
+      searchParams.append(key, String(value));
+    }
+  });
+
+  const queryString = searchParams.toString();
+  return queryString ? `?${queryString}` : '';
+};

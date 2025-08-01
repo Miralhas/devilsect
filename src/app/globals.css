@@ -141,3 +141,30 @@
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
 }
+
+.novels-showcase {
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  flex-flow: wrap;
+  grid-template-rows: auto;
+  grid-template-columns: minmax(80px, 115px) minmax(80px, 115px) minmax(80px, 115px) minmax(80px, 115px) minmax(80px, 115px);
+  grid-auto-columns: 1fr;
+  justify-content: space-around;
+  place-items: stretch stretch;
+  height: 100%;
+  padding: 9px 15px;
+  display: grid;
+}
+
+.novel-name {
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 115px;
+  margin-top: .1875rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 14px;
+  overflow: hidden;
+  font-weight: bold;
+}

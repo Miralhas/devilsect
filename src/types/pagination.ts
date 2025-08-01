@@ -1,4 +1,4 @@
-export type Pagination<T> = {
+export type PaginatedQuery<T> = {
   results: T;
   totalItems: number;
   next: number | null;

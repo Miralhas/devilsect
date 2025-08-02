@@ -2,16 +2,15 @@ import { env } from "@/env";
 import { statusMap } from "@/lib/utils";
 import { NovelSummary } from "@/types/novel";
 import { BookOpenText, StarIcon } from "lucide-react";
-import Image from "next/image";
+import DynamicBlurImage from "../dynamic-blur-image";
 
 const NovelCard = ({ author, ratingValue, status, title, slug }: NovelSummary) => {
   return (
     <div className="group space-y-2 [&:nth-child(n+7)]:hidden md:[&:nth-child(n+7)]:block">
       <div className="relative aspect-[2/3] overflow-hidden rounded-r-md shadow-sm transition-all duration-300 ease-in-out group-hover:-translate-y-2 group-hover:shadow-md shadow-accent">
-        <Image
+        <DynamicBlurImage
           src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${slug}/image`}
           alt={`${title} cover`}
-          loading="lazy"
           className="object-cover object-center w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105 opacity-90"
           fill
         />

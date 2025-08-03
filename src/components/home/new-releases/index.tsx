@@ -8,8 +8,8 @@ const NewReleases = async () => {
   const res = await getNovelSummariesPaginated({ size: 12, sort: SortKey.NEWEST_RELEASES });
 
   return (
-    <section className="w-full space-y-4">
-      <div className="flex justify-between items-baseline">
+    <section className="w-full space-y-6">
+      <div className="flex justify-between items-baseline border-b pb-3">
         <p className="text-lg md:text-3xl font-semibold tracking-tight">New Releases</p>
         <Link href="/" className="text-sm md:text-base text-muted-foreground hover:text-zinc-200 transition-colors duration-200">All Releases</Link>
       </div>

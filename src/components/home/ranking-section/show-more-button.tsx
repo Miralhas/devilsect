@@ -1,0 +1,46 @@
+'use client'
+
+import { useEffect, useRef, useState } from "react";
+
+const ShowMoreButton = () => {
+  const [showMore, setShowMore] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!showMore) return;
+
+    const intervalId = setInterval(() => {
+      buttonRef.current?.scrollIntoView();
+    }, 250);
+
+    return () => clearInterval(intervalId);
+  }, [showMore]);
+
+  const toggle = () => {
+    const grid = document.getElementById("ranking-grid");
+    // check if the grid has the limiting height class (max-h-[503px]). If so, removes it.
+    if (grid && grid.classList.contains("max-h-[503px]") && !showMore) {
+      grid.classList.remove("max-h-[503px]")
+      setShowMore(prev => !prev);
+    }
+
+    if (grid && !grid.classList.contains("max-h-[503px]") && showMore) {
+      grid.classList.add("max-h-[503px]")
+      setShowMore(prev => !prev);
+    }
+  }
+
+  return (
+    <div className="hidden md:flex w-full items-center justify-center mt-6">
+      <button
+        className="cursor-pointer uppercase font-extrabold text-base tracking-tighter text-[15px]"
+        onClick={toggle}
+        ref={buttonRef}
+      >
+        {!showMore ? "Show More" : "Show Less"}
+      </button>
+    </div>
+  )
+}
+
+export default ShowMoreButton;

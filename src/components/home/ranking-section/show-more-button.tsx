@@ -8,12 +8,7 @@ const ShowMoreButton = () => {
 
   useEffect(() => {
     if (!showMore) return;
-
-    const intervalId = setInterval(() => {
-      buttonRef.current?.scrollIntoView();
-    }, 250);
-
-    return () => clearInterval(intervalId);
+    buttonRef.current?.scrollIntoView();
   }, [showMore]);
 
   const toggle = () => {

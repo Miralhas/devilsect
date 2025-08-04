@@ -8,10 +8,14 @@ export const getNovelSummariesPaginated = async (params: NovelSummariesParams): 
   const parsed = NovelSummariesParamsSchema.parse(params);
   const queryString = buildQueryString(parsed);
   const url = `${env.APP_URL}/novels${queryString}`;
-  
+
   const res = await fetch(url, {
     method: "GET",
   });
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch novel summaries: ${res.status} ${res.statusText}`);
+  }
 
   return await res.json() as PaginatedQuery<NovelSummary[]>;
 }

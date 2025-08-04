@@ -1,4 +1,5 @@
-import { Link, LucideIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
+import Link from "next/link";
 
 type SectionHeaderProps = {
   icon: LucideIcon;

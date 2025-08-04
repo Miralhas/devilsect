@@ -2,25 +2,29 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const ShowMoreButton = () => {
+type ShowMoreButtonProps = {
+  className: string;
+}
+
+const ShowMoreButton = ({ className }: ShowMoreButtonProps) => {
   const [showMore, setShowMore] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!showMore) return;
-    buttonRef.current?.scrollIntoView({behavior: "smooth", block: "start"});
+    buttonRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [showMore]);
 
   const toggle = () => {
     const grid = document.getElementById("ranking-grid");
     // check if the grid has the limiting height class (max-h-[503px]). If so, removes it.
-    if (grid && grid.classList.contains("max-h-[503px]") && !showMore) {
-      grid.classList.remove("max-h-[503px]")
+    if (grid && grid.classList.contains(className) && !showMore) {
+      grid.classList.remove(className)
       setShowMore(prev => !prev);
     }
 
-    if (grid && !grid.classList.contains("max-h-[503px]") && showMore) {
-      grid.classList.add("max-h-[503px]")
+    if (grid && !grid.classList.contains(className) && showMore) {
+      grid.classList.add(className)
       setShowMore(prev => !prev);
     }
   }

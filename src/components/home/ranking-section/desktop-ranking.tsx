@@ -13,7 +13,7 @@ type DesktopRankingProps<T> = {
 }
 
 const rankingClassnames = (index: number) => {
-  return cn("text-zinc-300/60",{
+  return cn("text-zinc-300/60", {
     "text-yellow-400/70": index === 0,
     "text-blue-300/70": index === 1,
     "text-amber-700/70": index === 2,
@@ -21,11 +21,15 @@ const rankingClassnames = (index: number) => {
 }
 
 const DesktopRanking = ({ queries }: DesktopRankingProps<NovelSummary[]>) => {
+  const maxHeight = "max-h-[503px]";
   return (
     <div className="w-full">
       <div className="flex w-full">
         <ScrollArea className="w-32 min-h-0 flex-1 overflow-x-scroll overflow-y-hidden lg:overflow-hidden">
-          <div className="w-full grid grid-cols-[repeat(4,minmax(280px,1fr))] grid-rows-[min-content_max-content] gap-x-5 gap-y-7 max-h-[503px] pb-1" id="ranking-grid">
+          <div
+            id="ranking-grid"
+            className={`w-full grid grid-cols-[repeat(4,minmax(280px,1fr))] grid-rows-[min-content_max-content] gap-x-5 gap-y-7 pb-1 ${maxHeight}`} 
+          >
             <div className="col-span-1 row-start-1 relative w-full">
               <div className="max-w-max border border-accent px-3 lg:px-6 py-1.5 bg-primary">
                 <h1 className="text-lg font-semibold tracking-tight">Most Acclaimed</h1>
@@ -84,7 +88,7 @@ const DesktopRanking = ({ queries }: DesktopRankingProps<NovelSummary[]>) => {
           </div>
         </ScrollArea>
       </div>
-      <ShowMoreButton />
+      <ShowMoreButton className={maxHeight} />
     </div>
   )
 }

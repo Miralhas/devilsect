@@ -33,3 +33,5 @@ export const buildQueryString = <T extends Record<string, string | number | bool
   const queryString = searchParams.toString();
   return queryString ? `?${queryString}` : '';
 };
+
+export const leadingZero = (num: number, places: number) => (num).toString().padStart(places, "0")

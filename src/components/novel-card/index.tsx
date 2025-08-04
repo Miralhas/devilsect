@@ -45,7 +45,7 @@ const NovelCard = ({ author, ratingValue, status, title, slug }: NovelSummary) =
         </div>
       </div>
 
-      <p className="font-bold text-ellipsis whitespace-nowrap max-w-[115px] text-[12px] md:text-[14px] overflow-hidden capitalize group-hover:opacity-50 transition-opacity duration-300">
+      <p className="font-semibold text-ellipsis whitespace-nowrap max-w-[115px] text-[12px] md:text-[13px] overflow-hidden capitalize group-hover:opacity-50 transition-opacity duration-300">
         {title}
       </p>
     </div>

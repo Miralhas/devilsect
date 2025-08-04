@@ -1,6 +1,6 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import { env } from "@/env";
-import { statusMap } from "@/lib/utils";
+import { cn, leadingZero, statusMap } from "@/lib/utils";
 import { NovelSummary } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
@@ -10,6 +10,14 @@ import ShowMoreButton from "./show-more-button";
 
 type DesktopRankingProps<T> = {
   queries: PaginatedQuery<T>[]
+}
+
+const rankingClassnames = (index: number) => {
+  return cn("text-zinc-300/60",{
+    "text-yellow-400/70": index === 0,
+    "text-blue-300/70": index === 1,
+    "text-amber-700/70": index === 2,
+  })
 }
 
 const DesktopRanking = ({ queries }: DesktopRankingProps<NovelSummary[]>) => {
@@ -41,7 +49,7 @@ const DesktopRanking = ({ queries }: DesktopRankingProps<NovelSummary[]>) => {
             {queries.map((query, i) => (
               <div className="col-span-1 h-full flex flex-col gap-3" key={i}>
                 {query.results.map((novel, i) => (
-                  <Link href="/" key={i} className="flex gap-2.5 transition-all duration-200 shadow-sm shadow-accent/30 group hover:shadow-md hover:shadow-accent/80 hover:text-accent ease-in-out hover:translate-x-1 hover:-translate-y-1" >
+                  <Link href="/" key={i} className="flex gap-2 transition-all duration-200 shadow-sm shadow-accent/30 group hover:shadow-md hover:shadow-accent/80 hover:text-accent ease-in-out hover:translate-x-1 hover:-translate-y-1" >
                     <div className="aspect-[3/4] h-[75px] overflow-hidden rounded-sm relative group">
                       <DynamicBlurImage
                         src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
@@ -51,6 +59,9 @@ const DesktopRanking = ({ queries }: DesktopRankingProps<NovelSummary[]>) => {
                         width={62.5}
                         fill={false}
                       />
+                    </div>
+                    <div className="flex w-max text-sm font-medium tracking-tighter">
+                      <p className={rankingClassnames(i)}>{leadingZero(i + 1, 2)}</p>
                     </div>
                     <div className="flex-1 gap-1.5 self-stretch flex flex-col">
                       <p className="font-bold line-clamp-1 text-sm text-[12px] md:text-[14px] overflow-hidden capitalize">{novel.title}</p>

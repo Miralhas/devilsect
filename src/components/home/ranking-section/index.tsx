@@ -1,6 +1,7 @@
+import SectionHeader from "@/components/section-header";
 import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
 import { getNovelSummariesPaginated } from "@/services/novels/server-queries";
-import Link from "next/link";
+import { Trophy } from "lucide-react";
 import DesktopRanking from "./desktop-ranking";
 
 const RankingSection = async () => {
@@ -12,10 +13,7 @@ const RankingSection = async () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-baseline border-b pb-3">
-        <p className="text-lg md:text-3xl font-semibold tracking-tight">Ranking</p>
-        <Link href="/" className="text-sm md:text-base text-muted-foreground hover:text-zinc-200 transition-colors duration-200">View More</Link>
-      </div>
+      <SectionHeader icon={Trophy} title="Ranking" viewMore={{ href: "/", title: "View More" }} />
       <DesktopRanking queries={queries} />
     </div>
   )

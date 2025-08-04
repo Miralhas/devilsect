@@ -8,7 +8,7 @@ const ShowMoreButton = () => {
 
   useEffect(() => {
     if (!showMore) return;
-    buttonRef.current?.scrollIntoView();
+    buttonRef.current?.scrollIntoView({behavior: "smooth", block: "start"});
   }, [showMore]);
 
   const toggle = () => {

@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from "react";
 
 type ShowMoreButtonProps = {
   className: string;
+  elementId: string;
 }
 
-const ShowMoreButton = ({ className }: ShowMoreButtonProps) => {
+const ShowMoreButton = ({ className, elementId }: ShowMoreButtonProps) => {
   const [showMore, setShowMore] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -16,7 +17,7 @@ const ShowMoreButton = ({ className }: ShowMoreButtonProps) => {
   }, [showMore]);
 
   const toggle = () => {
-    const grid = document.getElementById("ranking-grid");
+    const grid = document.getElementById(elementId);
     // check if the grid has the limiting height class (max-h-[503px]). If so, removes it.
     if (grid && grid.classList.contains(className) && !showMore) {
       grid.classList.remove(className)

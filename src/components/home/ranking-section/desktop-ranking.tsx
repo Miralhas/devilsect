@@ -88,7 +88,7 @@ const DesktopRanking = ({ queries }: DesktopRankingProps<NovelSummary[]>) => {
           </div>
         </ScrollArea>
       </div>
-      <ShowMoreButton className={maxHeight} />
+      <ShowMoreButton className={maxHeight} elementId="ranking-grid" />
     </div>
   )
 }

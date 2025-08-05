@@ -22,6 +22,9 @@ const NewReleasesSkeletonLoader = () => {
           </div>
         </div>
       </section >
+      <section className="w-full space-y-4">
+        <div className="w-full h-[628.5px]"></div>
+      </section>
     </>
   )
 }

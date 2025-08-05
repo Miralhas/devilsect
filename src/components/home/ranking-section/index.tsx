@@ -12,10 +12,10 @@ const RankingSection = async () => {
   const queries = await Promise.all([bayesian, trend, views, views]);
 
   return (
-    <div className="space-y-6">
+    <section className="space-y-6">
       <SectionHeader icon={Trophy} title="Ranking" viewMore={{ href: "/", title: "View More" }} />
       <DesktopRanking queries={queries} />
-    </div>
+    </section>
   )
 }
 

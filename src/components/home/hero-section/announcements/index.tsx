@@ -9,7 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { arrayChuncker } from "@/lib/utils";
+import { arrayChunker } from "@/lib/utils";
 import { Announcement as AnnouncementType } from "@/types/announcement";
 import { Megaphone } from "lucide-react";
 import Link from "next/link";
@@ -29,12 +29,12 @@ const ANNOUNCEMENTS: AnnouncementType[] = [
   }
 ]
 
-const CAROUSEL_CHUNCK = 2;
-const CAROUSEL_MOBILE_CHUNCK = 1;
+const CAROUSEL_CHUNK = 2;
+const CAROUSEL_MOBILE_CHUNK = 1;
 const Announcements = () => {
   const isMobile = useIsMobile();
 
-  const chunckedAnnouncements = arrayChuncker(ANNOUNCEMENTS, isMobile ? CAROUSEL_MOBILE_CHUNCK : CAROUSEL_CHUNCK);
+  const chunkedAnnouncements = arrayChunker(ANNOUNCEMENTS, isMobile ? CAROUSEL_MOBILE_CHUNK : CAROUSEL_CHUNK);
 
   return (
     <section className="w-full lg:w-[35%]">
@@ -45,10 +45,10 @@ const Announcements = () => {
         </div>
         <Link href="/" className="text-sm md:text-base text-muted-foreground hover:text-zinc-200 transition-colors duration-200">View all</Link>
       </div>
-      {chunckedAnnouncements.length > 0 ? (
+      {chunkedAnnouncements.length > 0 ? (
         <Carousel className="grid">
           <CarouselContent className="h-auto lg:h-60">
-            {chunckedAnnouncements.map((items, index) => (
+            {chunkedAnnouncements.map((items, index) => (
               <CarouselItem className="space-y-4 mt-6" key={index}>
                 {items.map(({ date, title }, i) => (
                   <Announcement date={date} title={title} key={i} />

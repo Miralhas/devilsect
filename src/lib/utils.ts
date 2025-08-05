@@ -1,6 +1,6 @@
 import { DisplayStatus, NovelStatus } from "@/types/novel";
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -13,7 +13,7 @@ export const statusMap: Record<NovelStatus, DisplayStatus> = {
 };
 
 // https://stackoverflow.com/a/64777515/30371438
-export function arrayChuncker<T>(arr: T[], size: number): T[][] {
+export function arrayChunker<T>(arr: T[], size: number): T[][] {
   return [...Array(Math.ceil(arr.length / size))].map((_, i) =>
     arr.slice(size * i, size + size * i)
   );

@@ -6,7 +6,7 @@ import ReleasesCardHorizontal from "./releases-card-horizontal";
 import ReleasesGrid from "./releases-grid";
 
 const NewReleases = async () => {
-  const res = await getNovelSummariesPaginated({ size: 12, sort: SortKey.NEWEST_RELEASES });
+  const res = await getNovelSummariesPaginated({ size: 14, sort: SortKey.NEWEST_RELEASES });
 
   return (
     <section className="w-full space-y-6">

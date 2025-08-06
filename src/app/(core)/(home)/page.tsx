@@ -12,8 +12,8 @@ const HomePage = () => {
         <HeroSection />
         <Suspense fallback={<MainSectionSkeletonLoaders />}>
           <NewReleases />
-          <RankingSection />
           <EldersChoice />
+          <RankingSection />
         </Suspense>
       </div>
     </div>

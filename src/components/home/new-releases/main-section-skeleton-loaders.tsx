@@ -6,8 +6,8 @@ const MainSectionSkeletonLoaders = () => {
   return (
     <>
       <NewReleasesSkeletonLoader />
-      <RankingSkeletonLoader />
       <EldersChoiceSkeletonLoader />
+      <RankingSkeletonLoader />
     </>
   )
 }

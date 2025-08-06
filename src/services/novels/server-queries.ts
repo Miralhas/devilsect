@@ -1,7 +1,7 @@
 import { env } from "@/env";
 import { NovelSummariesParams, NovelSummariesParamsSchema } from "@/lib/schemas/novel-summaries-params-schema";
 import { buildQueryString } from "@/lib/utils";
-import { NovelSummary } from "@/types/novel";
+import { EldersChoice, NovelSummary } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
 
 export const getNovelSummariesPaginated = async (params: NovelSummariesParams): Promise<PaginatedQuery<NovelSummary[]>> => {
@@ -18,4 +18,18 @@ export const getNovelSummariesPaginated = async (params: NovelSummariesParams): 
   }
 
   return await res.json() as PaginatedQuery<NovelSummary[]>;
+}
+
+export const getEldersChoice = async (): Promise<EldersChoice[]> => {
+  const url = `${env.APP_URL}/elders-choice`;
+
+  const res = await fetch(url, {
+    method: "GET",
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch novel summaries: ${res.status} ${res.statusText}`);
+  }
+
+  return await res.json() as EldersChoice[];
 }

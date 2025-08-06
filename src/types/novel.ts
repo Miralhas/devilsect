@@ -20,3 +20,8 @@ export type NovelBanner = {
   status: NovelStatus;
   mc: string;
 };
+
+export type EldersChoice = {
+  id: number;
+  novel: NovelSummary
+}

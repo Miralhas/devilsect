@@ -10,11 +10,21 @@ type Props = {
   height?: number;
 };
 
-const DynamicBlurImage = async ({ src, alt, className, height, width, fill=true }: Props) => {
+const DynamicBlurImage = async ({ src, alt, className, height, width, fill = true }: Props) => {
   const buffer = await fetch(src).then(async (res) => Buffer.from(await res.arrayBuffer()));
   const { base64 } = await getPlaiceholder(buffer);
   return (
-    <Image src={src} alt={alt} width={width} height={height} fill={fill} placeholder="blur" blurDataURL={base64} className={className} />
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      fill={fill}
+      placeholder="blur"
+      blurDataURL={base64}
+      className={className}
+      
+    />
   )
 }
 

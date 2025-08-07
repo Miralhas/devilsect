@@ -2,7 +2,6 @@ import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { Inter, Manrope, Roboto, Tilt_Warp } from 'next/font/google';
-import "./embla.css";
 import "./globals.css";
 
 export const metadata: Metadata = {

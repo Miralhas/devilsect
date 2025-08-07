@@ -1,5 +1,7 @@
 import { DisplayStatus, NovelStatus } from "@/types/novel";
 import { clsx, type ClassValue } from "clsx";
+import { formatDistanceToNowStrict } from "date-fns";
+import { enUS } from 'date-fns/locale';
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -34,4 +36,6 @@ export const buildQueryString = <T extends Record<string, string | number | bool
   return queryString ? `?${queryString}` : '';
 };
 
-export const leadingZero = (num: number, places: number) => (num).toString().padStart(places, "0")
+export const leadingZero = (num: number, places: number) => (num).toString().padStart(places, "0");
+
+export const formatDate = (date: string) => formatDistanceToNowStrict(new Date(date).toString(), { locale: enUS, addSuffix: true });

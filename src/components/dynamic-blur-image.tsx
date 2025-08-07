@@ -12,9 +12,10 @@ type Props = {
   width?: number;
   height?: number;
   blurData?: string;
+  quality?: number;
 };
 
-const DynamicBlurImage = ({ src, alt, className, height, width, blurData, fill = true }: Props) => {
+const DynamicBlurImage = ({ src, alt, className, height, width, blurData, quality = 70, fill = true }: Props) => {
   const [imgSrc, setImgSrc] = useState<string>(src);
 
   return (
@@ -24,6 +25,7 @@ const DynamicBlurImage = ({ src, alt, className, height, width, blurData, fill =
       width={width}
       height={height}
       fill={fill}
+      quality={quality}
       placeholder="blur"
       blurDataURL={!!blurData ? blurData : defaultBlur}
       className={className}

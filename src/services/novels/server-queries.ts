@@ -3,6 +3,7 @@ import { NovelSummariesParams, NovelSummariesParamsSchema } from "@/lib/schemas/
 import { buildQueryString } from "@/lib/utils";
 import { EldersChoice, NovelSummary } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
+import { RecentlyAddedChapter } from "@/types/recently-added-chapters";
 
 export const getNovelSummariesPaginated = async (params: NovelSummariesParams): Promise<PaginatedQuery<NovelSummary[]>> => {
   const parsed = NovelSummariesParamsSchema.parse(params);
@@ -32,4 +33,16 @@ export const getEldersChoice = async (): Promise<EldersChoice[]> => {
   }
 
   return await res.json() as EldersChoice[];
+}
+
+export const getRecentlyAddedChapters = async (): Promise<RecentlyAddedChapter[]> => {
+  const url = `${env.APP_URL}/latest-chapters`;
+
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch novel summaries: ${res.status} ${res.statusText}`);
+  }
+
+  return await res.json() as RecentlyAddedChapter[]
 }

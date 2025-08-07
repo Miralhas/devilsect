@@ -1,5 +1,8 @@
+'use client'
+
+import defaultBlur from "@/lib/blur-data";
 import Image from "next/image";
-import { getPlaiceholder } from "plaiceholder"
+import { useState } from "react";
 
 type Props = {
   src: string;
@@ -8,22 +11,25 @@ type Props = {
   fill?: boolean;
   width?: number;
   height?: number;
+  blurData?: string;
 };
 
-const DynamicBlurImage = async ({ src, alt, className, height, width, fill = true }: Props) => {
-  const buffer = await fetch(src).then(async (res) => Buffer.from(await res.arrayBuffer()));
-  const { base64 } = await getPlaiceholder(buffer);
+const DynamicBlurImage = ({ src, alt, className, height, width, blurData, fill = true }: Props) => {
+  const [imgSrc, setImgSrc] = useState<string>(src);
+
   return (
     <Image
-      src={src}
+      src={imgSrc}
       alt={alt}
       width={width}
       height={height}
       fill={fill}
       placeholder="blur"
-      blurDataURL={base64}
+      blurDataURL={!!blurData ? blurData : defaultBlur}
       className={className}
-      
+      onError={() => {
+        setImgSrc("/ds.webp")
+      }}
     />
   )
 }

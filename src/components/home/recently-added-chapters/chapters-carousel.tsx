@@ -27,11 +27,11 @@ const ChaptersCarousel = ({ chapters }: { chapters: RecentlyAddedChapter[] }) =>
           <CarouselItem key={index} className="basis-full">
             <div className="w-full flex flex-col gap-1">
               {chunk.map(chapter => (
-                <div key={chapter.id} className="w-full border-b border-primary/40 hover:border-primary/80 pb-2 pt-1 flex gap-2 transition-all duration-300 group hover:-translate-y-1">
+                <div key={chapter.id} className="w-full border-b pb-2 pt-1 flex gap-2 transition-all duration-300 group">
                   <ChapterImage {...chapter} />
-                  <div className="w-full md:grid md:grid-cols-[0.5fr_0.5fr_0.3fr] md:gap-3 capitalize tracking-tight font-semibold duration-300 transition-colors group-hover:text-accent">
+                  <div className="w-full md:grid md:grid-cols-[0.5fr_0.5fr_0.3fr] md:gap-3 capitalize tracking-tight font-semibold">
                     <div className="col-span-1 md:flex md:flex-col">
-                      <Link href="/" className="text-sm text-[15.2px] text-ellipsis whitespace-break-spaces line-clamp-1 md:line-clamp-2 w-fit text-white group-hover:text-inherit">
+                      <Link href="/" className="text-sm text-[15.2px] text-ellipsis whitespace-break-spaces line-clamp-1 md:line-clamp-2 w-fit text-white hover:underline">
                         {chapter.novelTitle}
                       </Link>
                       <div className="text-sm text-[13px] text-muted-foreground mt-1 hidden md:block">
@@ -39,11 +39,11 @@ const ChaptersCarousel = ({ chapters }: { chapters: RecentlyAddedChapter[] }) =>
                       </div>
                     </div>
                     <div className="col-span-1">
-                      <Link href="/" className="text-sm text-ellipsis font-normal whitespace-break-spaces line-clamp-1 lg:line-clamp-2 w-fit">
+                      <Link href="/" className="text-sm md:text-[15px] text-ellipsis font-semibold whitespace-break-spaces line-clamp-1 lg:line-clamp-2 w-fit text-muted-foreground md:text-white hover:underline">
                         {chapter.title}
                       </Link>
                     </div>
-                    <div className="col-span-1 text-sm text-[13px] md:justify-self-end md:pe-2 font-medium text-muted-foreground/70"><p>{formatDate(chapter.createdAt)}</p></div>
+                    <div className="col-span-1 text-sm text-[13px] md:justify-self-end md:pe-2 font-normal tracking-normal text-muted-foreground"><p>{formatDate(chapter.createdAt)}</p></div>
                   </div>
                 </div>
               ))}

@@ -1,7 +1,8 @@
 'use client'
 
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { createContext } from "./create-context";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export const AVAILABLE_FONTS = ["font-atkinson", "font-inter", "font-roboto", "font-manrope"] as const;
 export const AVAILABLE_COLORS = [
@@ -30,6 +31,8 @@ type ReaderSettingsContextState = {
   changeTextColor: (color: AvailableColors) => void;
 }
 
+const INITIAL_DESKTOP_FONT_SIZE = 18;
+
 const initialValues: Pick<ReaderSettingsContextState, "fontFamily" | "fontSize" | "lineHeight" | "textColor"> = {
   fontSize: 16,
   lineHeight: 25,
@@ -37,16 +40,35 @@ const initialValues: Pick<ReaderSettingsContextState, "fontFamily" | "fontSize" 
   textColor: { name: "lightSilver", color: '#e0e0e0' },
 }
 
+type InitialValuesType = typeof initialValues;
+
 const { ContextProvider, useContext } = createContext<ReaderSettingsContextState>();
 
 export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
-  const [fontSize, setFontSize] = useState(initialValues["fontSize"]);
+  const isMobile = useIsMobile();
+  const [fontSize, setFontSize] = useState(() => isMobile ? initialValues["fontSize"] : INITIAL_DESKTOP_FONT_SIZE);
   const [fontFamily, setFontFamily] = useState(initialValues["fontFamily"]);
   const [lineHeight, setLineHeight] = useState(initialValues["lineHeight"]);
   const [textColor, setTextColor] = useState(initialValues["textColor"]);
 
+  useEffect(() => {
+    const readerSettingsString = localStorage.getItem("reader-settings");
+
+    if (readerSettingsString) {
+      const readerSettings: InitialValuesType = JSON.parse(readerSettingsString);
+      setFontSize(readerSettings.fontSize);
+      setFontFamily(readerSettings.fontFamily);
+      setLineHeight(readerSettings.lineHeight);
+      setTextColor(readerSettings.textColor);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("reader-settings", JSON.stringify({ fontSize, fontFamily, lineHeight, textColor }));
+  }, [fontSize, fontFamily, lineHeight, textColor])
+
   const reset = () => {
-    setFontSize(initialValues["fontSize"]);
+    setFontSize(isMobile ? initialValues["fontSize"] : INITIAL_DESKTOP_FONT_SIZE);
     setFontFamily(initialValues["fontFamily"]);
     setLineHeight(initialValues["lineHeight"]);
     setTextColor(initialValues["textColor"]);

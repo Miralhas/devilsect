@@ -22,7 +22,8 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         cool: "bg-primary/70 border border-accent/90 rounded-sm hover:bg-primary/60 focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5",
 
-        "cool-secondary": "bg-secondary border border-neutral-700/80 rounded-sm hover:bg-background focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5"
+        "cool-secondary": "bg-secondary border border-neutral-700/80 rounded-sm hover:bg-background focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5",
+        pure: ""
 
       },
       size: {
@@ -30,6 +31,7 @@ const buttonVariants = cva(
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
+        none: ""
       },
     },
     defaultVariants: {

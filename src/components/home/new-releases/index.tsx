@@ -1,0 +1,22 @@
+import SectionHeader from "@/components/section-header";
+import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
+import { getNovelSummariesPaginated } from "@/services/novels/server-queries";
+import { Clock } from "lucide-react";
+import ReleasesCardHorizontal from "./releases-card-horizontal";
+import ReleasesGrid from "./releases-grid";
+
+const NewReleases = async () => {
+  const res = await getNovelSummariesPaginated({ size: 14, sort: SortKey.NEWEST_RELEASES });
+
+  return (
+    <section className="w-full space-y-6">
+      <SectionHeader icon={Clock} title="New Releases" viewMore={{ href: "/", title: "View More" }} />
+      <div className="flex flex-col lg:flex-row gap-6">
+        <ReleasesCardHorizontal {...res} />
+        <ReleasesGrid {...res} />
+      </div>
+    </section >
+  )
+}
+
+export default NewReleases;

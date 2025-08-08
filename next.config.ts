@@ -1,5 +1,6 @@
 import { env } from "@/env";
 import type { NextConfig } from "next";
+import withPlaceholder from "@plaiceholder/next";
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -12,6 +13,14 @@ const nextConfig: NextConfig = {
   experimental: {
     authInterrupts: true,
   },
+  turbopack: {
+    rules: {
+      ".svg": {
+        loaders: ["@svgr/webpack"],
+        as: "*.js",
+      },
+    },
+  }
 };
 
-export default nextConfig;
+export default withPlaceholder(nextConfig);

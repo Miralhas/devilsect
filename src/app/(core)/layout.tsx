@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Header from "@/components/navbar/header";
 import { PropsWithChildren } from "react";
 
@@ -5,9 +6,8 @@ const CoreLayout = async ({ children }: PropsWithChildren) => {
   return (
     <>
       <Header />
-      <div className="mx-auto w-full max-w-[1440px] grid grid-rows-[min-content_max-content] gap-5 p-4">
-        {children}
-      </div>
+      {children}
+      <Footer />
     </>
   )
 }

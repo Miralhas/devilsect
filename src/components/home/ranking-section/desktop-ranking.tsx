@@ -53,7 +53,7 @@ const DesktopRanking = ({ queries }: DesktopRankingProps<NovelSummary[]>) => {
             {queries.map((query, i) => (
               <div className="col-span-1 h-full flex flex-col gap-3" key={i}>
                 {query.results.map((novel, i) => (
-                  <Link href="/" key={i} className="flex gap-2 transition-all duration-200 shadow-sm shadow-accent/30 group hover:shadow-md hover:shadow-accent/80 hover:text-accent ease-in-out hover:translate-x-1 hover:-translate-y-1" >
+                  <Link href={`/novels/${novel.slug}`} key={novel.id} className="flex gap-2 transition-all duration-200 shadow-sm shadow-accent/30 group hover:shadow-md hover:shadow-accent/80 hover:text-accent ease-in-out hover:translate-x-1 hover:-translate-y-1" >
                     <div className="aspect-[3/4] h-[75px] overflow-hidden rounded-sm relative group">
                       <DynamicBlurImage
                         src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}

@@ -8,11 +8,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { arrayChunker, formatDate } from "@/lib/utils";
 import { RecentlyAddedChapter } from "@/types/recently-added-chapters";
-import ChapterImage from "./chapter-image";
-import { useIsMobile } from "@/hooks/use-mobile";
 import Link from "next/link";
+import ChapterImage from "./chapter-image";
 
 const DESKTOP_CHUNK_SIZE = 10;
 const MOBILE_CHUNK_SIZE = 5;
@@ -31,7 +31,7 @@ const ChaptersCarousel = ({ chapters }: { chapters: RecentlyAddedChapter[] }) =>
                   <ChapterImage {...chapter} />
                   <div className="w-full md:grid md:grid-cols-[0.5fr_0.5fr_0.3fr] md:gap-3 capitalize tracking-tight font-semibold">
                     <div className="col-span-1 md:flex md:flex-col">
-                      <Link href="/" className="text-sm text-[15.2px] text-ellipsis whitespace-break-spaces line-clamp-1 md:line-clamp-2 w-fit text-white hover:underline">
+                      <Link href={`/novels/${chapter.novelSlug}`} className="text-sm text-[15.2px] text-ellipsis whitespace-break-spaces line-clamp-1 md:line-clamp-2 w-fit text-white hover:underline">
                         {chapter.novelTitle}
                       </Link>
                       <div className="text-sm text-[13px] text-muted-foreground mt-1 hidden md:block">
@@ -39,7 +39,7 @@ const ChaptersCarousel = ({ chapters }: { chapters: RecentlyAddedChapter[] }) =>
                       </div>
                     </div>
                     <div className="col-span-1">
-                      <Link href="/" className="text-sm md:text-[15px] text-ellipsis font-semibold whitespace-break-spaces line-clamp-1 lg:line-clamp-2 w-fit text-muted-foreground md:text-white hover:underline">
+                      <Link href={`/novels/${chapter.novelSlug}/${chapter.slug}`} className="text-sm md:text-[15px] text-ellipsis font-semibold whitespace-break-spaces line-clamp-1 lg:line-clamp-2 w-fit text-muted-foreground md:text-white hover:underline">
                         {chapter.title}
                       </Link>
                     </div>

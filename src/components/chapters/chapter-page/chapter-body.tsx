@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Chapter } from "@/types/chapter";
 import Link from "next/link";
 
@@ -12,23 +11,19 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
       <div className="w-full px-4 pb-10">
         <h2 className="capitalize text-center text-white/95 text-xl md:text-2xl font-tilt-warp mb-4">{chapter.title}</h2>
         <div
-          className="chapter-body font-atkinson max-w-none scroll-mt-[100px] text-[rgb(224_224_224)] text-[18px] space-y-[1rem] text-shadow-none"
+          className="chapter-body font-atkinson max-w-none scroll-mt-[100px] text-[rgb(224_224_224)] text-[16px] md:text-[18px] space-y-[1rem] text-shadow-none px-1"
           style={{ wordWrap: "break-word" }}
           dangerouslySetInnerHTML={{ __html: chapter.body }}
         >
         </div>
 
-        <div className="w-full flex items-center justify-between mt-14">
+        <div className="w-full flex items-center gap-4 justify-between mt-14">
           {hasPrevious ? (
-            <Button variant="cool" size="lg" asChild className="rounded-none w-full max-w-[200px]">
-              <Link href={`/novels/${chapter.novelSlug}/${previous.slug}`}>Previous Chapter</Link>
-            </Button>
+            <Link className="bg-primary/70 border border-accent/90 rounded-sm hover:bg-primary/60 focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5 p-5 w-full text-center max-w-[200px]" href={`/novels/${chapter.novelSlug}/${previous.slug}`}>Previous Chapter</Link>
           ) : null}
 
           {hasNext ? (
-            <Button variant="cool" size="lg" asChild className="rounded-none w-full max-w-[200px]">
-              <Link href={`/novels/${chapter.novelSlug}/${next.slug}`}>Next Chapter</Link>
-            </Button>
+            <Link className="bg-primary/70 border border-accent/90 rounded-sm hover:bg-primary/60 focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5 p-5 w-full text-center max-w-[200px] ms-auto" href={`/novels/${chapter.novelSlug}/${next.slug}`}>Next Chapter</Link>
           ) : null}
         </div>
       </div>

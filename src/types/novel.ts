@@ -44,6 +44,7 @@ export type NovelBanner = {
   description: string;
   status: NovelStatus;
   mc: string;
+  slug: string;
 };
 
 export type EldersChoice = {

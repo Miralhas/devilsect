@@ -10,12 +10,14 @@ type ChapterPageProps = {
 const ChapterPage = async ({ params }: ChapterPageProps) => {
   const { chapterSlug, slug } = await params;
   const chapter = await getChapterBySlug(chapterSlug, slug);
-  
+
   return (
-    <Container className="max-w-[1024px] p-0 gap-0 block min-h-screen space-y-4">
-      <Header novelSlug={slug} next={chapter.next} previous={chapter.previous} />
-      <ChapterBody chapter={chapter} />
-    </Container>
+    <>
+      <Container className="max-w-[1024px] p-0 gap-0 block min-h-screen space-y-4">
+        <Header novelSlug={slug} next={chapter.next} previous={chapter.previous} />
+        <ChapterBody chapter={chapter} />
+      </Container>
+    </>
   )
 }
 

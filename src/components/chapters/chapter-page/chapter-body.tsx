@@ -1,18 +1,32 @@
+'use client'
+
 import { Chapter } from "@/types/chapter";
 import Link from "next/link";
+import { useRef } from "react";
+import Settings from "./settings";
+import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
+import { cn } from "@/lib/utils";
 
 const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   const { previous, next } = chapter;
+  const divRef = useRef<HTMLDivElement>(null);
+  const { fontSize, lineHeight, fontFamily, textColor } = useReaderSettingsContext();
+
   const hasNext = next !== null;
   const hasPrevious = previous !== null;
 
   return (
-    <div className="max-w-[840px] mx-auto">
-      <div className="w-full px-4 pb-10">
+    <div className="w-full relative" ref={divRef}>
+      <div className="w-full px-4 max-w-[840px] mx-auto">
         <h2 className="capitalize text-center text-white/95 text-xl md:text-2xl font-tilt-warp mb-4">{chapter.title}</h2>
         <div
-          className="chapter-body font-atkinson max-w-none scroll-mt-[100px] text-[rgb(224_224_224)] text-[16px] md:text-[18px] space-y-[1rem] text-shadow-none px-1"
-          style={{ wordWrap: "break-word" }}
+          className={cn("chapter-body max-w-none scroll-mt-[100px] text-[16px] md:text-[18px] space-y-[1rem] text-shadow-none px-1", fontFamily)}
+          style={{
+            wordWrap: "break-word",
+            fontSize: fontSize,
+            lineHeight: `${lineHeight}px`,
+            color: textColor.color,
+          }}
           dangerouslySetInnerHTML={{ __html: chapter.body }}
         >
         </div>
@@ -27,6 +41,7 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
           ) : null}
         </div>
       </div>
+      <Settings chapter={chapter} divRef={divRef} />
     </div>
   )
 }

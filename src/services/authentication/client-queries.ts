@@ -9,6 +9,7 @@ export const useCurrentUserQuery = () => useQuery({
   },
   queryKey: ["user"],
   retry: 1,
+  refetchOnWindowFocus: false,
 });
 
 export const useUserNotificationCount = () => useQuery({

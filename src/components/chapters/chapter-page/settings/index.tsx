@@ -40,12 +40,7 @@ const Settings = ({ divRef, chapter }: SettingsProps) => {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 30,
-            duration: 0.3
-          }}
+          transition={{ duration: 0.35, ease: "easeInOut" }}
         >
           <div className="max-w-[1280px] mx-auto flex items-center px-4 h-14">
             <ShowChaptersSheet chapter={chapter} />

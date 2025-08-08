@@ -10,17 +10,21 @@ import {
 import { env } from "@/env";
 import { logoutAction } from "@/services/authentication/actions";
 import { User } from "@/types/authentication";
+import { useQueryClient } from "@tanstack/react-query";
 import { BookOpenText, LogOutIcon, Mail, UserIcon } from "lucide-react";
 import Image, { ImageProps } from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const UserAccount = ({ user }: { user: User }) => {
+  const queryClient = useQueryClient();
+  const router = useRouter();
 
   const handleLogout = async () => {
     await logoutAction();
-    window.location.reload();
-    // queryClient.invalidateQueries({ queryKey: ['user'] });
+    queryClient.invalidateQueries({ queryKey: ['user'] });
+    router.refresh();
   }
 
   return (

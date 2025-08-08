@@ -19,7 +19,7 @@ const NovelPage = async ({ params }: NovelPageProps) => {
   return (
     <section className="min-h-screen">
       <div className="bg-zinc-950/70">
-        <Container className="grid grid-cols-[243px_1fr] gap-4 p-0 mb-0 pb-0">
+        <Container className="md:grid md:grid-cols-[243px_1fr] gap-4 p-0 mb-0 pb-0">
           <DynamicBlurImage
             src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
             alt={novel.title + " cover"}

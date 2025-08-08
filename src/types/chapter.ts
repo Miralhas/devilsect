@@ -13,4 +13,6 @@ export type Chapter = {
   slug: string;
   body: string;
   novelSlug: string;
+  previous: ChapterSummary | null;
+  next: ChapterSummary | null;
 };

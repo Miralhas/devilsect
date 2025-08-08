@@ -6,3 +6,11 @@ export type ChapterSummary = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type Chapter = {
+  id: number;
+  title: string;
+  slug: string;
+  body: string;
+  novelSlug: string;
+};

@@ -46,20 +46,22 @@ const { ContextProvider, useContext } = createContext<ReaderSettingsContextState
 
 export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
   const isMobile = useIsMobile();
-  const [fontSize, setFontSize] = useState(() => isMobile ? initialValues["fontSize"] : INITIAL_DESKTOP_FONT_SIZE);
+  const [fontSize, setFontSize] = useState(initialValues["fontSize"]);
   const [fontFamily, setFontFamily] = useState(initialValues["fontFamily"]);
   const [lineHeight, setLineHeight] = useState(initialValues["lineHeight"]);
   const [textColor, setTextColor] = useState(initialValues["textColor"]);
 
   useEffect(() => {
     const readerSettingsString = localStorage.getItem("reader-settings");
-
     if (readerSettingsString) {
       const readerSettings: InitialValuesType = JSON.parse(readerSettingsString);
       setFontSize(readerSettings.fontSize);
       setFontFamily(readerSettings.fontFamily);
       setLineHeight(readerSettings.lineHeight);
       setTextColor(readerSettings.textColor);
+    } else {
+      const mobile = window.innerWidth < 768;
+      setFontSize(mobile ? initialValues["fontSize"] : INITIAL_DESKTOP_FONT_SIZE);
     }
   }, []);
 

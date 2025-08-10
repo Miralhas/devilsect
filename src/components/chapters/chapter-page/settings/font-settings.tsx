@@ -131,7 +131,7 @@ const FontSettings = () => {
             </div>
 
             <div className="w-full ">
-              <p className="text-base text-[15px] leading-7 tracking-wide">Opacity</p>
+              <p className="text-base text-[15px] leading-7 tracking-wide">Brightness</p>
               <div className="w-full flex justify-between items-baseline gap-3">
                 <Slider
                   defaultValue={[opacity]}

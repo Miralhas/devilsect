@@ -59,11 +59,11 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
     const readerSettingsString = localStorage.getItem("reader-settings");
     if (readerSettingsString) {
       const readerSettings: InitialValuesType = JSON.parse(readerSettingsString);
-      setFontSize(readerSettings.fontSize);
-      setFontFamily(readerSettings.fontFamily);
-      setLineHeight(readerSettings.lineHeight);
-      setTextColor(readerSettings.textColor);
-      setOpacity(readerSettings.opacity);
+      setFontSize(readerSettings.fontSize ?? initialValues["fontSize"]);
+      setFontFamily(readerSettings.fontFamily ?? initialValues["fontFamily"]);
+      setLineHeight(readerSettings.lineHeight ?? initialValues["lineHeight"]);
+      setTextColor(readerSettings.textColor ?? initialValues["textColor"]);
+      setOpacity(readerSettings.opacity ?? initialValues["opacity"]);
     } else {
       const mobile = window.innerWidth < 768;
       setFontSize(mobile ? initialValues["fontSize"] : INITIAL_DESKTOP_FONT_SIZE);

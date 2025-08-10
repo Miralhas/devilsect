@@ -13,6 +13,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { StarIcon } from "lucide-react";
 import Link from "next/link";
 import { BANNERS } from "./banners-data";
+import Image from "next/image";
 
 
 const CarouselNovel = () => {
@@ -30,11 +31,28 @@ const CarouselNovel = () => {
             <Link href={`/novels/${banner.slug}`}>
               <div className="h-full relative rounded-lg overflow-hidden bg-black">
                 <div className="absolute z-[1] top-0 h-full w-full overflow-hidden rounded-12">
-                  <img src={banner.src} alt="novel banner" className="w-full object-cover h-[95%] object-center opacity-40" />
+                  <Image
+                    fill
+                    sizes="33vw"
+                    src={banner.src}
+                    alt="novel banner"
+                    className="w-full object-cover h-[95%] object-center opacity-40"
+                    quality={10}
+                    priority
+                    loading="eager"
+                  />
                 </div>
 
-                <div className="absolute w-full max-w-[200px] z-[2] right-0 md:right-8 top-1 overflow-hidden">
-                  <img src={banner.mc} alt="novel main character" className="w-full h-full max-h-[280px] object-contain" />
+                <div className="absolute z-[2] right-0 md:right-13 top-0 overflow-hidden">
+                  <Image
+                    src={banner.mc} alt="novel main character"
+                    className="object-cover inline-block"
+                    quality={50}
+                    width={200}
+                    height={280}
+                    priority
+                    loading="eager"
+                  />
                 </div>
 
                 <div className="absolute bottom-0 z-[3] h-full md:h-24 w-full ">

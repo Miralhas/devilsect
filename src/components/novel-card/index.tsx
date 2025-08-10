@@ -26,6 +26,7 @@ const NovelCard = async ({ novelSummary: { author, ratingValue, status, title, s
           className="object-cover object-center w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105 opacity-90"
           blurData={base64}
           fill
+          sizes="20vw"
         />
         <BookCoverOverlay />
         <HoverOverlay info={{ author, title }} size={size} />

@@ -11,28 +11,33 @@ export const metadata: Metadata = {
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
+  preload: false
 });
 
 const atkinson = Atkinson_Hyperlegible({
   weight: ["400", "700"],
   subsets: ["latin"],
-  variable: "--font-atkinson"
+  variable: "--font-atkinson",
+  preload: false
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  preload: false
 });
 
 const roboto = Roboto({
   subsets: ["latin"],
   variable: "--font-roboto",
+  preload: false
 });
 
 const tiltWarp = Tilt_Warp({
   subsets: ["latin"],
   variable: "--font-tilt-warp",
-  weight: "400"
+  weight: "400",
+  preload: false
 });
 
 export default function RootLayout({
@@ -41,8 +46,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en"
+    <html
+      lang="en"
       className={`${manrope.variable} ${roboto.variable} ${tiltWarp.variable} ${inter.variable} ${atkinson.variable}`}
+      data-scroll-behavior="smooth"
     >
       <body
         className={`vsc-initialized antialiased text-zinc-200 relative font-main`}

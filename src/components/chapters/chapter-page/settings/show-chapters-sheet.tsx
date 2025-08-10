@@ -14,6 +14,7 @@ import { BookOpenText, Loader, Menu } from "lucide-react";
 import Image from "next/image";
 import ChapterAccordion from "./chapters-accordion";
 import { useGetNovelChapterSummaries } from "@/services/chapters/client-queries";
+import Link from "next/link";
 
 const ShowChaptersSheet = ({ chapter }: { chapter: Chapter }) => {
   const { data, isLoading, isError } = useGetNovelChapterSummaries({ novelSlug: chapter.novelSlug, page: 0, size: 9999 });
@@ -29,20 +30,24 @@ const ShowChaptersSheet = ({ chapter }: { chapter: Chapter }) => {
             </p>
           </div>
         </SheetTrigger>
-        <SheetContent side="left" className="gap-0">
+        <SheetContent side="left" className="gap-0" aria-describedby="content">
           <SheetHeader className="grid grid-cols-4 mt-5 gap-3 pb-4 border-b mb-0">
             <div className="col-span-1 w-full relative aspect-[3/4] h-full">
-              <Image
-                src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${chapter.novelSlug}/image`}
-                blurDataURL={defaultBlur}
-                alt="novel cover"
-                className="inline-block object-cover rounded-md w-full h-full"
-                fill
-              />
+              <Link href={"/novels/" + chapter.novelSlug}>
+                <Image
+                  src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${chapter.novelSlug}/image`}
+                  blurDataURL={defaultBlur}
+                  alt="novel cover"
+                  className="inline-block object-cover rounded-md w-full h-full"
+                  fill
+                />
+              </Link>
             </div>
             <div className="col-span-3 flex gap-1 flex-col">
               <SheetTitle className="capitalize text-sm md:text-base tracking-tight leading-6 font-semibold w-full line-clamp-2 md:line-clamp-3">
-                {chapter.novelSlug.replaceAll("-", " ")}
+                <Link href={"/novels/" + chapter.novelSlug}>
+                  {chapter.novelSlug.replaceAll("-", " ")}
+                </Link>
               </SheetTitle>
               {!isLoading && !isError && <div className="flex items-center gap-1.5 text-muted-foreground">
                 <BookOpenText className="size-4" />

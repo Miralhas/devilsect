@@ -28,7 +28,7 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
             fontSize: fontSize,
             lineHeight: `${lineHeight}px`,
             color: textColor.color,
-            opacity: opacityDecimal ?? 1
+            opacity: opacityDecimal
           }}
           dangerouslySetInnerHTML={{ __html: chapter.body }}
         >

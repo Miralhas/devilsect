@@ -24,15 +24,17 @@ const ChapterAccordion = ({ paginatedSumaries, currentChapter }: ChapterAccordio
         value={accordionValue}
         onValueChange={setAccordionValue}
       >
-        {arrayChunker(paginatedSumaries!.results, 100).map((chapterSummaryArr, index) => (
-          <ChapterAccordionItem
-            key={index}
-            chapterSummaryArr={chapterSummaryArr}
-            index={index}
-            currentChapter={currentChapter} setAccordionValue={setAccordionValue}
-            accordionValue={accordionValue}
-          />
-        ))}
+        {paginatedSumaries?.results &&
+          arrayChunker(paginatedSumaries.results, 100).map((chapterSummaryArr, index) => (
+            <ChapterAccordionItem
+              key={index}
+              chapterSummaryArr={chapterSummaryArr}
+              index={index}
+              currentChapter={currentChapter} setAccordionValue={setAccordionValue}
+              accordionValue={accordionValue}
+            />
+          ))
+        }
       </Accordion>
     </div>
   )

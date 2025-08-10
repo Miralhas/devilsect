@@ -24,7 +24,7 @@ const Settings = ({ divRef, chapter }: SettingsProps) => {
       return;
     }
 
-    if (previous && latest > previous) {
+    if (previous && latest+1 > previous) {
       setIsNavHidden(true);
       return;
     }

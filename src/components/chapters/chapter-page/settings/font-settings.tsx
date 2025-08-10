@@ -6,6 +6,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { Slider } from "@/components/ui/slider"
 import { AVAILABLE_COLORS, AVAILABLE_FONTS, useReaderSettingsContext } from "@/contexts/reader-settings-context"
 
 import { Check, MinusIcon, PlusIcon, TypeIcon } from "lucide-react"
@@ -22,10 +23,12 @@ const FontSettings = () => {
     decreaseLineHeight,
     increaseLineHeight,
     changeTextColor,
+    changeOpacity,
     fontSize,
     lineHeight,
     fontFamily,
-    textColor
+    textColor,
+    opacity,
   } = useReaderSettingsContext();
   return (
     <>
@@ -124,6 +127,22 @@ const FontSettings = () => {
                     ) : null}
                   </Button>
                 ))}
+              </div>
+            </div>
+
+            <div className="w-full ">
+              <p className="text-base text-[15px] leading-7 tracking-wide">Opacity</p>
+              <div className="w-full flex justify-between items-baseline gap-3">
+                <Slider
+                  defaultValue={[opacity]}
+                  value={[opacity]}
+                  max={100}
+                  min={10}
+                  step={5}
+                  className="w-full"
+                  onValueChange={(value) => changeOpacity(value[0])}
+                />
+                <p className="text-base text-[15px] leading-7 tracking-tight font-medium">{opacity}</p>
               </div>
             </div>
 

@@ -22,6 +22,7 @@ type ReaderSettingsContextState = {
   lineHeight: number;
   fontFamily: AvailableFonts;
   textColor: AvailableColors;
+  opacity: number;
   reset: () => void;
   increaseFontSize: () => void;
   increaseLineHeight: () => void;
@@ -29,15 +30,17 @@ type ReaderSettingsContextState = {
   decreaseLineHeight: () => void;
   changeFontFamily: (font: AvailableFonts) => void;
   changeTextColor: (color: AvailableColors) => void;
+  changeOpacity: (value: number) => void;
 }
 
 const INITIAL_DESKTOP_FONT_SIZE = 18;
 
-const initialValues: Pick<ReaderSettingsContextState, "fontFamily" | "fontSize" | "lineHeight" | "textColor"> = {
+const initialValues: Pick<ReaderSettingsContextState, "fontFamily" | "fontSize" | "lineHeight" | "textColor" | "opacity"> = {
   fontSize: 16,
   lineHeight: 25,
   fontFamily: "font-atkinson",
   textColor: { name: "lightSilver", color: '#e0e0e0' },
+  opacity: 100,
 }
 
 type InitialValuesType = typeof initialValues;
@@ -50,6 +53,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
   const [fontFamily, setFontFamily] = useState(initialValues["fontFamily"]);
   const [lineHeight, setLineHeight] = useState(initialValues["lineHeight"]);
   const [textColor, setTextColor] = useState(initialValues["textColor"]);
+  const [opacity, setOpacity] = useState(initialValues["opacity"]);
 
   useEffect(() => {
     const readerSettingsString = localStorage.getItem("reader-settings");
@@ -59,6 +63,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
       setFontFamily(readerSettings.fontFamily);
       setLineHeight(readerSettings.lineHeight);
       setTextColor(readerSettings.textColor);
+      setOpacity(readerSettings.opacity);
     } else {
       const mobile = window.innerWidth < 768;
       setFontSize(mobile ? initialValues["fontSize"] : INITIAL_DESKTOP_FONT_SIZE);
@@ -66,14 +71,15 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("reader-settings", JSON.stringify({ fontSize, fontFamily, lineHeight, textColor }));
-  }, [fontSize, fontFamily, lineHeight, textColor])
+    localStorage.setItem("reader-settings", JSON.stringify({ fontSize, fontFamily, lineHeight, textColor, opacity }));
+  }, [fontSize, fontFamily, lineHeight, textColor, opacity])
 
   const reset = () => {
     setFontSize(isMobile ? initialValues["fontSize"] : INITIAL_DESKTOP_FONT_SIZE);
     setFontFamily(initialValues["fontFamily"]);
     setLineHeight(initialValues["lineHeight"]);
     setTextColor(initialValues["textColor"]);
+    setOpacity(initialValues["opacity"]);
   }
 
   const increaseLineHeight = () => {
@@ -100,6 +106,10 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
     setTextColor(color);
   }
 
+  const changeOpacity = (value: number) => {
+    setOpacity(value);
+  }
+
 
   return (
     <ContextProvider
@@ -108,12 +118,14 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
         fontFamily,
         lineHeight,
         textColor,
+        opacity,
         decreaseFontSize,
         increaseFontSize,
         decreaseLineHeight,
         increaseLineHeight,
         changeFontFamily,
         changeTextColor,
+        changeOpacity,
         reset,
       }}
     >

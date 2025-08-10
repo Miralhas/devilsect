@@ -10,7 +10,9 @@ import { cn } from "@/lib/utils";
 const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   const { previous, next } = chapter;
   const divRef = useRef<HTMLDivElement>(null);
-  const { fontSize, lineHeight, fontFamily, textColor } = useReaderSettingsContext();
+  const { fontSize, lineHeight, fontFamily, textColor, opacity } = useReaderSettingsContext();
+
+  const opacityDecimal = (opacity / 100);
 
   const hasNext = next !== null;
   const hasPrevious = previous !== null;
@@ -26,6 +28,7 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
             fontSize: fontSize,
             lineHeight: `${lineHeight}px`,
             color: textColor.color,
+            opacity: opacityDecimal
           }}
           dangerouslySetInnerHTML={{ __html: chapter.body }}
         >

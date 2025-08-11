@@ -2,6 +2,7 @@
 
 import { Chapter } from "@/types/chapter";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
+// import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { RefObject, useState } from "react";
 import PrevAndNextButtons from "./prev-and-next-buttons";
 import ShowChaptersSheet from "./show-chapters-sheet";
@@ -19,12 +20,14 @@ const Settings = ({ divRef, chapter }: SettingsProps) => {
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
 
+    console.log(previous, latest);
+
     if (divRef.current && latest >= (divRef.current.clientHeight - 1000)) {
       setIsNavHidden(true);
       return;
     }
 
-    if (previous && latest+1 > previous) {
+    if (previous && latest+5 > previous) {
       setIsNavHidden(true);
       return;
     }

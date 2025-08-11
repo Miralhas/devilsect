@@ -2,7 +2,7 @@
 
 import { Chapter } from "@/types/chapter";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Settings from "./settings";
 import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,7 @@ import { motion, useScroll, useSpring } from "motion/react";
 
 const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   const { previous, next } = chapter;
+  const [isNavHidden, setIsNavHidden] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -50,6 +51,7 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
             opacity: opacityDecimal
           }}
           dangerouslySetInnerHTML={{ __html: chapter.body }}
+          onTouchEnd={() => setIsNavHidden(prev => !prev)}
         >
         </div>
 
@@ -63,7 +65,7 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
           ) : null}
         </div>
       </div>
-      <Settings chapter={chapter} divRef={divRef} />
+      <Settings chapter={chapter} divRef={divRef} isNavHidden={isNavHidden} setIsNavHidden={setIsNavHidden} />
     </div>
   )
 }

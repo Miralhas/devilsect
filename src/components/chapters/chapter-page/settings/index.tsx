@@ -2,19 +2,19 @@
 
 import { Chapter } from "@/types/chapter";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
-// import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
-import { RefObject, useState } from "react";
+import { Dispatch, RefObject, SetStateAction } from "react";
+import FontSettings from "./font-settings";
 import PrevAndNextButtons from "./prev-and-next-buttons";
 import ShowChaptersSheet from "./show-chapters-sheet";
-import FontSettings from "./font-settings";
 
 type SettingsProps = {
   divRef: RefObject<HTMLDivElement | null>;
   chapter: Chapter;
+  isNavHidden: boolean;
+  setIsNavHidden: Dispatch<SetStateAction<boolean>>;
 }
 
-const Settings = ({ divRef, chapter }: SettingsProps) => {
-  const [isNavHidden, setIsNavHidden] = useState(false);
+const Settings = ({ divRef, chapter, isNavHidden, setIsNavHidden}: SettingsProps) => {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -27,7 +27,7 @@ const Settings = ({ divRef, chapter }: SettingsProps) => {
       return;
     }
 
-    if (previous && latest+0.5 > previous) {
+    if (previous && latest > previous) {
       setIsNavHidden(true);
       return;
     }

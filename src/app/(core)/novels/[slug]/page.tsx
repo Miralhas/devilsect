@@ -6,6 +6,7 @@ import { getBlurData } from "@/lib/get-blur-data";
 import { Eye, StarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { putView } from "@/services/novels/api";
 
 type NovelPageProps = {
   params: Promise<{ slug: string }>;
@@ -15,7 +16,9 @@ const NovelPage = async ({ params }: NovelPageProps) => {
   const { slug } = await params;
   const novel = await getNovelBySlug(slug);
   const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`);
-
+  
+  putView(slug);
+  
   return (
     <section className="min-h-screen">
       <div className="bg-zinc-950/70">

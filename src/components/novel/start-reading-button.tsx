@@ -2,6 +2,7 @@ import { getUserLibrary } from "@/services/novels/server-queries";
 import { Novel } from "@/types/novel";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { delay } from "@/lib/utils";
 
 type StartReadingButtonProps = {
   novel: Novel;
@@ -9,6 +10,7 @@ type StartReadingButtonProps = {
 }
 
 const StartReadingButton = async ({ novel }: StartReadingButtonProps) => {
+  await delay(2000)
   const paginatedUserLibrary = await getUserLibrary({novelSlug: novel.slug});
   const hasNovelOnHistory = !!paginatedUserLibrary && paginatedUserLibrary?.totalItems > 0;
   return (

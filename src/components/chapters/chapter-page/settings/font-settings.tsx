@@ -147,7 +147,7 @@ const FontSettings = () => {
             </div>
 
             <div className="w-full grid">
-              <Button className="font-bold text-[17px] py-7 rounded-2xl" variant="cool" onClick={reset}>RESET</Button>
+              <Button className="font-bold text-[17px] py-7 rounded-lg" variant="gradient" onClick={reset}>RESET</Button>
             </div>
           </div>
         </PopoverContent>

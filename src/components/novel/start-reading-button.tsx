@@ -13,7 +13,7 @@ const StartReadingButton = async ({ novel }: StartReadingButtonProps) => {
   const hasNovelOnHistory = !!paginatedUserLibrary && paginatedUserLibrary?.totalItems > 0;
   const isBookmarked = hasNovelOnHistory && paginatedUserLibrary.results[0].bookmarked;
   return (
-    <div className="gap-2 flex flex-col w-full lg:max-w-[240px]">
+    <div className="gap-2 flex flex-col w-full lg:max-w-[300px]">
       {hasNovelOnHistory && isBookmarked ? (
         <Button variant="pure" size="sm" className="transition-opacity ease-in-out duration-300 hover:opacity-80">
           <CheckIcon className="size-5" />
@@ -26,7 +26,7 @@ const StartReadingButton = async ({ novel }: StartReadingButtonProps) => {
         </Button>
       )}
       <Button variant="pure" asChild className="transition-opacity ease-in-out duration-300 hover:opacity-80 bg-gradient-to-r from-accent to-primary/60 text-lg h-[60px] text-white font-bold capitalize tracking-tighter">
-        {hasNovelOnHistory ? (
+        {hasNovelOnHistory && paginatedUserLibrary.results[0].chapterNumber ? (
           <Link href={`/novels/${novel.slug}/${paginatedUserLibrary?.results[0].chapterSlug}`}>
             Read Chapter {''}
             {paginatedUserLibrary?.results[0].chapterNumber}

@@ -27,7 +27,7 @@ const NovelPage = async ({ params }: NovelPageProps) => {
   return (
     <section className="min-h-screen">
       <div className="bg-zinc-950/70">
-        <Container className="max-w-[1024px] md:grid md:grid-cols-[243px_500px] gap-4 py-6 lg:px-0 mb-0 relative">
+        <Container className="max-w-[1024px] md:grid md:grid-cols-[243px_1fr] gap-4 py-6 xl:px-0 mb-0 relative">
           <div className="relative max-h-[300px] md:max-h-max aspect-[2/3] w-full md:col-span-1">
             <DynamicBlurImage
               src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
@@ -38,17 +38,17 @@ const NovelPage = async ({ params }: NovelPageProps) => {
               className="object-contain md:object-cover  rounded-r-lg"
             />
           </div>
-          <div className="w-full col-span-1 flex flex-col gap-8 lg:gap-6">
+          <div className="w-full col-span-1 flex flex-col gap-8 lg:gap-4">
             <div className="space-y-2">
               <div className="flex items-center gap-4">
                 <Badge variant="cool">{statusMap[novel.status]}</Badge>
-                <div className="flex items-center gap-1">
-                  <BookOpenText className="size-4 mt-0.5" />
-                  <p className="text-muted-foreground text-sm">{novel.chaptersCount} Chapters</p>
+                <div className="xs:flex items-center gap-1 ">
+                  <BookOpenText className="size-4 mt-0.5 hidden xs:block" />
+                  <p className="text-muted-foreground text-sm whitespace-nowrap">{novel.chaptersCount} Chapters</p>
                 </div>
-                <div className="flex items-center gap-1">
-                  <Eye className="size-5 relative top-0.25" />
-                  <p className="text-muted-foreground text-sm">{novel.metrics.views} Views</p>
+                <div className="xs:flex items-center gap-1">
+                  <Eye className="size-5 relative top-0.25 hidden xs:block" />
+                  <p className="text-muted-foreground text-sm whitespace-nowrap">{novel.metrics.views} Views</p>
                 </div>
               </div>
               <div className="space-y-1">
@@ -56,12 +56,12 @@ const NovelPage = async ({ params }: NovelPageProps) => {
                 <p className="text-muted-foreground font-normal text-[15px] ml-1">Author: <Link href="/" className="text-accent font-semibold">{novel.author}</Link></p>
               </div>
             </div>
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-2 flex-wrap w-full max-w-[500px]">
               {novel.genres.map(genre => (
                 <NovelBadge name={genre} key={genre} />
               ))}
             </div>
-            <div className="flex gap-1 items-center ml-1 mt-auto">
+            <div className="flex gap-1 items-center ml-1 ">
               <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />
               <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />
               <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />

@@ -58,12 +58,6 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
         </div>
 
         <div className="w-full flex items-center justify-center gap-8 my-14">
-          {/* <Link className="bg-gradient-to-r from-accent to-primary/70 font-bold w-full max-w-[100px] border border-accent/90 rounded-sm hover:bg-primary/60 focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5 py-3 px-4" href={`/novels/${chapter.novelSlug}/${previous?.slug}`} aria-disabled={!hasPrevious}>
-            <div className="w-full flex">
-              <ChevronLeft className="size-6" strokeWidth={4} />
-              Prev
-            </div>
-          </Link> */}
           <Button variant="pure" size="none" className="bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasPrevious} >
             <Link href={`/novels/${chapter.novelSlug}/${previous?.slug}`} className="pr-2">
               <div className="flex items-center w-full justify-center">

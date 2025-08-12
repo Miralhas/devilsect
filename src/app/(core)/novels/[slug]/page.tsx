@@ -1,5 +1,6 @@
 import Container from "@/components/container";
 import DynamicBlurImage from "@/components/dynamic-blur-image";
+import NovelBadge from "@/components/novel/novel-badge";
 import StartReadingButton from "@/components/novel/start-reading-button";
 import StartReadingButtonLoading from "@/components/novel/start-reading-button-loading";
 import { Badge } from "@/components/ui/badge";
@@ -8,7 +9,7 @@ import { getBlurData } from "@/lib/get-blur-data";
 import { statusMap } from "@/lib/utils";
 import { putView } from "@/services/novels/api";
 import { getNovelBySlug } from "@/services/novels/server-queries";
-import { Eye, StarIcon } from "lucide-react";
+import { BookOpenText, Eye, StarIcon } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -37,19 +38,38 @@ const NovelPage = async ({ params }: NovelPageProps) => {
               className="object-contain md:object-cover  rounded-r-lg"
             />
           </div>
-          <div className="w-full col-span-1 flex flex-col gap-4">
-            <div className="space-y-0.5">
-              <Badge variant="cool">{statusMap[novel.status]}</Badge>
-              <h1 className="capitalize text-3xl font-bold">{novel.title}</h1>
+          <div className="w-full col-span-1 flex flex-col gap-8 lg:gap-6">
+            <div className="space-y-2">
+              <div className="flex items-center gap-4">
+                <Badge variant="cool">{statusMap[novel.status]}</Badge>
+                <div className="flex items-center gap-1">
+                  <BookOpenText className="size-4 mt-0.5" />
+                  <p className="text-muted-foreground text-sm">{novel.chaptersCount} Chapters</p>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Eye className="size-5 relative top-0.25" />
+                  <p className="text-muted-foreground text-sm">{novel.metrics.views} Views</p>
+                </div>
+              </div>
+              <div className="space-y-1">
+                <h1 className="capitalize text-3xl font-bold">{novel.title}</h1>
+                <p className="text-muted-foreground font-normal text-[15px] ml-1">Author: <Link href="/" className="text-accent font-semibold">{novel.author}</Link></p>
+              </div>
             </div>
-            <div className="flex gap-1 items-center">
+            <div className="flex gap-2 flex-wrap">
+              {novel.genres.map(genre => (
+                <NovelBadge name={genre} key={genre} />
+              ))}
+            </div>
+            <div className="flex gap-1 items-center ml-1 mt-auto">
+              <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />
+              <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />
+              <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />
+              <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />
               <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />
               <span className="font-semibold">{novel.metrics.ratingValue ?? '0.0'}</span>
-              <p className="ml-1 text-sm text-muted-foreground">{novel.metrics.ratingSize} <span className="relative">Avaliations</span></p>
-              <Eye className="size-5 ml-2 text-muted-foreground" />
-              <p className="text-muted-foreground text-sm">{novel.metrics.views}</p>
+              <p className="ml-1 text-sm text-muted-foreground">({novel.metrics.ratingSize} <span className="relative">ratings</span>)</p>
             </div>
-            <p className="text-muted-foreground font-normal">Author: <Link href="/" className="text-accent font-semibold">{novel.author}</Link></p>
             <div className="mt-auto w-full">
               <Suspense fallback={<StartReadingButtonLoading />}>
                 <StartReadingButton novel={novel} />

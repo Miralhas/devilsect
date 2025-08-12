@@ -11,7 +11,7 @@ export const delay = async (ms: number) => await new Promise(resolve => setTimeo
 
 export const statusMap: Record<NovelStatus, DisplayStatus> = {
   COMPLETED: 'Completed',
-  ON_GOING: "On Going"
+  ON_GOING: "Ongoing"
 };
 
 // https://stackoverflow.com/a/64777515/30371438

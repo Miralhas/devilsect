@@ -1,12 +1,13 @@
-import { getNovelBySlug } from "@/services/novels/server-queries";
 import Container from "@/components/container";
 import DynamicBlurImage from "@/components/dynamic-blur-image";
+import StartReadingButton from "@/components/novel/start-reading-button";
+import StartReadingButtonLoading from "@/components/novel/start-reading-button-loading";
 import { env } from "@/env";
 import { getBlurData } from "@/lib/get-blur-data";
-import { Eye, StarIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { putView } from "@/services/novels/api";
+import { getNovelBySlug } from "@/services/novels/server-queries";
+import { Eye, StarIcon } from "lucide-react";
+import { Suspense } from "react";
 
 type NovelPageProps = {
   params: Promise<{ slug: string }>;
@@ -16,13 +17,13 @@ const NovelPage = async ({ params }: NovelPageProps) => {
   const { slug } = await params;
   const novel = await getNovelBySlug(slug);
   const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`);
-  
+
   putView(slug);
-  
+
   return (
     <section className="min-h-screen">
       <div className="bg-zinc-950/70">
-        <Container className="md:grid md:grid-cols-[243px_1fr] gap-4 p-0 mb-0 pb-0">
+        <Container className="max-w-[1024px] md:grid md:grid-cols-[243px_1fr] gap-4 p-0 py-6 mb-0">
           <DynamicBlurImage
             src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
             alt={novel.title + " cover"}
@@ -43,10 +44,10 @@ const NovelPage = async ({ params }: NovelPageProps) => {
               <p className="text-muted-foreground text-sm">{novel.metrics.views}</p>
             </div>
             <p className="text-muted-foreground">Author: <span className="text-accent">{novel.author}</span></p>
-            <div className="mt-auto pb-4">
-              <Button variant="cool" asChild className="text-lg py-6 px-10 text-white font-bold uppercase tracking-tighter">
-                <Link href={`/novels/${novel.slug}/${novel.firstChapter.slug}`}>Start Reading</Link>
-              </Button>
+            <div className="mt-auto">
+              <Suspense fallback={<StartReadingButtonLoading />}>
+                <StartReadingButton novel={novel} />
+              </Suspense>
             </div>
           </div>
         </Container>

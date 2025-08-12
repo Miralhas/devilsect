@@ -39,6 +39,7 @@ const ShowChaptersSheet = ({ chapter }: { chapter: Chapter }) => {
                   blurDataURL={defaultBlur}
                   alt="novel cover"
                   className="inline-block object-cover rounded-md w-full h-full"
+                  sizes="10vw"
                   fill
                 />
               </Link>

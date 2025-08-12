@@ -20,8 +20,6 @@ const Settings = ({ divRef, chapter, isNavHidden, setIsNavHidden}: SettingsProps
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
 
-    console.log(previous, latest);
-
     if (divRef.current && latest >= (divRef.current.clientHeight - 1000)) {
       setIsNavHidden(true);
       return;

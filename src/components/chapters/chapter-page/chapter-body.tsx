@@ -7,6 +7,8 @@ import Settings from "./settings";
 import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useSpring } from "motion/react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   const { previous, next } = chapter;
@@ -51,18 +53,34 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
             opacity: opacityDecimal
           }}
           dangerouslySetInnerHTML={{ __html: chapter.body }}
-          onTouchEnd={() => setIsNavHidden(prev => !prev)}
+          onTouchStart={() => setIsNavHidden(prev => !prev)}
         >
         </div>
 
-        <div className="w-full flex items-center gap-4 justify-between mt-14">
-          {hasPrevious ? (
-            <Link className="bg-primary/70 border border-accent/90 rounded-sm hover:bg-primary/60 focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5 p-5 w-full text-center max-w-[200px]" href={`/novels/${chapter.novelSlug}/${previous.slug}`}>Previous Chapter</Link>
-          ) : null}
+        <div className="w-full flex items-center justify-center gap-8 my-14">
+          {/* <Link className="bg-gradient-to-r from-accent to-primary/70 font-bold w-full max-w-[100px] border border-accent/90 rounded-sm hover:bg-primary/60 focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5 py-3 px-4" href={`/novels/${chapter.novelSlug}/${previous?.slug}`} aria-disabled={!hasPrevious}>
+            <div className="w-full flex">
+              <ChevronLeft className="size-6" strokeWidth={4} />
+              Prev
+            </div>
+          </Link> */}
+          <Button variant="pure" size="none" className="bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasPrevious} >
+            <Link href={`/novels/${chapter.novelSlug}/${previous?.slug}`} className="pr-2">
+              <div className="flex items-center w-full justify-center">
+                <ChevronLeft className="size-6" strokeWidth={4} />
+                <span className="text-lg">Prev</span>
+              </div>
+            </Link>
+          </Button>
 
-          {hasNext ? (
-            <Link className="bg-primary/70 border border-accent/90 rounded-sm hover:bg-primary/60 focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5 p-5 w-full text-center max-w-[200px] ms-auto" href={`/novels/${chapter.novelSlug}/${next.slug}`}>Next Chapter</Link>
-          ) : null}
+          <Button variant="pure" size="none" className="bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasNext} >
+            <Link href={`/novels/${chapter.novelSlug}/${next?.slug}`} className="pl-2">
+              <div className="flex items-center w-full justify-center">
+                <span className="text-lg mb-0.5">Next</span>
+                <ChevronRight className="size-6" strokeWidth={4} />
+              </div>
+            </Link>
+          </Button>
         </div>
       </div>
       <Settings chapter={chapter} divRef={divRef} isNavHidden={isNavHidden} setIsNavHidden={setIsNavHidden} />

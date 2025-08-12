@@ -71,19 +71,24 @@ export const getUserLibrary = async (params: UserLibraryParams): Promise<Paginat
   const session = await getSession();
   if (!session) return;
 
-  
+
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${session?.value}`);
 
   const parsed = UserLibraryParamsSchema.parse(params);
   const queryString = buildQueryString(parsed);
-  
+
   const url = `${env.NEXT_PUBLIC_BASE_URL}/library${queryString}`
 
   const res = await fetch(url, {
     method: "GET",
     headers: myHeaders,
   });
+
+  if (!res.ok) {
+    const error: ApiResponseError = await res.json();
+    console.error(`Error trying to [GET] user History: ${error.detail}`);
+  }
 
   return await res.json() as PaginatedQuery<Library[]>;
 }
@@ -101,11 +106,11 @@ export const addChapterToUserHistory = async (requestBody: { novelId: number, ch
   const res = await fetch(url, {
     method: "PUT",
     headers: myHeaders,
-    body: JSON.stringify({chapterId: requestBody.chapterId, novelId: requestBody.novelId}),
+    body: JSON.stringify({ chapterId: requestBody.chapterId, novelId: requestBody.novelId }),
   });
 
   if (!res.ok) {
     const error: ApiResponseError = await res.json();
-    console.error(`Error trying to [PUT] novel chapter to user History: ${error}`);
+    console.error(`Error trying to [PUT] novel chapter to user History: ${error.detail}`);
   }
 }

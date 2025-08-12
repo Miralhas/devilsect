@@ -11,3 +11,4 @@ export const putView = async (novelSlug: string): Promise<void> => {
     console.log("failed to post novel view");
   }
 }
+

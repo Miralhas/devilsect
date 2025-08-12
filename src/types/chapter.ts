@@ -9,6 +9,7 @@ export type ChapterSummary = {
 
 export type Chapter = {
   id: number;
+  novelId: number;
   title: string;
   slug: string;
   body: string;

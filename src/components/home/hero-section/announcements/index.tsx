@@ -12,6 +12,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { arrayChunker } from "@/lib/utils";
 import { Announcement as AnnouncementType } from "@/types/announcement";
 import { Megaphone } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const ANNOUNCEMENTS: AnnouncementType[] = [
@@ -74,7 +75,7 @@ const Announcements = () => {
 const Announcement = ({ date, title }: AnnouncementType) => {
   return (
     <Link href="/" className="w-full h-[86px] rounded-xl px-4 py-3 flex gap-3 items-center border hover:border-accent/60 hover:bg-primary/10 bg-muted-foreground/5 transition-colors duration-200 ease-in-out">
-      <img src="yin-yang.png" alt="" className="size-12" />
+      <Image src="/yin-yang.png" alt="" width={48} height={48} className="object-cover" />
       <div className="w-full">
         <p className="text-[17px] font-semibold leading-[120%] tracking-[-0.02em] line-clamp-2">
           {title}

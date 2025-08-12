@@ -4,4 +4,5 @@ export type PaginatedQuery<T> = {
   next: number | null;
   previous: number | null;
   currentPage: number;
+  totalPages: number,
 }

@@ -1,11 +1,16 @@
-import { getNovelBySlug } from "@/services/novels/server-queries";
 import Container from "@/components/container";
 import DynamicBlurImage from "@/components/dynamic-blur-image";
+import StartReadingButton from "@/components/novel/start-reading-button";
+import StartReadingButtonLoading from "@/components/novel/start-reading-button-loading";
+import { Badge } from "@/components/ui/badge";
 import { env } from "@/env";
 import { getBlurData } from "@/lib/get-blur-data";
+import { statusMap } from "@/lib/utils";
+import { putView } from "@/services/novels/api";
+import { getNovelBySlug } from "@/services/novels/server-queries";
 import { Eye, StarIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Suspense } from "react";
 
 type NovelPageProps = {
   params: Promise<{ slug: string }>;
@@ -16,22 +21,27 @@ const NovelPage = async ({ params }: NovelPageProps) => {
   const novel = await getNovelBySlug(slug);
   const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`);
 
+  putView(slug);
+
   return (
     <section className="min-h-screen">
       <div className="bg-zinc-950/70">
-        <Container className="md:grid md:grid-cols-[243px_1fr] gap-4 p-0 mb-0 pb-0">
-          <DynamicBlurImage
-            src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
-            alt={novel.title + " cover"}
-            blurData={base64}
-            width={243}
-            height={324}
-            fill={false}
-            quality={100}
-            className="object-cover col-span-1 rounded-r-lg"
-          />
+        <Container className="max-w-[1024px] md:grid md:grid-cols-[243px_500px] gap-4 py-6 lg:px-0 mb-0 relative">
+          <div className="relative max-h-[300px] md:max-h-max aspect-[2/3] w-full md:col-span-1">
+            <DynamicBlurImage
+              src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
+              alt={novel.title + " cover"}
+              blurData={base64}
+              quality={100}
+              sizes="33vh"
+              className="object-contain md:object-cover  rounded-r-lg"
+            />
+          </div>
           <div className="w-full col-span-1 flex flex-col gap-4">
-            <h1 className="capitalize text-3xl font-bold">{novel.title}</h1>
+            <div className="space-y-0.5">
+              <Badge variant="cool">{statusMap[novel.status]}</Badge>
+              <h1 className="capitalize text-3xl font-bold">{novel.title}</h1>
+            </div>
             <div className="flex gap-1 items-center">
               <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />
               <span className="font-semibold">{novel.metrics.ratingValue ?? '0.0'}</span>
@@ -39,11 +49,11 @@ const NovelPage = async ({ params }: NovelPageProps) => {
               <Eye className="size-5 ml-2 text-muted-foreground" />
               <p className="text-muted-foreground text-sm">{novel.metrics.views}</p>
             </div>
-            <p className="text-muted-foreground">Author: <span className="text-accent">{novel.author}</span></p>
-            <div className="mt-auto pb-4">
-              <Button variant="cool" asChild className="text-lg py-6 px-10 text-white font-bold uppercase tracking-tighter">
-                <Link href={`/novels/${novel.slug}/${novel.firstChapter.slug}`}>Start Reading</Link>
-              </Button>
+            <p className="text-muted-foreground font-normal">Author: <Link href="/" className="text-accent font-semibold">{novel.author}</Link></p>
+            <div className="mt-auto w-full">
+              <Suspense fallback={<StartReadingButtonLoading />}>
+                <StartReadingButton novel={novel} />
+              </Suspense>
             </div>
           </div>
         </Container>

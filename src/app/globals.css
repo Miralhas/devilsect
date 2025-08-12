@@ -12,6 +12,7 @@
   --font-tilt-warp: var(--font-tilt-warp);
   --font-inter: var(--font-inter);
   --font-atkinson: var(--font-atkinson);
+  --font-manrope: var(--font-manrope);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -172,7 +173,6 @@
 
 .chapter-body>p {
   text-align: left;
-  line-height: 1.4;
   letter-spacing: 0.01em;
   word-spacing: 0.05em;
 }

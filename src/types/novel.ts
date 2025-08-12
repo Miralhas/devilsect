@@ -1,7 +1,7 @@
 import { ChapterSummary } from "./chapter";
 
 export type NovelStatus = 'ON_GOING' | 'COMPLETED';
-export type DisplayStatus = 'On Going' | 'Completed';
+export type DisplayStatus = 'Ongoing' | 'Completed';
 
 export type NovelSummary = {
   id: number;
@@ -20,7 +20,7 @@ export type Novel = {
   slug: string;
   title: string;
   author: string;
-  status: string;
+  status: NovelStatus;
   isHidden: boolean;
   description: string;
   chaptersCount: number;

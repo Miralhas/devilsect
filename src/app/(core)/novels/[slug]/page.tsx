@@ -42,11 +42,11 @@ const NovelPage = async ({ params }: NovelPageProps) => {
             <div className="space-y-2">
               <div className="flex items-center gap-4">
                 <Badge variant="cool">{statusMap[novel.status]}</Badge>
-                <div className="xs:flex items-center gap-1 ">
+                <div className="flex items-center gap-1 ">
                   <BookOpenText className="size-4 mt-0.5 hidden xs:block" />
                   <p className="text-muted-foreground text-sm whitespace-nowrap">{novel.chaptersCount} Chapters</p>
                 </div>
-                <div className="xs:flex items-center gap-1">
+                <div className="flex items-center gap-1">
                   <Eye className="size-5 relative top-0.25 hidden xs:block" />
                   <p className="text-muted-foreground text-sm whitespace-nowrap">{novel.metrics.views} Views</p>
                 </div>

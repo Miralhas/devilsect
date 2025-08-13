@@ -2,7 +2,7 @@ import { getUserLibrary } from "@/services/novels/server-queries";
 import { Novel } from "@/types/novel";
 import { BellIcon, CheckIcon } from "lucide-react";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 type StartReadingButtonProps = {
   novel: Novel;

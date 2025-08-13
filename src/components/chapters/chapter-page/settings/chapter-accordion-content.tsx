@@ -17,7 +17,7 @@ const ChapterAccordionContent = ({ accordionChapter, currentChapter }: ChapterAc
     if (currentChapter.id === accordionChapter.id && chapterLinkRef.current) {
       const id = setTimeout(() => {
         chapterLinkRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 300);
+      }, 500);
 
       return () => clearTimeout(id);
     }

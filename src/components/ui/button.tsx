@@ -23,7 +23,8 @@ const buttonVariants = cva(
         cool: "bg-primary/70 border border-accent/90 rounded-sm hover:bg-primary/60 focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5",
 
         "cool-secondary": "bg-secondary border border-neutral-700/80 rounded-sm hover:bg-background focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5",
-        pure: "transition-colors duration-200 ease-in-out"
+        pure: "transition-colors duration-200 ease-in-out",
+        gradient: "bg-gradient-to-r from-accent to-primary/80 hover:opacity-70 transition-opacity duration-300 ease-in-out"
 
       },
       size: {

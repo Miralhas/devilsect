@@ -6,8 +6,8 @@ import { Novel } from "@/types/novel";
 
 const AboutTab = ({ novel }: { novel: Novel }) => {
   return (
-    <div className="w-full max-w-[1024px] mx-auto pb-6 space-y-8">
-      <div className="space-y-4">
+    <div className="w-full max-w-[1024px] mx-auto space-y-8">
+      <div className="space-y-6">
         <div className="flex flex-col md:flex-row md:gap-34">
           <div className="space-y-1 flex md:flex-col gap-2 md:gap-0 order-2 md:order-none">
             <div className="flex items-center gap-1">

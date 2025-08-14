@@ -1,5 +1,6 @@
 import AboutSection from "@/components/novel/about-section";
 import InfoSection from "@/components/novel/info-section";
+import RelatedNovels from "@/components/novel/related-novels";
 import { putView } from "@/services/novels/api";
 import { getNovelBySlug } from "@/services/novels/server-queries";
 
@@ -13,9 +14,11 @@ const NovelPage = async ({ params }: NovelPageProps) => {
   putView(slug);
 
   return (
-    <section className="min-h-[200vh] pb-10">
+    <section className="min-h-[100vh] pb-10 space-y-6">
       <InfoSection novel={novel} />
       <AboutSection novel={novel} />
+      {/* <Reviews /> */}
+      <RelatedNovels genre={novel.genres[0]} />
     </section>
   )
 }

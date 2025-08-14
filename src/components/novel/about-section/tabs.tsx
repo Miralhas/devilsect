@@ -16,7 +16,7 @@ const Tabs = ({ novel }: { novel: Novel }) => {
     <>
       <div className="w-full border-b border-zinc-50/15">
         <nav className="max-w-[1024px] mx-auto">
-          <ul className="p-0 m-0 font-medium text-sm flex list-none w-fit gap-8 pt-4">
+          <ul className="p-0 m-0 font-medium text-sm flex list-none w-fit gap-8">
             {tabs.map((item) => (
               <motion.li
                 key={item}

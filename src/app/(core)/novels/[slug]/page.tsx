@@ -13,7 +13,7 @@ const NovelPage = async ({ params }: NovelPageProps) => {
   putView(slug);
 
   return (
-    <section className="min-h-[200vh]">
+    <section className="min-h-[200vh] pb-10">
       <InfoSection novel={novel} />
       <AboutSection novel={novel} />
     </section>

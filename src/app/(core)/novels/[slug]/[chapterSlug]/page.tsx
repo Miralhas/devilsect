@@ -15,7 +15,6 @@ const ChapterPage = async ({ params }: ChapterPageProps) => {
   addChapterToUserHistory({novelId: chapter.novelId, chapterId: chapter.id});
   putView(slug);
 
-
   return (
     <>
       <Container className="max-w-[1024px] p-0 gap-0 block min-h-screen space-y-4">

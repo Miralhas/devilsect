@@ -2,9 +2,21 @@ import { useGetNovelChapterSummaries } from "@/services/chapters/client-queries"
 import { format } from "date-fns";
 import { Loader } from "lucide-react";
 import Link from "next/link";
+import { RefObject, useEffect } from "react";
 
-const ChapterAccordionContent = ({ page, slug }: { page: number, slug: string }) => {
+const ChapterAccordionContent = ({ page, slug, accordionRef }: { page: number, slug: string; accordionRef: RefObject<HTMLDivElement | null> }) => {
   const chapters = useGetNovelChapterSummaries({ page, novelSlug: slug, size: 100, });
+
+  useEffect(() => {
+    if (accordionRef.current && !chapters.isLoading) {
+      const id = setTimeout(() => {
+        accordionRef.current?.scrollIntoView({behavior: "smooth", block: "start"});
+      }, 250);
+
+      return () => clearTimeout(id);
+    }
+    
+  }, [page, accordionRef, chapters.isLoading])
 
   if (chapters.isError || chapters.isLoading) {
     return <Loading />

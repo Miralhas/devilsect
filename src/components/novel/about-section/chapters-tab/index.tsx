@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Novel } from "@/types/novel";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ChapterAccordionContent from "./chapter-accordion-content";
 import Sort from "./sort";
 
@@ -40,9 +40,10 @@ const ChaptersTab = ({ novel }: { novel: Novel }) => {
 }
 
 const Item = ({ isLast, novel, index }: { isLast: boolean; novel: Novel; index: number }) => {
+  const accordionRef = useRef<HTMLDivElement>(null);
   return (
     <>
-      <AccordionItem value={`item-${index}`}>
+      <AccordionItem value={`item-${index}`} ref={accordionRef}>
         <AccordionTrigger className="p-4 rounded-none rounded-t-md bg-secondary w-full text-base items-center cursor-pointer hover:no-underline">
           <div className="flex gap-3 items-center font-bold">
             <p className="size-[32px] flex items-center justify-center text-white bg-zinc-700/50 rounded-sm">{index + 1}</p>
@@ -52,7 +53,7 @@ const Item = ({ isLast, novel, index }: { isLast: boolean; novel: Novel; index: 
           </div>
         </AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance bg-secondary">
-          <ChapterAccordionContent page={index} slug={novel.slug} />
+          <ChapterAccordionContent page={index} slug={novel.slug} accordionRef={accordionRef} />
         </AccordionContent>
       </AccordionItem>
     </>

@@ -20,7 +20,7 @@ const ChapterAccordionContent = ({ currentChapter, page, accordionRef, accordion
 
   useEffect(() => {
     // scroll to the start of the accordion or to the current chapter link, if any
-    if (accordionValue === String(page) && accordionRef.current && !chapters.isLoading) {
+    if (accordionRef.current && !chapters.isLoading) {
       const id = setTimeout(() => {
         if (chapterLinkRef.current) {
           chapterLinkRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });

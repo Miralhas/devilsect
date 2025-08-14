@@ -16,7 +16,7 @@ const ChaptersTab = ({ novel }: { novel: Novel }) => {
   const totalButtons = Math.ceil(novel.chaptersCount / MAX_CHAPTERS_PER_BUTTON);
 
   return (
-    <section className="w-full max-w-[1024px] mx-auto space-y-4">
+    <section className="w-full max-w-[1024px] mx-auto space-y-6">
       <Sort novel={novel} setSort={setSort} sort={sort} />
       <Accordion
         type="single"

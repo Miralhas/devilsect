@@ -3,34 +3,25 @@ import {
   AccordionItem,
   AccordionTrigger
 } from "@/components/ui/accordion";
-import { Chapter, ChapterSummary } from "@/types/chapter";
-import ChapterAccordionContent from "./chapter-accordion-content";
+import { Chapter } from "@/types/chapter";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import ChapterAccordionContent from "./chapter-accordion-content";
+import { MAX_CHAPTERS_PER_BUTTON } from "./chapters-accordion";
 
 
 type ChapterAccordionItemProps = {
-  chapterSummaryArr: ChapterSummary[];
   index: number;
   currentChapter: Chapter;
   setAccordionValue: Dispatch<SetStateAction<string | undefined>>;
   accordionValue?: string;
+  isLast: boolean;
 }
 
-const ChapterAccordionItem = ({ chapterSummaryArr, index, currentChapter, setAccordionValue, accordionValue }: ChapterAccordionItemProps) => {
+const ChapterAccordionItem = ({ index, currentChapter, setAccordionValue, accordionValue, isLast }: ChapterAccordionItemProps) => {
   const accordionRef = useRef<HTMLDivElement>(null);
-  const initialChunkChapter = chapterSummaryArr[0].number;
-  const lastChunkChapter = chapterSummaryArr[chapterSummaryArr.length - 1].number;
-
-  useEffect(() => {
-    // scroll to the start of the newly open accordion
-    if (accordionValue === String(index) && accordionRef.current) {
-      const id = setTimeout(() => {
-        accordionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 250);
-
-      return () => clearTimeout(id);
-    }
-  }, [accordionValue, index])
+  const initialChunkChapter = MAX_CHAPTERS_PER_BUTTON * index + 1;
+  const lastChunkChapter = isLast ? (currentChapter.novelChaptersCount)
+    : (MAX_CHAPTERS_PER_BUTTON + MAX_CHAPTERS_PER_BUTTON * index);
 
   useEffect(() => {
     // if current chapter is between the first and last chapters of the current chapters chunk, then open this accordion
@@ -46,15 +37,12 @@ const ChapterAccordionItem = ({ chapterSummaryArr, index, currentChapter, setAcc
           {initialChunkChapter} - {lastChunkChapter}
         </AccordionTrigger>
         <AccordionContent className="flex flex-col text-balance first:mt-2">
-          {chapterSummaryArr.map(chapter => {
-            return (
-              <ChapterAccordionContent
-                key={chapter.id}
-                accordionChapter={chapter}
-                currentChapter={currentChapter}
-              />
-            )
-          })}
+          <ChapterAccordionContent
+            currentChapter={currentChapter}
+            page={index}
+            accordionRef={accordionRef}
+            accordionValue={accordionValue}
+          />
         </AccordionContent>
       </AccordionItem>
     </>

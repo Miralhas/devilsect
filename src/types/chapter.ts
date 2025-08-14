@@ -17,4 +17,5 @@ export type Chapter = {
   novelSlug: string;
   previous: ChapterSummary | null;
   next: ChapterSummary | null;
+  novelChaptersCount: number;
 };

@@ -10,15 +10,12 @@ import {
 import { env } from "@/env";
 import defaultBlur from "@/lib/blur-data";
 import { Chapter } from "@/types/chapter";
-import { BookOpenText, Loader, Menu } from "lucide-react";
+import { BookOpenText, Menu } from "lucide-react";
 import Image from "next/image";
-import ChapterAccordion from "./chapters-accordion";
-import { useGetNovelChapterSummaries } from "@/services/chapters/client-queries";
 import Link from "next/link";
+import ChapterAccordion from "./chapters-accordion";
 
 const ShowChaptersSheet = ({ chapter }: { chapter: Chapter }) => {
-  const { data, isLoading, isError } = useGetNovelChapterSummaries({ novelSlug: chapter.novelSlug, page: 0, size: 9999 });
-
   return (
     <>
       <Sheet>
@@ -50,15 +47,15 @@ const ShowChaptersSheet = ({ chapter }: { chapter: Chapter }) => {
                   {chapter.novelSlug.replaceAll("-", " ")}
                 </Link>
               </SheetTitle>
-              {!isLoading && !isError && <div className="flex items-center gap-1.5 text-muted-foreground">
+              <div className="flex items-center gap-1.5 text-muted-foreground">
                 <BookOpenText className="size-4" />
-                <p className="text-[12px] mb-0.5">{data?.totalItems} Chapters</p>
-              </div>}
+                <p className="text-[12px] mb-0.5">{chapter.novelChaptersCount} Chapters</p>
+              </div>
             </div>
           </SheetHeader>
-          {!isLoading && !isError ? <div className="grid flex-1 auto-rows-min gap-6 px-4 overflow-y-auto">
-            <ChapterAccordion currentChapter={chapter} paginatedSumaries={data!} />
-          </div> : <div className="w-full grid place-items-center min-h-[10vh]"><Loader className="size-7 animate-spin" /></div>}
+          <div className="grid flex-1 auto-rows-min gap-6 px-4 overflow-y-auto">
+            <ChapterAccordion currentChapter={chapter} />
+          </div>
           <SheetFooter>
             <SheetClose asChild>
             </SheetClose>

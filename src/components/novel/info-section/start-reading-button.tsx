@@ -2,7 +2,7 @@ import { getUserLibrary } from "@/services/novels/server-queries";
 import { Novel } from "@/types/novel";
 import { BellIcon, CheckIcon } from "lucide-react";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 type StartReadingButtonProps = {
   novel: Novel;
@@ -13,7 +13,7 @@ const StartReadingButton = async ({ novel }: StartReadingButtonProps) => {
   const hasNovelOnHistory = !!paginatedUserLibrary && paginatedUserLibrary?.totalItems > 0;
   const isBookmarked = hasNovelOnHistory && paginatedUserLibrary.results[0].bookmarked;
   return (
-    <div className="gap-2 flex flex-col w-full lg:max-w-[300px]">
+    <div className="gap-2 flex flex-col w-full lg:max-w-[335px]">
       {hasNovelOnHistory && isBookmarked ? (
         <Button variant="pure" size="sm" className="transition-opacity ease-in-out duration-300 hover:opacity-80">
           <CheckIcon className="size-5" />

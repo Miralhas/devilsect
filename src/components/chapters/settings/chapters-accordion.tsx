@@ -1,19 +1,19 @@
 import {
   Accordion
 } from "@/components/ui/accordion";
-import { arrayChunker } from "@/lib/utils";
-import { Chapter, ChapterSummary } from "@/types/chapter";
-import { PaginatedQuery } from "@/types/pagination";
+import { Chapter } from "@/types/chapter";
 import { useState } from "react";
 import ChapterAccordionItem from "./chapter-accordion-item";
 
 type ChapterAccordionProps = {
-  paginatedSumaries: PaginatedQuery<ChapterSummary[]>;
   currentChapter: Chapter;
 };
 
-const ChapterAccordion = ({ paginatedSumaries, currentChapter }: ChapterAccordionProps) => {
+export const MAX_CHAPTERS_PER_BUTTON = 100;
+
+const ChapterAccordion = ({ currentChapter }: ChapterAccordionProps) => {
   const [accordionValue, setAccordionValue] = useState<string | undefined>();
+  const totalButtons = Math.ceil(currentChapter.novelChaptersCount / MAX_CHAPTERS_PER_BUTTON);
 
   return (
     <div className="w-full space-y-2">
@@ -24,17 +24,19 @@ const ChapterAccordion = ({ paginatedSumaries, currentChapter }: ChapterAccordio
         value={accordionValue}
         onValueChange={setAccordionValue}
       >
-        {paginatedSumaries?.results &&
-          arrayChunker(paginatedSumaries.results, 100).map((chapterSummaryArr, index) => (
+        {Array.from({ length: totalButtons }).map((_, index) => {
+          const isLast = index + 1 === totalButtons;
+          return (
             <ChapterAccordionItem
-              key={index}
-              chapterSummaryArr={chapterSummaryArr}
+              currentChapter={currentChapter}
               index={index}
-              currentChapter={currentChapter} setAccordionValue={setAccordionValue}
+              isLast={isLast}
+              setAccordionValue={setAccordionValue}
               accordionValue={accordionValue}
+              key={index}
             />
-          ))
-        }
+          )
+        })}
       </Accordion>
     </div>
   )

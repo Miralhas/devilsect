@@ -1,5 +1,5 @@
-import ChapterBody from "@/components/chapters/chapter-page/chapter-body";
-import Header from "@/components/chapters/chapter-page/header";
+import ChapterBody from "@/components/chapters/chapter-body";
+import Header from "@/components/chapters/header";
 import Container from "@/components/container";
 import { getChapterBySlug } from "@/services/chapters/server-queries";
 import { putView } from "@/services/novels/api";
@@ -14,7 +14,6 @@ const ChapterPage = async ({ params }: ChapterPageProps) => {
   const chapter = await getChapterBySlug(chapterSlug, slug);
   addChapterToUserHistory({novelId: chapter.novelId, chapterId: chapter.id});
   putView(slug);
-
 
   return (
     <>

@@ -16,7 +16,9 @@ const ChoicesCarousel = ({ choices }: { choices: EldersChoice[] }) => {
       <CarouselContent className="mr-0.5">
         {choices.map(choice => (
           <CarouselItem className="basis-1/3 md:basis-1/6" key={choice.id}>
-            <Link className="group space-y-2 [&:nth-child(n+7)]:hidden md:[&:nth-child(n+7)]:block" href={`/novels/${choice.novel.slug}`}>
+            <Link
+              className="group space-y-2 [&:nth-child(n+7)]:hidden md:[&:nth-child(n+7)]:block"
+              href={`/novels/${choice.novel.slug}`}>
               <NovelCard novelSummary={choice.novel} size="lg" />
             </Link>
           </CarouselItem>

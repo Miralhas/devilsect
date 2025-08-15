@@ -83,6 +83,7 @@ export const getUserLibrary = async (params: UserLibraryParams): Promise<Paginat
   const res = await fetch(url, {
     method: "GET",
     headers: myHeaders,
+    next: { tags: ["library"] }
   });
 
   if (!res.ok) {

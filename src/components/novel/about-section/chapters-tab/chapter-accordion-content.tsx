@@ -1,6 +1,6 @@
+import SpinnerLoader from "@/components/ui/spinner-loader";
 import { useGetNovelChapterSummaries } from "@/services/chapters/client-queries";
 import { format } from "date-fns";
-import { Loader } from "lucide-react";
 import Link from "next/link";
 import { RefObject, useEffect } from "react";
 
@@ -19,7 +19,7 @@ const ChapterAccordionContent = ({ page, slug, accordionRef }: { page: number, s
   }, [page, accordionRef, chapters.isLoading])
 
   if (chapters.isError || chapters.isLoading) {
-    return <Loading />
+    return <SpinnerLoader containerClassName="min-h-[10vh]" loaderClassName="size-7" />
   }
 
   return (
@@ -33,14 +33,6 @@ const ChapterAccordionContent = ({ page, slug, accordionRef }: { page: number, s
           <span className="text-[11px] text-muted-foreground">- {format(new Date(chapter.createdAt), 'MM/dd/yyyy')}</span>
         </Link>
       ))}
-    </div>
-  )
-}
-
-const Loading = () => {
-  return (
-    <div className="grid min-h-[10vh] place-items-center">
-      <Loader className="size-7 animate-spin" />
     </div>
   )
 }

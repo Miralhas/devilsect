@@ -1,10 +1,10 @@
+import SpinnerLoader from "@/components/ui/spinner-loader";
 import { cn } from "@/lib/utils";
 import { useGetNovelChapterSummaries } from "@/services/chapters/client-queries";
 import { Chapter } from "@/types/chapter";
 import { format } from "date-fns";
-import { Loader } from "lucide-react";
 import Link from "next/link";
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject, useLayoutEffect, useRef } from "react";
 import { MAX_CHAPTERS_PER_BUTTON } from "./chapters-accordion";
 
 type ChapterAccordionContentProps = {
@@ -18,23 +18,24 @@ const ChapterAccordionContent = ({ currentChapter, page, accordionRef, accordion
   const chapters = useGetNovelChapterSummaries({ page, novelSlug: currentChapter.novelSlug, size: MAX_CHAPTERS_PER_BUTTON, });
   const chapterLinkRef = useRef<HTMLAnchorElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // scroll to the start of the accordion or to the current chapter link, if any
     if (accordionRef.current && !chapters.isLoading) {
-      const id = setTimeout(() => {
+      const timer = setTimeout(() => {
         if (chapterLinkRef.current) {
-          chapterLinkRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          return;
+          chapterLinkRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          accordionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
         }
-        accordionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 250);
-      return () => clearTimeout(id);
+      }, 450);
+
+      return () => clearTimeout(timer);
     }
 
   }, [accordionValue, page, accordionRef, chapters.isLoading]);
 
   if (chapters.isError || chapters.isLoading) {
-    return <Loading />
+    return <SpinnerLoader containerClassName="min-h-[5vh]" loaderClassName="size-7" />
   }
 
   return (
@@ -54,14 +55,6 @@ const ChapterAccordionContent = ({ currentChapter, page, accordionRef, accordion
         </Link>
       ))}
     </>
-  )
-}
-
-const Loading = () => {
-  return (
-    <div className="grid min-h-[5vh] place-items-center">
-      <Loader className="size-7 animate-spin" />
-    </div>
   )
 }
 

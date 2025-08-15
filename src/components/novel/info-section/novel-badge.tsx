@@ -11,7 +11,7 @@ type NovelBadgeProps = {
 
 const NovelBadge = ({ name, className, href = "/", variant = "default" }: NovelBadgeProps) => {
   return (
-    <Badge asChild variant={variant} className={cn("rounded-sm md:text-[13.2px] tracking-tight leading-5", className)}>
+    <Badge asChild variant={variant} className={cn("rounded-sm md:text-[13.2px] tracking-tight leading-5 capitalize", className)}>
       <Link href={href}>{name}</Link>
     </Badge>
   )

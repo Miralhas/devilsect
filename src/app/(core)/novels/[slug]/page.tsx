@@ -1,8 +1,10 @@
 import AboutSection from "@/components/novel/about-section";
 import InfoSection from "@/components/novel/info-section";
 import RelatedNovels from "@/components/novel/related-novels";
+import SkeletonLoader from "@/components/novel/related-novels/skeleton-loader";
 import { putView } from "@/services/novels/api";
 import { getNovelBySlug } from "@/services/novels/server-queries";
+import { Suspense } from "react";
 
 type NovelPageProps = {
   params: Promise<{ slug: string }>;
@@ -17,8 +19,10 @@ const NovelPage = async ({ params }: NovelPageProps) => {
     <section className="min-h-[100vh] pb-10 space-y-6">
       <InfoSection novel={novel} />
       <AboutSection novel={novel} />
-      {/* <Reviews /> */}
-      <RelatedNovels genre={novel.genres[0]} />
+      <Suspense fallback={<SkeletonLoader />}>
+        {/* <Reviews /> */}
+        <RelatedNovels genre={novel.genres[0]} />
+      </Suspense>
     </section>
   )
 }

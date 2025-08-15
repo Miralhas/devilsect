@@ -6,7 +6,7 @@ import Link from "next/link";
 const RelatedNovels = async ({ genre }: { genre: string }) => {
   const related = await getNovelSummariesPaginated({ sort: SortKey.NEWEST_RELEASES, genres: genre, size: 6 });
   return (
-    <section className="w-full px-4 md:px-10">
+    <section className="w-full px-5 md:px-10">
       <div className="max-w-[1024px] mx-auto w-full space-y-4.5">
         <p className="text-xl md:text-3xl font-semibold tracking-tight text-white">Related Novels</p>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-3">

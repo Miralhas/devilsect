@@ -2,10 +2,12 @@
 
 import { Chapter } from "@/types/chapter";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
+import dynamic from 'next/dynamic';
 import { Dispatch, RefObject, SetStateAction } from "react";
-import FontSettings from "./font-settings";
-import PrevAndNextButtons from "./prev-and-next-buttons";
-import ShowChaptersSheet from "./show-chapters-sheet";
+
+const FontSettings = dynamic(() => import("./font-settings"), {ssr: false});
+const PrevAndNextButtons = dynamic(() => import("./prev-and-next-buttons"), {ssr: false});
+const ShowChaptersSheet = dynamic(() => import("./show-chapters-sheet"), {ssr: false});
 
 type SettingsProps = {
   divRef: RefObject<HTMLDivElement | null>;

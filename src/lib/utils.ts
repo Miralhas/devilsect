@@ -39,3 +39,7 @@ export const buildQueryString = <T extends Record<string, string | number | bool
 export const leadingZero = (num: number, places: number) => (num).toString().padStart(places, "0");
 
 export const formatDate = (date: string) => formatDistanceToNowStrict(new Date(date).toString(), { locale: enUS, addSuffix: true });
+
+export const capitalize = (val: string) => {
+  return val.split(" ").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");
+}

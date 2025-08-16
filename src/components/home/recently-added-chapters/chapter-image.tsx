@@ -13,7 +13,7 @@ const ChapterImage = ({ novelSlug, title }: RecentlyAddedChapter) => {
         placeholder="blur"
         blurDataURL={defaultBlur}
         className="w-full h-auto object-cover object-center align-middle duration-300 transition-transform ease-in-out group-hover:scale-110"
-        sizes="10vw"
+        sizes="5vw"
         fill
       />
       <div className="absolute inset-0 rounded-r-sm book-cover" />

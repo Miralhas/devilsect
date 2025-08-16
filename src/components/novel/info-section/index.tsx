@@ -20,7 +20,7 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
         <div className="relative max-h-[300px] md:max-h-[350px] aspect-[2/3] w-full md:col-span-1 h-full">
           <DynamicBlurImage
             priority
-            sizes="33vh"
+            sizes="(max-width: 767px) 100vw, 33vh"
             quality={100}
             blurData={base64}
             alt={novel.title + " cover"}

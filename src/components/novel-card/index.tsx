@@ -12,9 +12,10 @@ export type Size = "sm" | "lg";
 type NovelCardProps = {
   novelSummary: NovelSummary;
   size?: Size;
+  imageSizes?: string;
 }
 
-const NovelCard = async ({ novelSummary: { author, ratingValue, status, title, slug }, size = "sm" }: NovelCardProps) => {
+const NovelCard = async ({ novelSummary: { author, ratingValue, status, title, slug }, imageSizes, size = "sm" }: NovelCardProps) => {
   const isLarge = size === "lg";
   const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${slug}/image`);
   return (
@@ -26,7 +27,7 @@ const NovelCard = async ({ novelSummary: { author, ratingValue, status, title, s
           className="object-cover object-center w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105 opacity-90"
           blurData={base64}
           fill
-          sizes="20vw"
+          sizes={imageSizes ?? "20vw"}
         />
         <BookCoverOverlay />
         <HoverOverlay info={{ author, title }} size={size} />

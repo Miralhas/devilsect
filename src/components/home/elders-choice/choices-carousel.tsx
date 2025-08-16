@@ -19,7 +19,7 @@ const ChoicesCarousel = ({ choices }: { choices: EldersChoice[] }) => {
             <Link
               className="group space-y-2 [&:nth-child(n+7)]:hidden md:[&:nth-child(n+7)]:block"
               href={`/novels/${choice.novel.slug}`}>
-              <NovelCard novelSummary={choice.novel} size="lg" />
+              <NovelCard novelSummary={choice.novel} size="lg" imageSizes="(max-width: 767px) 25vw, 15vw" />
             </Link>
           </CarouselItem>
         ))}

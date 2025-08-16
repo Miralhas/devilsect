@@ -1,11 +1,12 @@
 'use client'
 
 import LoginButton from "@/components/navbar/login-button";
-import { BookOpenText } from "lucide-react";
-import Link from "next/link";
-import UserAccount from "./user-account";
-import UserInbox from "./user-inbox";
 import { useCurrentUserQuery } from "@/services/authentication/client-queries";
+import dynamic from "next/dynamic";
+
+const LibraryLink = dynamic(() => import("./library-link"), { ssr: false, loading: () => <div className="w-[75px]"></div> });
+const UserAccount = dynamic(() => import("./user-account"), { ssr: false, loading: () => <div className="w-[20px]"></div> });
+const UserInbox = dynamic(() => import("./user-inbox"), { ssr: false, loading: () => <div className="w-[32px]"></div> });
 
 const UserLinks = () => {
   const { data, isLoading, isError } = useCurrentUserQuery();
@@ -16,10 +17,7 @@ const UserLinks = () => {
 
   return (
     <>
-      <Link href="/account/library" className="hidden sm:flex transition-transform duration-100 ease-out transform text-foreground/80 hover:text-foreground items-center gap-2 relative group hover:scale-[1.03]">
-        <BookOpenText className="size-5" />
-        <span className="text-sm mb-[2px]  sr-only md:not-sr-only">Library</span>
-      </Link>
+      <LibraryLink />
 
       <UserInbox />
 

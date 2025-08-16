@@ -2,12 +2,14 @@ import { getUserLibrary } from "@/services/novels/server-queries";
 import { Novel } from "@/types/novel";
 import Link from "next/link";
 import { Button } from "../../ui/button";
-import BookmarkNovel from "./bookmark-novel";
 import { getCurrentUser } from "@/services/authentication/server-queries";
+import dynamic from "next/dynamic";
 
 type StartReadingButtonProps = {
   novel: Novel;
 }
+
+const BookmarkNovel = dynamic(() => import("./bookmark-novel"));
 
 const StartReadingButton = async ({ novel }: StartReadingButtonProps) => {
   const user = await getCurrentUser();

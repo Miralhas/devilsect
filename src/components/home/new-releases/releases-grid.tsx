@@ -8,7 +8,7 @@ const ReleasesGrid = (res: PaginatedQuery<NovelSummary[]>) => {
     <div className="grid grid-cols-3 md:grid-cols-5 gap-4 justify-around">
       {res.results.slice(4).map(novel => (
         <Link href={`/novels/${novel.slug}`} className="group space-y-2 [&:nth-child(n+7)]:hidden md:[&:nth-child(n+7)]:block max-w-[115px]" key={novel.id} >
-          <NovelCard novelSummary={novel} imageSizes="(max-width: 768px) 20vw, 10vw" />
+          <NovelCard novelSummary={novel} imageSizes="(max-width: 768px) 25vw, 10vw" />
         </Link>
       ))}
     </div>

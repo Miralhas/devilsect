@@ -33,7 +33,7 @@ const CarouselNovel = () => {
                 <div className="absolute z-[1] top-0 h-full w-full overflow-hidden rounded-12 aspect-[3/1]">
                   <Image
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 90vw, 25vw"
                     src={banner.src}
                     alt="novel banner"
                     className="w-full object-cover opacity-40"
@@ -47,11 +47,11 @@ const CarouselNovel = () => {
                   <Image
                     src={banner.mc} alt="novel main character"
                     className="object-cover inline-block"
-                    quality={10}
+                    quality={50}
                     fill
                     priority
                     loading="eager"
-                    sizes="(max-width: 768px) 45vw, 20vw"
+                    sizes="(max-width: 768px) 30vw, 20vw"
                   />
                 </div>
 

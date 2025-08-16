@@ -6,6 +6,7 @@ import RecentlyAddedChapters from "@/components/home/recently-added-chapters";
 import EldersChoiceSkeletonLoader from "@/components/home/skeletons/elders-choice-skeleton-loader";
 import NewReleasesSkeletonLoader from "@/components/home/skeletons/new-releases-skeleton-loader";
 import RankingSkeletonLoader from "@/components/home/skeletons/ranking-skeleton-loader";
+import RecentlyAddedChapterSkeletonLoader from "@/components/home/skeletons/recently-added-chapters-skeleton-loader";
 import { Suspense } from "react";
 
 const HomePage = () => {
@@ -22,7 +23,7 @@ const HomePage = () => {
         <Suspense fallback={<RankingSkeletonLoader />}>
           <RankingSection />
         </Suspense>
-        <Suspense>
+        <Suspense fallback={<RecentlyAddedChapterSkeletonLoader />}>
           <RecentlyAddedChapters />
         </Suspense>
       </div>

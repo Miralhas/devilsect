@@ -1,5 +1,11 @@
+import SpinnerLoader from "@/components/ui/spinner-loader";
+import dynamic from "next/dynamic";
 import Announcements from "./announcements";
-import CarouselNovel from "./carousel-novel";
+
+const CarouselNovel = dynamic(() => import("./carousel-novel"), {
+  ssr: true,
+  loading: () => <SpinnerLoader containerClassName="min-h-[30vh]" />
+});
 
 const HeroSection = () => {
   return (

@@ -14,9 +14,10 @@ type Props = {
   blurData?: string;
   quality?: number;
   sizes?: string;
+  priority?: boolean;
 };
 
-const DynamicBlurImage = ({ src, alt, className, height, width, blurData, sizes, quality = 70, fill = true }: Props) => {
+const DynamicBlurImage = ({ src, alt, className, height, width, blurData, sizes, priority, quality = 70, fill = true }: Props) => {
   const [imgSrc, setImgSrc] = useState<string>(src);
 
   return (
@@ -31,6 +32,7 @@ const DynamicBlurImage = ({ src, alt, className, height, width, blurData, sizes,
       blurDataURL={!!blurData ? blurData : defaultBlur}
       className={className}
       sizes={sizes}
+      priority={priority}
       onError={() => {
         setImgSrc("/ds.webp")
       }}

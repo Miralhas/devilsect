@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { Inter, Manrope, Roboto, Tilt_Warp, Atkinson_Hyperlegible } from 'next/font/google';
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "Devil Sect | Read Free Webnovels and Light Novels Online",
@@ -58,6 +59,7 @@ export default function RootLayout({
           {children}
         </Providers>
         <Toaster richColors />
+        <SpeedInsights />
       </body>
     </html>
   );

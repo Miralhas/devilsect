@@ -2,13 +2,17 @@
 
 import { Book, Gem, LucideIcon, RefreshCcw } from "lucide-react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import LogoLink from "../logo-link";
+import SpinnerLoader from "../ui/spinner-loader";
 import MenuButton from "./menu-button";
-import MobileMenu from "./mobile-menu";
 import SearchInput from "./search-input";
-import UserLinks from "./user-links";
+
+const UserLinks = dynamic(() => import("./user-links"), {ssr:false});
+
+const MobileMenu = dynamic(() => import("./mobile-menu"), { ssr: false, loading: () => <SpinnerLoader containerClassName="bg-secondary h-[400px]" /> })
 
 export type NavLink = {
   title: string;

@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { env } from "@/env";
+import defaultBlur from "@/lib/blur-data";
 import { logoutAction } from "@/services/authentication/actions";
 import { User } from "@/types/authentication";
 import { useQueryClient } from "@tanstack/react-query";
@@ -75,6 +76,7 @@ const ImageWithFallback = ({ fallback = "/yin-yang.png", alt, src, ...props }: I
       onError={() => setError(true)}
       src={error ? fallback : src}
       {...props}
+      blurDataURL={defaultBlur}
     />
   )
 }

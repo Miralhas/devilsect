@@ -9,9 +9,11 @@ import LogoLink from "../logo-link";
 import SpinnerLoader from "../ui/spinner-loader";
 import MenuButton from "./menu-button";
 import SearchInput from "./search-input";
-import UserLinks from "./user-links";
 
-const MobileMenu = dynamic(() => import("./mobile-menu"), { ssr: false, loading: () => <SpinnerLoader containerClassName="bg-secondary h-[400px]" /> })
+const MobileMenu = dynamic(() => import("./mobile-menu"), { ssr: false, loading: () => <SpinnerLoader containerClassName="bg-secondary h-[400px]" /> });
+
+const UserLinks = dynamic(() => import("./user-links"), { ssr: false });
+
 
 export type NavLink = {
   title: string;

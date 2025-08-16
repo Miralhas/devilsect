@@ -59,9 +59,7 @@ const DesktopRanking = ({ queries }: DesktopRankingProps<NovelSummary[]>) => {
                         src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
                         alt={novel.title + " cover"}
                         className="w-full h-auto object-cover object-center align-middle duration-300 transition-transform ease-in-out group-hover:scale-110"
-                        height={75}
-                        width={62.5}
-                        fill={false}
+                        sizes="(max-width: 768px) 25vw, 10vw"
                       />
                     </div>
                     <div className="flex w-max text-sm font-medium tracking-tighter">

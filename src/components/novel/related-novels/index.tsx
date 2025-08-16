@@ -16,7 +16,7 @@ const RelatedNovels = async ({ genre }: { genre: string }) => {
                 key={novel.id}
                 className="group space-y-2 [&:nth-child(n+7)]:hidden md:[&:nth-child(n+7)]:block"
                 href={`/novels/${novel.slug}`}>
-                <NovelCard novelSummary={novel} size="lg" imageSizes="(max-width: 767px) 33vw, 15vw" />
+                <NovelCard novelSummary={novel} size="lg" imageSizes="(max-width: 768px) 30vw, 10vw" />
               </Link>
             )
           })}

@@ -19,11 +19,12 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
       <div className="mx-auto max-w-[1024px] md:grid md:grid-cols-[243px_1fr] space-y-4 gap-4 py-8 md:py-12 lg:py-16 xl:px-0 mb-0 relative auto-rows-[350px]">
         <div className="relative max-h-[300px] md:max-h-[350px] aspect-[2/3] w-full md:col-span-1 h-full">
           <DynamicBlurImage
-            src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
-            alt={novel.title + " cover"}
-            blurData={base64}
-            quality={100}
+            priority
             sizes="33vh"
+            quality={100}
+            blurData={base64}
+            alt={novel.title + " cover"}
+            src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
             className="object-contain md:object-cover rounded-r-lg h-full"
           />
         </div>

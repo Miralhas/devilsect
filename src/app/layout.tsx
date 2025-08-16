@@ -25,7 +25,7 @@ const atkinson = Atkinson_Hyperlegible({
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  preload: false
+  preload: true,
 });
 
 const roboto = Roboto({

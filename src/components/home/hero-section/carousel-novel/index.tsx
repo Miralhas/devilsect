@@ -30,28 +30,28 @@ const CarouselNovel = () => {
           <CarouselItem key={index}>
             <Link href={`/novels/${banner.slug}`}>
               <div className="h-full relative rounded-lg overflow-hidden bg-black">
-                <div className="absolute z-[1] top-0 h-full w-full overflow-hidden rounded-12">
+                <div className="absolute z-[1] top-0 h-full w-full overflow-hidden rounded-12 aspect-[3/1]">
                   <Image
                     fill
-                    sizes="33vw"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     src={banner.src}
                     alt="novel banner"
-                    className="w-full object-cover h-[95%] object-center opacity-40"
+                    className="w-full object-cover opacity-40"
                     quality={10}
                     priority
                     loading="eager"
                   />
                 </div>
 
-                <div className="absolute z-[2] right-0 md:right-13 top-0 overflow-hidden">
+                <div className="absolute z-[2] right-0 md:right-13 top-0 overflow-hidden aspect-[3/4] max-w-[200px] w-full">
                   <Image
                     src={banner.mc} alt="novel main character"
                     className="object-cover inline-block"
-                    quality={50}
-                    width={200}
-                    height={280}
+                    quality={10}
+                    fill
                     priority
                     loading="eager"
+                    sizes="(max-width: 768px) 45vw, 20vw"
                   />
                 </div>
 

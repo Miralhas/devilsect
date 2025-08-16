@@ -11,10 +11,8 @@ const CardImage = async ({ novelSummary }: { novelSummary: NovelSummary }) => {
         src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novelSummary.slug}/image`}
         alt={novelSummary.title + " cover"}
         className="w-full h-auto object-cover object-center align-middle duration-300 transition-transform ease-in-out group-hover:scale-110"
-        height={75}
-        width={62.5}
-        fill={false}
         blurData={base64}
+        sizes="(max-width: 768px) 25vw, 10vw"
       />
     </>
   )

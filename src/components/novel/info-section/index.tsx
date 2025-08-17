@@ -8,6 +8,7 @@ import { getBlurData } from "@/lib/get-blur-data";
 import { statusMap } from "@/lib/utils";
 import { Novel } from "@/types/novel";
 import { BookOpenText, Eye, StarIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -20,13 +21,23 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
         <div className="relative max-h-[300px] md:max-h-[350px] aspect-[2/3] w-full md:col-span-1 h-full">
           <DynamicBlurImage
             priority
-            sizes="(max-width: 768px) 25vw, 15vw"
+            sizes="(max-width: 768px) 40vw, 15vw"
             quality={100}
             blurData={base64}
             alt={novel.title + " cover"}
             src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
-            className="object-contain md:object-cover rounded-r-lg h-full"
+            className="object-contain md:object-cover z-[1] rounded-r-lg h-full shadow-2xl"
           />
+          <div className="absolute inset-0 md:hidden w-full h-full">
+            <Image
+              fill
+              quality={1}
+              src={base64}
+              alt="glass effect background"
+              sizes="(max-width: 768px) 90vw, 0vw"
+              className="object-center object-cover opacity-30"
+            />
+          </div>
         </div>
         <div className="w-full col-span-1 flex flex-col gap-4">
           <div className="space-y-2">

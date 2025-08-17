@@ -8,7 +8,7 @@ const NovelTags = ({ tags }: { tags: string[] }) => {
         <p className="text-xl md:text-2xl font-semibold">Tags</p>
         <div className="w-full h-[2px] bg-zinc-50/7 mt-1.75"></div>
       </div>
-      <ShowMore maxLines={4}>
+      <ShowMore maxLines={4} containerClassName="space-x-2.5 md:space-x-4 md:space-y-5">
         {tags.map(tag => (
           <NovelBadge
             key={tag}

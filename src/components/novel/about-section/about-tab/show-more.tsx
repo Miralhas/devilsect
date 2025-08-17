@@ -7,9 +7,10 @@ import { PropsWithChildren, useEffect, useRef, useState } from "react";
 type ShowMoreProps = {
   maxLines?: number;
   className?: string;
+  containerClassName?: string;
 }
 
-const ShowMore = ({ children, className, maxLines = 4 }: PropsWithChildren<ShowMoreProps>) => {
+const ShowMore = ({ children, className, containerClassName, maxLines = 4 }: PropsWithChildren<ShowMoreProps>) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
   const [needsTruncation, setNeedsTruncation] = useState(false);
@@ -33,7 +34,7 @@ const ShowMore = ({ children, className, maxLines = 4 }: PropsWithChildren<ShowM
 
   return (
     <div className={className}>
-      <div className="space-y-3 space-x-2.5" ref={contentRef}
+      <div className={cn("space-y-3", containerClassName)} ref={contentRef}
         style={{
           overflow: 'hidden',
           textOverflow: 'ellipsis',

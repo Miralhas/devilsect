@@ -6,12 +6,11 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import LogoLink from "../logo-link";
-import SpinnerLoader from "../ui/spinner-loader";
+import LoginButton from "./login-button";
 import MenuButton from "./menu-button";
 import SearchInput from "./search-input";
-import LoginButton from "./login-button";
 
-const MobileMenu = dynamic(() => import("./mobile-menu"), { ssr: false, loading: () => <SpinnerLoader containerClassName="bg-secondary h-[400px]" /> });
+const MobileMenu = dynamic(() => import("./mobile-menu"), { ssr: false });
 
 const UserLinks = dynamic(() => import("./user-links"), { ssr: false, loading: () => <LoginButton isLoading /> });
 

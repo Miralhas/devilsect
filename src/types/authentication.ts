@@ -1,3 +1,5 @@
+export type RoleStatus = "Admin" | "Member";
+
 export enum Role {
   USER = "USER",
   ADMIN = "ADMIN"

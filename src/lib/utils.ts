@@ -1,3 +1,4 @@
+import { Role, RoleStatus } from "@/types/authentication";
 import { DisplayStatus, NovelStatus } from "@/types/novel";
 import { clsx, type ClassValue } from "clsx";
 import { formatDistanceToNowStrict } from "date-fns";
@@ -13,6 +14,19 @@ export const statusMap: Record<NovelStatus, DisplayStatus> = {
   COMPLETED: 'Completed',
   ON_GOING: "Ongoing"
 };
+
+export const roleMap: Record<Role, RoleStatus> = {
+  ADMIN: "Admin",
+  USER: "Member",
+}
+
+export const mapRoles = (roles: Role[]) => {
+  if (roles.some(r => Role.ADMIN === r)) {
+    return roleMap["ADMIN"]
+  }
+
+  return roleMap["USER"]
+}
 
 // https://stackoverflow.com/a/64777515/30371438
 export function arrayChunker<T>(arr: T[], size: number): T[][] {

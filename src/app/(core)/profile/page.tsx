@@ -1,9 +1,9 @@
 
-const ProfilePage = async () => {
+const ProfilePage = () => {
   return (
-    <section className="">
+    <div>
       <h1>profile info</h1>
-    </section>
+    </div>
   )
 }
 

@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const LibraryLink = () => {
   return (
-    <Link href="/account/library" className="hidden sm:flex transition-transform duration-100 ease-out transform text-foreground/80 hover:text-foreground items-center gap-2 relative group hover:scale-[1.03]">
+    <Link href="/profile/library" className="hidden sm:flex transition-all duration-200 ease-out text-foreground/80 hover:text-foreground items-center gap-2">
       <BookOpenText className="size-5" />
-      <span className="text-sm mb-[2px]  sr-only md:not-sr-only">Library</span>
+      <span className="text-sm sr-only md:not-sr-only">Library</span>
     </Link>
   )
 }

@@ -9,7 +9,7 @@ const UserInbox = () => {
   const hasNotifications = data && data?.count > 0;
 
   return (
-    <Link href="/account/inbox" className="transition-transform duration-100 ease-out transform flex items-center gap-2 group hover:scale-[1.03] text-foreground/80 hover:text-foreground">
+    <Link href="/profile/inbox" className="transition-all duration-200 ease-in-out transform flex items-center gap-2 group text-foreground/80 hover:text-foreground">
       <div className="relative">
         {isLoading || isError || !hasNotifications ? null : (
           <span className="text-white rounded-full absolute -top-[11px] -right-[9px] text-[10px] bg-red-900/80 border border-red-500 px-[5px] w-fit h-fit flex items-center justify-center">

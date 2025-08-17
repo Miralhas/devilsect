@@ -40,19 +40,19 @@ const UserAccount = ({ user }: { user: User }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[150px] text-zinc-200 bg-zinc-900">
         <DropdownMenuItem asChild>
-          <Link href="/account">
+          <Link href="/profile">
             <UserIcon className="text-zinc-200 mt-[2px]" />
             Profile
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/account/library">
+          <Link href="/profile/library">
             <BookOpenText className="text-zinc-200 mt-[2px]" />
             Library
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/account/inbox">
+          <Link href="/profile/inbox">
             <Mail className="text-zinc-200 mt-[2px]" />
             Inbox
           </Link>
@@ -77,6 +77,7 @@ const ImageWithFallback = ({ fallback = "/yin-yang.png", alt, src, ...props }: I
       src={error ? fallback : src}
       {...props}
       blurDataURL={defaultBlur}
+      unoptimized
     />
   )
 }

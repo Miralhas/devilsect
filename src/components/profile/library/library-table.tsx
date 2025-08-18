@@ -2,24 +2,17 @@
 
 import { Library } from "@/types/library";
 import { PaginatedQuery } from "@/types/pagination";
-import LibraryGrid from "../library-grid";
-import { useLayoutEffect, useRef } from "react";
+import LibraryFilters from "./library-filters";
+import LibraryGrid from "./library-grid";
+import LibraryHeader from "./library-header";
 
 const LibraryTable = ({ library }: { library: PaginatedQuery<Library[]> }) => {
-  const divRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    const id = setTimeout(() => {
-      if (divRef.current) {
-        divRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
-      }
-    }, 250);
-
-    return () => clearTimeout(id);
-  }, []);
-
   return (
-    <div className="w-full" ref={divRef}>
+    <div className="w-full space-y-4 md:space-y-10">
+      <div className="space-y-4 md:space-y-6 w-full">
+        <LibraryHeader />
+        <LibraryFilters />
+      </div>
       <LibraryGrid library={library.results} />
     </div>
   )

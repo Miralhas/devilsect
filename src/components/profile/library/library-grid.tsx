@@ -1,11 +1,11 @@
 import { env } from "@/env";
 import { formatDate } from "@/lib/utils";
 import { Library } from "@/types/library";
+import { BookOpenText } from "lucide-react";
 import Link from "next/link";
-import DynamicBlurImage from "../dynamic-blur-image";
-import BookCoverOverlay from "../novel-card/book-cover-overlay";
-import { Button } from "../ui/button";
-import { SquarePen } from "lucide-react";
+import DynamicBlurImage from "../../dynamic-blur-image";
+import BookCoverOverlay from "../../novel-card/book-cover-overlay";
+import EditItemButton from "./edit-item-button";
 
 interface LibraryGridProps {
   library: Library[];
@@ -21,7 +21,7 @@ const LibraryGrid = ({ library }: LibraryGridProps) => {
     return (
       <div className="flex flex-col items-center justify-center pb-4 md:pb-10 text-center">
         <div className="w-14 md:w-16 h-14 md:h-16 bg-secondary border rounded-full flex items-center justify-center mb-2 md:mb-4">
-          📚
+          <BookOpenText className="size-6" />
         </div>
         <h3 className="text-lg font-medium mb-1 md:mb-2">
           No books in your library
@@ -57,7 +57,7 @@ const LibraryGrid = ({ library }: LibraryGridProps) => {
       </div>
 
       {/* Table Rows */}
-      <div className="space-y-0">
+      <div className="space-y-0 border-t md:border-none">
         {library.map((item) => {
           const progressPercent = getProgressPercentage(item.chapterNumber, item.totalChapters);
 
@@ -111,15 +111,12 @@ const LibraryGrid = ({ library }: LibraryGridProps) => {
                 </div>
 
                 <div className="text-sm text-muted-foreground absolute top-0 right-0 transition-all duration-300 hover:scale-105 hover:text-accent">
-                  <Button size="sm" variant='pure' className="gap-1">
-                    <SquarePen className="size-5" />
-                    <span className="text-xs text-[11px]">Edit</span>
-                  </Button>
+                  <EditItemButton display="MOBILE" />
                 </div>
               </div>
 
               {/* Desktop Layout */}
-              <div className="hidden md:grid md:grid-cols-[50px_0.3fr_0.4fr_0.2fr_0.2fr_50px] gap-3">
+              <div className="hidden md:grid md:grid-cols-[50px_0.3fr_0.4fr_0.2fr_0.2fr_50px] gap-1 items-center">
                 <div className="w-[40px] h-[50px] overflow-hidden rounded-r-sm relative">
                   <DynamicBlurImage
                     unoptimized
@@ -169,10 +166,7 @@ const LibraryGrid = ({ library }: LibraryGridProps) => {
                   {formatDate(item.lastReadAt)}
                 </div>
                 <div className="text-sm text-muted-foreground text-center transition-all duration-300 hover:scale-105 hover:text-accent">
-                  <Button size="sm" variant='pure' className="flex-col gap-0">
-                    <SquarePen className="size-5" />
-                    <span className="text-xs">Edit</span>
-                  </Button>
+                  <EditItemButton display="DESKTOP" />
                 </div>
               </div>
             </div>

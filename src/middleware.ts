@@ -3,7 +3,14 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { SESSION_COOKIE_NAME } from './lib/constants';
 
-const protectedRoutes = ['/account'];
+const protectedRoutes = [
+  '/profile',
+  '/profile/library',
+  '/profile/history',
+  '/profile/reviews',
+  '/profile/comments',
+  '/profile/inbox',
+];
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;

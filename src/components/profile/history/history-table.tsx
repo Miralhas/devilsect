@@ -2,7 +2,7 @@
 
 import { Library } from "@/types/library";
 import { PaginatedQuery } from "@/types/pagination";
-import HistoryGrid from "../history-grid";
+import HistoryGrid from "./history-grid";
 import { useLayoutEffect, useRef } from "react";
 
 const HistoryTable = ({ library }: { library: PaginatedQuery<Library[]> }) => {

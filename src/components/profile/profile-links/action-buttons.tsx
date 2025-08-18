@@ -8,8 +8,13 @@ const ActionButtons = () => {
   const handleLogout = useLogout();
   return (
     <>
-      <Button className="text-lg rounded-2xl text-red-700 bg-primary/30 transition-transform hover:scale-105 duration-300 ease-in-out" size="lg" variant="cool">Edit Profile</Button>
-      <Button className="text-base rounded-2xl bg-secondary/30 transition-transform hover:scale-105 duration-300 ease-in-out" size="lg" variant="cool-secondary" onClick={handleLogout}>
+      <Button
+        variant="cool"
+        className="text-lg md:h-10 md:px-6 md:has-[>svg]:px-4 rounded-2xl text-red-700 bg-primary/30 transition-transform hover:scale-105 duration-300 ease-in-out"
+      >
+        Edit Profile
+      </Button>
+      <Button className="text-base md:h-10 md:px-6 md:has-[>svg]:px-4 rounded-2xl bg-secondary/30 transition-transform hover:scale-105 duration-300 ease-in-out" variant="cool-secondary" onClick={handleLogout}>
         <LogOutIcon className="size-4" />
         Logout
       </Button>

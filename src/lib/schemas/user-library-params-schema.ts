@@ -1,4 +1,4 @@
-import { createLoader, parseAsBoolean, parseAsInteger, parseAsString, parseAsStringEnum } from 'nuqs/server';
+import { createLoader, parseAsBoolean, parseAsInteger, parseAsString } from 'nuqs/server';
 
 import { z } from "zod";
 

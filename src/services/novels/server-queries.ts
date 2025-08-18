@@ -88,7 +88,7 @@ export const getUserLibrary = async (params: UserLibraryParams): Promise<Paginat
 
   if (!res.ok) {
     const error: ApiResponseError = await res.json();
-    console.error(`Error trying to [GET] user History: ${error.detail}`);
+    console.error(`Error trying to [GET] user Library: ${error.detail}`);
   }
 
   return await res.json() as PaginatedQuery<Library[]>;

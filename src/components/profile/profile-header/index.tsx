@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import ProfileLinks from "../profile-links";
 import ActionButtons from "../profile-links/action-buttons";
 import ProfileStats from "./profile-stats";
+import RoleBadge from "./role-badge";
 
 const ProfileHeader = async () => {
   const user = await getCurrentUser();
@@ -32,11 +33,11 @@ const ProfileHeader = async () => {
           </div>
         </div>
       </div>
-      <div className="col-span-1 row-start-2 md:row-start-1 row-span-1 space-y-4 grid">
+      <div className="col-span-1 row-start-2 md:row-start-1 row-span-1 space-y-6 grid">
         <div className="flex flex-col md:flex-row w-full justify-between items-center md:items-baseline gap-4 md:self-start">
-          <div className="space-y-1  flex flex-col items-center justify-center md:items-start overflow-hidden">
+          <div className="space-y-0.5 overflow-hidden flex flex-col items-center md:block">
             <h1 className="text-3xl md:text-4xl font-bold text-white group">{user.username}</h1>
-            <p className="text-center md:text-start text-muted-foreground text-base">{mapRoles(user.roles)}</p>
+            <RoleBadge role={mapRoles(user.roles)} />
           </div>
           <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] gap-4">
             <ActionButtons />

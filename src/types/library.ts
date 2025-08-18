@@ -3,6 +3,8 @@ export type Library = {
   chapterSlug: string;
   novelSlug: string;
   userId: number;
+  novelTitle: string;
+  chapterTitle: string;
   lastReadAt: string;
   totalChapters: number;
   chapterNumber: number;

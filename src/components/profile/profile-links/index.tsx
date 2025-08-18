@@ -19,7 +19,7 @@ const ProfileLinks = () => {
   return (
     <ul className="w-full font-medium grid grid-cols-2 justify-items-center md:flex gap-4 md:justify-start md:gap-10">
       {NAV_LINKS.map(link => (
-        <div key={link.href} className="w-full flex justify-center border-b md:border-none">
+        <div key={link.href} className="w-full md:w-fit flex justify-center border-b md:border-none">
           <motion.li key={link.href}
             className='list-none text-base md:text-lg font-semibold pb-2 md:pb-4 relative w-fit col-span-1'
             initial={false}

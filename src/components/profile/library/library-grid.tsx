@@ -5,7 +5,7 @@ import { BookOpenText } from "lucide-react";
 import Link from "next/link";
 import DynamicBlurImage from "../../dynamic-blur-image";
 import BookCoverOverlay from "../../novel-card/book-cover-overlay";
-import EditItemButton from "./edit-item-button";
+import EditItemDialog from "./edit-item-dialog";
 
 interface LibraryGridProps {
   library: Library[];
@@ -111,7 +111,7 @@ const LibraryGrid = ({ library }: LibraryGridProps) => {
                 </div>
 
                 <div className="text-sm text-muted-foreground absolute top-0 right-0 transition-all duration-300 hover:scale-105 hover:text-accent">
-                  <EditItemButton display="MOBILE" />
+                  <EditItemDialog display="MOBILE" item={item} />
                 </div>
               </div>
 
@@ -166,7 +166,7 @@ const LibraryGrid = ({ library }: LibraryGridProps) => {
                   {formatDate(item.lastReadAt)}
                 </div>
                 <div className="text-sm text-muted-foreground text-center transition-all duration-300 hover:scale-105 hover:text-accent">
-                  <EditItemButton display="DESKTOP" />
+                  <EditItemDialog display="DESKTOP" item={item} />
                 </div>
               </div>
             </div>

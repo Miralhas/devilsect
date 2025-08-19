@@ -5,7 +5,8 @@ import { mapRoles } from "@/lib/utils";
 import { getCurrentUser } from "@/services/authentication/server-queries";
 import { redirect } from "next/navigation";
 import ProfileLinks from "../profile-links";
-import ActionButtons from "../profile-links/action-buttons";
+import EditProfileModal from "./edit-profile-modal";
+import LogoutButton from "./logout-button";
 import ProfileStats from "./profile-stats";
 import RoleBadge from "./role-badge";
 
@@ -40,7 +41,8 @@ const ProfileHeader = async () => {
             <RoleBadge role={mapRoles(user.roles)} />
           </div>
           <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] gap-4">
-            <ActionButtons />
+            <EditProfileModal user={user} />
+            <LogoutButton />
           </div>
         </div>
         <ProfileStats />

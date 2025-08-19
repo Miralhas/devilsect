@@ -1,11 +1,13 @@
 'use server'
 
 import { env } from '@/env';
+import { EditProfileInput, editProfileSchema } from '@/lib/schemas/edit-profile-schema';
 import { LoginInput, loginSchema } from '@/lib/schemas/login';
 import { ResetPasswordTokenInput, SendResetPasswordInput, resetPasswordTokenSchema, sendResetPasswordEmailSchema } from '@/lib/schemas/reset-password';
 import { SignupInput, signUpSchema } from '@/lib/schemas/signup';
-import { createSession, deleteSession } from '@/lib/sessions';
+import { createSession, deleteSession, getSession } from '@/lib/sessions';
 import { ApiLoginResponse, ApiResponseError } from '@/types/api';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 type AuthenticationFormState = {
@@ -18,6 +20,7 @@ const DEFAULT_LOGIN_ERROR_MESSAGE = "Login Error! Try again";
 const DEFAULT_SIGNUP_ERROR_MESSAGE = "Signup Error! Try again";
 const DEFAULT_RESET_PASSWORD_ERROR_MESSAGE = "Reset Password Error! Try again later";
 const DEFAULT_INVALID_RESET_PASSWORD_TOKEN = "Invalid verification token";
+const DEFAULT_EDIT_PROFILE_MESSAGE = "Failed to Edit Profile. Try again later"
 
 export const loginAction = async (prevState: unknown, payload: LoginInput): Promise<AuthenticationFormState> => {
   const parsed = loginSchema.safeParse(payload);
@@ -175,4 +178,48 @@ export const resetPasswordAction = async (prevState: AuthenticationFormState, pa
     const errors: AuthenticationFormState["errors"] = { error: [DEFAULT_RESET_PASSWORD_ERROR_MESSAGE] }
     return { errors, success: false, fields: parsed.data };
   }
+}
+
+export const editProfileAction = async (prevState: AuthenticationFormState, payload: EditProfileInput): Promise<AuthenticationFormState> => {
+  const parsed = editProfileSchema.safeParse(payload);
+
+  if (!parsed.success) {
+    const errors = parsed.error?.flatten().fieldErrors;
+    const fields: AuthenticationFormState["fields"] = { ...payload };
+    return { success: false, fields, errors };
+  }
+
+  try {
+    const url = `${env.APP_URL}/users`;
+
+    const session = await getSession();
+    if (!session) throw new Error(DEFAULT_EDIT_PROFILE_MESSAGE);
+
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${session?.value}`);
+    myHeaders.append("Content-Type", "application/json");
+
+    const res = await fetch(url, {
+      method: "PATCH",
+      headers: myHeaders,
+      body: JSON.stringify(parsed.data)
+    });
+
+    if (!res.ok) {
+      // console.log(await res.json());
+      const data: ApiResponseError = await res.json();
+      console.log(data);
+      const errors: AuthenticationFormState["errors"] = { error: [data.detail ?? DEFAULT_EDIT_PROFILE_MESSAGE] };
+      if (data?.errors?.password) errors["password"] = [data.errors?.password];
+      if (data?.errors?.username) errors["username"] = [data.errors?.username];
+      return { errors, success: false, fields: parsed.data };
+    }
+
+  } catch (error) {
+    console.log(error);
+    const errors: AuthenticationFormState["errors"] = { error: [DEFAULT_EDIT_PROFILE_MESSAGE] }
+    return { errors, success: false, fields: parsed.data };
+  }
+  revalidatePath("/profile")
+  return { success: true, fields: parsed.data };
 }

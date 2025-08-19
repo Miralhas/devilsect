@@ -1,5 +1,5 @@
 import LibraryTable from "@/components/profile/library/library-table";
-import { loadUserLibraryParams, mapSortKey } from "@/lib/schemas/user-library-params-schema";
+import { loadUserLibraryParams, mapFilter, mapSortKey } from "@/lib/schemas/user-library-params-schema";
 import { getUserLibrary } from "@/services/novels/server-queries";
 import { redirect } from "next/navigation";
 import type { SearchParams } from 'nuqs/server';
@@ -9,8 +9,8 @@ type PageProps = {
 }
 
 const LibraryPage = async ({ searchParams }: PageProps) => {
-  const { size, sort } = await loadUserLibraryParams(searchParams);
-  const library = await getUserLibrary({ bookmarked: true, size, sort: mapSortKey(sort) });
+  const { size, sort, filter } = await loadUserLibraryParams(searchParams);
+  const library = await getUserLibrary({ filter: mapFilter(filter), size, sort: mapSortKey(sort) });
   if (!library) redirect("/error");
 
   return (

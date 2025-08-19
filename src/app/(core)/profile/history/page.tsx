@@ -3,7 +3,7 @@ import { getUserLibrary } from "@/services/novels/server-queries";
 import { redirect } from "next/navigation";
 
 const HistoryPage = async () => {
-  const library = await getUserLibrary({});
+  const library = await getUserLibrary({ size: 100 });
   if (!library) redirect("/error");
 
   return (

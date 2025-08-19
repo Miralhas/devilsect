@@ -14,8 +14,8 @@ import { cn } from "@/lib/utils";
 import { Library } from "@/types/library";
 import { SquarePen } from "lucide-react";
 import { useState } from "react";
-import BookmarkButton from "./bookmark-button";
 import CompleteActionButton from "./complete-action-button";
+import RemoveBookmarkButton from "../../remove-bookmark-button";
 
 const EditItemDialog = ({ display, item }: { display: "MOBILE" | "DESKTOP", item: Library; }) => {
   const displayMobile = display === "MOBILE";
@@ -30,7 +30,7 @@ const EditItemDialog = ({ display, item }: { display: "MOBILE" | "DESKTOP", item
           className={cn("gap-1", { "flex-col gap-0": !displayMobile })}
         >
           <SquarePen className="size-5" />
-          <span className={cn("text-xs", { "text-[11px]": displayMobile })}>Edit</span>
+          <span className={cn("text-xs sr-only xs:not-sr-only", { "text-[11px]": displayMobile })}>Edit</span>
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -41,7 +41,7 @@ const EditItemDialog = ({ display, item }: { display: "MOBILE" | "DESKTOP", item
           </DialogDescription>
         </DialogHeader>
         <div className="grid w-full p-6 gap-4">
-          <BookmarkButton setOpen={setOpen} item={item} />
+          <RemoveBookmarkButton setOpen={setOpen} item={item} />
           <CompleteActionButton setOpen={setOpen} item={item} />
         </div>
       </DialogContent>

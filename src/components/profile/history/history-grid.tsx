@@ -5,6 +5,8 @@ import { formatDate } from "@/lib/utils";
 import { Library } from "@/types/library";
 import { BookOpenText } from "lucide-react";
 import Link from "next/link";
+import BookmarkButtonIcon from "./bookmark-button-icon";
+import RemoveBookmarkButtonIcon from "./remove-bookmark-icon";
 
 
 interface LibraryGridProps {
@@ -36,35 +38,38 @@ const HistoryGrid = ({ library }: LibraryGridProps) => {
   return (
     <div className="w-full">
       {/* Desktop Table Header */}
-      <div className="hidden md:grid md:grid-cols-[50px_0.5fr_0.5fr_0.25fr_0.2fr] gap-3 pb-3 mb-4 border-b border-zinc-200/20 dark:border-zinc-700/30">
+      <div className="hidden md:grid md:grid-cols-[50px_0.3fr_0.4fr_0.2fr_0.15fr_50px] gap-3 pb-3 mb-4 border-b border-zinc-200/20 dark:border-zinc-700/30">
         <div className="col-span-1">
         </div>
-        <div className="text-xs font-medium uppercase tracking-wide">
+        <div className="text-xs font-medium uppercase tracking-wide col-span-1">
           Title
         </div>
-        <div className="text-xs font-medium uppercase tracking-wide">
+        <div className="text-xs font-medium uppercase tracking-wide col-span-1">
           Chapter
         </div>
-        <div className="text-xs font-medium uppercase tracking-wide">
+        <div className="text-xs font-medium uppercase tracking-wide col-span-1">
           Progress
         </div>
-        <div className="text-xs font-medium uppercase tracking-wide text-right">
+        <div className="text-xs font-medium uppercase tracking-wide col-span-1 justify-self-center">
           Last Read
+        </div>
+        <div className="text-xs font-medium uppercase tracking-wide col-span-1 ">
+
         </div>
       </div>
 
       {/* Table Rows */}
-      <div className="space-y-0">
+      <div className="space-y-0 border-t md:border-none">
         {library.map((item) => {
           const progressPercent = getProgressPercentage(item.chapterNumber, item.totalChapters);
 
           return (
             <div
               key={item.libraryElementId}
-              className="group hover:bg-secondary/70 rounded-lg transition-all duration-200 py-3 border-b"
+              className="group hover:bg-secondary rounded-lg transition-all duration-200 py-3 border-b"
             >
               {/* Mobile Layout */}
-              <div className="flex gap-3 md:hidden">
+              <div className="flex gap-3 md:hidden relative">
                 <div className="flex-shrink-0">
                   <div className="w-12 h-16 overflow-hidden rounded-r-sm relative">
                     <DynamicBlurImage
@@ -76,16 +81,17 @@ const HistoryGrid = ({ library }: LibraryGridProps) => {
                     <BookCoverOverlay />
                   </div>
                 </div>
-                <div className="flex-1 min-w-0 ">
+                <div className="flex-1 min-w-0">
                   <Link
                     href={`/novels/${item.novelSlug}`}
-                    className="block font-medium transition-colors line-clamp-2 capitalize"
+                    className="font-medium transition-colors line-clamp-1 capitalize max-w-[80%]"
                   >
                     {item.novelTitle}
                   </Link>
+
                   <Link
                     href={`/novels/${item.novelSlug}/${item.chapterSlug}`}
-                    className="block text-sm transition-colors line-clamp-1 text-zinc-300/80 capitalize mb-1"
+                    className="text-sm transition-colors line-clamp-1 text-zinc-300/80 capitalize mb-1 max-w-[80%]"
                   >
                     {item.chapterTitle}
                   </Link>
@@ -105,10 +111,18 @@ const HistoryGrid = ({ library }: LibraryGridProps) => {
                     <span>{formatDate(item.lastReadAt)}</span>
                   </div>
                 </div>
+
+                <div className="text-sm text-muted-foreground absolute top-0 right-0 transition-all duration-300 hover:scale-105 hover:text-accent">
+                  {item.bookmarked ? (
+                    <RemoveBookmarkButtonIcon item={item} />
+                  ) : (
+                    <BookmarkButtonIcon item={item} />
+                  )}
+                </div>
               </div>
 
               {/* Desktop Layout */}
-              <div className="hidden md:grid md:grid-cols-[40px_0.5fr_0.5fr_0.25fr_0.2fr] gap-3 items-center">
+              <div className="hidden md:grid md:grid-cols-[50px_0.3fr_0.4fr_0.2fr_0.15fr_50px] gap-1 items-center">
                 <div className="w-[40px] h-[50px] overflow-hidden rounded-r-sm relative">
                   <DynamicBlurImage
                     unoptimized
@@ -119,19 +133,19 @@ const HistoryGrid = ({ library }: LibraryGridProps) => {
                   <BookCoverOverlay />
                 </div>
 
-                <div className="col-span-1">
+                <div className="min-w-0 justify-self-start">
                   <Link
                     href={`/novels/${item.novelSlug}`}
-                    className="font-medium capitalize hover:text-accent transition-colors line-clamp-2 max-w-[90%] w-full"
+                    className="font-medium capitalize hover:text-accent transition-colors line-clamp-2"
                   >
                     {item.novelTitle}
                   </Link>
                 </div>
 
-                <div className="col-span-1">
+                <div className="min-w-0 justify-self-start">
                   <Link
                     href={`/novels/${item.novelSlug}/${item.chapterSlug}`}
-                    className="text-sm hover:text-accent transition-colors line-clamp-2 max-w-[90%] w-full"
+                    className="text-sm hover:text-accent transition-colors"
                   >
                     {item.chapterTitle}
                   </Link>
@@ -154,8 +168,15 @@ const HistoryGrid = ({ library }: LibraryGridProps) => {
                   </div>
                 </div>
 
-                <div className="text-sm text-muted-foreground text-right">
+                <div className="text-sm text-muted-foreground text-center">
                   {formatDate(item.lastReadAt)}
+                </div>
+                <div className="text-sm text-muted-foreground text-center transition-all duration-300 hover:scale-105 hover:text-accent">
+                  {item.bookmarked ? (
+                    <RemoveBookmarkButtonIcon item={item} />
+                  ) : (
+                    <BookmarkButtonIcon item={item} />
+                  )}
                 </div>
               </div>
             </div>

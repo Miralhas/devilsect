@@ -6,9 +6,9 @@ import { BookmarkMinus } from "lucide-react";
 import { Dispatch, SetStateAction, startTransition, useActionState, useEffect } from "react";
 import { toast } from "sonner";
 
-type BookmarkButtonProps = { setOpen: Dispatch<SetStateAction<boolean>>, item: Library };
+type RemoveBookmarkButtonProps = { setOpen: Dispatch<SetStateAction<boolean>>, item: Library };
 
-const BookmarkButton = ({ setOpen, item: { novelTitle, libraryElementId } }: BookmarkButtonProps) => {
+const RemoveBookmarkButton = ({ setOpen, item: { novelTitle, libraryElementId } }: RemoveBookmarkButtonProps) => {
   const [state, action, isPending] = useActionState(deleteBookmarkAction, { success: undefined });
 
   useEffect(() => {
@@ -43,4 +43,4 @@ const BookmarkButton = ({ setOpen, item: { novelTitle, libraryElementId } }: Boo
   )
 }
 
-export default BookmarkButton;
+export default RemoveBookmarkButton;

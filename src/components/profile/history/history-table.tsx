@@ -11,7 +11,7 @@ const HistoryTable = ({ library }: { library: PaginatedQuery<Library[]> }) => {
   useLayoutEffect(() => {
     const id = setTimeout(() => {
       if (divRef.current) {
-        divRef.current.scrollIntoView({behavior: "smooth", block: "start"})
+        divRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
       }
     }, 250);
 
@@ -19,7 +19,7 @@ const HistoryTable = ({ library }: { library: PaginatedQuery<Library[]> }) => {
   }, []);
 
   return (
-    <div className="w-full" ref={divRef}>
+    <div className="w-full space-y-8" ref={divRef}>
       <HistoryGrid library={library.results} />
     </div>
   )

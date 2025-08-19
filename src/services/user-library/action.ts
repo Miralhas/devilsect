@@ -1,7 +1,6 @@
 'use server'
 
 import { capitalize } from "@/lib/utils";
-import { Novel } from "@/types/novel";
 import { revalidateTag } from "next/cache";
 import { deleteBookmark, deleteComplete, putBookmark, putComplete } from "./api";
 
@@ -34,17 +33,17 @@ export const deleteCompleteAction = async (prevState: unknown, payload: { novelT
   return { success: true, message: `Marked ${capitalize(payload.novelTitle)} as incomplete!` };
 }
 
-export const bookmarkAction = async (prevState: unknown, novel: Novel): Promise<ActionState> => {
+export const bookmarkAction = async (prevState: unknown, payload: { novelTitle: string; novelSlug: string; }): Promise<ActionState> => {
   try {
-    await putBookmark(novel.slug);
+    await putBookmark(payload.novelSlug);
     // eslint-disable-next-line
   } catch (err: any) {
     console.log(err)
     return { success: false, message: err.message }
   }
 
-  revalidateTag("library");
-  return { success: true, message: `Saved ${capitalize(novel.title)} to bookmarks!` };
+  // revalidateTag("library");
+  return { success: true, message: `Saved ${capitalize(payload.novelTitle)} to bookmarks!` };
 }
 
 export const deleteBookmarkAction = async (prevState: unknown, payload: { novelTitle: string, libraryId: number }): Promise<ActionState> => {

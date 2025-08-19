@@ -18,7 +18,7 @@ const SizeFilter = () => {
   return (
     <Select
       onValueChange={(value) => setSearchParams({ size: Number(value) })}>
-      <SelectTrigger className="text-xs md:text-sm ">
+      <SelectTrigger className="text-sm">
         <SelectValue placeholder="Size" />
       </SelectTrigger>
       <SelectContent>

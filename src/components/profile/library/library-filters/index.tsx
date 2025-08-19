@@ -1,17 +1,21 @@
 'use client'
 
 import FilterButtons from "./filter-buttons";
+import FilterSelect from "./filter-select";
 import SizeFilter from "./size-filter";
 import SortFilter from "./sort-filter";
 
 const LibraryFilters = () => {
   return (
-    <section className="flex gap-4 flex-wrap-reverse md:justify-between">
-      <FilterButtons />
-      <div className="flex gap-4 items-center">
-        <SortFilter />
-        <SizeFilter />
+    <section className="flex gap-2 items-center">
+      <div className="hidden md:block">
+        <FilterButtons />
       </div>
+      <div className="block md:hidden">
+        <FilterSelect />
+      </div>
+      <SortFilter />
+      <SizeFilter />
     </section>
   )
 }

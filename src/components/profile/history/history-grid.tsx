@@ -38,7 +38,7 @@ const HistoryGrid = ({ library }: LibraryGridProps) => {
   return (
     <div className="w-full">
       {/* Desktop Table Header */}
-      <div className="hidden md:grid md:grid-cols-[50px_0.3fr_0.4fr_0.2fr_0.15fr_50px] gap-3 pb-3 mb-4 border-b border-zinc-200/20 dark:border-zinc-700/30">
+      <div className="hidden md:grid md:grid-cols-[50px_0.3fr_0.4fr_0.2fr_0.2fr_50px] gap-3 pb-3 mb-4 border-b border-zinc-200/20 dark:border-zinc-700/30">
         <div className="col-span-1">
         </div>
         <div className="text-xs font-medium uppercase tracking-wide col-span-1">
@@ -122,7 +122,7 @@ const HistoryGrid = ({ library }: LibraryGridProps) => {
               </div>
 
               {/* Desktop Layout */}
-              <div className="hidden md:grid md:grid-cols-[50px_0.3fr_0.4fr_0.2fr_0.15fr_50px] gap-1 items-center">
+              <div className="hidden md:grid md:grid-cols-[50px_0.3fr_0.4fr_0.2fr_0.2fr_50px] gap-1 items-center">
                 <div className="w-[40px] h-[50px] overflow-hidden rounded-r-sm relative">
                   <DynamicBlurImage
                     unoptimized
@@ -171,7 +171,7 @@ const HistoryGrid = ({ library }: LibraryGridProps) => {
                 <div className="text-sm text-muted-foreground text-center">
                   {formatDate(item.lastReadAt)}
                 </div>
-                <div className="text-sm text-muted-foreground text-center transition-all duration-300 hover:scale-105 hover:text-accent">
+                <div className="text-sm text-muted-foreground text-center transition-all duration-300 hover:scale-105 hover:text-accent justify-self-start">
                   {item.bookmarked ? (
                     <RemoveBookmarkButtonIcon item={item} />
                   ) : (

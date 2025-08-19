@@ -1,5 +1,6 @@
 'use client'
 
+import ImageWithFallback from "@/components/image-with-fallback";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,12 +10,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { env } from "@/env";
 import useLogout from "@/hooks/use-logout";
-import defaultBlur from "@/lib/blur-data";
 import { User } from "@/types/authentication";
 import { BookOpenText, LogOutIcon, Mail, UserIcon } from "lucide-react";
-import Image, { ImageProps } from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 const UserAccount = ({ user }: { user: User }) => {
   const handleLogout = useLogout();
@@ -22,7 +20,8 @@ const UserAccount = ({ user }: { user: User }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <ImageWithFallback src={`${env.NEXT_PUBLIC_BASE_URL}/users/${user.id}/image`}
+        <ImageWithFallback
+          src={`${env.NEXT_PUBLIC_BASE_URL}/users/${user.id}/image`}
           width={32}
           height={32}
           alt="account image"
@@ -55,21 +54,6 @@ const UserAccount = ({ user }: { user: User }) => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
-
-const ImageWithFallback = ({ fallback = "/yin-yang.png", alt, src, ...props }: ImageProps & { fallback?: string }) => {
-  const [error, setError] = useState(false);
-
-  return (
-    <Image
-      alt={alt}
-      onError={() => setError(true)}
-      src={error ? fallback : src}
-      {...props}
-      blurDataURL={defaultBlur}
-      unoptimized
-    />
   )
 }
 

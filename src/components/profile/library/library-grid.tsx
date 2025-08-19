@@ -19,7 +19,7 @@ const LibraryGrid = ({ library }: LibraryGridProps) => {
   // Empty state
   if (!library.length) {
     return (
-      <div className="flex flex-col items-center justify-center pb-4 md:pb-10 text-center">
+      <div className="flex flex-col items-center justify-center pb-4 md:pb-10 text-center  mx">
         <div className="w-14 md:w-16 h-14 md:h-16 bg-secondary border rounded-full flex items-center justify-center mb-2 md:mb-4">
           <BookOpenText className="size-6" />
         </div>

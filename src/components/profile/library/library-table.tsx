@@ -11,7 +11,9 @@ const LibraryTable = ({ library }: { library: PaginatedQuery<Library[]> }) => {
     <div className="w-full space-y-4 md:space-y-10">
       <div className="space-y-4 md:space-y-6 w-full">
         <LibraryHeader />
-        <LibraryFilters />
+        {library.totalItems ? (
+          <LibraryFilters />
+        ) : null}
       </div>
       <LibraryGrid library={library.results} />
     </div>

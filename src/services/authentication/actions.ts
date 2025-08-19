@@ -16,11 +16,17 @@ type AuthenticationFormState = {
   errors?: Record<string, string[]>;
 }
 
+type ActionState = {
+  success: boolean;
+  message?: string;
+}
+
 const DEFAULT_LOGIN_ERROR_MESSAGE = "Login Error! Try again";
 const DEFAULT_SIGNUP_ERROR_MESSAGE = "Signup Error! Try again";
 const DEFAULT_RESET_PASSWORD_ERROR_MESSAGE = "Reset Password Error! Try again later";
 const DEFAULT_INVALID_RESET_PASSWORD_TOKEN = "Invalid verification token";
-const DEFAULT_EDIT_PROFILE_MESSAGE = "Failed to Edit Profile. Try again later"
+const DEFAULT_EDIT_PROFILE_MESSAGE = "Failed to Edit Profile. Try again later";
+const DEFAULT_EDIT_PROFILE_IMAGE = "Failed to Edit Profile. Try again later";
 
 export const loginAction = async (prevState: unknown, payload: LoginInput): Promise<AuthenticationFormState> => {
   const parsed = loginSchema.safeParse(payload);
@@ -222,4 +228,34 @@ export const editProfileAction = async (prevState: AuthenticationFormState, payl
   }
   revalidatePath("/profile")
   return { success: true, fields: parsed.data };
+}
+
+export const profilePicture = async (prevState: unknown, payload: { imageBlob: Blob, userId: number }): Promise<ActionState> => {
+  const session = await getSession();
+  if (!session) throw new Error(DEFAULT_EDIT_PROFILE_IMAGE);
+  const formData = new FormData();
+
+  formData.append("file", payload.imageBlob);
+
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/users/${payload.userId}/image`, {
+      headers: { "Authorization": `Bearer ${session.value}` },
+      body: formData,
+      method: "PUT"
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      console.log(data);
+      return { success: false, message: data.detail ?? DEFAULT_EDIT_PROFILE_IMAGE };
+    }
+
+    console.log(await res.json())
+
+  } catch (err) {
+    console.log(err);
+    return { success: false, message: DEFAULT_EDIT_PROFILE_IMAGE };
+  }
+
+  return { success: true, message: new Date().getTime().toString() };
 }

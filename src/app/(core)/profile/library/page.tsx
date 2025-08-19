@@ -16,9 +16,11 @@ const LibraryPage = async ({ searchParams }: PageProps) => {
   return (
     <div className="px-4 md:px-10 pt-4 md:pt-6 space-y-4 pb-4">
       <LibraryTable library={library} />
-      <p className="text-sm text-muted-foreground text-center">
-        Add more stories and keep track of your progress.
-      </p>
+      {library.totalItems ? (
+        <p className="text-sm text-muted-foreground text-center">
+          Add more stories and keep track of your progress.
+        </p>
+      ) : null}
     </div>
   )
 }

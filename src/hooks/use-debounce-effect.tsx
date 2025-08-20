@@ -1,16 +1,11 @@
 import { useEffect, DependencyList } from 'react'
 
-export function useDebounceEffect(
-  fn: () => void,
-  waitTime: number,
-  deps?: DependencyList,
-) {
+ // eslint-disable-next-line
+export function useDebounceEffect(fn: (...args: any[]) => void, deps: DependencyList, waitTime: number) {
   useEffect(() => {
     const t = setTimeout(() => {
-      // eslint-disable-next-line
-      fn.apply(undefined, deps)
+      fn(...(deps || []))
     }, waitTime)
-
     return () => {
       clearTimeout(t)
     }

@@ -156,8 +156,8 @@ const EditImageModal = ({ open, setOpen, imageFile, onStartTransition }: Props) 
         )
       }
     },
-    100,
     [completedCrop, SCALE, ROTATE],
+    100,
   )
 
   return (

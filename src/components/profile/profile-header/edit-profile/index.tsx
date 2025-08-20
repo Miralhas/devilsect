@@ -11,10 +11,12 @@ import {
 } from "@/components/ui/dialog"
 import { User } from "@/types/authentication"
 import EditProfileForm from "./edit-profile-form"
+import { useState } from "react"
 
 const EditProfileModal = ({ user }: { user: User }) => {
+  const [open, setOpen] = useState(false);
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           variant="cool"
@@ -31,7 +33,7 @@ const EditProfileModal = ({ user }: { user: User }) => {
           </DialogDescription>
         </DialogHeader>
         <div className="my-4 space-y-10">
-          <EditProfileForm user={user} />
+          <EditProfileForm user={user} handleClose={() => setOpen(false)} />
         </div>
       </DialogContent>
     </Dialog>

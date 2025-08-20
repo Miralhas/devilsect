@@ -11,13 +11,13 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 type AuthenticationFormState = {
-  success: boolean;
+  success?: boolean;
   fields?: Record<string, string>;
   errors?: Record<string, string[]>;
 }
 
 type ActionState = {
-  success: boolean;
+  success?: boolean;
   message?: string;
 }
 
@@ -214,7 +214,6 @@ export const editProfileAction = async (prevState: AuthenticationFormState, payl
     if (!res.ok) {
       // console.log(await res.json());
       const data: ApiResponseError = await res.json();
-      console.log(data);
       const errors: AuthenticationFormState["errors"] = { error: [data.detail ?? DEFAULT_EDIT_PROFILE_MESSAGE] };
       if (data?.errors?.password) errors["password"] = [data.errors?.password];
       if (data?.errors?.username) errors["username"] = [data.errors?.username];
@@ -246,11 +245,8 @@ export const profilePicture = async (prevState: unknown, payload: { imageBlob: B
 
     if (!res.ok) {
       const data = await res.json();
-      console.log(data);
       return { success: false, message: data.detail ?? DEFAULT_EDIT_PROFILE_IMAGE };
     }
-
-    console.log(await res.json())
 
   } catch (err) {
     console.log(err);

@@ -14,14 +14,22 @@ import { editProfileAction } from "@/services/authentication/actions";
 import { User } from "@/types/authentication";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";
-import { startTransition, useActionState, useState } from "react";
+import { startTransition, useActionState, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 
-const EditProfileForm = ({ user }: { user: User }) => {
-  const [formState, formAction, isPending] = useActionState(editProfileAction, { success: false });
+const EditProfileForm = ({ user, handleClose }: { user: User; handleClose: () => void }) => {
+  const [formState, formAction, isPending] = useActionState(editProfileAction, { success: undefined });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  useEffect(() => {
+    if (formState.success) {
+      toast.success("Profile updated successfully!")
+      handleClose()
+    }
+  }, [formState, handleClose])
 
   const toggleShowPassword = () => setShowPassword(prev => !prev);
   const toggleShowConfirmPassword = () => setShowConfirmPassword(prev => !prev);

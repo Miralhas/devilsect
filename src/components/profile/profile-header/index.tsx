@@ -31,7 +31,7 @@ const ProfileHeader = async () => {
         </div>
         <ProfileStats user={user} />
       </div>
-      <div className="row-start-3 col-span-2 pt-2 border-t md:pt-4 w-full md:px-4">
+      <div className="row-start-3 col-span-2 pt-2  md:pt-4 w-full md:px-4">
         <ProfileLinks />
       </div>
     </section>

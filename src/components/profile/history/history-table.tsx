@@ -2,8 +2,8 @@
 
 import { Library } from "@/types/library";
 import { PaginatedQuery } from "@/types/pagination";
+import { useRef } from "react";
 import HistoryGrid from "./history-grid";
-import { useLayoutEffect, useRef } from "react";
 
 const HistoryTable = ({ library }: { library: PaginatedQuery<Library[]> }) => {
   const divRef = useRef<HTMLDivElement>(null);

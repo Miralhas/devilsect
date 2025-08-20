@@ -1,7 +1,7 @@
 'use client'
 
 import { FlagIcon, LibraryIcon, Star } from "lucide-react";
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 
 const LibraryHeader = () => {
   const divRef = useRef<HTMLDivElement>(null);

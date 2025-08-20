@@ -25,6 +25,7 @@ const UserAccount = ({ user }: { user: User }) => {
           width={32}
           height={32}
           alt="account image"
+          fallback="/yin-yang-48x48.png"
           className="rounded-full size-8 overflow-hidden object-cover object-center shadow-2xl ring-2 ring-secondary cursor-pointer"
         />
       </DropdownMenuTrigger>

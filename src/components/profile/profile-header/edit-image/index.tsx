@@ -5,11 +5,10 @@ import { env } from "@/env";
 import { cn } from "@/lib/utils";
 import { profilePicture } from "@/services/authentication/actions";
 import { User } from "@/types/authentication";
-import dynamic from "next/dynamic";
 import { ChangeEvent, startTransition, useActionState, useEffect, useRef, useState } from 'react';
 import { toast } from "sonner";
+import EditImageModal from "./edit-image-modal";
 
-const EditImageModal = dynamic(import("./edit-image-modal"), { ssr: false });
 
 const EditImage = ({ user }: { user: User }) => {
   const [file, setFile] = useState<File | null>(null);
@@ -18,7 +17,7 @@ const EditImage = ({ user }: { user: User }) => {
   const [open, setOpen] = useState(false);
   const [state, action, isPending] = useActionState(profilePicture, { success: undefined });
 
-  const imgUrl = `${env.NEXT_PUBLIC_BASE_URL}/users/${user.id}/image`;
+  const imgUrl = `${env.NEXT_PUBLIC_BASE_URL}/users/${user.id}/image#${new Date().getTime().toString()}`;
 
   useEffect(() => {
     if (state.success === undefined) return;
@@ -29,7 +28,7 @@ const EditImage = ({ user }: { user: User }) => {
       return;
     }
 
-    toast.error(state.message);
+    toast.error(state.message, { description: state.success});
   }, [state, imgUrl]);
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,21 +51,19 @@ const EditImage = ({ user }: { user: User }) => {
 
   return (
     <>
-      {open ? (
-        <EditImageModal open={open} setOpen={setOpen} imageFile={file} onStartTransition={onStartTransition} />
-      ) : null}
-
+      <EditImageModal open={open} setOpen={setOpen} imageFile={file} onStartTransition={onStartTransition} />
       <div className="relative group">
         <div className="absolute -inset-1 bg-gradient-to-br from-primary to-accent/20 rounded-full blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
         <div className={cn("rounded-full size-32 md:size-36 aspect-square overflow-hidden relative", isPending && "animate-pulse")} onClick={onAvatarClick}>
           <ImageWithFallback
             src={imgUrl}
             imageRef={imageRef}
-            alt="profile image"
             fill
+            loading="eager"
+            sizes="8vw"
+            alt="img"
             priority
-            // quality={100}
-            sizes="(max-width: 768px) 20vw, 10vw"
+            fallback="/yin-yang-140x140.png"
             unoptimized={false}
           />
           <div className="absolute grid place-items-center inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black/70 cursor-pointer">

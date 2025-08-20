@@ -8,7 +8,6 @@ import LogoutButton from "./logout-button";
 import ProfileStats from "./profile-stats";
 import RoleBadge from "./role-badge";
 
-
 const ProfileHeader = async () => {
   const user = await getCurrentUserInfo();
 

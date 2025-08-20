@@ -117,7 +117,7 @@ const EditImageModal = ({ open, setOpen, imageFile, onStartTransition }: Props) 
     // reduce image size
     const blob = await offscreen.convertToBlob({
       type: 'image/jpeg',
-      quality: 0.7
+      quality: 0.5
     })
 
 

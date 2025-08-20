@@ -14,7 +14,7 @@ const UserLinks = () => {
   }
 
   return (
-    <div className="flex gap-3 items-center md:ms-3">
+    <div className="flex gap-4 items-center md:ms-3">
       <LibraryLink />
 
       <UserInbox />

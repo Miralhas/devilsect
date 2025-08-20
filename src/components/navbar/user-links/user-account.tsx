@@ -1,5 +1,6 @@
 'use client'
 
+import ImageWithFallback from "@/components/image-with-fallback";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,30 +9,19 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { env } from "@/env";
-import defaultBlur from "@/lib/blur-data";
-import { logoutAction } from "@/services/authentication/actions";
+import useLogout from "@/hooks/use-logout";
 import { User } from "@/types/authentication";
-import { useQueryClient } from "@tanstack/react-query";
 import { BookOpenText, LogOutIcon, Mail, UserIcon } from "lucide-react";
-import Image, { ImageProps } from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 const UserAccount = ({ user }: { user: User }) => {
-  const queryClient = useQueryClient();
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    await logoutAction();
-    queryClient.invalidateQueries({ queryKey: ['user'] });
-    router.refresh();
-  }
+  const handleLogout = useLogout();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <ImageWithFallback src={`${env.NEXT_PUBLIC_BASE_URL}/users/${user.id}/image`}
+        <ImageWithFallback
+          src={`${env.NEXT_PUBLIC_BASE_URL}/users/${user.id}/image`}
           width={32}
           height={32}
           alt="account image"
@@ -40,19 +30,19 @@ const UserAccount = ({ user }: { user: User }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[150px] text-zinc-200 bg-zinc-900">
         <DropdownMenuItem asChild>
-          <Link href="/account">
+          <Link href="/profile">
             <UserIcon className="text-zinc-200 mt-[2px]" />
             Profile
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/account/library">
+          <Link href="/profile/library">
             <BookOpenText className="text-zinc-200 mt-[2px]" />
             Library
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/account/inbox">
+          <Link href="/profile/inbox">
             <Mail className="text-zinc-200 mt-[2px]" />
             Inbox
           </Link>
@@ -64,20 +54,6 @@ const UserAccount = ({ user }: { user: User }) => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
-
-const ImageWithFallback = ({ fallback = "/yin-yang.png", alt, src, ...props }: ImageProps & { fallback?: string }) => {
-  const [error, setError] = useState(false);
-
-  return (
-    <Image
-      alt={alt}
-      onError={() => setError(true)}
-      src={error ? fallback : src}
-      {...props}
-      blurDataURL={defaultBlur}
-    />
   )
 }
 

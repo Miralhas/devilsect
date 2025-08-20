@@ -76,6 +76,7 @@ export const getUserLibrary = async (params: UserLibraryParams): Promise<Paginat
   myHeaders.append("Authorization", `Bearer ${session?.value}`);
 
   const parsed = UserLibraryParamsSchema.parse(params);
+
   const queryString = buildQueryString(parsed);
 
   const url = `${env.NEXT_PUBLIC_BASE_URL}/library${queryString}`
@@ -88,7 +89,7 @@ export const getUserLibrary = async (params: UserLibraryParams): Promise<Paginat
 
   if (!res.ok) {
     const error: ApiResponseError = await res.json();
-    console.error(`Error trying to [GET] user History: ${error.detail}`);
+    console.error(`Error trying to [GET] user Library: ${error.detail}`);
   }
 
   return await res.json() as PaginatedQuery<Library[]>;

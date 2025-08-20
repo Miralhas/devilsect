@@ -1,9 +1,11 @@
 import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
-import type { Metadata } from "next";
-import { Inter, Manrope, Roboto, Tilt_Warp, Atkinson_Hyperlegible } from 'next/font/google';
-import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata } from "next";
+import { Atkinson_Hyperlegible, Inter, Manrope, Roboto, Tilt_Warp } from 'next/font/google';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import 'react-image-crop/dist/ReactCrop.css';
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Devil Sect | Read Free Webnovels and Light Novels Online",
@@ -56,7 +58,7 @@ export default function RootLayout({
         className={`vsc-initialized antialiased text-zinc-200 relative font-main`}
       >
         <Providers>
-          {children}
+          <NuqsAdapter>{children}</NuqsAdapter>
         </Providers>
         <Toaster richColors />
         <SpeedInsights />

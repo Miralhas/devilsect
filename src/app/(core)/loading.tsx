@@ -1,4 +1,4 @@
-const HomeLoading = () => {
+const LoadingNovel = () => {
   return (
     <section className="min-h-screen w-full">
       <div className="flex items-center justify-center fixed inset-0 bg-black/50 backdrop-blur-sm z-40">
@@ -12,4 +12,4 @@ const HomeLoading = () => {
   )
 }
 
-export default HomeLoading;
+export default LoadingNovel;

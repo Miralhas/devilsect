@@ -7,7 +7,7 @@ const WEEK_IN_SECONDS = 604800;
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    minimumCacheTTL: WEEK_IN_SECONDS * 2,
+    minimumCacheTTL: WEEK_IN_SECONDS * 4,
     remotePatterns: [
       new URL('https://github.com/**'),
       new URL(`${env.APP_URL}/**`)

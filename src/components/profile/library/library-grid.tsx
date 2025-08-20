@@ -7,7 +7,7 @@ import DynamicBlurImage from "../../dynamic-blur-image";
 import BookCoverOverlay from "../../novel-card/book-cover-overlay";
 import EditItemDialog from "./edit-item-dialog";
 
-interface LibraryGridProps {
+type LibraryGridProps = {
   library: Library[];
 }
 

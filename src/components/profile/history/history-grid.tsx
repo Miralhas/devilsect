@@ -10,8 +10,7 @@ import Link from "next/link";
 import BookmarkButtonIcon from "./bookmark-button-icon";
 import RemoveBookmarkButtonIcon from "./remove-bookmark-icon";
 
-
-interface LibraryGridProps {
+type LibraryGridProps = {
   library: Library[];
 }
 

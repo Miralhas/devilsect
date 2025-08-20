@@ -1,9 +1,9 @@
 'use client'
 
-import { BookmarkPlus, FlagIcon, LibraryIcon } from "lucide-react";
+import { BookmarkPlus, HistoryIcon } from "lucide-react";
 import { useLayoutEffect, useRef } from "react";
 
-const LibraryHeader = () => {
+const HistoryHeader = () => {
   const divRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -20,25 +20,21 @@ const LibraryHeader = () => {
     <div ref={divRef}>
       <div className="flex items-center gap-2 w-full mb-1">
         <div className="size-10 bg-primary/50 text-accent flex items-center justify-center border border-accent/70 rounded-md">
-          <LibraryIcon className="size-6" />
+          <HistoryIcon className="size-6" />
         </div>
-        <h2 className="text-xl md:text-3xl font-semibold">Your Library</h2>
+        <h2 className="text-xl md:text-3xl font-semibold">Reading History</h2>
       </div>
       <p className="text-sm text-muted-foreground ">
-        Your personal collection of novels.
+        View and return to the novels you’ve recently read.
       </p>
       <div className="w-full bg-secondary/40 mt-4 p-4 space-y-2 border">
         <p className="text-muted-foreground text-sm">
-          <BookmarkPlus className="size-3.5 inline-block mr-1" fill="" />
-          Bookmark your favorite novels.
-        </p>
-        <p className="text-muted-foreground text-sm">
-          <FlagIcon className="size-3.5 inline-block mr-1" fill="#9f9fa9" />
-          Mark a novel as Complete once you’ve finished reading.
+          <BookmarkPlus className="size-4 inline-block mr-1" fill="" />
+          Quickly bookmark any novel from your reading history to save it in your library.
         </p>
       </div>
     </div>
   )
 }
 
-export default LibraryHeader;
+export default HistoryHeader;

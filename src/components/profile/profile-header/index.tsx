@@ -14,7 +14,7 @@ const ProfileHeader = async () => {
   if (!user) redirect("/login");
 
   return (
-    <section className="w-full grid grid-rows-[max-content_max-content_min-content] md:grid-rows-[max-content_max-content] grid-cols-1 md:grid-cols-[min-content_1fr] bg-secondary/10 border border-zinc-50/10 rounded-2xl backdrop-blur-xl gap-y-4 md:gap-x-6 px-4 md:px-10 pt-4 md:pt-10">
+    <section className="w-full grid grid-rows-[max-content_max-content_min-content] md:grid-rows-[max-content_max-content] grid-cols-1 md:grid-cols-[min-content_1fr] bg-secondary/10  rounded-2xl backdrop-blur-xl gap-y-4 md:gap-x-6 px-4 md:px-10 pt-4 md:pt-10">
       <div className="col-span-1 flex items-center justify-center row-start-1 row-span-1">
         <EditImage user={user} />
       </div>

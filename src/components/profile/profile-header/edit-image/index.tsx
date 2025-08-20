@@ -60,6 +60,9 @@ const EditImage = ({ user }: { user: User }) => {
             imageRef={imageRef}
             alt="profile image"
             fill
+            // quality={100}
+            sizes="(max-width: 768px) 20vw, 10vw"
+            unoptimized={false}
           />
           <div className="absolute grid place-items-center inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black/70 cursor-pointer">
             <p className="tracking-wide text-lg text-[17px] font-semibold">Edit image</p>

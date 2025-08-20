@@ -5,9 +5,11 @@ import { env } from "@/env";
 import { cn } from "@/lib/utils";
 import { profilePicture } from "@/services/authentication/actions";
 import { User } from "@/types/authentication";
+import dynamic from "next/dynamic";
 import { ChangeEvent, startTransition, useActionState, useEffect, useRef, useState } from 'react';
-import EditImageModal from "./edit-image-modal";
 import { toast } from "sonner";
+
+const EditImageModal = dynamic(import("./edit-image-modal"), { ssr: false });
 
 const EditImage = ({ user }: { user: User }) => {
   const [file, setFile] = useState<File | null>(null);
@@ -19,7 +21,7 @@ const EditImage = ({ user }: { user: User }) => {
   const imgUrl = `${env.NEXT_PUBLIC_BASE_URL}/users/${user.id}/image`;
 
   useEffect(() => {
-    if(state.success===undefined) return;
+    if (state.success === undefined) return;
     if (state.success && imageRef.current) {
       imageRef.current.src = `${imgUrl}#${state.message}`;
       (document.getElementById("navbar-user-image") as HTMLImageElement).src = `${imgUrl}#${state.message}`
@@ -50,7 +52,9 @@ const EditImage = ({ user }: { user: User }) => {
 
   return (
     <>
-      <EditImageModal open={open} setOpen={setOpen} imageFile={file} onStartTransition={onStartTransition} />
+      {open ? (
+        <EditImageModal open={open} setOpen={setOpen} imageFile={file} onStartTransition={onStartTransition} />
+      ) : null}
 
       <div className="relative group">
         <div className="absolute -inset-1 bg-gradient-to-br from-primary to-accent/20 rounded-full blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
@@ -60,6 +64,7 @@ const EditImage = ({ user }: { user: User }) => {
             imageRef={imageRef}
             alt="profile image"
             fill
+            priority
             // quality={100}
             sizes="(max-width: 768px) 20vw, 10vw"
             unoptimized={false}

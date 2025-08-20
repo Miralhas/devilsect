@@ -1,15 +1,15 @@
 import { mapRoles } from "@/lib/utils";
-import { getCurrentUser } from "@/services/authentication/server-queries";
+import { getCurrentUserInfo } from "@/services/authentication/server-queries";
 import { redirect } from "next/navigation";
 import ProfileLinks from "../profile-links";
 import EditImage from "./edit-image";
+import EditProfileModal from "./edit-profile";
 import LogoutButton from "./logout-button";
 import ProfileStats from "./profile-stats";
 import RoleBadge from "./role-badge";
-import EditProfileModal from "./edit-profile";
 
 const ProfileHeader = async () => {
-  const user = await getCurrentUser();
+  const user = await getCurrentUserInfo();
 
   if (!user) redirect("/login");
 
@@ -29,7 +29,7 @@ const ProfileHeader = async () => {
             <LogoutButton />
           </div>
         </div>
-        <ProfileStats />
+        <ProfileStats user={user} />
       </div>
       <div className="row-start-3 col-span-2 border-t pt-2 md:pt-4 w-full md:px-4">
         <ProfileLinks />

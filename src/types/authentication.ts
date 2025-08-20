@@ -11,3 +11,12 @@ export type User = {
   email: string;
   roles: Role[];
 }
+export type UserInfo = User & {
+  createdAt: string;
+  readCount: number;
+  bookmarkCount: number;
+  completedCount: number;
+  reviewsCount: number;
+  lastActivity: string;
+  registerType: string;
+}

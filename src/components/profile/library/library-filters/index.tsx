@@ -7,7 +7,7 @@ import SortFilter from "./sort-filter";
 
 const LibraryFilters = () => {
   return (
-    <section className="flex gap-2 items-center">
+    <section className="flex gap-2 items-center flex-wrap">
       <div className="hidden md:block">
         <FilterButtons />
       </div>

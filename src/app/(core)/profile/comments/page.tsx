@@ -7,7 +7,7 @@ const CommentsPage = () => {
         <div className="p-5 rounded-full bg-secondary justify-self-center border border-zinc-50/10">
           <MessageCircle className="size-6.5" />
         </div>
-        <p className="text-sm md:text-base">No comments have been made.</p>
+        <p className="text-sm md:text-base">No comments have been written.</p>
       </div>
     </section>
   )

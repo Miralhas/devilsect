@@ -1,23 +1,23 @@
 import LibraryTable from "@/components/profile/library/library-table";
 import ProfileHeader from "@/components/profile/profile-header";
-import { loadUserLibraryParams, mapFilter, mapSortKey } from "@/lib/schemas/user-library-params-schema";
-import { getUserLibrary } from "@/services/novels/server-queries";
-import { redirect } from "next/navigation";
+import ProfileLoading from "@/components/profile/profile-loading";
+import { loadUserLibraryParams } from "@/lib/schemas/user-library-params-schema";
 import type { SearchParams } from 'nuqs/server';
+import { Suspense } from "react";
 
 type PageProps = {
   searchParams: Promise<SearchParams>
 }
 
 const LibraryPage = async ({ searchParams }: PageProps) => {
-  const { size, sort, filter } = await loadUserLibraryParams(searchParams);
-  const library = await getUserLibrary({ filter: mapFilter(filter), size, sort: mapSortKey(sort) });
-  if (!library) redirect("/error");
+  const params = await loadUserLibraryParams(searchParams);
 
   return (
-    <div className="p-4 md:p-10 space-y-6 md:space-y-12">
+    <div className="p-4 md:p-10 space-y-12">
       <ProfileHeader />
-      <LibraryTable library={library} />
+      <Suspense fallback={<ProfileLoading />}>
+        <LibraryTable params={params} />
+      </Suspense>
     </div>
   )
 }

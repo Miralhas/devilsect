@@ -1,3 +1,5 @@
+'use client'
+
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import BookCoverOverlay from "@/components/novel-card/book-cover-overlay";
 import { env } from "@/env";

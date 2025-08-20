@@ -1,16 +1,15 @@
 import HistoryTable from "@/components/profile/history/history-table";
 import ProfileHeader from "@/components/profile/profile-header";
-import { getUserLibrary } from "@/services/novels/server-queries";
-import { redirect } from "next/navigation";
+import ProfileLoading from "@/components/profile/profile-loading";
+import { Suspense } from "react";
 
 const HistoryPage = async () => {
-  const library = await getUserLibrary({ size: 100 });
-  if (!library) redirect("/error");
-
   return (
-    <section className="p-4 md:p-10 space-y-6 md:space-y-12">
+    <section className="p-4 md:p-10 space-y-12">
       <ProfileHeader />
-      <HistoryTable library={library} />
+      <Suspense fallback={<ProfileLoading />}>
+        <HistoryTable />
+      </Suspense>
     </section>
   )
 }

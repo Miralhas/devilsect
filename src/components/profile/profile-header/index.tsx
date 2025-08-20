@@ -3,10 +3,11 @@ import { getCurrentUserInfo } from "@/services/authentication/server-queries";
 import { redirect } from "next/navigation";
 import ProfileLinks from "../profile-links";
 import EditImage from "./edit-image";
-import EditProfileModal from "./edit-profile";
+import EditProfile from "./edit-profile";
 import LogoutButton from "./logout-button";
 import ProfileStats from "./profile-stats";
 import RoleBadge from "./role-badge";
+
 
 const ProfileHeader = async () => {
   const user = await getCurrentUserInfo();
@@ -25,7 +26,7 @@ const ProfileHeader = async () => {
             <RoleBadge role={mapRoles(user.roles)} />
           </div>
           <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] gap-4">
-            <EditProfileModal user={user} />
+            <EditProfile user={user} />
             <LogoutButton />
           </div>
         </div>

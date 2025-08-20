@@ -28,7 +28,7 @@ const EditImage = ({ user }: { user: User }) => {
       return;
     }
 
-    toast.error(state.message, { description: state.success});
+    toast.error(state.message, { description: state.success });
   }, [state, imgUrl]);
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -59,12 +59,10 @@ const EditImage = ({ user }: { user: User }) => {
             src={imgUrl}
             imageRef={imageRef}
             fill
-            loading="eager"
-            sizes="8vw"
             alt="img"
             priority
             fallback="/yin-yang-140x140.png"
-            unoptimized={false}
+            unoptimized={true}
           />
           <div className="absolute grid place-items-center inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black/70 cursor-pointer">
             <p className="tracking-wide text-lg text-[17px] font-semibold">Edit image</p>

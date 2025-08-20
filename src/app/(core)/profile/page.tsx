@@ -15,9 +15,9 @@ const ProfilePage = async () => {
     : "No activity recorded yet.";
 
   return (
-    <section className="space-y-12">
+    <section className="p-4 md:p-10 space-y-6 md:space-y-12">
       <ProfileHeader />
-      <section className="p-4 md:p-10 space-y-2.5 md:space-y-6">
+      <div className="space-y-2.5 md:space-y-6">
         <div className="flex items-center gap-2 w-full px-3">
           <div className="size-10 bg-primary/50 text-accent flex items-center justify-center border border-accent/70 rounded-md">
             <UserIcon className="size-6" />
@@ -72,7 +72,7 @@ const ProfilePage = async () => {
           </div>
 
         </div>
-      </section>
+      </div>
     </section>
   )
 }

@@ -25,3 +25,5 @@ export const getCurrentUser = async (): Promise<User | undefined> => {
 
   return await res.json() as User;
 }
+
+// export const 

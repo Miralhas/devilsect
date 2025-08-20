@@ -71,7 +71,9 @@ const LibraryGrid = ({ library }: LibraryGridProps) => {
                 <div className="flex-shrink-0">
                   <div className="w-12 h-16 overflow-hidden rounded-r-sm relative">
                     <DynamicBlurImage
-                      unoptimized
+                      // unoptimized
+                      fill
+                      sizes="(max-width: 768px) 10vw, 1vw"
                       alt={`${item.novelTitle} cover`}
                       className="w-full h-full object-fill"
                       src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${item.novelSlug}/image`}

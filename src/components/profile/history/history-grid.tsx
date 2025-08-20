@@ -125,7 +125,9 @@ const HistoryGrid = ({ library }: LibraryGridProps) => {
               <div className="hidden md:grid md:grid-cols-[50px_0.3fr_0.4fr_0.2fr_0.2fr_50px] gap-1 items-center">
                 <div className="w-[40px] h-[50px] overflow-hidden rounded-r-sm relative">
                   <DynamicBlurImage
-                    unoptimized
+                    // unoptimized
+                    fill
+                    sizes="(max-width: 768px) 10vw, 1vw"
                     alt={`${item.novelTitle} cover`}
                     className="w-full h-full object-fill"
                     src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${item.novelSlug}/image`}

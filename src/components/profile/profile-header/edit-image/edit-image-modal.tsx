@@ -117,7 +117,7 @@ const EditImageModal = ({ open, setOpen, imageFile, onStartTransition }: Props) 
     // reduce image size
     const blob = await offscreen.convertToBlob({
       type: 'image/jpeg',
-      quality: 0.5
+      quality: 0.3
     })
 
 
@@ -161,55 +161,57 @@ const EditImageModal = ({ open, setOpen, imageFile, onStartTransition }: Props) 
   )
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="max-h-[60vh] overflow-y-auto overflow-x-hidden">
+    <Dialog open={open} onOpenChange={setOpen} >
+      <DialogContent className="max-h-[60vh]  overflow-y-auto overflow-x-hidden">
         <DialogHeader>
-          <DialogTitle>Image Crop</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="sr-only">Image Crop</DialogTitle>
+          <DialogDescription className="sr-only">
             Image may take a while to update.
           </DialogDescription>
-          <div className='grid grid-cols-2 grid-rows-[auto_auto] gap-4 gap-y-12'>
-            {!!imgSrc ? (
-              <ReactCrop
-                crop={crop}
-                onChange={(_, percentCrop) => setCrop(percentCrop)}
-                onComplete={(c) => setCompletedCrop(c)}
-                aspect={ASPECT_RATIO}
-                minHeight={100}
-                keepSelection
-                className="row-start-1 col-span-1"
-              >
-                <img
-                  ref={imgRef}
-                  alt="Crop me"
-                  src={imgSrc}
-                  style={{ transform: `scale(${SCALE}) rotate(${ROTATE}deg)` }}
-                  onLoad={onImageLoad}
-                />
+        </DialogHeader>
+        <div className='grid grid-rows-[minmax(0,1fr)_minmax(0,180px)_auto] gap-y-6'>
+          {!!imgSrc ? (
+            <ReactCrop
+              crop={crop}
+              onChange={(_, percentCrop) => setCrop(percentCrop)}
+              onComplete={(c) => setCompletedCrop(c)}
+              aspect={ASPECT_RATIO}
+              minHeight={100}
+              maxHeight={250}
+              maxWidth={250}
+              keepSelection
+              className="row-start-1 col-span-1 relative overflow-hidden bg-black m-auto"
+              style={{ maxWidth: 350 }}
+            >
+              <img
+                ref={imgRef}
+                alt="Crop me"
+                src={imgSrc}
+                style={{ transform: `scale(${SCALE}) rotate(${ROTATE}deg)` }}
+                onLoad={onImageLoad}
+              />
 
-              </ReactCrop>
-            ) : null}
-            {!!completedCrop ? (
-              <>
-                <div className="space-y-2 row-start-1 col-span-1">
-                  <p className="text-center">Preview</p>
-                  <canvas
-                    ref={previewCanvasRef}
-                    className='border border-black object-contain rounded-full mx-auto'
-                    style={{ width: completedCrop.width, height: completedCrop.height }}
-                  />
-                </div>
-              </>
-            ) : null}
+            </ReactCrop>
+          ) : null}
+          {!!completedCrop ? (
+            <>
+              <div className="row-start-2 space-y-1">
+                <p className="text-center">Preview</p>
+                <canvas
+                  ref={previewCanvasRef}
+                  className='border border-black object-contain rounded-full mx-auto min-w-36 min-h-36 max-w-36 max-h-36'
+                  style={{ width: completedCrop.width, height: completedCrop.height }}
+                />
+              </div>
+            </>
+          ) : null}
           {!!completedCrop && (
-            <div className='grid grid-cols-2 row-start-2 col-span-2 gap-4'>
-              <Button variant='cool' className="col-span-1 h-11"  onClick={onDownloadCropClick}>Set avatar</Button>
-              <Button variant='cool-secondary' className="col-span-1 h-11"  onClick={() => setOpen(false)}>Cancel</Button>
+            <div className='grid grid-cols-2 row-start-3 gap-4'>
+              <Button variant='cool' className="col-span-1 h-11" onClick={onDownloadCropClick}>Set avatar</Button>
+              <Button variant='cool-secondary' className="col-span-1 h-11" onClick={() => setOpen(false)}>Cancel</Button>
             </div>
           )}
-          </div>
-
-        </DialogHeader>
+        </div>
       </DialogContent>
     </Dialog>
   )

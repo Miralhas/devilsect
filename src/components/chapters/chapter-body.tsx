@@ -67,27 +67,27 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
         <div className="w-full grid grid-cols-[repeat(3,minmax(0px,100px))] gap-4 my-16 items-center justify-center">
           <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasPrevious} >
             <Link href={`/novels/${chapter.novelSlug}/${previous?.slug}`} className="pr-1">
-              <div className="flex items-center w-full justify-center">
-                <ChevronLeft className="size-5 md:size-6" strokeWidth={4} />
-                <span className="text-sm text-[15px] md:text-base md:text-[17px] mb-0.5 md:mb-0">Prev</span>
+              <div className="grid grid-cols-[min-content_min-content] items-center">
+                <ChevronLeft className="size-4.5 md:size-6" strokeWidth={4} />
+                <p className="text-sm text-[15px] md:text-base md:text-[17px] mt-0.25">Prev</p>
               </div>
             </Link>
           </Button>
 
           <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10">
             <Link href={`/novels/${chapter.novelSlug}`}>
-              <div className="flex items-center w-full justify-center gap-1">
+              <div className="grid grid-cols-[min-content_min-content] items-center gap-1">
                 <HouseIcon className="size-4.5" strokeWidth={3} />
-                <span className="md:text-base md:text-[17px]">Index</span>
+                <p className="text-sm md:text-base md:text-[17px]">Index</p>
               </div>
             </Link>
           </Button>
 
           <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasNext} >
             <Link href={`/novels/${chapter.novelSlug}/${next?.slug}`} className="pl-2">
-              <div className="flex items-center w-full justify-center">
-                <span className="text-sm text-[15px] md:text-base md:text-[17px] mb-0.5 md:mb-0">Next</span>
-                <ChevronRight className="size-5 md:size-6" strokeWidth={4} />
+              <div className="grid grid-cols-[min-content_min-content] place-items-center-safe">
+                <span className="text-sm text-[15px] md:text-base md:text-[17px] mb-0.25">Next</span>
+                <ChevronRight className="size-4.5 md:size-6" strokeWidth={4} />
               </div>
             </Link>
           </Button>

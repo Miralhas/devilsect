@@ -5,6 +5,7 @@ import { env } from "@/env";
 import { cn } from "@/lib/utils";
 import { profilePicture } from "@/services/authentication/actions";
 import { User } from "@/types/authentication";
+import { Pencil } from "lucide-react";
 import { ChangeEvent, startTransition, useActionState, useEffect, useRef, useState } from 'react';
 import { toast } from "sonner";
 import EditImageModal from "./edit-image-modal";
@@ -52,9 +53,9 @@ const EditImage = ({ user }: { user: User }) => {
   return (
     <>
       <EditImageModal open={open} setOpen={setOpen} imageFile={file} onStartTransition={onStartTransition} />
-      <div className="relative group">
+      <div className="relative group" onClick={onAvatarClick}>
         <div className="absolute -inset-1 bg-gradient-to-br from-primary to-accent/20 rounded-full blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className={cn("rounded-full size-32 md:size-36 aspect-square overflow-hidden relative", isPending && "animate-pulse")} onClick={onAvatarClick}>
+        <div className={cn("rounded-full size-32 md:size-36 aspect-square overflow-hidden relative", isPending && "animate-pulse")}>
           <ImageWithFallback
             src={imgUrl}
             imageRef={imageRef}
@@ -63,10 +64,19 @@ const EditImage = ({ user }: { user: User }) => {
             priority
             fallback="/yin-yang-140x140.png"
             unoptimized={true}
+            className="opacity-90 object-center object-cover w-full h-auto inline-block"
           />
-          <div className="absolute grid place-items-center inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black/70 cursor-pointer">
-            <p className="tracking-wide text-lg text-[17px] font-semibold">Edit image</p>
+          <div
+            className="absolute inset-0 z-10 transition-opacity duration-300 opacity-0 group-hover:opacity-100 bg-black/60 cursor-pointer rounded-md grid place-items-center"
+          >
+            <Pencil className="size-7 text-white" />
           </div>
+        </div>
+        <div
+          className="absolute flex items-center gap-1 p-1 px-2 bottom-0 right-0 z-10 transition-opacity duration-300 group-hover:opacity-100 bg-secondary cursor-pointer border border-white/20 rounded-md"
+        >
+          <Pencil className="size-4" />
+          <p className="tracking-wide text-xs font-semibold">Edit</p>
         </div>
       </div>
       <input

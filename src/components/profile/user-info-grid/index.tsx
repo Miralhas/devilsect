@@ -1,6 +1,5 @@
-import { roleMap } from "@/lib/utils";
+import { formatFullDate, roleMap } from "@/lib/utils";
 import { getCurrentUserInfo } from "@/services/authentication/server-queries";
-import { format } from "date-fns";
 import { UserIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import RoleBadge from "../profile-header/role-badge";
@@ -9,9 +8,7 @@ const UserInfoGrid = async () => {
   const user = await getCurrentUserInfo();
   if (!user) redirect("/login");
 
-  const lastActivity = user.lastActivity
-    ? format(user.lastActivity, "MMMM dd, yyyy 'at' hh':'mm a")
-    : "No activity recorded yet.";
+  const lastActivity = user.lastActivity ? formatFullDate(user.lastActivity) : "No activity recorded yet.";
 
   return (
     <div className="space-y-2.5 md:space-y-6">
@@ -57,7 +54,7 @@ const UserInfoGrid = async () => {
         <div className="border-b">
           <div className="md:grid md:grid-cols-[minmax(0,0.20fr)_minmax(0,1fr)] md:gap-5 space-y-2 md:space-y-0 p-4 duration-300 ease-in-out transition-colors hover:bg-secondary/55">
             <p className="text-muted-foreground font-medium">Member Since</p>
-            <p className="text-zinc-300/90 font-medium tracking-tight">{format(user.createdAt, "MMMM dd, yyyy 'at' hh':'mm a")}</p>
+            <p className="text-zinc-300/90 font-medium tracking-tight">{formatFullDate(user.createdAt)}</p>
           </div>
         </div>
 

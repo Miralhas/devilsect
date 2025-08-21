@@ -13,7 +13,7 @@ type Props = {
   }
 }
 
-const LibraryTable = async ({ params: {filter, size, sort} }: Props) => {
+const LibraryTable = async ({ params: { filter, size, sort } }: Props) => {
   const library = await getUserLibrary({ filter: mapFilter(filter), size, sort: mapSortKey(sort) });
   if (!library) redirect("/error");
 
@@ -21,9 +21,7 @@ const LibraryTable = async ({ params: {filter, size, sort} }: Props) => {
     <div className="w-full space-y-4 md:space-y-10">
       <div className="space-y-4 md:space-y-6 w-full">
         <LibraryHeader />
-        {library.totalItems ? (
-          <LibraryFilters />
-        ) : null}
+        <LibraryFilters />
       </div>
       <LibraryGrid library={library.results} />
     </div>

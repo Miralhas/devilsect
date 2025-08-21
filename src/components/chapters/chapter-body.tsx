@@ -1,14 +1,15 @@
 'use client'
 
-import { Chapter } from "@/types/chapter";
-import Link from "next/link";
-import { useRef, useState } from "react";
-import Settings from "./settings";
+import { Button } from "@/components/ui/button";
 import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
 import { cn } from "@/lib/utils";
-import { motion, useScroll, useSpring } from "motion/react";
+import { useAddChapterToUserHistoryMutation } from "@/services/user-library/client-mutation";
+import { Chapter } from "@/types/chapter";
 import { ChevronLeft, ChevronRight, HouseIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { motion, useScroll, useSpring } from "motion/react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import Settings from "./settings";
 
 const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   const { previous, next } = chapter;
@@ -21,6 +22,12 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   })
   const divRef = useRef<HTMLDivElement>(null);
   const { fontSize, lineHeight, fontFamily, textColor, opacity } = useReaderSettingsContext();
+  const mutation = useAddChapterToUserHistoryMutation();
+
+  useEffect(() => {
+    mutation.mutate({ chapter });
+    // eslint-disable-next-line
+  }, [chapter]);
 
   const opacityDecimal = (opacity / 100);
 
@@ -57,34 +64,34 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
         >
         </div>
 
-      <div className="w-full grid grid-cols-[repeat(3,minmax(0px,100px))] gap-4 my-16 items-center justify-center">
-        <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasPrevious} >
-          <Link href={`/novels/${chapter.novelSlug}/${previous?.slug}`} className="pr-1">
-            <div className="flex items-center w-full justify-center">
-              <ChevronLeft className="size-5 md:size-6" strokeWidth={4} />
-              <span className="text-sm text-[15px] md:text-base md:text-[17px] mb-0.5 md:mb-0">Prev</span>
-            </div>
-          </Link>
-        </Button>
+        <div className="w-full grid grid-cols-[repeat(3,minmax(0px,100px))] gap-4 my-16 items-center justify-center">
+          <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasPrevious} >
+            <Link href={`/novels/${chapter.novelSlug}/${previous?.slug}`} className="pr-1">
+              <div className="flex items-center w-full justify-center">
+                <ChevronLeft className="size-5 md:size-6" strokeWidth={4} />
+                <span className="text-sm text-[15px] md:text-base md:text-[17px] mb-0.5 md:mb-0">Prev</span>
+              </div>
+            </Link>
+          </Button>
 
-        <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10">
-          <Link href={`/novels/${chapter.novelSlug}`}>
-            <div className="flex items-center w-full justify-center gap-1">
-              <HouseIcon className="size-4.5" strokeWidth={3} />
-              <span className="md:text-base md:text-[17px]">Index</span>
-            </div>
-          </Link>
-        </Button>
+          <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10">
+            <Link href={`/novels/${chapter.novelSlug}`}>
+              <div className="flex items-center w-full justify-center gap-1">
+                <HouseIcon className="size-4.5" strokeWidth={3} />
+                <span className="md:text-base md:text-[17px]">Index</span>
+              </div>
+            </Link>
+          </Button>
 
-        <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasNext} >
-          <Link href={`/novels/${chapter.novelSlug}/${next?.slug}`} className="pl-2">
-            <div className="flex items-center w-full justify-center">
-              <span className="text-sm text-[15px] md:text-base md:text-[17px] mb-0.5 md:mb-0">Next</span>
-              <ChevronRight className="size-5 md:size-6" strokeWidth={4} />
-            </div>
-          </Link>
-        </Button>
-      </div>
+          <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasNext} >
+            <Link href={`/novels/${chapter.novelSlug}/${next?.slug}`} className="pl-2">
+              <div className="flex items-center w-full justify-center">
+                <span className="text-sm text-[15px] md:text-base md:text-[17px] mb-0.5 md:mb-0">Next</span>
+                <ChevronRight className="size-5 md:size-6" strokeWidth={4} />
+              </div>
+            </Link>
+          </Button>
+        </div>
       </div>
       <Settings chapter={chapter} divRef={divRef} isNavHidden={isNavHidden} setIsNavHidden={setIsNavHidden} />
     </div>

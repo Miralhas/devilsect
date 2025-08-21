@@ -1,7 +1,7 @@
 import { Role, RoleStatus } from "@/types/authentication";
 import { DisplayStatus, NovelStatus } from "@/types/novel";
 import { clsx, type ClassValue } from "clsx";
-import { formatDistanceToNowStrict } from "date-fns";
+import { format, formatDistanceToNowStrict } from "date-fns";
 import { enUS } from 'date-fns/locale';
 import { twMerge } from "tailwind-merge";
 
@@ -54,6 +54,7 @@ export const buildQueryString = <T extends Record<string, string | number | bool
 export const leadingZero = (num: number, places: number) => (num).toString().padStart(places, "0");
 
 export const formatDate = (date: string) => formatDistanceToNowStrict(new Date(date).toString(), { locale: enUS, addSuffix: true });
+export const formatFullDate = (date: string) => format(new Date(date), "MMMM dd, yyyy 'at' hh':'mm a", { locale: enUS })
 
 export const capitalize = (val: string) => {
   return val.split(" ").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");

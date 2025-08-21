@@ -1,3 +1,5 @@
+'use client'
+
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import BookCoverOverlay from "@/components/novel-card/book-cover-overlay";
 import { env } from "@/env";
@@ -8,8 +10,7 @@ import Link from "next/link";
 import BookmarkButtonIcon from "./bookmark-button-icon";
 import RemoveBookmarkButtonIcon from "./remove-bookmark-icon";
 
-
-interface LibraryGridProps {
+type LibraryGridProps = {
   library: Library[];
 }
 

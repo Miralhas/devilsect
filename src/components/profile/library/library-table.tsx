@@ -1,19 +1,27 @@
-'use client'
-
-import { Library } from "@/types/library";
-import { PaginatedQuery } from "@/types/pagination";
+import { mapFilter, mapSortKey } from "@/lib/schemas/user-library-params-schema";
+import { getUserLibrary } from "@/services/novels/server-queries";
+import { redirect } from "next/navigation";
 import LibraryFilters from "./library-filters";
 import LibraryGrid from "./library-grid";
 import LibraryHeader from "./library-header";
 
-const LibraryTable = ({ library }: { library: PaginatedQuery<Library[]> }) => {
+type Props = {
+  params: {
+    size: number;
+    filter: string;
+    sort: string;
+  }
+}
+
+const LibraryTable = async ({ params: { filter, size, sort } }: Props) => {
+  const library = await getUserLibrary({ filter: mapFilter(filter), size, sort: mapSortKey(sort) });
+  if (!library) redirect("/error");
+
   return (
     <div className="w-full space-y-4 md:space-y-10">
       <div className="space-y-4 md:space-y-6 w-full">
         <LibraryHeader />
-        {library.totalItems ? (
-          <LibraryFilters />
-        ) : null}
+        <LibraryFilters />
       </div>
       <LibraryGrid library={library.results} />
     </div>

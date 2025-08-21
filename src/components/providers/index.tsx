@@ -1,6 +1,6 @@
 'use client'
 
-import { MutationCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { PropsWithChildren } from 'react';
 
 const queryClient = new QueryClient({
@@ -8,12 +8,7 @@ const queryClient = new QueryClient({
     queries: {
       staleTime: 2 * 60 * 1000 // 2 minutes
     }
-  },
-  mutationCache: new MutationCache({
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  }),
+  }
 });
 
 const Providers = ({ children }: PropsWithChildren) => {

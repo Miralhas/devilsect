@@ -38,7 +38,7 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
     <div className="w-full relative" ref={divRef}>
       <motion.div
         id="scroll-indicator"
-        className="bg-primary fixed z-[2]"
+        className="bg-primary fixed z-[2] will-change-transform backface-hidden"
         style={{
           scaleX: scaleX,
           top: 0,
@@ -57,7 +57,7 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
             fontSize: fontSize,
             lineHeight: `${lineHeight}px`,
             color: textColor.color,
-            opacity: opacityDecimal
+            opacity: opacityDecimal,
           }}
           dangerouslySetInnerHTML={{ __html: chapter.body }}
           onTouchStart={() => setIsNavHidden(prev => !prev)}

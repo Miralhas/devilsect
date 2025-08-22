@@ -39,7 +39,7 @@ const Settings = ({ divRef, chapter, isNavHidden, setIsNavHidden}: SettingsProps
     <AnimatePresence>
       {!isNavHidden ? (
         <motion.div
-          className="bg-[#302f2f] fixed bottom-0 left-0 right-0 z-50 w-full"
+          className="bg-[#302f2f] fixed bottom-0 left-0 right-0 z-50 w-full backface-hidden will-change-transform"
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}

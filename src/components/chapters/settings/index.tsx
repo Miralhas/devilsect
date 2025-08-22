@@ -1,7 +1,7 @@
 'use client'
 
 import { Chapter } from "@/types/chapter";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import dynamic from 'next/dynamic';
 import { Dispatch, RefObject, SetStateAction } from "react";
 
@@ -16,24 +16,24 @@ type SettingsProps = {
   setIsNavHidden: Dispatch<SetStateAction<boolean>>;
 }
 
-const Settings = ({ divRef, chapter, isNavHidden, setIsNavHidden}: SettingsProps) => {
-  const { scrollY } = useScroll();
+const Settings = ({ chapter, isNavHidden}: SettingsProps) => {
+  // const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious();
+  // useMotionValueEvent(scrollY, "change", (latest) => {
+  //   const previous = scrollY.getPrevious();
 
-    if (divRef.current && latest >= (divRef.current.clientHeight - 1000)) {
-      setIsNavHidden(true);
-      return;
-    }
+  //   if (divRef.current && latest >= (divRef.current.clientHeight - 1000)) {
+  //     setIsNavHidden(true);
+  //     return;
+  //   }
 
-    if (previous && latest > previous) {
-      setIsNavHidden(true);
-      return;
-    }
+  //   if (previous && latest > previous) {
+  //     setIsNavHidden(true);
+  //     return;
+  //   }
 
-    setIsNavHidden(false);
-  });
+  //   setIsNavHidden(false);
+  // });
 
   return (
     <AnimatePresence>

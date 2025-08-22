@@ -10,6 +10,7 @@ import { motion, useScroll, useSpring } from "motion/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Settings from "./settings";
+import useAutoScroll from "@/hooks/use-auto-scroll";
 
 const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   const { previous, next } = chapter;
@@ -21,8 +22,10 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
     restDelta: 0.001
   })
   const divRef = useRef<HTMLDivElement>(null);
+  const chapterContentRef = useRef<HTMLDivElement>(null);
   const { fontSize, lineHeight, fontFamily, textColor, opacity } = useReaderSettingsContext();
   const mutation = useAddChapterToUserHistoryMutation();
+  const onPause = useAutoScroll(chapterContentRef);
 
   useEffect(() => {
     mutation.mutate({ chapter });
@@ -60,7 +63,11 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
             opacity: opacityDecimal,
           }}
           dangerouslySetInnerHTML={{ __html: chapter.body }}
-          onTouchStart={() => setIsNavHidden(prev => !prev)}
+          onClick={() => {
+            setIsNavHidden(prev => !prev);
+            onPause()
+          }}
+          ref={chapterContentRef}
         >
         </div>
 

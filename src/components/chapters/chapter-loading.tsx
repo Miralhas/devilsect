@@ -24,7 +24,7 @@ const Header = () => {
         <div className="flex justify-between p-3 items-center">
           <div className="flex items-center gap-2">
             <Skeleton className="h-[42px] w-[28px] rounded-xs" />
-            <Skeleton className="h-[16px] w-[200px]" />
+            <Skeleton className="h-[16px] w-[100px] md:w-[200px]" />
           </div>
           <div className="flex items-center gap-3">
             <div

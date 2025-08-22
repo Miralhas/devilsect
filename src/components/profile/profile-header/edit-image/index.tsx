@@ -63,7 +63,6 @@ const EditImage = ({ user }: { user: User }) => {
             alt="img"
             priority
             fallback="/yin-yang-140x140.png"
-            unoptimized={true}
             className="opacity-90 object-center object-cover w-full h-auto inline-block"
           />
           <div

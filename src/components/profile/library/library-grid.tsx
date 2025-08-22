@@ -71,11 +71,11 @@ const LibraryGrid = ({ library }: LibraryGridProps) => {
                 <div className="flex-shrink-0">
                   <div className="w-12 h-16 overflow-hidden rounded-r-sm relative">
                     <DynamicBlurImage
-                      // unoptimized
                       fill
-                      sizes="(max-width: 768px) 10vw, 1vw"
+                      sizes="(max-width: 768px) 33vw, 5vw"
                       alt={`${item.novelTitle} cover`}
                       className="w-full h-full object-fill"
+                      unoptimized={false}
                       src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${item.novelSlug}/image`}
                     />
                     <BookCoverOverlay />
@@ -121,9 +121,11 @@ const LibraryGrid = ({ library }: LibraryGridProps) => {
               <div className="hidden md:grid md:grid-cols-[50px_0.3fr_0.4fr_0.2fr_0.2fr_50px] gap-1 items-center">
                 <div className="w-[40px] h-[50px] overflow-hidden rounded-r-sm relative">
                   <DynamicBlurImage
-                    unoptimized
+                    fill
+                    sizes="(max-width: 768px) 10vw, 5vw"
                     alt={`${item.novelTitle} cover`}
                     className="w-full h-full object-fill"
+                    unoptimized={false}
                     src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${item.novelSlug}/image`}
                   />
                   <BookCoverOverlay />

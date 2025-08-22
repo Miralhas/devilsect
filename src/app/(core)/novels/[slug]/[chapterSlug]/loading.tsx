@@ -1,11 +1,11 @@
-import YinYangLoading from "@/components/yinyang-loading";
+import ChapterLoading from "@/components/chapters/chapter-loading";
 
-const ChapterLoading = () => {
+const Loading = () => {
   return (
     <>
-      <YinYangLoading />
+      <ChapterLoading />
     </>
   )
 }
 
-export default ChapterLoading;
+export default Loading;

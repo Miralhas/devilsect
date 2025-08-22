@@ -42,7 +42,7 @@ const SettingsAccordion = () => {
                   size="none"
                   className="rounded-full p-2 border bg-secondary"
                   onClick={decreaseAutoScrollSpeed}
-                  disabled={autoScroll.speed <= 1}
+                  disabled={autoScroll.speed <= 0.5}
                 >
                   <MinusIcon className="size-3 text-zinc-300" strokeWidth={4} />
                 </Button>

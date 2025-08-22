@@ -129,11 +129,11 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
   }
 
   const increaseAutoScrollSpeed = () => {
-    setAutoScroll(prev => ({ ...prev, speed: prev.speed + 1 }));
+    setAutoScroll(prev => ({ ...prev, speed: prev.speed + 0.25 }));
   }
 
   const decreaseAutoScrollSpeed = () => {
-    setAutoScroll(prev => ({ ...prev, speed: prev.speed - 1 }));
+    setAutoScroll(prev => ({ ...prev, speed: prev.speed - 0.25 }));
   }
 
   const onAutoScrollPause = () => {

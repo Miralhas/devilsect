@@ -14,7 +14,7 @@ type HeaderProps = {
 
 const Header = ({ novelSlug: slug, next, previous }: HeaderProps) => {
   const hasNext = next !== null;
-  const hasPrevious = previous !== null
+  const hasPrevious = previous !== null;
   return (
     <div className="w-full">
       <div className="max-w-[840px] mx-auto px-2">

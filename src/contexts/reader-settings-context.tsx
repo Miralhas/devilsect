@@ -40,7 +40,9 @@ type ReaderSettingsContextState = {
   onAutoScrollActiveChange: () => void;
   increaseAutoScrollSpeed: () => void;
   decreaseAutoScrollSpeed: () => void;
-  onAutoScrollPause: () => void;
+  onAutoScrollPauseChange: () => void;
+  autoScrollPause: () => void;
+  autoScrollUnpause: () => void;
 }
 
 const INITIAL_DESKTOP_FONT_SIZE = 18;
@@ -51,7 +53,7 @@ const initialValues: Pick<ReaderSettingsContextState, "fontFamily" | "fontSize" 
   fontFamily: "font-atkinson",
   textColor: { name: "lightSilver", color: '#e0e0e0' },
   opacity: 100,
-  autoScroll: { active: false, pause: true, speed: 3 },
+  autoScroll: { active: false, pause: true, speed: 1 },
 }
 
 type InitialValuesType = typeof initialValues;
@@ -136,8 +138,16 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
     setAutoScroll(prev => ({ ...prev, speed: prev.speed - 0.25 }));
   }
 
-  const onAutoScrollPause = () => {
+  const onAutoScrollPauseChange = () => {
     setAutoScroll(prev => ({ ...prev, pause: !prev.pause }));
+  }
+
+  const autoScrollPause = () => {
+    setAutoScroll(prev => ({ ...prev, pause: true }));
+  }
+
+   const autoScrollUnpause = () => {
+    setAutoScroll(prev => ({ ...prev, pause: false }));
   }
 
 
@@ -161,7 +171,9 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
         decreaseAutoScrollSpeed,
         increaseAutoScrollSpeed,
         onAutoScrollActiveChange,
-        onAutoScrollPause,
+        autoScrollPause,
+        autoScrollUnpause,
+        onAutoScrollPauseChange
       }}
     >
       {children}

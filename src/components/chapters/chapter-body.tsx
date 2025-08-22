@@ -23,12 +23,16 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   })
   const divRef = useRef<HTMLDivElement>(null);
   const chapterContentRef = useRef<HTMLDivElement>(null);
-  const { fontSize, lineHeight, fontFamily, textColor, opacity } = useReaderSettingsContext();
+  const { fontSize, lineHeight, fontFamily, textColor, opacity, autoScroll } = useReaderSettingsContext();
   const mutation = useAddChapterToUserHistoryMutation();
-  const onPause = useAutoScroll(chapterContentRef);
+  const { onAutoScrollPauseChange, autoScrollPause } = useAutoScroll(chapterContentRef);
 
   useEffect(() => {
     mutation.mutate({ chapter });
+    if (autoScroll.active) {
+      autoScrollPause();
+    }
+
     // eslint-disable-next-line
   }, [chapter]);
 
@@ -65,7 +69,7 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
           dangerouslySetInnerHTML={{ __html: chapter.body }}
           onClick={() => {
             setIsNavHidden(prev => !prev);
-            onPause()
+            onAutoScrollPauseChange();
           }}
           ref={chapterContentRef}
         >

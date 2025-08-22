@@ -12,6 +12,9 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { MinusIcon, PlusIcon } from "lucide-react"
 
+const AUTO_SCROLL_MIN_SPEED = 0.5;
+const AUTO_SCROLL_MAX_SPEED = 10;
+
 const SettingsAccordion = () => {
   const {
     autoScroll,
@@ -31,6 +34,7 @@ const SettingsAccordion = () => {
             </div>
           </AccordionTrigger>
           <AccordionContent>
+            <p className="text-muted-foreground text-xs mb-1">Recommended for mobile users</p>
             <div className="flex items-center justify-between">
               <div className="grid grid-cols-[min-content_min-content] gap-2">
                 <Switch id="auto-scroll" checked={autoScroll.active} onCheckedChange={onAutoScrollActiveChange} />
@@ -42,7 +46,7 @@ const SettingsAccordion = () => {
                   size="none"
                   className="rounded-full p-2 border bg-secondary"
                   onClick={decreaseAutoScrollSpeed}
-                  disabled={autoScroll.speed <= 0.5}
+                  disabled={autoScroll.speed <= AUTO_SCROLL_MIN_SPEED}
                 >
                   <MinusIcon className="size-3 text-zinc-300" strokeWidth={4} />
                 </Button>
@@ -52,7 +56,7 @@ const SettingsAccordion = () => {
                   size="none"
                   className="rounded-full p-2 border bg-secondary"
                   onClick={increaseAutoScrollSpeed}
-                  disabled={autoScroll.speed >= 10}
+                  disabled={autoScroll.speed >= AUTO_SCROLL_MAX_SPEED}
                 >
                   <PlusIcon className="size-3 text-zinc-300" strokeWidth={4} />
                 </Button>

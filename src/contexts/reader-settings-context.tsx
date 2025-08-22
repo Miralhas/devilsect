@@ -1,8 +1,8 @@
 'use client'
 
+import { useIsMobile } from "@/hooks/use-mobile";
 import { PropsWithChildren, useEffect, useState } from "react";
 import { createContext } from "./create-context";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 export const AVAILABLE_FONTS = ["font-atkinson", "font-inter", "font-roboto", "font-manrope"] as const;
 export const AVAILABLE_COLORS = [
@@ -16,6 +16,11 @@ export const AVAILABLE_COLORS = [
 
 type AvailableFonts = typeof AVAILABLE_FONTS[number];
 type AvailableColors = typeof AVAILABLE_COLORS[number];
+type AutoScroll = {
+  active: boolean;
+  pause: boolean;
+  speed: number;
+}
 
 type ReaderSettingsContextState = {
   fontSize: number;
@@ -23,6 +28,7 @@ type ReaderSettingsContextState = {
   fontFamily: AvailableFonts;
   textColor: AvailableColors;
   opacity: number;
+  autoScroll: AutoScroll,
   reset: () => void;
   increaseFontSize: () => void;
   increaseLineHeight: () => void;
@@ -31,16 +37,21 @@ type ReaderSettingsContextState = {
   changeFontFamily: (font: AvailableFonts) => void;
   changeTextColor: (color: AvailableColors) => void;
   changeOpacity: (value: number) => void;
+  onAutoScrollActiveChange: () => void;
+  increaseAutoScrollSpeed: () => void;
+  decreaseAutoScrollSpeed: () => void;
+  onAutoScrollPause: () => void;
 }
 
 const INITIAL_DESKTOP_FONT_SIZE = 18;
 
-const initialValues: Pick<ReaderSettingsContextState, "fontFamily" | "fontSize" | "lineHeight" | "textColor" | "opacity"> = {
+const initialValues: Pick<ReaderSettingsContextState, "fontFamily" | "fontSize" | "lineHeight" | "textColor" | "opacity" | 'autoScroll'> = {
   fontSize: 16,
   lineHeight: 25,
   fontFamily: "font-atkinson",
   textColor: { name: "lightSilver", color: '#e0e0e0' },
   opacity: 100,
+  autoScroll: { active: false, pause: true, speed: 3 },
 }
 
 type InitialValuesType = typeof initialValues;
@@ -54,6 +65,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
   const [lineHeight, setLineHeight] = useState(initialValues["lineHeight"]);
   const [textColor, setTextColor] = useState(initialValues["textColor"]);
   const [opacity, setOpacity] = useState(initialValues["opacity"]);
+  const [autoScroll, setAutoScroll] = useState(initialValues["autoScroll"]);
 
   useEffect(() => {
     const readerSettingsString = localStorage.getItem("reader-settings");
@@ -64,6 +76,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
       setLineHeight(readerSettings.lineHeight ?? initialValues["lineHeight"]);
       setTextColor(readerSettings.textColor ?? initialValues["textColor"]);
       setOpacity(readerSettings.opacity ?? initialValues["opacity"]);
+      setAutoScroll(readerSettings.autoScroll ?? initialValues["autoScroll"]);
     } else {
       const mobile = window.innerWidth < 768;
       setFontSize(mobile ? initialValues["fontSize"] : INITIAL_DESKTOP_FONT_SIZE);
@@ -71,8 +84,8 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("reader-settings", JSON.stringify({ fontSize, fontFamily, lineHeight, textColor, opacity }));
-  }, [fontSize, fontFamily, lineHeight, textColor, opacity])
+    localStorage.setItem("reader-settings", JSON.stringify({ fontSize, fontFamily, lineHeight, textColor, opacity, autoScroll }));
+  }, [fontSize, fontFamily, lineHeight, textColor, opacity, autoScroll]);
 
   const reset = () => {
     setFontSize(isMobile ? initialValues["fontSize"] : INITIAL_DESKTOP_FONT_SIZE);
@@ -80,6 +93,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
     setLineHeight(initialValues["lineHeight"]);
     setTextColor(initialValues["textColor"]);
     setOpacity(initialValues["opacity"]);
+    setAutoScroll(initialValues["autoScroll"]);
   }
 
   const increaseLineHeight = () => {
@@ -110,6 +124,22 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
     setOpacity(value);
   }
 
+  const onAutoScrollActiveChange = () => {
+    setAutoScroll(prev => ({ ...prev, active: !prev.active }));
+  }
+
+  const increaseAutoScrollSpeed = () => {
+    setAutoScroll(prev => ({ ...prev, speed: prev.speed + 1 }));
+  }
+
+  const decreaseAutoScrollSpeed = () => {
+    setAutoScroll(prev => ({ ...prev, speed: prev.speed - 1 }));
+  }
+
+  const onAutoScrollPause = () => {
+    setAutoScroll(prev => ({ ...prev, pause: !prev.pause }));
+  }
+
 
   return (
     <ContextProvider
@@ -119,6 +149,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
         lineHeight,
         textColor,
         opacity,
+        autoScroll,
         decreaseFontSize,
         increaseFontSize,
         decreaseLineHeight,
@@ -127,6 +158,10 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
         changeTextColor,
         changeOpacity,
         reset,
+        decreaseAutoScrollSpeed,
+        increaseAutoScrollSpeed,
+        onAutoScrollActiveChange,
+        onAutoScrollPause,
       }}
     >
       {children}

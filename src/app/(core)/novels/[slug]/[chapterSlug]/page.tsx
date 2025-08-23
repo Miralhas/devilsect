@@ -15,7 +15,7 @@ const ChapterPage = async ({ params }: ChapterPageProps) => {
 
   return (
     <>
-      <Container className="max-w-[1024px] p-0 gap-0 block min-h-[4000vh] space-y-4">
+      <Container className="max-w-[1024px] p-0 gap-0 block min-h-screen space-y-4">
         <Header novelSlug={slug} next={chapter.next} previous={chapter.previous} />
         <ChapterBody chapter={chapter} />
       </Container>

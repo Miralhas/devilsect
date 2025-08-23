@@ -34,7 +34,7 @@ const SettingsAccordion = () => {
             </div>
           </AccordionTrigger>
           <AccordionContent>
-            <p className="text-muted-foreground text-xs mb-1">Recommended for mobile users</p>
+            <p className="text-muted-foreground text-xs mb-1">A lower scroll speed is recommended for mobile users.</p>
             <div className="flex items-center justify-between">
               <div className="grid grid-cols-[min-content_min-content] gap-2">
                 <Switch id="auto-scroll" checked={autoScroll.active} onCheckedChange={onAutoScrollActiveChange} />

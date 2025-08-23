@@ -11,22 +11,33 @@ const useAutoScroll = (divRef: RefObject<HTMLDivElement | null>) => {
   } = useReaderSettingsContext();
 
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const requestIdRef = useRef<number>(undefined);
+
+  if (pause && requestIdRef.current) {
+    cancelAnimationFrame(requestIdRef.current)
+    requestIdRef.current = undefined;
+  }
 
   useEffect(() => {
     if (active && !pause) {
-      const intervalId = setInterval(() => {
-        requestAnimationFrame(() => {
-          window.scrollBy({ top: speed, behavior: "smooth" });
-        });
-      }, 16);
-
-      return () => clearInterval(intervalId);
+      const step = () => {
+        window.scrollBy({ top: speed, behavior: "smooth" });
+        requestIdRef.current = requestAnimationFrame(step);
+      }
+      requestIdRef.current = requestAnimationFrame(step);
     }
+
+    return () => {
+      if (requestIdRef.current) {
+        cancelAnimationFrame(requestIdRef.current);
+        requestIdRef.current = undefined;
+      }
+    };
   }, [active, pause, speed]);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) autoScrollPause();
+      if (entry.isIntersecting) { autoScrollPause() };
     }, { root: null, rootMargin: "0px", threshold: 1 });
   }, [autoScrollPause]);
 

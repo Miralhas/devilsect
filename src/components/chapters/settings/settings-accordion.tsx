@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { MinusIcon, PlusIcon } from "lucide-react"
 
-const AUTO_SCROLL_MIN_SPEED = 0.5;
+const AUTO_SCROLL_MIN_SPEED = 0.25;
 const AUTO_SCROLL_MAX_SPEED = 10;
 
 const SettingsAccordion = () => {

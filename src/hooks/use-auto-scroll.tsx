@@ -21,7 +21,7 @@ const useAutoScroll = (divRef: RefObject<HTMLDivElement | null>) => {
   useEffect(() => {
     if (active && !pause) {
       const step = () => {
-        window.scrollBy({ top: speed, behavior: "auto" });
+        window.scrollBy({ top: speed, behavior: "smooth" });
         requestIdRef.current = requestAnimationFrame(step);
       }
       requestIdRef.current = requestAnimationFrame(step);

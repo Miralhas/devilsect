@@ -45,6 +45,7 @@ type ReaderSettingsContextState = {
   autoScrollUnpause: () => void;
 }
 
+const AUTO_SCROLL_SPEED_OFFSET = 0.25;
 const INITIAL_DESKTOP_FONT_SIZE = 18;
 
 const initialValues: Pick<ReaderSettingsContextState, "fontFamily" | "fontSize" | "lineHeight" | "textColor" | "opacity" | 'autoScroll'> = {
@@ -131,11 +132,11 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
   }
 
   const increaseAutoScrollSpeed = () => {
-    setAutoScroll(prev => ({ ...prev, speed: prev.speed + 0.25 }));
+    setAutoScroll(prev => ({ ...prev, speed: prev.speed + AUTO_SCROLL_SPEED_OFFSET }));
   }
 
   const decreaseAutoScrollSpeed = () => {
-    setAutoScroll(prev => ({ ...prev, speed: prev.speed - 0.25 }));
+    setAutoScroll(prev => ({ ...prev, speed: prev.speed - AUTO_SCROLL_SPEED_OFFSET }));
   }
 
   const onAutoScrollPauseChange = () => {

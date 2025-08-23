@@ -71,11 +71,10 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
             setIsNavHidden(prev => !prev);
             onAutoScrollPauseChange();
           }}
-          ref={chapterContentRef}
         >
         </div>
 
-        <div className="w-full grid grid-cols-[repeat(3,minmax(0px,100px))] gap-4 my-16 items-center justify-center">
+        <div className="w-full grid grid-cols-[repeat(3,minmax(0px,100px))] gap-4 my-16 items-center justify-center" ref={chapterContentRef}>
           <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasPrevious} >
             <Link href={`/novels/${chapter.novelSlug}/${previous?.slug}`} className="pr-1">
               <div className="flex items-center w-full justify-center">

@@ -1,23 +1,46 @@
 'use client'
+
 import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
-import { RefObject, useEffect } from "react";
+import { RefObject, useEffect, useRef } from "react";
 
 const useAutoScroll = (divRef: RefObject<HTMLDivElement | null>) => {
-  const { autoScroll: { active, pause, speed }, autoScrollPause, onAutoScrollPauseChange } = useReaderSettingsContext();
+  const {
+    autoScroll: { active, pause, speed },
+    autoScrollPause,
+    onAutoScrollPauseChange
+  } = useReaderSettingsContext();
+
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    if (active && !pause && divRef.current) {
-      const scrollHeight = divRef.current.scrollHeight;
+    if (active && !pause) {
       const intervalId = setInterval(() => {
-        window.scrollBy({ top: speed, behavior: "smooth" });
-        if (window.scrollY >= scrollHeight) autoScrollPause();
-      }, 10);
+        requestAnimationFrame(() => {
+          window.scrollBy({ top: speed, behavior: "smooth" });
+        });
+      }, 16);
+
       return () => clearInterval(intervalId);
     }
+  }, [active, pause, speed]);
 
-  }, [active, divRef, autoScrollPause, speed, pause]);
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) autoScrollPause();
+    }, { root: null, rootMargin: "0px", threshold: 1 });
+  }, [autoScrollPause]);
+
+  useEffect(() => {
+    if (divRef.current) {
+      observerRef.current?.observe(divRef.current);
+    }
+
+    return () => {
+      observerRef.current?.disconnect();
+    };
+  }, [divRef]);
 
   return { onAutoScrollPauseChange, autoScrollPause };
-}
+};
 
 export default useAutoScroll;

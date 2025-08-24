@@ -2,15 +2,15 @@
 
 import { Button } from "@/components/ui/button";
 import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
-import { cn } from "@/lib/utils";
+import useAutoScroll from "@/hooks/use-auto-scroll";
 import { useAddChapterToUserHistoryMutation } from "@/services/user-library/client-mutation";
 import { Chapter } from "@/types/chapter";
 import { ChevronLeft, ChevronRight, HouseIcon } from "lucide-react";
 import { motion, useScroll, useSpring } from "motion/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import ChapterContent from "./chapter-content";
 import Settings from "./settings";
-import useAutoScroll from "@/hooks/use-auto-scroll";
 
 const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   const { previous, next } = chapter;
@@ -23,7 +23,7 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   })
   const divRef = useRef<HTMLDivElement>(null);
   const chapterContentRef = useRef<HTMLDivElement>(null);
-  const { fontSize, lineHeight, fontFamily, textColor, opacity, autoScroll } = useReaderSettingsContext();
+  const { autoScroll } = useReaderSettingsContext();
   const mutation = useAddChapterToUserHistoryMutation();
   const { onAutoScrollPauseChange, autoScrollPause } = useAutoScroll(chapterContentRef);
 
@@ -36,7 +36,6 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
     // eslint-disable-next-line
   }, [chapter]);
 
-  const opacityDecimal = (opacity / 100);
 
   const hasNext = next !== null;
   const hasPrevious = previous !== null;
@@ -56,23 +55,10 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
         }}
       />
       <div className="w-full px-4 max-w-[840px] mx-auto relative">
-        <h2 className="capitalize text-center text-white/95 text-xl md:text-2xl font-tilt-warp mb-4">{chapter.title}</h2>
-        <div
-          className={cn("chapter-body max-w-none scroll-mt-[100px] text-[16px] md:text-[18px] space-y-[1rem] text-shadow-none px-1", fontFamily)}
-          style={{
-            wordWrap: "break-word",
-            fontSize: fontSize,
-            lineHeight: `${lineHeight}px`,
-            color: textColor.color,
-            opacity: opacityDecimal,
-          }}
-          dangerouslySetInnerHTML={{ __html: chapter.body }}
-          onClick={() => {
-            setIsNavHidden(prev => !prev);
-            onAutoScrollPauseChange();
-          }}
-        >
-        </div>
+        <ChapterContent content={chapter.body} title={chapter.title} onClickCallback={() => {
+          setIsNavHidden(prev => !prev);
+          onAutoScrollPauseChange();
+        }} />
 
         <div className="w-full grid grid-cols-[repeat(3,minmax(0px,100px))] gap-4 my-16 items-center justify-center" ref={chapterContentRef}>
           <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasPrevious} >

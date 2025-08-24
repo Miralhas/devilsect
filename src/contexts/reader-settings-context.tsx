@@ -1,8 +1,9 @@
 'use client'
 
 import { useIsMobile } from "@/hooks/use-mobile";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { Dispatch, PropsWithChildren, SetStateAction, useEffect, useState } from "react";
 import { createContext } from "./create-context";
+import { languages } from "google-translate-api-x";
 
 export const AVAILABLE_FONTS = ["font-atkinson", "font-inter", "font-roboto", "font-manrope"] as const;
 export const AVAILABLE_COLORS = [
@@ -29,6 +30,7 @@ type ReaderSettingsContextState = {
   textColor: AvailableColors;
   opacity: number;
   autoScroll: AutoScroll,
+  language: languages,
   reset: () => void;
   increaseFontSize: () => void;
   increaseLineHeight: () => void;
@@ -43,18 +45,20 @@ type ReaderSettingsContextState = {
   onAutoScrollPauseChange: () => void;
   autoScrollPause: () => void;
   autoScrollUnpause: () => void;
+  setLanguage: Dispatch<SetStateAction<languages>>
 }
 
 const AUTO_SCROLL_SPEED_OFFSET = 0.25;
 const INITIAL_DESKTOP_FONT_SIZE = 18;
 
-const initialValues: Pick<ReaderSettingsContextState, "fontFamily" | "fontSize" | "lineHeight" | "textColor" | "opacity" | 'autoScroll'> = {
+const initialValues: Pick<ReaderSettingsContextState, "fontFamily" | "fontSize" | "lineHeight" | "textColor" | "opacity" | 'autoScroll' | 'language'> = {
   fontSize: 16,
   lineHeight: 25,
   fontFamily: "font-atkinson",
   textColor: { name: "lightSilver", color: '#e0e0e0' },
   opacity: 100,
   autoScroll: { active: false, pause: true, speed: 1 },
+  language: languages.en,
 }
 
 type InitialValuesType = typeof initialValues;
@@ -69,6 +73,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
   const [textColor, setTextColor] = useState(initialValues["textColor"]);
   const [opacity, setOpacity] = useState(initialValues["opacity"]);
   const [autoScroll, setAutoScroll] = useState(initialValues["autoScroll"]);
+  const [language, setLanguage] = useState(initialValues["language"]);
 
   useEffect(() => {
     const readerSettingsString = localStorage.getItem("reader-settings");
@@ -80,6 +85,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
       setTextColor(readerSettings.textColor ?? initialValues["textColor"]);
       setOpacity(readerSettings.opacity ?? initialValues["opacity"]);
       setAutoScroll(readerSettings.autoScroll ?? initialValues["autoScroll"]);
+      setLanguage(readerSettings.language ?? initialValues["language"])
     } else {
       const mobile = window.innerWidth < 768;
       setFontSize(mobile ? initialValues["fontSize"] : INITIAL_DESKTOP_FONT_SIZE);
@@ -87,8 +93,8 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("reader-settings", JSON.stringify({ fontSize, fontFamily, lineHeight, textColor, opacity, autoScroll }));
-  }, [fontSize, fontFamily, lineHeight, textColor, opacity, autoScroll]);
+    localStorage.setItem("reader-settings", JSON.stringify({ fontSize, fontFamily, lineHeight, textColor, opacity, autoScroll, language }));
+  }, [fontSize, fontFamily, lineHeight, textColor, opacity, autoScroll, language]);
 
   const reset = () => {
     setFontSize(isMobile ? initialValues["fontSize"] : INITIAL_DESKTOP_FONT_SIZE);
@@ -97,6 +103,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
     setTextColor(initialValues["textColor"]);
     setOpacity(initialValues["opacity"]);
     setAutoScroll(initialValues["autoScroll"]);
+    setLanguage(initialValues["language"])
   }
 
   const increaseLineHeight = () => {
@@ -147,10 +154,9 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
     setAutoScroll(prev => ({ ...prev, pause: true }));
   }
 
-   const autoScrollUnpause = () => {
+  const autoScrollUnpause = () => {
     setAutoScroll(prev => ({ ...prev, pause: false }));
   }
-
 
   return (
     <ContextProvider
@@ -161,6 +167,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
         textColor,
         opacity,
         autoScroll,
+        language,
         decreaseFontSize,
         increaseFontSize,
         decreaseLineHeight,
@@ -174,7 +181,8 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
         onAutoScrollActiveChange,
         autoScrollPause,
         autoScrollUnpause,
-        onAutoScrollPauseChange
+        onAutoScrollPauseChange,
+        setLanguage,
       }}
     >
       {children}

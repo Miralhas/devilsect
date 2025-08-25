@@ -11,7 +11,6 @@ const ChapterContent = ({ content, onClickCallback, title }: Props) => {
   const { fontSize, lineHeight, fontFamily, textColor, opacity } = useReaderSettingsContext();
   const opacityDecimal = (opacity / 100);
 
-
   return (
     <>
       <h2 className="capitalize text-center text-white/95 text-xl md:text-2xl font-tilt-warp mb-4 translate">{title}</h2>
@@ -26,6 +25,7 @@ const ChapterContent = ({ content, onClickCallback, title }: Props) => {
         }}
         dangerouslySetInnerHTML={{ __html: content }}
         onClick={onClickCallback}
+        id="chapter-content"
       >
       </div>
     </>

@@ -176,3 +176,11 @@
   letter-spacing: 0.01em;
   word-spacing: 0.05em;
 }
+
+body {
+  top: 0px !important;
+}
+
+.skiptranslate > iframe {
+  display: none !important;
+}

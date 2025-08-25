@@ -22,7 +22,7 @@ const ShowChaptersSheet = ({ chapter }: { chapter: Chapter }) => {
         <SheetTrigger asChild>
           <div className="flex gap-3 items-center cursor-pointer">
             <Menu className="text-muted-foreground size-7" />
-            <p className="text-sm md:text-[15px] font-semibold tracking-tight leading-7 text-white line-clamp-1 w-full max-w-[100px] xs:max-w-[190px] md:max-w-[300px]">
+            <p className="text-sm md:text-[15px] font-semibold tracking-tight leading-7 text-white line-clamp-1 w-full max-w-[50px] xs:max-w-[140px] md:max-w-[300px]">
               {chapter.title}
             </p>
           </div>

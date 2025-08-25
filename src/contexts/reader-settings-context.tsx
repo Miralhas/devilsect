@@ -147,10 +147,9 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
     setAutoScroll(prev => ({ ...prev, pause: true }));
   }
 
-   const autoScrollUnpause = () => {
+  const autoScrollUnpause = () => {
     setAutoScroll(prev => ({ ...prev, pause: false }));
   }
-
 
   return (
     <ContextProvider
@@ -174,7 +173,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
         onAutoScrollActiveChange,
         autoScrollPause,
         autoScrollUnpause,
-        onAutoScrollPauseChange
+        onAutoScrollPauseChange,
       }}
     >
       {children}

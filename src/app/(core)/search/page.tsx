@@ -1,8 +1,12 @@
-const SearchPage = () => {
+const SearchPage = async () => {
+
   return (
-    <>
-      <h1>search</h1>
-    </>
+    <section className='min-h-screen w-full max-w-[1280] mx-auto'>
+      <div className="bg-secondary w-full max-w-[840px] mx-auto space-y-4"
+      >
+
+      </div>
+    </section>
   )
 }
 

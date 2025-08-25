@@ -10,7 +10,7 @@ import { Slider } from "@/components/ui/slider"
 import { AVAILABLE_COLORS, AVAILABLE_FONTS, useReaderSettingsContext } from "@/contexts/reader-settings-context"
 
 import { Check, MinusIcon, PlusIcon, TypeIcon } from "lucide-react"
-import SettingsAccordion from "./settings-accordion"
+import AutoScroll from "./auto-scroll"
 
 const MINIMUM_FONT_LIMIT = 8;
 const MAXIMUM_FONT_LIMIT = 40;
@@ -36,11 +36,12 @@ const FontSettings = () => {
       <Popover>
         <PopoverTrigger asChild>
           <Button variant="pure" size="none">
-            <TypeIcon className="size-6" />
+            <TypeIcon className="size-4.5 xs:size-5 md:size-6" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[280px] bg-background overflow-y-auto max-h-[550px] pt-0" sideOffset={16.5}>
-          <SettingsAccordion />
+
+        <PopoverContent className="w-[280px] bg-background pt-0" sideOffset={16.5}>
+          <AutoScroll />
           <div className="grid gap-5">
             <div className="w-full space-y-2">
               <p className="text-base text-[15px] leading-7 tracking-wide">Font</p>
@@ -157,5 +158,7 @@ const FontSettings = () => {
     </>
   )
 }
+
+
 
 export default FontSettings;

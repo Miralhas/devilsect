@@ -4,6 +4,7 @@ import { Chapter } from "@/types/chapter";
 import { AnimatePresence, motion } from "motion/react";
 import dynamic from 'next/dynamic';
 import { Dispatch, RefObject, SetStateAction } from "react";
+import LanguageSettings from "./language-settings-popover";
 
 const FontSettings = dynamic(() => import("./font-settings"), {ssr: false});
 const PrevAndNextButtons = dynamic(() => import("./prev-and-next-buttons"), {ssr: false});
@@ -48,6 +49,7 @@ const Settings = ({ chapter, isNavHidden}: SettingsProps) => {
           <div className="max-w-[1280px] mx-auto flex items-center px-4 h-14">
             <ShowChaptersSheet chapter={chapter} />
             <div className="ms-auto flex items-center gap-4 text-zinc-300">
+              <LanguageSettings />
               <FontSettings />
               <PrevAndNextButtons {...chapter} />
             </div>

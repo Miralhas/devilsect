@@ -7,8 +7,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { nuqsSearchParams } from "@/lib/schemas/search-params-schema";
-import { buildQueryString, cn } from "@/lib/utils";
+import { nuqsSearchParams, searchSerializer } from "@/lib/schemas/search-params-schema";
+import { cn } from "@/lib/utils";
 import { PaginatedQuery } from "@/types/pagination";
 import { useQueryStates } from "nuqs";
 import { MouseEvent, useMemo } from "react";
@@ -21,7 +21,6 @@ function GenericPagination<T>({ query }: { query: PaginatedQuery<T> }) {
 
   const last = query.totalPages;
   const current = query.currentPage + 1;
-  console.log(query);
 
   const range = useMemo(() => {
     const r = []
@@ -45,7 +44,7 @@ function GenericPagination<T>({ query }: { query: PaginatedQuery<T> }) {
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            href={`/search${buildQueryString({ q: value.q, page: Number(query.previous) + 1 })}`}
+            href={searchSerializer({ q: value.q, page: Number(query.previous) + 1 })}
             aria-disabled={query.previous === null}
             tabIndex={query.previous === null ? -1 : undefined}
             className={
@@ -59,7 +58,7 @@ function GenericPagination<T>({ query }: { query: PaginatedQuery<T> }) {
             <PaginationItem className="hidden md:block">
               <PaginationLink
                 className=""
-                href={`/search${buildQueryString({ q: value.q, page: FIRST_PAGE })}`}
+                href={searchSerializer({ q: value.q, page: FIRST_PAGE })}
                 onClick={(e) => handleClick(e, FIRST_PAGE)}>
                 {FIRST_PAGE}
               </PaginationLink>
@@ -75,7 +74,7 @@ function GenericPagination<T>({ query }: { query: PaginatedQuery<T> }) {
           <PaginationItem key={index}>
             <PaginationLink
               className={cn(current === page && "border border-primary bg-primary/30 text-accent")}
-              href={`/search${buildQueryString({ q: value.q, page: page })}`}
+              href={searchSerializer({ q: value.q, page: page })}
               onClick={(e) => handleClick(e, page)}>
               {page}
             </PaginationLink>
@@ -90,8 +89,7 @@ function GenericPagination<T>({ query }: { query: PaginatedQuery<T> }) {
             <PaginationItem className="hidden md:block">
               <PaginationLink
                 className=""
-                href={`/search${buildQueryString({ q: value.q, page: last })}`}
-                // href={`/search?q=${value.q}&page=${last}`}
+                href={searchSerializer({ q: value.q, page: last })}
                 onClick={(e) => handleClick(e, last)}>
                 {last}
               </PaginationLink>
@@ -101,7 +99,7 @@ function GenericPagination<T>({ query }: { query: PaginatedQuery<T> }) {
 
         <PaginationItem >
           <PaginationNext
-            href={`/search${buildQueryString({ q: value.q, page: Number(query.next) + 1 })}`}
+            href={searchSerializer({ q: value.q, page: Number(query.next) + 1 })}
             text={false}
             aria-disabled={query.next === null}
             tabIndex={query.next === null ? -1 : undefined}

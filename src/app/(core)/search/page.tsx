@@ -8,7 +8,7 @@ const SearchPage = async () => {
 
   return (
     <>
-      <section className='border border-zinc-50/15 bg-secondary/10 p-7 rounded-md self-start min-h-[50vh] space-y-8'>
+      <section className='border grid grid-rows-[min-content_1fr] border-zinc-50/15 bg-secondary/10 p-7 rounded-md min-h-[50vh] space-y-8'>
         <SearchInput />
         <Suspense fallback={<SkeletonLoader />}>
           <SearchContent />

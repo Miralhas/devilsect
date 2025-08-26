@@ -13,7 +13,7 @@ import { notFound } from "next/navigation";
 export const getNovelSummariesPaginated = async (params: NovelSummariesParams): Promise<PaginatedQuery<NovelSummary[]>> => {
   const parsed = NovelSummariesParamsSchema.parse(params);
   const queryString = buildQueryString(parsed);
-  const url = `${env.APP_URL}/novels${queryString}`;
+  const url = `${env.NEXT_PUBLIC_BASE_URL}/novels${queryString}`;
 
   const res = await fetch(url, {
     method: "GET",

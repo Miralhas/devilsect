@@ -3,7 +3,7 @@ import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
 import { getNovelSummariesPaginated } from "@/services/novels/server-queries";
 import Link from "next/link";
 
-const RelatedNovels = async ({ genre }: { genre: string }) => {
+const RelatedNovels = async ({ genre }: { genre?: string }) => {
   const related = await getNovelSummariesPaginated({ sort: SortKey.NEWEST_RELEASES, genres: genre, size: 6 });
   return (
     <section className="w-full px-5 md:px-10">

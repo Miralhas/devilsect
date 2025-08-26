@@ -14,7 +14,7 @@ const SearchContent = () => {
   const searchParams = useSearchParams();
   const q = searchParams.get("q");
   const page = searchParams.get("page");
-  const novelsQuery = useGetNovelSummaries({ params: { q: q ?? undefined, page: (Number(page) - 1), size: 2, sort: SortKey.BAYESIAN_RANKING } });
+  const novelsQuery = useGetNovelSummaries({ params: { q: q ?? undefined, page: (Number(page) - 1), size: 18, sort: SortKey.BAYESIAN_RANKING } });
 
   if (novelsQuery.isLoading) {
     return <SkeletonLoader />

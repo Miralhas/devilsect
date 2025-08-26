@@ -15,9 +15,7 @@ const SearchPage = () => {
         </Suspense>
       </section>
 
-      <section className="border border-zinc-50/10 bg-secondary/10 p-7 rounded-md self-start">
-        <PopularNovels />
-      </section>
+      <PopularNovels />
     </>
   )
 }

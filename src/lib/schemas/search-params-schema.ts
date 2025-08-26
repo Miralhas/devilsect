@@ -10,8 +10,8 @@ export const SearchParamsSchema = z.object({
 export type SearchParams = z.infer<typeof SearchParamsSchema>;
 
 export const nuqsSearchParams = {
-  q: parseAsString.withDefault("").withOptions({ shallow: false }),
-  page: parseAsInteger.withDefault(0).withOptions({ shallow: false })
+  q: parseAsString.withDefault("").withOptions({ shallow: false, clearOnDefault: true }),
+  page: parseAsInteger.withDefault(1).withOptions({ shallow: false, clearOnDefault: true })
 }
 
 export const loadSearchParams = createLoader(nuqsSearchParams);

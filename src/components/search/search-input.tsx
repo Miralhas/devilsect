@@ -13,8 +13,10 @@ const SearchInput = () => {
   const [text, setText] = useState(() => value.q)
 
   const handleSearch = useDebouncedCallback((val: string) => {
-    console.log(val)
     setValue({ q: val });
+    if (!val) {
+      setValue({ page: 1 })
+    }
   }, 300);
 
   const handleType = (event: ChangeEvent<HTMLInputElement>) => {
@@ -23,9 +25,10 @@ const SearchInput = () => {
   }
 
   const handleClear = () => {
-    setValue({ q: "" })
+    setValue({ q: "", page: 1 })
     setText("");
   }
+
 
   return (
     <div className="relative">
@@ -35,7 +38,7 @@ const SearchInput = () => {
         value={text}
         onChange={handleType}
         placeholder="Search for books by title"
-        className="w-full p-8 pl-11 !text-lg placeholder:text-muted-foreground focus:text-lg placeholder:text-lg border-zinc-50/5"
+        className="w-full p-8 pl-11 !text-lg placeholder:text-muted-foreground focus:text-lg placeholder:text-lg border-zinc-50/10"
         autoFocus
       />
       {value.q ? (

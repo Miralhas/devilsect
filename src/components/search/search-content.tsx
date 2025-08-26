@@ -6,6 +6,7 @@ import { SearchIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import ClientNovelCard from "../novel-card/client-novel-card";
+import GenericPagination from "../generic-pagination";
 import SkeletonLoader from "./skeleton-loader";
 
 const SearchContent = () => {
@@ -13,7 +14,7 @@ const SearchContent = () => {
   const searchParams = useSearchParams();
   const q = searchParams.get("q");
   const page = searchParams.get("page");
-  const novelsQuery = useGetNovelSummaries({ params: { q: q ?? undefined, page: Number(page), size: 12, sort: SortKey.BAYESIAN_RANKING } });
+  const novelsQuery = useGetNovelSummaries({ params: { q: q ?? undefined, page: (Number(page) - 1), size: 2, sort: SortKey.BAYESIAN_RANKING } });
 
   if (novelsQuery.isLoading) {
     return <SkeletonLoader />
@@ -23,18 +24,23 @@ const SearchContent = () => {
     router.push("/error");
   }
 
-  if (!novelsQuery.data?.totalItems) {
+  if (!novelsQuery.data?.results.length) {
     return <Empty q={q} />
   }
 
   return (
-    <section className="grid grid-cols-3 md:grid-cols-6 gap-4">
-      {novelsQuery.data?.results.map(novel => (
-        <Link href={`/novels/${novel.slug}`} key={novel.id} className="relative group">
-          <ClientNovelCard novel={novel} size="lg" />
-        </Link>
-      ))}
-    </section>
+    <>
+      <section className="grid grid-cols-3 md:grid-cols-6 gap-4">
+        {novelsQuery.data?.results.map(novel => (
+          <Link href={`/novels/${novel.slug}`} key={novel.id} className="relative group">
+            <ClientNovelCard novel={novel} size="lg" />
+          </Link>
+        ))}
+      </section>
+      {novelsQuery.data.totalPages > 1 ? (
+        <GenericPagination query={novelsQuery.data} />
+      ) : null}
+    </>
   )
 }
 

@@ -10,11 +10,13 @@ const PopularNovels = () => {
   const novelsQuery = useGetNovelSummaries({ params: { size: 30, sort: SortKey.BAYESIAN_RANKING }, enabled: true });
 
   if (novelsQuery.isLoading) {
-    return <SkeletonLoader size={30} className="grid-cols-4 md:grid-cols-10" />
+    return <Loading />
   }
 
+  if (novelsQuery.isError) return null;
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 border border-zinc-50/10 bg-secondary/10 p-7 rounded-md self-start">
       <div className="py-2 border-b border-zinc-50/15">
         <h2 className="text-zinc-300 text-xl md:text-2xl tracking-tight font-medium">Popular Novels</h2>
       </div>
@@ -28,6 +30,17 @@ const PopularNovels = () => {
           </Link>
         ))}
       </div>
+    </div>
+  )
+}
+
+export const Loading = () => {
+  return (
+    <div className="space-y-4 border border-zinc-50/10 bg-secondary/10 p-7 rounded-md self-start">
+      <div className="py-2 border-b border-zinc-50/15">
+        <h2 className="text-zinc-300 text-xl md:text-2xl tracking-tight font-medium">Popular Novels</h2>
+      </div>
+      <SkeletonLoader size={30} className="grid-cols-4 md:grid-cols-10" />
     </div>
   )
 }

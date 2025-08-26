@@ -1,23 +1,22 @@
+import PopularNovels from "@/components/search/popular-novels";
 import SearchContent from "@/components/search/search-content";
 import SearchInput from "@/components/search/search-input";
 import SkeletonLoader from "@/components/search/skeleton-loader";
 import { Suspense } from "react";
 
 
-const SearchPage = async () => {
-
+const SearchPage = () => {
   return (
     <>
-      <section className='border grid grid-rows-[min-content_1fr] border-zinc-50/15 bg-secondary/10 p-7 rounded-md min-h-[50vh] space-y-8'>
+      <section className='border border-zinc-50/10 grid grid-rows-[min-content_1fr] bg-secondary/10 p-7 rounded-md min-h-[45vh] space-y-8'>
         <SearchInput />
         <Suspense fallback={<SkeletonLoader />}>
           <SearchContent />
         </Suspense>
       </section>
-      <section className="border border-zinc-50/15 bg-secondary/10 p-7 rounded-md self-start">
-        {/* <Suspense fallback={<SkeletonLoader />}>
-          <RelatedNovels />
-        </Suspense> */}
+
+      <section className="border border-zinc-50/10 bg-secondary/10 p-7 rounded-md self-start">
+        <PopularNovels />
       </section>
     </>
   )

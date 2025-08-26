@@ -22,8 +22,8 @@ const getNovelSummaries = async (params: NovelSummariesParams) => {
 }
 
 
-export const useGetNovelSummaries = (params: NovelSummariesParams) => useQuery({
+export const useGetNovelSummaries = ({ params, enabled = false }: { params: NovelSummariesParams; enabled?: boolean }) => useQuery({
   queryFn: async () => getNovelSummaries(params),
   queryKey: ["novel", "list", params],
-  enabled: false,
+  enabled: () => !!params.q || enabled,
 })

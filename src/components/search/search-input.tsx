@@ -1,6 +1,6 @@
 'use client'
 
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 import { nuqsSearchParams } from "@/lib/schemas/search-params-schema";
 import { SearchIcon, XIcon } from "lucide-react";
 import { useQueryStates } from "nuqs";
@@ -35,7 +35,7 @@ const SearchInput = () => {
         value={text}
         onChange={handleType}
         placeholder="Search for books by title"
-        className="w-full p-8 pl-11 !text-lg placeholder:text-muted-foreground focus:text-lg placeholder:text-lg"
+        className="w-full p-8 pl-11 !text-lg placeholder:text-muted-foreground focus:text-lg placeholder:text-lg border-zinc-50/5"
         autoFocus
       />
       {value.q ? (

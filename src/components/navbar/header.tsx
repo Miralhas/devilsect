@@ -24,7 +24,7 @@ export type NavLink = {
 export const LEFT_SIDE_NAV_LINKS: NavLink[] = [
   { title: "Novels", href: "/novels", icon: Book },
   { title: "Ranking", href: "/ranking", icon: Gem },
-  { title: "Updates", href: "/latest-updates", icon: RefreshCcw },
+  { title: "Updates", href: "/latest", icon: RefreshCcw },
 ]
 
 const Header = () => {

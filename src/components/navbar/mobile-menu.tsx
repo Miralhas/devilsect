@@ -14,7 +14,7 @@ type MobileMenuProps = {
 const MobileMenu = ({ containerRef, toggleMenu }: MobileMenuProps) => {
   return (
     <motion.div
-      className="bg-secondary w-full h-[400px] absolute z-10 origin-top-right lg:hidden shadow-2xl"
+      className="bg-secondary w-full  absolute z-10 origin-top-right lg:hidden shadow-2xl"
       initial={{ opacity: 0, scaleY: 0, scaleX: 1 }}
       animate={{ opacity: 1, scaleY: 1, scaleX: 1 }}
       exit={{ opacity: 0, scaleY: 0, scaleX: 1 }}
@@ -37,7 +37,7 @@ const MobileMenu = ({ containerRef, toggleMenu }: MobileMenuProps) => {
         <Separator className="my-2" />
 
         <li className="flex w-full items-center">
-          <NavItem href="/account/library" title="Library" icon={BookOpenText} />
+          <NavItem href="/profile/library" title="Library" icon={BookOpenText} />
         </li>
       </ul>
     </motion.div>

@@ -114,3 +114,5 @@ function GenericPagination<T>({ query }: { query: PaginatedQuery<T> }) {
 }
 
 export default GenericPagination;
+
+// gist that helped me - https://gist.github.com/kottenator/9d936eb3e4e3c3e02598

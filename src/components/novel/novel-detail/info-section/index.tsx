@@ -1,7 +1,7 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
-import NovelBadge from "@/components/novel/info-section/novel-badge";
-import StartReadingButton from "@/components/novel/info-section/start-reading-button";
-import StartReadingButtonLoading from "@/components/novel/info-section/start-reading-button-loading";
+import NovelBadge from "@/components/novel/novel-detail/info-section/novel-badge";
+import StartReadingButton from "@/components/novel/novel-detail/info-section/start-reading-button";
+import StartReadingButtonLoading from "@/components/novel/novel-detail/info-section/start-reading-button-loading";
 import { Badge } from "@/components/ui/badge";
 import { env } from "@/env";
 import { getBlurData } from "@/lib/get-blur-data";

@@ -1,9 +1,9 @@
+import { getCurrentUser } from "@/services/authentication/server-queries";
 import { getUserLibrary } from "@/services/novels/server-queries";
 import { Novel } from "@/types/novel";
-import Link from "next/link";
-import { Button } from "../../ui/button";
-import { getCurrentUser } from "@/services/authentication/server-queries";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import { Button } from "../../../ui/button";
 
 type StartReadingButtonProps = {
   novel: Novel;

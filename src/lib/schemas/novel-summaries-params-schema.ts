@@ -1,4 +1,4 @@
-import { inferParserType, parseAsIndex, parseAsInteger, parseAsString, parseAsStringLiteral } from 'nuqs/server';
+import { inferParserType, parseAsArrayOf, parseAsIndex, parseAsInteger, parseAsString, parseAsStringLiteral } from 'nuqs/server';
 import { z } from "zod";
 
 export enum SortKey {
@@ -39,7 +39,7 @@ export const nuqsNovelSummariesParams = {
   q: parseAsString.withDefault("").withOptions({ clearOnDefault: true, history: "push" }),
   page: parseAsIndex.withDefault(0).withOptions({ clearOnDefault: true, history: "push", scroll: true }),
   size: parseAsInteger.withDefault(18).withOptions({ clearOnDefault: true, history: "push" }),
-  genres: parseAsString.withDefault("").withOptions({ clearOnDefault: true, history: "push" }),
+  genres: parseAsArrayOf(parseAsString).withDefault([]).withOptions({ clearOnDefault: false, history: "push" }),
   status: parseAsStringLiteral(allowedValues.status).withDefault("").withOptions({ clearOnDefault: true, history: "push", }),
   sort: parseAsStringLiteral(sortKeyParams).withDefault('popularity').withOptions({ clearOnDefault: true, history: "push", }),
 }

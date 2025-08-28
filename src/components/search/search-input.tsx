@@ -10,12 +10,12 @@ import { Button } from "../ui/button";
 
 const SearchInput = () => {
   const [value, setValue] = useQueryStates(nuqsSearchParams);
-  const [text, setText] = useState(() => value.q)
+  const [text, setText] = useState(value.q);
 
   const handleSearch = useDebouncedCallback((val: string) => {
     setValue({ q: val });
     if (!val) {
-      setValue({ page: 1 })
+      setValue({ page: null, q: null });
     }
   }, 300);
 
@@ -25,8 +25,8 @@ const SearchInput = () => {
   }
 
   const handleClear = () => {
-    setValue({ q: "", page: 1 })
-    setText("");
+    setValue({ q: null, page: null })
+    setText("")
   }
 
 

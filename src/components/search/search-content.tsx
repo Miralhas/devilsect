@@ -1,20 +1,21 @@
 'use client'
 
-import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
+import { nuqsNovelSummariesParams, SortKey } from "@/lib/schemas/novel-summaries-params-schema";
 import { useGetNovelSummaries } from "@/services/novels/client-queries";
 import { SearchIcon } from "lucide-react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import ClientNovelCard from "../novel-card/client-novel-card";
+import { useRouter } from "next/navigation";
+import { useQueryStates } from "nuqs";
 import GenericPagination from "../generic-pagination";
+import ClientNovelCard from "../novel-card/client-novel-card";
 import SkeletonLoader from "./skeleton-loader";
+import { useRef } from "react";
 
 const SearchContent = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const q = searchParams.get("q");
-  const page = searchParams.get("page");
-  const novelsQuery = useGetNovelSummaries({ params: { q: q ?? undefined, page: (Number(page) - 1), size: 2, sort: SortKey.BAYESIAN_RANKING } });
+  const [params, setParams] = useQueryStates(nuqsNovelSummariesParams);
+  const rf = useRef<HTMLAnchorElement>(null)
+  const novelsQuery = useGetNovelSummaries({ params: { q: params.q, page: params.page, size: 18, sort: SortKey.BAYESIAN_RANKING } });
 
   if (novelsQuery.isLoading) {
     return <SkeletonLoader />
@@ -25,20 +26,24 @@ const SearchContent = () => {
   }
 
   if (!novelsQuery.data?.results.length) {
-    return <Empty q={q} />
+    return <Empty q={params.q} />
+  }
+
+  const handlePage = (page: number) => {
+    setParams({ ...params, page });
   }
 
   return (
     <>
       <section className="grid grid-cols-3 md:grid-cols-6 gap-4">
         {novelsQuery.data?.results.map(novel => (
-          <Link href={`/novels/${novel.slug}`} key={novel.id} className="relative group">
+          <Link href={`/novels/${novel.slug}`} key={novel.id} className="relative group" ref={rf}>
             <ClientNovelCard novel={novel} size="lg" />
           </Link>
         ))}
       </section>
       {novelsQuery.data.totalPages > 1 ? (
-        <GenericPagination query={novelsQuery.data} />
+        <GenericPagination handlePage={handlePage} query={novelsQuery.data} />
       ) : null}
     </>
   )

@@ -19,8 +19,9 @@ const StatusButton = (props: PropsWithChildren<Statuses>) => {
     <Button
       variant={isCurrent ? "extra-cool" : "extra-cool-secondary"}
       value="Newest"
+      size="extra-cool"
       onClick={() => onSortClick(props.value)}
-      className="capitalize"
+      className="capitalize justify-start"
     >
       <props.icon className={cn("size-5 mr-2", isCurrent && "text-red-700")} strokeWidth={2} />
       {props.children}

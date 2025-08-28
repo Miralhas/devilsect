@@ -22,9 +22,9 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         cool: "bg-primary/70 border border-accent/90 rounded-sm hover:bg-primary/60 focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5",
 
-        "extra-cool": "rounded-sm focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5 text-base md:h-10 md:px-6 md:has-[>svg]:px-4 rounded-sm text-red-600 bg-primary/20 transition-colors duration-300 ease-in-out border border-accent/80 justify-start items-center hover:bg-primary/10 font-normal ",
+        "extra-cool": "rounded-sm focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5 text-base rounded-sm text-red-600 bg-primary/20 transition-colors duration-300 ease-in-out border border-accent/80 justify-center items-center hover:bg-primary/10 font-normal ",
 
-        "extra-cool-secondary": "rounded-sm focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5 text-base md:h-10 md:px-6 md:has-[>svg]:px-4 rounded-sm text-zinc-300 bg-secondary/30 transition-colors duration-300 ease-in-out border border-zinc-50/10 justify-start items-center hover:bg-secondary/10 font-normal ",
+        "extra-cool-secondary": "rounded-sm focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5 text-base rounded-sm text-zinc-300 bg-secondary/30 transition-colors duration-300 ease-in-out border border-zinc-50/10 justify-center items-center hover:bg-secondary/10 font-normal ",
 
         "cool-secondary": "bg-secondary border border-neutral-700/80 rounded-sm hover:bg-background focus-visible:border-neutral-400 focus-visible:ring-neutral-400/5",
         pure: "transition-colors duration-200 ease-in-out",
@@ -36,6 +36,7 @@ const buttonVariants = cva(
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
+        "extra-cool": "h-10 px-6 has-[>svg]:px-4",
         none: ""
       },
     },

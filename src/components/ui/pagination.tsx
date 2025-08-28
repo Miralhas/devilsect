@@ -49,7 +49,7 @@ function PaginationLink({
   ...props
 }: PaginationLinkProps) {
   return (
-    <Button variant={isActive ? "outline" : "ghost"} size={size} className={cn("border border-zinc-50/15 hover:border-primary hover:bg-primary/30 hover:text-accent", className)} {...props}>
+    <Button variant={isActive ? "extra-cool" : "extra-cool-secondary"} size={size} className={cn(className)} {...props}>
       
     </Button>
   )

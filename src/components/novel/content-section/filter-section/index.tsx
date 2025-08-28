@@ -7,6 +7,7 @@ import { useState } from "react";
 import SortBy from "./sort-by";
 import Status from "./status";
 import Genres from "./genres";
+import ChaptersCount from "./chapters-count";
 
 const FilterSection = () => {
   const [isActive, setIsActive] = useState(false);
@@ -44,6 +45,7 @@ const FilterSection = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 h-full">
               <SortBy />
               <Status />
+              <ChaptersCount />
               <Genres />
             </div>
           </motion.div>

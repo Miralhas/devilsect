@@ -14,9 +14,19 @@ const NovelList = () => {
   const router = useRouter();
   const [params, setParams] = useQueryStates(nuqsNovelSummariesParams);
 
+  const genres = params.genres.join(",");
+
   const query = useGetNovelSummaries({
     enabled: true,
-    params: { q: params.q, page: params.page, size: 18, sort: mapSortKey(params.sort), status: params.status }
+    params: {
+      genres,
+      size: 18, 
+      q: params.q, 
+      page: params.page,
+      status: params.status, 
+      sort: mapSortKey(params.sort),
+      chaptersRange: params.chaptersRange
+    }
   });
 
   if (query.isLoading) {

@@ -74,7 +74,8 @@ function GenericPagination<T>({ query, handlePage, className }: Props<T>) {
           <PaginationItem key={index}>
             <PaginationLink
               onClick={(e) => handleClick(e, page)}
-              className={cn(current === page && "border border-primary bg-primary/30 text-accent")}
+              className={cn(current === page && "")}
+              isActive={current === page}
             >
               {page + 1}
             </PaginationLink>

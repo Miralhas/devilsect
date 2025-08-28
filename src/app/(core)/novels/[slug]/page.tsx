@@ -1,7 +1,7 @@
-import AboutSection from "@/components/novel/about-section";
-import InfoSection from "@/components/novel/info-section";
-import RelatedNovels from "@/components/novel/related-novels";
-import SkeletonLoader from "@/components/novel/related-novels/skeleton-loader";
+import AboutSection from "@/components/novel/novel-detail/about-section";
+import InfoSection from "@/components/novel/novel-detail/info-section";
+import RelatedNovels from "@/components/novel/novel-detail/related-novels";
+import SkeletonLoader from "@/components/novel/novel-detail/related-novels/skeleton-loader";
 import { putView } from "@/services/novels/api";
 import { getNovelBySlug } from "@/services/novels/server-queries";
 import { Suspense } from "react";

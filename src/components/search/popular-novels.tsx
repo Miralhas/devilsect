@@ -16,7 +16,7 @@ const PopularNovels = () => {
   if (novelsQuery.isError) return null;
 
   return (
-    <div className="space-y-4 border border-zinc-50/10 bg-secondary/10 p-7 rounded-md self-start">
+    <div className="space-y-4 rounded-md self-start">
       <div className="py-2 border-b border-zinc-50/15">
         <h2 className="text-zinc-300 text-xl md:text-2xl tracking-tight font-medium">Popular Novels</h2>
       </div>
@@ -36,7 +36,7 @@ const PopularNovels = () => {
 
 export const Loading = () => {
   return (
-    <div className="space-y-4 border border-zinc-50/10 bg-secondary/10 p-7 rounded-md self-start">
+    <div className="space-y-4 rounded-md self-start">
       <div className="py-2 border-b border-zinc-50/15">
         <h2 className="text-zinc-300 text-xl md:text-2xl tracking-tight font-medium">Popular Novels</h2>
       </div>

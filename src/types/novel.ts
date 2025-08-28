@@ -51,3 +51,10 @@ export type EldersChoice = {
   id: number;
   novel: NovelSummary
 }
+
+export type Genre = {
+  id: number;
+  name: string;
+  description: string;
+  slug: string;
+}

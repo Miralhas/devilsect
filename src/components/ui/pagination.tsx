@@ -7,7 +7,6 @@ import * as React from "react"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import Link from "next/link"
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
@@ -41,26 +40,17 @@ function PaginationItem({ ...props }: React.ComponentProps<"li">) {
 type PaginationLinkProps = {
   isActive?: boolean,
 } & Pick<React.ComponentProps<typeof Button>, "size"> &
-  React.ComponentProps<"a">
+  React.ComponentProps<"button">
 
 function PaginationLink({
   className,
   isActive,
-  href,
   size = "icon",
   ...props
 }: PaginationLinkProps) {
   return (
-    <Button asChild variant={isActive ? "outline" : "ghost"} size={size} className={cn("border border-zinc-50/15 hover:border-primary hover:bg-primary/30 hover:text-accent", className)}>
-      <Link
-        href={`${href}`}
-        aria-current={isActive ? "page" : undefined}
-        data-slot="pagination-link"
-        data-active={isActive}
-        data-disabled={true}
-        {...props}
-      >
-      </Link>
+    <Button variant={isActive ? "extra-cool" : "extra-cool-secondary"} size={size} className={cn(className)} {...props}>
+      
     </Button>
   )
 }

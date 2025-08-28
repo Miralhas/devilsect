@@ -1,14 +1,28 @@
 import { Label } from "@/components/ui/label";
 import { ArrowUp01, ChevronRight, ChevronsRightLeft, GripIcon } from "lucide-react";
 import ChaptersRange from "./chapters-range-button";
+import { nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
+import { useQueryStates } from "nuqs";
+import { Button } from "@/components/ui/button";
 
 const ChaptersCount = () => {
+  const [values, setValues] = useQueryStates(nuqsNovelSummariesParams);
+
+  const onClear = () => {
+    setValues({ chaptersRange: "" });
+  }
+
+  const isDefaultSelected = values.chaptersRange === "";
+
   return (
     <div className="bg-secondary/20 rounded-xl p-4 border border-white/5 hover:border-white/10 transition-colors space-y-3 overflow-y-auto max-h-[254px] custom-scrollbar">
-      <Label className="inline-flex items-start">
-        <ArrowUp01 className="size-4 text-red-700" strokeWidth={3} />
-        Chapters
-      </Label>
+      <div className="flex items-center justify-between">
+        <Label className="inline-flex items-start">
+          <ArrowUp01 className="size-4 text-red-700" strokeWidth={3} />
+          Chapters
+        </Label>
+        {!isDefaultSelected ? <Button variant="link" size="none" className="text-sm text-accent" onClick={onClear}>Clear</Button> : null}
+      </div>
       <div className="grid gap-2.5">
         <ChaptersRange icon={GripIcon} className="text-sm" title={"All"} value="" />
         <ChaptersRange icon={ChevronsRightLeft} className="text-sm" title={"1 - 500 Chapters"} value="1:500" />

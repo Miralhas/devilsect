@@ -4,6 +4,9 @@ import { FrownIcon, LibraryIcon } from "lucide-react";
 import { PropsWithChildren } from "react";
 import GenreButton from "./genre-button";
 import SkeletonLoader from "./skeleton-loader";
+import { useQueryStates } from "nuqs";
+import { nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
+import { Button } from "@/components/ui/button";
 
 const Genres = () => {
   const query = useGetGenres();
@@ -41,12 +44,23 @@ const Genres = () => {
 }
 
 const Layout = ({ children }: PropsWithChildren) => {
+  const [values, setValues] = useQueryStates(nuqsNovelSummariesParams);
+
+  const onClear = () => {
+    setValues({ genres: [] });
+  }
+
+  const isDefaultSelected = values.genres.length <= 0;
+
   return (
     <div className="bg-secondary/20 rounded-xl p-4 border border-white/5 hover:border-white/10 transition-colors space-y-3 overflow-y-auto max-h-[254px] custom-scrollbar">
-      <Label className="inline-flex items-start">
-        <LibraryIcon className="size-4 text-red-700" strokeWidth={3} />
-        Genres
-      </Label>
+      <div className="flex items-center justify-between">
+        <Label className="inline-flex items-start">
+          <LibraryIcon className="size-4 text-red-700" strokeWidth={3} />
+          Genres
+        </Label>
+        {!isDefaultSelected ? <Button variant="link" size="none" className="text-sm text-accent" onClick={onClear}>Clear</Button> : null}
+      </div>
       {children}
     </div>
   )

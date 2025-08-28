@@ -1,17 +1,24 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
+import { nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, SlidersHorizontal } from "lucide-react";
+import { ChevronDown, SlidersHorizontal, XIcon } from "lucide-react";
+import { useQueryStates } from "nuqs";
 import { useState } from "react";
+import ChaptersCount from "./chapters-count";
+import Genres from "./genres";
 import SortBy from "./sort-by";
 import Status from "./status";
-import Genres from "./genres";
-import ChaptersCount from "./chapters-count";
 
 const FilterSection = () => {
   const [isActive, setIsActive] = useState(false);
   const onActive = () => setIsActive(prev => !prev);
+  const [, setValues] = useQueryStates(nuqsNovelSummariesParams);
+
+  const onClearAll = () => {
+    setValues(null);
+  }
 
   return (
     <motion.section layout={"position"} className="w-full flex flex-col items-end gap-y-4">
@@ -40,8 +47,14 @@ const FilterSection = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ type: "spring", stiffness: 80, damping: 12 }}
-            className="w-full bg-secondary/10 backdrop-blur-xl shadow-2xl rounded-xl overflow-hidden z-10 border border-white/10 p-6"
+            className="w-full bg-secondary/10 backdrop-blur-xl shadow-2xl rounded-xl overflow-hidden z-10 border border-white/10 p-6 space-y-5"
           >
+            <div className="flex items-center justify-end">
+              <Button variant="extra-cool-secondary" size="extra-cool" className="text-muted-foreground" onClick={onClearAll}>
+                <XIcon className="size-5" />
+                <span>Clear All</span>
+              </Button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 h-full">
               <SortBy />
               <Status />

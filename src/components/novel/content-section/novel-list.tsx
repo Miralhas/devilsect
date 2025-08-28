@@ -1,7 +1,7 @@
 'use client'
 
 import GenericPagination from "@/components/generic-pagination";
-import { nuqsNovelSummariesParams, SortKey } from "@/lib/schemas/novel-summaries-params-schema";
+import { mapSortKey, nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
 import { useGetNovelSummaries } from "@/services/novels/client-queries";
 import { motion } from "framer-motion";
 import { BookIcon } from "lucide-react";
@@ -14,7 +14,10 @@ const NovelList = () => {
   const router = useRouter();
   const [params, setParams] = useQueryStates(nuqsNovelSummariesParams);
 
-  const query = useGetNovelSummaries({ enabled: true, params: { q: params.q, page: params.page, size: 18, sort: SortKey.BAYESIAN_RANKING } });
+  const query = useGetNovelSummaries({
+    enabled: true,
+    params: { q: params.q, page: params.page, size: 18, sort: mapSortKey(params.sort) }
+  });
 
   if (query.isLoading) {
     return <SkeletonLoader />
@@ -45,24 +48,28 @@ const NovelList = () => {
     <motion.div
       layout
       layoutId="novel-list-container"
-      className="space-y-2"
+      className="mb-16"
     >
-      <div className="relative grid grid-cols-3 md:grid-cols-6 gap-4 gap-y-6">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-xl md:text-2xl font-bold">All Novels</h2>
+        <p className="text-base text-[15px] text-muted-foreground">{query.data.totalItems} novels found</p>
+      </div>
+      <div className="relative grid grid-cols-3 md:grid-cols-6 gap-4 gap-y-6 min-h-[50vh]">
         {query.data?.results.map((novel) => (
           <motion.div
             layout
             className="relative group"
             key={novel.id}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.2 }}
           >
-            <ClientNovelCard key={novel.id} novel={novel} size="lg" />
+            <ClientNovelCard key={novel.id} novel={novel} size="lg" imageSizes="(max-width: 768px)30vw, 10vw" />
           </motion.div>
         ))}
       </div>
       {query.data?.totalPages > 1 ? (
-        <GenericPagination query={query.data!} handlePage={handlePage} />
+        <GenericPagination query={query.data!} handlePage={handlePage} className="mt-14" />
       ) : null}
     </motion.div>
   )

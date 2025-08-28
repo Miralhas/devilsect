@@ -19,9 +19,10 @@ const FIRST_PAGE = 0;
 type Props<T> = {
   query: PaginatedQuery<T>;
   handlePage: (page: number) => void;
+  className?: string;
 }
 
-function GenericPagination<T>({ query, handlePage }: Props<T>) {
+function GenericPagination<T>({ query, handlePage, className }: Props<T>) {
   const last = query.totalPages - 1;
   const current = query.currentPage;
 
@@ -43,7 +44,7 @@ function GenericPagination<T>({ query, handlePage }: Props<T>) {
   }
 
   return (
-    <Pagination className="border-t pt-4">
+    <Pagination className={cn("", className)}>
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
@@ -69,19 +70,17 @@ function GenericPagination<T>({ query, handlePage }: Props<T>) {
         )}
 
 
-        {range.map((page, index) => {
-          console.log(page, index);
-          return (
-            <PaginationItem key={index}>
-              <PaginationLink
-                onClick={(e) => handleClick(e, page)}
-                className={cn(current === page && "border border-primary bg-primary/30 text-accent")}
-              >
-                {page + 1}
-              </PaginationLink>
-            </PaginationItem>
-          )
-        })}
+        {range.map((page, index) => (
+          <PaginationItem key={index}>
+            <PaginationLink
+              onClick={(e) => handleClick(e, page)}
+              className={cn(current === page && "border border-primary bg-primary/30 text-accent")}
+            >
+              {page + 1}
+            </PaginationLink>
+          </PaginationItem>
+        )
+        )}
 
         {range.includes(last) ? null : (
           <>

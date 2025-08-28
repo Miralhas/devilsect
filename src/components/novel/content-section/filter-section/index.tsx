@@ -1,8 +1,10 @@
 'use client'
+
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import { useState } from "react";
+import SortBy from "./sort-by";
 
 const FilterSection = () => {
   const [isActive, setIsActive] = useState(false);
@@ -31,14 +33,15 @@ const FilterSection = () => {
           <motion.div
             layoutId="filter-panel"
             layout="size"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ type: "spring", stiffness: 80, damping: 12 }}
-            className="min-h-[30vh] w-full border border-primary bg-primary/30 text-white/80 grid place-items-center overflow-hidden"
+            className="w-full bg-secondary/10 backdrop-blur-xl shadow-2xl rounded-xl overflow-hidden z-10 border border-white/10 p-6"
           >
-
-            <p>filter</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 h-full">
+              <SortBy />
+            </div>
           </motion.div>
         ) : null}
       </AnimatePresence>

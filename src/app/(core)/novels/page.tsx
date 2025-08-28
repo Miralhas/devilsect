@@ -5,7 +5,7 @@ import { Book } from "lucide-react";
 
 const NovelPage = async () => {
   return (
-    <section className="grid grid-rows-[min-content_max-content] w-full max-w-[1280px] mx-auto relative p-4 md:pt-12 space-y-10 min-h-screen mb-10">
+    <section className="grid grid-rows-[min-content_max-content] w-full max-w-[1280px] mx-auto relative p-4 md:pt-12 space-y-10 min-h-screen pb-8">
       <BlurCenter opacity="low" />
       <PageHeader description="Discover new novels and mastepieces" icon={Book} title="Novels" />
       <ContentSection key="content" />

@@ -1,4 +1,4 @@
-import { createSerializer, parseAsIndex, parseAsInteger, parseAsString, parseAsStringLiteral } from 'nuqs/server';
+import { inferParserType, parseAsIndex, parseAsInteger, parseAsString, parseAsStringLiteral } from 'nuqs/server';
 import { z } from "zod";
 
 export enum SortKey {
@@ -8,7 +8,16 @@ export enum SortKey {
   MOST_RATED = "ratingValue,id,desc"
 }
 
-export const sortKeyParams = ["most-viewed", 'newest', 'popular', 'rating'] as const
+export const sortKeyParams = ["views", 'newest', 'popularity', 'rating'] as const
+
+export const mapSortKey = (value: string): SortKey => {
+  switch (value) {
+    case 'views': return SortKey.MOST_VIEWED;
+    case "newest": return SortKey.NEWEST_RELEASES;
+    case "rating": return SortKey.MOST_RATED;
+    default: return SortKey.BAYESIAN_RANKING
+  }
+}
 
 export const allowedValues = {
   status: ["COMPLETED", "ON_GOING", ""],
@@ -27,13 +36,13 @@ export const NovelSummariesParamsSchema = z.object({
 });
 
 export const nuqsNovelSummariesParams = {
-  q: parseAsString.withDefault("").withOptions({ shallow: true, clearOnDefault: true, history: "push" }),
-  page: parseAsIndex.withDefault(0).withOptions({ shallow: true, clearOnDefault: true, history: "push", scroll: true}),
-  size: parseAsInteger.withDefault(18).withOptions({ shallow: true, clearOnDefault: true, history: "push"}),
-  genres: parseAsString.withDefault("").withOptions({ shallow: true, clearOnDefault: true, history: "push"}),
-  status: parseAsStringLiteral(allowedValues.status).withDefault("").withOptions({ shallow: true, clearOnDefault: true, history: "push"}),
-  sort: parseAsStringLiteral(sortKeyParams).withDefault('popular').withOptions({ shallow: true, clearOnDefault: true, history: "push"}),
+  q: parseAsString.withDefault("").withOptions({ clearOnDefault: true, history: "push" }),
+  page: parseAsIndex.withDefault(0).withOptions({ clearOnDefault: true, history: "push", scroll: true }),
+  size: parseAsInteger.withDefault(18).withOptions({ clearOnDefault: true, history: "push" }),
+  genres: parseAsString.withDefault("").withOptions({ clearOnDefault: true, history: "push" }),
+  status: parseAsStringLiteral(allowedValues.status).withDefault("").withOptions({ clearOnDefault: true, history: "push", }),
+  sort: parseAsStringLiteral(sortKeyParams).withDefault('popularity').withOptions({ clearOnDefault: true, history: "push", }),
 }
 
 export type NovelSummariesParams = z.infer<typeof NovelSummariesParamsSchema>;
-export const novelsSerializer = createSerializer({ ...nuqsNovelSummariesParams });
+export type NovelSearchParams = inferParserType<typeof nuqsNovelSummariesParams>;

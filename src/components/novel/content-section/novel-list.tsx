@@ -16,7 +16,7 @@ const NovelList = () => {
 
   const query = useGetNovelSummaries({
     enabled: true,
-    params: { q: params.q, page: params.page, size: 18, sort: mapSortKey(params.sort) }
+    params: { q: params.q, page: params.page, size: 18, sort: mapSortKey(params.sort), status: params.status }
   });
 
   if (query.isLoading) {

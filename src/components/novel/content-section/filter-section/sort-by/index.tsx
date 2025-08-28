@@ -24,7 +24,7 @@ const SortBy = () => {
         <SlidersVertical className="size-4 text-red-700" strokeWidth={3} />
         Sort By
       </Label>
-      <div className="grid grid-cols-1 grid-rows-3 gap-2.5">
+      <div className="grid gap-2.5">
         {SORTS.map(s => (
           <SortBtn key={s.value} value={s.value} icon={s.icon} />
         ))}

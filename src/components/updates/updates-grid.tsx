@@ -16,34 +16,32 @@ const UpdatesGrid = ({ recent }: { recent: RecentlyAddedChapter[] }) => {
           return (
             <div
               key={item.id}
-              className="group hover:bg-secondary rounded-lg transition-all duration-200 py-3 border-b"
+              className="group hover:bg-secondary rounded-lg transition-all duration-200 py-1.5 md:py-3 border-b"
             >
               {/* Mobile Layout */}
-              <div className="flex gap-3 md:hidden relative">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-16 overflow-hidden rounded-r-sm relative">
-                    <DynamicBlurImage
-                      fill
-                      sizes="(max-width: 768px) 33vw, 5vw"
-                      alt={`${item.novelTitle} cover`}
-                      className="w-full h-full object-fill"
-                      unoptimized={false}
-                      src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${item.novelSlug}/image`}
-                    />
-                    <BookCoverOverlay />
-                  </div>
+              <div className="flex gap-2 md:hidden relative items-center px-1">
+                <div className="w-8 h-10 overflow-hidden rounded-r-sm relative">
+                  <DynamicBlurImage
+                    fill
+                    sizes="(max-width: 768px) 33vw, 5vw"
+                    alt={`${item.novelTitle} cover`}
+                    className="w-full h-full object-fill"
+                    unoptimized={false}
+                    src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${item.novelSlug}/image`}
+                  />
+                  <BookCoverOverlay />
                 </div>
-                <div className="flex-1 min-w-0">
+                <div className="w-full space-y-0.5">
                   <Link
                     href={`/novels/${item.novelSlug}`}
-                    className="font-medium transition-colors line-clamp-1 capitalize max-w-[80%]"
+                    className="font-medium transition-colors line-clamp-1 capitalize text-sm leading-4"
                   >
                     {item.novelTitle}
                   </Link>
 
                   <Link
                     href={`/novels/${item.novelSlug}/${item.slug}`}
-                    className="text-sm transition-colors line-clamp-1 text-zinc-300/80 capitalize mb-1 max-w-[80%]"
+                    className="text-sm text-[13px] transition-colors line-clamp-1 text-zinc-300/80 capitalize font-medium"
                   >
                     {item.title}
                   </Link>
@@ -55,8 +53,8 @@ const UpdatesGrid = ({ recent }: { recent: RecentlyAddedChapter[] }) => {
               </div>
 
               {/* Desktop Layout */}
-              <div className="hidden md:grid md:grid-cols-[50px_0.3fr_0.5fr_0.2fr_0.1fr] gap-1">
-                <div className="w-[40px] h-[50px] overflow-hidden rounded-r-sm relative">
+              <div className="hidden md:grid md:grid-cols-[45px_0.3fr_0.5fr_0.2fr_0.1fr]">
+                <div className="w-[30px] h-[40px] overflow-hidden rounded-r-sm relative">
                   <DynamicBlurImage
                     fill
                     sizes="(max-width: 768px) 10vw, 5vw"
@@ -80,7 +78,7 @@ const UpdatesGrid = ({ recent }: { recent: RecentlyAddedChapter[] }) => {
                 <div className="min-w-0 justify-self-start">
                   <Link
                     href={`/novels/${item.novelSlug}/${item.chapterNumber}`}
-                    className="text-sm hover:text-accent transition-colors"
+                    className="text-sm hover:text-accent transition-colors font-medium text-zinc-300"
                   >
                     {item.title}
                   </Link>

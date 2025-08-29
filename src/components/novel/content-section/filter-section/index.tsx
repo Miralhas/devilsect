@@ -49,7 +49,8 @@ const FilterSection = () => {
             transition={{ type: "spring", stiffness: 80, damping: 12 }}
             className="w-full bg-secondary/10 backdrop-blur-xl shadow-2xl rounded-xl overflow-hidden z-10 border border-white/10 p-6 space-y-5"
           >
-            <div className="flex items-center justify-end">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl md:text-2xl bg-clip-text text-transparent bg-gradient-to-r from-red-900/80 to-primary font-bold">Novels Filter</h2>
               <Button variant="extra-cool-secondary" size="extra-cool" className="text-muted-foreground" onClick={onClearAll}>
                 <XIcon className="size-5" />
                 <span>Clear All</span>

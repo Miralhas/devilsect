@@ -15,7 +15,7 @@ const ChapterContent = ({ content, onClickCallback, title }: Props) => {
     <>
       <h2 className="capitalize text-center text-white/95 text-xl md:text-2xl font-tilt-warp mb-4 translate">{title}</h2>
       <div
-        className={cn("chapter-body translate max-w-none scroll-mt-[100px] text-[16px] md:text-[18px] space-y-[1rem] text-shadow-none px-1", fontFamily)}
+        className={cn("chapter-body translate max-w-none scroll-mt-[100px] text-[16px] md:text-[18px] text-pretty space-y-[1rem] text-shadow-none px-1", fontFamily)}
         style={{
           wordWrap: "break-word",
           fontSize: fontSize,

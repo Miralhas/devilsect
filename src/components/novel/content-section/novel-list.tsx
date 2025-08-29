@@ -9,6 +9,9 @@ import { useRouter } from "next/navigation";
 import { useQueryStates } from "nuqs";
 import ClientNovelCard from "../../novel-card/client-novel-card";
 import SkeletonLoader from "./skeleton-loder";
+import Link from "next/link";
+
+const MotionLink = motion.create(Link);
 
 const NovelList = () => {
   const router = useRouter();
@@ -20,10 +23,10 @@ const NovelList = () => {
     enabled: true,
     params: {
       genres,
-      size: 18, 
-      q: params.q, 
+      size: 18,
+      q: params.q,
       page: params.page,
-      status: params.status, 
+      status: params.status,
       sort: mapSortKey(params.sort),
       chaptersRange: params.chaptersRange
     }
@@ -64,18 +67,19 @@ const NovelList = () => {
         <h2 className="text-xl md:text-2xl font-bold">All Novels</h2>
         <p className="text-base text-[15px] text-muted-foreground">{query.data.totalItems} novels found</p>
       </div>
-      <div className="relative grid grid-cols-3 md:grid-cols-6 gap-4 gap-y-6 min-h-[50vh]">
+      <div className="relative grid grid-cols-3 md:grid-cols-6 gap-4 gap-y-6 min-h-[50vh] items-start">
         {query.data?.results.map((novel) => (
-          <motion.div
+          <MotionLink
             layout
-            className="relative group"
+            className="relative group col-span-1"
             key={novel.id}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.2 }}
+            href={`/novels/${novel.slug}`}
           >
-            <ClientNovelCard key={novel.id} novel={novel} size="lg" imageSizes="(max-width: 768px)30vw, 10vw" />
-          </motion.div>
+              <ClientNovelCard key={novel.id} novel={novel} size="lg" imageSizes="(max-width: 768px)30vw, 10vw" />
+          </MotionLink>
         ))}
       </div>
       {query.data?.totalPages > 1 ? (

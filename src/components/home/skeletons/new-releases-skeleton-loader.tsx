@@ -6,7 +6,7 @@ const NewReleasesSkeletonLoader = () => {
   return (
     <>
       <section className="w-full space-y-4">
-        <SectionHeader icon={Clock} title="New Releases" viewMore={{ href: "/", title: "View More" }} />
+        <SectionHeader icon={Clock} title="New Releases" />
         <div className="flex flex-col lg:flex-row gap-4 md:gap-6">
           <div className="flex flex-1 flex-col gap-3.5 h-full">
             {Array.from({ length: 4 }).map((_, i) => (

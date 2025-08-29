@@ -7,7 +7,7 @@ const RecentlyAddedChapters = async () => {
   const chapters = await getRecentlyAddedChapters();
   return (
     <section className="space-y-4 w-full">
-      <SectionHeader icon={Clock} title="Recently Added Chapters" viewMore={{ href: "/", title: "View More" }} />
+      <SectionHeader icon={Clock} title="Recently Added Chapters" viewMore={{ href: "/updates", title: "View More" }} />
       <div className="w-full">
         <ChaptersCarousel chapters={chapters} />
       </div>

@@ -10,7 +10,7 @@ const NewReleases = async () => {
 
   return (
     <section className="w-full space-y-6">
-      <SectionHeader icon={Clock} title="New Releases" viewMore={{ href: "/", title: "View More" }} />
+      <SectionHeader icon={Clock} title="New Releases" />
       <div className="flex flex-col lg:flex-row gap-6">
         <ReleasesCardHorizontal {...res} />
         <ReleasesGrid {...res} />

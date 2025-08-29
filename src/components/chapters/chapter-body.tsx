@@ -61,7 +61,7 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
         }} />
 
         <div className="w-full grid grid-cols-[repeat(3,minmax(0px,100px))] gap-4 my-16 items-center justify-center" ref={chapterContentRef}>
-          <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasPrevious} >
+          <Button variant="pure" asChild size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasPrevious} >
             <Link href={`/novels/${chapter.novelSlug}/${previous?.slug}`} className="pr-1">
               <div className="flex items-center w-full justify-center">
                 <ChevronLeft className="size-5 md:size-6" strokeWidth={4} />
@@ -70,7 +70,7 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
             </Link>
           </Button>
 
-          <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10">
+          <Button variant="pure" asChild size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10">
             <Link href={`/novels/${chapter.novelSlug}`}>
               <div className="flex items-center w-full justify-center gap-1">
                 <HouseIcon className="size-4.5" strokeWidth={3} />
@@ -79,7 +79,7 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
             </Link>
           </Button>
 
-          <Button variant="pure" size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasNext} >
+          <Button variant="pure" asChild size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasNext} >
             <Link href={`/novels/${chapter.novelSlug}/${next?.slug}`} className="pl-2">
               <div className="flex items-center w-full justify-center">
                 <span className="text-sm text-[15px] md:text-base md:text-[17px]">Next</span>

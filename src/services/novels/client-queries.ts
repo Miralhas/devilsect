@@ -3,6 +3,7 @@ import { NovelSummariesParams, NovelSummariesParamsSchema } from "@/lib/schemas/
 import { buildQueryString } from "@/lib/utils";
 import { Genre, NovelSummary } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
+import { Rating } from "@/types/rating";
 import { useQuery } from "@tanstack/react-query";
 
 const getNovelSummaries = async (params: NovelSummariesParams) => {
@@ -34,6 +35,14 @@ const getNovelGenres = async () => {
   return await res.json() as Genre[]
 }
 
+export const useGetUserRatingOnNovel = (params: { novelId: number, userId: number }) => useQuery({
+  queryFn: async () => {
+    const res = await fetch(`/api/user/reviews/${params.novelId}`)
+    if (!res.ok) throw new Error("Failed to fetch user rating on novel");
+    return await res.json() as Rating;
+  },
+  queryKey: ["rating", params]
+})
 
 export const useGetNovelSummaries = ({ params, enabled = false }: { params: NovelSummariesParams; enabled?: boolean }) => useQuery({
   queryFn: async () => getNovelSummaries(params),

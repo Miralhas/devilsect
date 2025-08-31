@@ -7,10 +7,12 @@ import { env } from "@/env";
 import { getBlurData } from "@/lib/get-blur-data";
 import { statusMap } from "@/lib/utils";
 import { Novel } from "@/types/novel";
-import { BookOpenText, Eye, StarIcon } from "lucide-react";
+import { BookOpenText, Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
+import NovelRating from "./rating";
+import RatingLoader from "./rating/rating-loader";
 
 const InfoSection = async ({ novel }: { novel: Novel }) => {
   const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`);
@@ -62,15 +64,9 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
               <NovelBadge name={genre} key={genre} />
             ))}
           </div>
-          <div className="flex gap-1 items-center ml-1">
-            <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />
-            <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />
-            <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />
-            <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />
-            <StarIcon className="size-5 text-[#D3AF37]" fill="#D3AF37" />
-            <span className="font-semibold">{novel.metrics.ratingValue ?? '0.0'}</span>
-            <p className="ml-1 text-sm text-muted-foreground">({novel.metrics.ratingSize} <span className="relative">ratings</span>)</p>
-          </div>
+          <Suspense fallback={<RatingLoader />}>
+            <NovelRating novel={novel} />
+          </Suspense>
           <div className="mt-5 md:mt-auto w-full">
             <Suspense fallback={<StartReadingButtonLoading />}>
               <StartReadingButton novel={novel} />

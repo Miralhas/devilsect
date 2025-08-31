@@ -1,8 +1,9 @@
 import { env } from "@/env";
 import { NovelSummariesParams, NovelSummariesParamsSchema } from "@/lib/schemas/novel-summaries-params-schema";
 import { buildQueryString } from "@/lib/utils";
-import { Genre, NovelSummary } from "@/types/novel";
+import { Genre, Metrics, Novel, NovelSummary } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
+import { Rating } from "@/types/rating";
 import { useQuery } from "@tanstack/react-query";
 
 const getNovelSummaries = async (params: NovelSummariesParams) => {
@@ -34,6 +35,27 @@ const getNovelGenres = async () => {
   return await res.json() as Genre[]
 }
 
+const getNovelMetrics = async (novelSlug: string) => {
+  const url = `${env.NEXT_PUBLIC_BASE_URL}/novels/${novelSlug}/metric`;
+  const res = await fetch(url, {
+    method: "GET",
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch novel metrics: ${res.status} ${res.statusText}`);
+  }
+
+  return await res.json() as Metrics;
+}
+
+export const useGetUserRatingOnNovel = (params: { novelId: number, userId: number }) => useQuery({
+  queryFn: async () => {
+    const res = await fetch(`/api/user/ratings/${params.novelId}`)
+    if (!res.ok) throw new Error("Failed to fetch user rating on novel");
+    return await res.json() as Rating;
+  },
+  queryKey: ["rating", params]
+})
 
 export const useGetNovelSummaries = ({ params, enabled = false }: { params: NovelSummariesParams; enabled?: boolean }) => useQuery({
   queryFn: async () => getNovelSummaries(params),
@@ -44,4 +66,10 @@ export const useGetNovelSummaries = ({ params, enabled = false }: { params: Nove
 export const useGetGenres = () => useQuery({
   queryFn: getNovelGenres,
   queryKey: ["genre", "list"]
+})
+
+export const useGetNovelMetrics = (novel: Novel) => useQuery({
+  queryFn: () => getNovelMetrics(novel.slug),
+  queryKey: ["novel", "detail", "ratings", novel.id],
+  initialData: novel.metrics,
 })

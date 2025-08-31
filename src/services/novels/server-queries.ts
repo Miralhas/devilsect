@@ -71,7 +71,6 @@ export const getUserLibrary = async (params: UserLibraryParams): Promise<Paginat
   const session = await getSession();
   if (!session) return;
 
-
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${session?.value}`);
 

@@ -2,6 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { PropsWithChildren } from 'react';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,7 +16,9 @@ const Providers = ({ children }: PropsWithChildren) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+        {children}
+      </AppRouterCacheProvider>
     </QueryClientProvider>
   )
 }

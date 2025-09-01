@@ -3,6 +3,7 @@ import NovelBadge from "@/components/novel/novel-detail/info-section/novel-badge
 import StartReadingButton from "@/components/novel/novel-detail/info-section/start-reading-button";
 import StartReadingButtonLoading from "@/components/novel/novel-detail/info-section/start-reading-button-loading";
 import { Badge } from "@/components/ui/badge";
+import wsrvLoader from "@/components/wsrvLoader";
 import { env } from "@/env";
 import { getBlurData } from "@/lib/get-blur-data";
 import { statusMap } from "@/lib/utils";
@@ -24,7 +25,6 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
           <DynamicBlurImage
             priority
             sizes="(max-width: 768px) 40vw, 15vw"
-            quality={100}
             blurData={base64}
             alt={novel.title + " cover"}
             src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
@@ -38,6 +38,7 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
               alt="glass effect background"
               sizes="(max-width: 768px) 90vw, 0vw"
               className="object-center object-cover opacity-30"
+              loader={wsrvLoader}
             />
           </div>
         </div>

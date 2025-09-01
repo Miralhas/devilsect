@@ -1,6 +1,6 @@
 'use client'
 
-import ImageWithFallback from "@/components/image-with-fallback";
+import DynamicBlurImage from "@/components/dynamic-blur-image";
 import { env } from "@/env";
 import { cn } from "@/lib/utils";
 import { profilePicture } from "@/services/authentication/actions";
@@ -23,8 +23,10 @@ const EditImage = ({ user }: { user: User }) => {
   useEffect(() => {
     if (state.success === undefined) return;
     if (state.success && imageRef.current) {
-      imageRef.current.src = `${imgUrl}#${state.message}`;
-      (document.getElementById("navbar-user-image") as HTMLImageElement).src = `${imgUrl}#${state.message}`
+      imageRef.current.src = `${imgUrl.split("#")[0]}#${state.message}`;
+      imageRef.current.srcset = "";
+      (document.querySelector(".user-profile-header-image") as HTMLImageElement).src = `${imgUrl.split("#")[0]}#${state.message}`;
+      (document.querySelector(".user-profile-header-image") as HTMLImageElement).srcset = ""
       toast.success("Profile image updated successfully!");
       return;
     }
@@ -56,17 +58,21 @@ const EditImage = ({ user }: { user: User }) => {
       <div className="relative group" onClick={onAvatarClick}>
         <div className="absolute -inset-1 bg-gradient-to-br from-primary to-accent/20 rounded-full blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
         <div className={cn("rounded-full size-32 md:size-36 aspect-square overflow-hidden relative", isPending && "animate-pulse")}>
-          <ImageWithFallback
+          <DynamicBlurImage
             src={imgUrl}
             imageRef={imageRef}
-            fill
-            alt="img"
+            fill={false}
+            width={144}
+            height={144}
+            alt="User Image"
             priority
-            fallback="/yin-yang-140x140.png"
             className="opacity-90 object-center object-cover w-full h-auto inline-block"
+            default={`https://static.devilsect.com/yin-yang.png`}
+            mask="circle"
+            mtrim
           />
           <div
-            className="absolute inset-0 z-10 transition-opacity duration-300 opacity-0 group-hover:opacity-100 bg-black/60 cursor-pointer rounded-md grid place-items-center"
+            className="absolute inset-0 z-10 transition-opacity duration-300 opacity-0 group-hover:opFacity-100 bg-black/60 cursor-pointer rounded-md grid place-items-center"
           >
             <Pencil className="size-7 text-white" />
           </div>

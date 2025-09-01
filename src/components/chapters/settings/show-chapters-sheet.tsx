@@ -1,3 +1,4 @@
+import DynamicBlurImage from "@/components/dynamic-blur-image";
 import {
   Sheet,
   SheetClose,
@@ -8,10 +9,8 @@ import {
   SheetTrigger
 } from "@/components/ui/sheet";
 import { env } from "@/env";
-import defaultBlur from "@/lib/blur-data";
 import { Chapter } from "@/types/chapter";
 import { BookOpenText, Menu } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import ChapterAccordion from "./chapters-accordion";
 
@@ -31,13 +30,13 @@ const ShowChaptersSheet = ({ chapter }: { chapter: Chapter }) => {
           <SheetHeader className="grid grid-cols-4 mt-5 gap-3 pb-4 border-b mb-0">
             <div className="col-span-1 w-full relative aspect-[3/4] h-full">
               <Link href={"/novels/" + chapter.novelSlug}>
-                <Image
+                <DynamicBlurImage
                   src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${chapter.novelSlug}/image`}
-                  blurDataURL={defaultBlur}
                   alt="novel cover"
                   className="inline-block object-cover rounded-md w-full h-full"
                   sizes="5vw"
                   fill
+                  default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
                 />
               </Link>
             </div>

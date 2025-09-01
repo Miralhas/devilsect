@@ -3,8 +3,8 @@ import { env } from "@/env";
 import { cn } from "@/lib/utils";
 import { ChapterSummary } from "@/types/chapter";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import DynamicBlurImage from "../dynamic-blur-image";
 
 type HeaderProps = {
   novelSlug: string;
@@ -23,12 +23,13 @@ const Header = ({ novelSlug: slug, next, previous }: HeaderProps) => {
             href={`/novels/${slug}`}
             className="transition-all ease-in hover:underline flex items-center gap-2">
             <div className="relative h-[42px] aspect-[2/3]">
-              <Image
+              <DynamicBlurImage
                 fill
                 sizes="(max-width: 1024px) 10vw, 5vw"
                 alt="cover"
                 src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${slug}/image`}
                 className="object-fill rounded-xs"
+                default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
               />
             </div>
             <p className="capitalize font-bold text-sm leading-4 md:text-[15px] line-clamp-1 text-white">{slug.replaceAll("-", " ")}</p>

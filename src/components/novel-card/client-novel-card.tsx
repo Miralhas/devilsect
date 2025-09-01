@@ -25,6 +25,7 @@ const ClientNovelCard = ({ novel, size = "lg", imageSizes = "20vw" }: NovelCardP
           className="object-cover object-center w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105 opacity-90"
           sizes={imageSizes}
           fill
+          default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
         />
         <BookCoverOverlay />
         <HoverOverlay info={{ author: novel.author, title: novel.title }} size="lg" />

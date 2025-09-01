@@ -2,7 +2,8 @@
 
 import defaultBlur from "@/lib/blur-data";
 import Image from "next/image";
-import { useState } from "react";
+import { createWsrvLoader, WsrvParams } from "./wsrvLoader";
+import { RefObject } from "react";
 
 type Props = {
   src: string;
@@ -17,14 +18,13 @@ type Props = {
   priority?: boolean;
   onErrorImage?: string;
   unoptimized?: boolean;
-};
+  imageRef?: RefObject<HTMLImageElement | null>;
+} & WsrvParams;
 
-const DynamicBlurImage = ({ src, alt, className, height, width, blurData, sizes, priority, onErrorImage, unoptimized = false, quality = 70, fill = true }: Props) => {
-  const [imgSrc, setImgSrc] = useState<string>(src);
-
+const DynamicBlurImage = ({ src, alt, className, height, width, blurData, sizes, priority, imageRef, unoptimized = false, quality = 70, fill = true, ...rest }: Props) => {
   return (
     <Image
-      src={imgSrc}
+      src={src}
       alt={alt}
       width={width}
       height={height}
@@ -35,10 +35,9 @@ const DynamicBlurImage = ({ src, alt, className, height, width, blurData, sizes,
       className={className}
       sizes={sizes}
       priority={priority}
-      onError={() => {
-        setImgSrc(onErrorImage ?? "/ds.webp")
-      }}
+      loader={createWsrvLoader(rest)}
       unoptimized={unoptimized}
+      ref={imageRef}
     />
   )
 }

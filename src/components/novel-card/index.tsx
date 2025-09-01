@@ -26,8 +26,9 @@ const NovelCard = async ({ novelSummary: { author, ratingValue, status, title, s
           alt={`${title} cover`}
           className="object-cover object-center w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105 opacity-90"
           blurData={base64}
-          fill
           sizes={imageSizes ?? "20vw"}
+          fill
+          default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
         />
         <BookCoverOverlay />
         <HoverOverlay info={{ author, title }} size={size} />

@@ -1,6 +1,6 @@
 'use client'
 
-import ImageWithFallback from "@/components/image-with-fallback";
+import DynamicBlurImage from "@/components/dynamic-blur-image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,13 +20,14 @@ const UserAccount = ({ user }: { user: User }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <ImageWithFallback
-          src={`${env.NEXT_PUBLIC_BASE_URL}/users/${user.id}/image`}
+        <DynamicBlurImage
+          src={`${env.NEXT_PUBLIC_BASE_URL}/users/${user.id}/image#${new Date().getTime().toString()}`}
           width={32}
           height={32}
+          fill={false}
           alt="account image"
-          fallback="/yin-yang-48x48.png"
-          className="rounded-full size-6 md:size-8 overflow-hidden object-cover object-center shadow-2xl ring-2 ring-secondary cursor-pointer"
+          default={`https://static.devilsect.com/yin-yang.png`}
+          className="rounded-full size-6 md:size-8 overflow-hidden object-cover object-center shadow-2xl ring-2 ring-secondary cursor-pointer user-profile-header-image"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[150px] text-zinc-200 bg-zinc-900">

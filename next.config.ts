@@ -14,7 +14,6 @@ const nextConfig: NextConfig = {
       new URL(`${env.NEXT_PUBLIC_CDN_URL}/**`),
     ],
     loader: 'custom',
-    loaderFile: './src/components/wsrvLoader.ts',
   },
   experimental: {
     authInterrupts: true,

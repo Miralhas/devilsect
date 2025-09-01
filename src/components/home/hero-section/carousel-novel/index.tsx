@@ -8,12 +8,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { createWsrvLoader } from "@/components/wsrvLoader";
 import { statusMap } from "@/lib/utils";
 import Autoplay from "embla-carousel-autoplay";
 import { StarIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { BANNERS } from "./banners-data";
-import Image from "next/image";
 
 
 const CarouselNovel = () => {
@@ -38,24 +39,26 @@ const CarouselNovel = () => {
                     alt="novel banner"
                     className="w-full object-cover opacity-40"
                     quality={10}
-                    priority
-                    loading="eager"
+                    priority={index === 0} // first image = priority
+                    loading={index === 0 ? "eager" : "lazy"}
+                    loader={createWsrvLoader({})}
                   />
                 </div>
 
-                <div className="absolute z-[2] right-0 md:right-13 top-0 overflow-hidden aspect-[3/4] max-w-[200px] w-full">
+                <div className="absolute z-[2] right-0 md:right-13 top-0 overflow-hidden aspect-[3/4] w-full max-w-[200px]">
                   <Image
-                    src={banner.mc} alt="novel main character"
-                    className="object-cover inline-block"
-                    quality={50}
                     fill
-                    priority
-                    loading="eager"
-                    sizes="(max-width: 768px) 30vw, 20vw"
+                    alt="novel main character"
+                    src={banner.mc} 
+                    quality={50}
+                    priority={index === 0} // first image = priority
+                    loading={index === 0 ? "eager" : "lazy"}
+                    sizes="(max-width: 768px) 30vw, 10vw"
+                    loader={createWsrvLoader({})}
                   />
                 </div>
 
-                <div className="absolute bottom-0 z-[3] h-full md:h-24 w-full ">
+                <div className="absolute bottom-0 z-[3] h-full md:h-24 w-full">
                   <div className="h-full bg-gradient-to-t from-black to-transparent"></div>
                 </div>
 

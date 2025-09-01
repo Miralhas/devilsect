@@ -10,8 +10,11 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: WEEK_IN_SECONDS * 4,
     remotePatterns: [
       new URL('https://github.com/**'),
-      new URL(`${env.APP_URL}/**`)
+      new URL(`${env.APP_URL}/**`),
+      new URL(`${env.NEXT_PUBLIC_CDN_URL}/**`),
     ],
+    loader: 'custom',
+    loaderFile: './src/components/wsrvLoader.ts',
   },
   experimental: {
     authInterrupts: true,

@@ -3,8 +3,9 @@
 import defaultBlur from "@/lib/blur-data";
 import Image, { ImageProps } from "next/image";
 import { RefObject, useState } from "react";
+import wsrvLoader from "./wsrvLoader";
 
-const ImageWithFallback = ({ fallback = "/yin-yang.png", imageRef, alt, src, unoptimized = true, ...props }: ImageProps & { fallback?: string; imageRef?: RefObject<HTMLImageElement | null> }) => {
+const ImageWithFallback = ({ fallback = "/yin-yang.png", imageRef, alt, src, ...props }: ImageProps & { fallback?: string; imageRef?: RefObject<HTMLImageElement | null> }) => {
   const [error, setError] = useState(false);
 
   return (
@@ -14,9 +15,9 @@ const ImageWithFallback = ({ fallback = "/yin-yang.png", imageRef, alt, src, uno
       onError={() => setError(true)}
       src={error ? fallback : src}
       blurDataURL={defaultBlur}
-      unoptimized={unoptimized}
       id="navbar-user-image"
       ref={imageRef}
+      loader={wsrvLoader}
     />
   )
 }

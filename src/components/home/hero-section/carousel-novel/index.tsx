@@ -33,8 +33,10 @@ const CarouselNovel = () => {
               <div className="h-full relative rounded-lg overflow-hidden bg-black">
                 <div className="absolute z-[1] top-0 h-full w-full overflow-hidden rounded-12 aspect-[3/1]">
                   <Image
-                    fill
-                    sizes="(max-width: 768px) 90vw, 25vw"
+                    // fill
+                    // sizes="(max-width: 768px) 90vw, 25vw"
+                    width={200}
+                    height={0}
                     src={banner.src}
                     alt="novel banner"
                     className="w-full object-cover opacity-40"

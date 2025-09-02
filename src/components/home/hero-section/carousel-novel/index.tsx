@@ -41,7 +41,7 @@ const CarouselNovel = () => {
                     quality={10}
                     priority={index === 0} // first image = priority
                     loading={index === 0 ? "eager" : "lazy"}
-                    loader={createWsrvLoader({})}
+                    loader={createWsrvLoader({l: 0})}
                   />
                 </div>
 
@@ -54,7 +54,7 @@ const CarouselNovel = () => {
                     priority={index === 0} // first image = priority
                     loading={index === 0 ? "eager" : "lazy"}
                     sizes="(max-width: 768px) 30vw, 10vw"
-                    loader={createWsrvLoader({})}
+                    loader={createWsrvLoader({l: 0})}
                   />
                 </div>
 

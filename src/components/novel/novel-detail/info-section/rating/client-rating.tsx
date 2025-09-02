@@ -22,7 +22,7 @@ const ClientRating = ({ novel, userId }: { novel: Novel, userId: number }) => {
     const id = setTimeout(() => {
       setUserClicked(false);
       setRating(query.data.ratingValue ?? 0);
-    }, 5000);
+    }, 10000);
 
     return () => clearTimeout(id);
   }, [userClicked, query.data.ratingValue])

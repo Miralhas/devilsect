@@ -16,7 +16,6 @@ const LibraryGrid = ({ library }: LibraryGridProps) => {
     return Math.min((current / total) * 100, 100);
   };
 
-  // Empty state
   if (!library.length) {
     return (
       <div className="flex flex-col items-center justify-center pb-4 md:pb-10 text-center  mx">

@@ -1,3 +1,4 @@
+import CommentSection from "@/components/comment-section";
 import AboutSection from "@/components/novel/novel-detail/about-section";
 import InfoSection from "@/components/novel/novel-detail/info-section";
 import RelatedNovels from "@/components/novel/novel-detail/related-novels";
@@ -19,8 +20,8 @@ const NovelPage = async ({ params }: NovelPageProps) => {
     <section className="min-h-[100vh] pb-10 space-y-6">
       <InfoSection novel={novel} />
       <AboutSection novel={novel} />
+      <CommentSection type="NOVEL" slug={slug} />
       <Suspense fallback={<SkeletonLoader />}>
-        {/* <Reviews /> */}
         <RelatedNovels genre={novel.genres[0]} />
       </Suspense>
     </section>

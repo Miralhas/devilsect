@@ -138,7 +138,7 @@
 }
 
 .custom-scrollbar {
-  scrollbar-color: rgba(255,255,255,.2) rgba(0,0,0,.2);
+  scrollbar-color: rgba(255, 255, 255, .2) rgba(0, 0, 0, .2);
   scrollbar-width: thin;
   scroll-behavior: smooth;
 }
@@ -223,4 +223,9 @@ body {
   background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
+}
+
+.rsw-ce,
+.rsw-ce:focus {
+  outline: 0px solid transparent !important;
 }

@@ -4,8 +4,10 @@ import { env } from "@/env";
 import { useGetComments } from "@/services/comments/client-queries";
 import { FrownIcon } from "lucide-react";
 import { PropsWithChildren } from "react";
+import { Separator } from "@/components/ui/separator";
 import Loading from "../loading";
 import Comment from "./comment";
+import CommentEditor from "./comment-editor";
 
 type Props =
   | { type: "NOVEL", slug: string }
@@ -36,7 +38,7 @@ const CommentSection = (props: Props) => {
 
   return (
     <Layout>
-      <hr />
+      <Separator className="mt-4" />
       <div className="py-4 w-full space-y-3 md:space-y-3">
         {query.data?.results.map(c => {
           return <Comment key={c.id} comment={c} />
@@ -64,14 +66,10 @@ const Empty = () => {
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <div>
+    <div className="space-y-4">
       <p className="text-xl md:text-2xl font-semibold">User Comments</p>
-      <div className="p-3 border border-zinc-50/15 rounded-sm mb-3">
-        <p className="text-sm text-muted-foreground">
-          Please refrain from posting spoilers to preserve the reading experience for everyone.
-        </p>
-      </div>
       <div>
+        <CommentEditor />
         {children}
       </div>
     </div>

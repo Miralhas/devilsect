@@ -60,7 +60,6 @@ export type WsrvParams = {
   il?: boolean;              // Interlace/progressive for GIF/PNG/JPEG :contentReference[oaicite:34]{index=34}
   n?: number;                // Number of pages for animated or multi-page images :contentReference[oaicite:35]{index=35}
   ll?: boolean;              // Lossless WebP output :contentReference[oaicite:36]{index=36}
-  q?: number;                // Quality (1–100) for JPG, TIFF, WebP :contentReference[oaicite:37]{index=37}
   page?: number;             // Page number for PDF/TIFF/ICO; -1 largest, -2 smallest :contentReference[oaicite:38]{index=38}
 
   // Cache and Defaults
@@ -96,7 +95,7 @@ const wsrvLoader = ({ src, width, quality }: ImageLoaderProps) => {
     il: true,
     af: true,
   });
-  return `https://wsrv.nl/${queryString.toString()}`;
+  return `https://wsrv.nl/${queryString}`;
 };
 
 export const createWsrvLoader = (params?: WsrvParams) => {
@@ -113,7 +112,8 @@ export const createWsrvLoader = (params?: WsrvParams) => {
       il: params?.il || true,
       af: params?.af || true,
     });
-    return `https://wsrv.nl/${queryString.toString()}`;
+
+    return `https://wsrv.nl/${queryString}`;
   };
 };
 

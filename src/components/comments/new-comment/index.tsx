@@ -1,13 +1,19 @@
 'use client'
 
-import { useState } from "react";
-import RichTextEditor from "./rich-text-editor";
-import AddCommentButton from "./add-comment-button";
 import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
+import RichTextEditor from "../../rich-text-editor";
+import AddCommentButton from "./add-comment-button";
+import { CommentInput } from "@/types/threaded-comment";
 
-const CommentEditor = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
+type Props = {
+  isAuthenticated: boolean;
+  onSubmit: (commentInput: CommentInput) => void;
+}
+
+const NewComment = ({ isAuthenticated, onSubmit }: Props) => {
   const [showEditor, setShowEditor] = useState(false);
-  
+
   const onChangeEditor = () => {
     if (!isAuthenticated) return;
     setShowEditor(prev => !prev)
@@ -27,7 +33,7 @@ const CommentEditor = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
         key={showEditor ? "editor" : "button"}
       >
         {showEditor ? (
-          <RichTextEditor cancel={onChangeEditor} />
+          <RichTextEditor onCancel={onChangeEditor} onSubmit={onSubmit} />
         ) : (
           <AddCommentButton onClick={onChangeEditor} />
         )}
@@ -36,4 +42,4 @@ const CommentEditor = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   )
 }
 
-export default CommentEditor;
+export default NewComment;

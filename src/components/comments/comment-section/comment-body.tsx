@@ -1,5 +1,5 @@
 import { ThreadedComment } from "@/types/threaded-comment";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 

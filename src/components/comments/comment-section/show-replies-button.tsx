@@ -1,6 +1,6 @@
 import { ThreadedComment } from "@/types/threaded-comment";
 import { motion } from "motion/react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 type ShowRepliesProps = {
   hasChildren: boolean;

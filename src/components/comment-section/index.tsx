@@ -10,8 +10,8 @@ import Comment from "./comment";
 import CommentEditor from "./comment-editor";
 
 type Props =
-  | { type: "NOVEL", slug: string }
-  | { type: "CHAPTER", novelSlug: string, chapterSlug: string }
+  | { type: "NOVEL", slug: string, isAuthenticated: boolean }
+  | { type: "CHAPTER", novelSlug: string, chapterSlug: string, isAuthenticated: boolean }
 
 const getUrl = (props: Props) => {
   const baseCommentsUrl = `${env.NEXT_PUBLIC_BASE_URL}/novels`
@@ -33,13 +33,12 @@ const CommentSection = (props: Props) => {
   }
 
   if (!query.data?.results.length) {
-    return <Empty />
+    return <Empty isAuthenticated={props.isAuthenticated} />
   }
 
   return (
-    <Layout>
-      <Separator className="mt-4" />
-      <div className="py-4 w-full space-y-3 md:space-y-3">
+    <Layout isAuthenticated={props.isAuthenticated}>
+      <div className="w-full space-y-3 md:space-y-3">
         {query.data?.results.map(c => {
           return <Comment key={c.id} comment={c} />
         })}
@@ -48,9 +47,9 @@ const CommentSection = (props: Props) => {
   )
 }
 
-const Empty = () => {
+const Empty = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   return (
-    <Layout>
+    <Layout isAuthenticated={isAuthenticated}>
       <div className="grid place-items-center min-h-[30vh] border border-zinc-50/10">
         <div className="text-center">
           <div className="size-12 rounded-full flex items-center justify-center bg-secondary/50 border border-zinc-50/15 mx-auto mb-2">
@@ -64,12 +63,13 @@ const Empty = () => {
   )
 }
 
-const Layout = ({ children }: PropsWithChildren) => {
+const Layout = ({ children, isAuthenticated = false }: PropsWithChildren<{ isAuthenticated?: boolean }>) => {
   return (
     <div className="space-y-4">
       <p className="text-xl md:text-2xl font-semibold">User Comments</p>
-      <div>
-        <CommentEditor />
+      <div className="space-y-4">
+        <CommentEditor isAuthenticated={isAuthenticated} />
+        <Separator />
         {children}
       </div>
     </div>

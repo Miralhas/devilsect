@@ -5,9 +5,13 @@ import RichTextEditor from "./rich-text-editor";
 import AddCommentButton from "./add-comment-button";
 import { AnimatePresence, motion } from "motion/react";
 
-const CommentEditor = () => {
+const CommentEditor = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   const [showEditor, setShowEditor] = useState(false);
-  const onChangeEditor = () => setShowEditor(prev => !prev);
+  
+  const onChangeEditor = () => {
+    if (!isAuthenticated) return;
+    setShowEditor(prev => !prev)
+  };
 
   return (
     <AnimatePresence mode="wait">

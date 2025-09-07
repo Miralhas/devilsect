@@ -19,7 +19,7 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
   const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`);
 
   return (
-    <section className="bg-zinc-950/70 px-5 md:px-10">
+    <section className="bg-zinc-950/70 px-5 md:px-10 relative">
       <div className="mx-auto max-w-[1024px] md:grid md:grid-cols-[243px_1fr] space-y-4 gap-4 py-8 md:py-12 lg:py-16 xl:px-0 mb-0 relative auto-rows-[350px]">
         <div className="relative max-h-[300px] md:max-h-[350px] aspect-[2/3] w-full md:col-span-1 h-full">
           <DynamicBlurImage

@@ -22,8 +22,10 @@ const CommentBody = ({ comment }: { comment: ThreadedComment; }) => {
           </Button>
         </span>
       )}
-      <div className={cn("blur-none text-sm md:text-base text-zinc-300", spoiler && "blur-sm bg-secondary/60")}>
-        {comment.message}
+      <div
+        className={cn("blur-none text-sm text-zinc-300", spoiler && "blur-sm bg-secondary/60")}
+        dangerouslySetInnerHTML={{__html: comment.message}}
+      >
       </div>
     </div>
   )

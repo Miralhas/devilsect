@@ -37,7 +37,7 @@ const CommentSection = (props: Props) => {
   return (
     <Layout>
       <hr />
-      <div className="py-4 w-full space-y-3 md:space-y-4">
+      <div className="py-4 w-full space-y-3 md:space-y-3">
         {query.data?.results.map(c => {
           return <Comment key={c.id} comment={c} />
         })}
@@ -64,17 +64,17 @@ const Empty = () => {
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <section className="max-w-[1024px] mx-auto space-y-2 px-5 md:px-0">
+    <div>
       <p className="text-xl md:text-2xl font-semibold">User Comments</p>
       <div className="p-3 border border-zinc-50/15 rounded-sm mb-3">
         <p className="text-sm text-muted-foreground">
           Please refrain from posting spoilers to preserve the reading experience for everyone.
         </p>
       </div>
-      <div className="">
+      <div>
         {children}
       </div>
-    </section>
+    </div>
   )
 }
 

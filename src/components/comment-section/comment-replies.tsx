@@ -23,7 +23,7 @@ const CommentReplies = ({ comment, depth, showChildren }: Props) => {
           }}
           style={{ overflow: "hidden" }}
         >
-          <div className="space-y-2 md:space-y-4">
+          <div className="space-y-2 md:space-y-3">
             {comment.childComments.map(c => (
               <Comment key={c.id} comment={c} depth={depth + 1} />
             ))}

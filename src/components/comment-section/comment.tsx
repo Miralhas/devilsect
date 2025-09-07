@@ -19,8 +19,8 @@ const Comment = ({ comment, depth = 0 }: { comment: ThreadedComment, depth?: num
   };
 
   return (
-    <motion.div className={cn("space-y-2 md:space-y-4", !isRoot && "pl-3 ml-1.5 md:pl-6 md:ml-4 border-l border-zinc-50/5")}>
-      <div className="border border-zinc-50/10 rounded-sm min-h-[80px] relative transition-colors duration-200 ease-in-out hover:bg-secondary/10 p-3 md:p-5 space-y-3">
+    <motion.div className={cn("space-y-2 md:space-y-3", !isRoot && "pl-3 ml-1.5 md:pl-6 md:ml-4 border-l border-zinc-50/5")}>
+      <div className="bg-zinc-950/70 border border-white/10 rounded-lg min-h-[80px] relative p-3 md:p-5 space-y-3">
         <CommentHeader comment={comment} />
         <CommentBody comment={comment} />
         <ShowRepliesButton

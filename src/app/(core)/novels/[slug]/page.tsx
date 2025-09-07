@@ -4,6 +4,7 @@ import NovelReviews from "@/components/novel/novel-detail/novel-reviews";
 import RelatedNovels from "@/components/novel/novel-detail/related-novels";
 import SkeletonLoader from "@/components/novel/novel-detail/related-novels/skeleton-loader";
 import { Separator } from "@/components/ui/separator";
+import { getShallowUser } from "@/services/authentication/server-queries";
 import { putView } from "@/services/novels/api";
 import { getNovelBySlug } from "@/services/novels/server-queries";
 import { Suspense } from "react";
@@ -15,6 +16,8 @@ type NovelPageProps = {
 const NovelPage = async ({ params }: NovelPageProps) => {
   const { slug } = await params;
   const novel = await getNovelBySlug(slug);
+  const shallowUser = await getShallowUser();
+  const isAuthenticated = shallowUser !== undefined;
   putView(slug);
 
   return (
@@ -22,7 +25,7 @@ const NovelPage = async ({ params }: NovelPageProps) => {
       <InfoSection novel={novel} />
       <AboutSection novel={novel} />
       <Separator orientation="horizontal" className="mb-12" />
-      <NovelReviews slug={novel.slug} />
+      <NovelReviews slug={novel.slug} isAuthenticated={isAuthenticated} />
       <Suspense fallback={<SkeletonLoader />}>
         <RelatedNovels genre={novel.genres[0]} />
       </Suspense>

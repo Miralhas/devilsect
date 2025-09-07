@@ -12,3 +12,9 @@ export type ThreadedComment = {
   message: string;
   childComments: ThreadedComment[];
 };
+
+export type CommentInput = {
+  message: string;
+  isSpoiler: boolean;
+  parentCommentId: number | null;
+}

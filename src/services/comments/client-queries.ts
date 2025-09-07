@@ -1,7 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getComments } from "./api";
+import { getChapterComments, getNovelReviews } from "./api";
 
-export const useGetComments = ({ url }: { url: string }) => useQuery({
-  queryFn: () => getComments({ url }),
-  queryKey: ["comments", url],
+export const useGetChapterComments = ({ chapterSlug, novelSlug }: { novelSlug: string, chapterSlug: string }) => useQuery({
+  queryFn: () => getChapterComments({ chapterSlug, novelSlug }),
+  queryKey: ["chapter", "comments", chapterSlug],
+});
+
+export const useGetNovelReviews = ({ novelSlug }: { novelSlug: string }) => useQuery({
+  queryFn: () => getNovelReviews(novelSlug),
+  queryKey: ["novel", "reviews", novelSlug],
 });

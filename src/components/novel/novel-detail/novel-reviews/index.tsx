@@ -6,11 +6,13 @@ import Loading from "@/components/loading";
 import { Separator } from "@/components/ui/separator";
 import { useNovelReviewMutation } from "@/services/comments/client-mutations";
 import { useGetNovelReviews } from "@/services/comments/client-queries";
+import { User } from "@/types/authentication";
 import { CommentInput } from "@/types/threaded-comment";
 import { PropsWithChildren } from "react";
 import { toast } from "sonner";
 
-const NovelReviews = ({ slug, isAuthenticated }: { slug: string; isAuthenticated: boolean; }) => {
+const NovelReviews = ({ slug, currentUser }: { slug: string; currentUser?: User }) => {
+  const isAuthenticated = currentUser !== undefined;
   const query = useGetNovelReviews({ novelSlug: slug });
   const mutation = useNovelReviewMutation({ novelSlug: slug });
 
@@ -35,7 +37,7 @@ const NovelReviews = ({ slug, isAuthenticated }: { slug: string; isAuthenticated
     <Layout>
       <NewComment isAuthenticated={isAuthenticated} onSubmit={onSubmit} />
       <Separator />
-      <CommentSection comments={query.data} />
+      <CommentSection comments={query.data} currentUser={currentUser} />
     </Layout>
   )
 }

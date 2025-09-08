@@ -1,6 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { ThreadedComment } from "@/types/threaded-comment";
 import { motion } from "motion/react";
-import { Button } from "@/components/ui/button";
 
 type ShowRepliesProps = {
   hasChildren: boolean;
@@ -16,7 +16,7 @@ const ShowRepliesButton = ({ hasChildren, handleShowChildren, showChildren, comm
         <Button
           variant="link"
           size="none"
-          className="mt-2 text-xs md:text-[13px] text-accent flex items-center gap-1 cursor-pointer w-max hover:no-underline"
+          className="text-xs md:text-[13px] text-accent flex items-center gap-1 cursor-pointer w-max hover:no-underline"
           onClick={handleShowChildren}
         >
           <motion.span

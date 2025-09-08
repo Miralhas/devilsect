@@ -17,7 +17,7 @@ const NovelPage = async ({ params }: NovelPageProps) => {
   const { slug } = await params;
   const novel = await getNovelBySlug(slug);
   const shallowUser = await getShallowUser();
-  const isAuthenticated = shallowUser !== undefined;
+
   putView(slug);
 
   return (
@@ -25,7 +25,7 @@ const NovelPage = async ({ params }: NovelPageProps) => {
       <InfoSection novel={novel} />
       <AboutSection novel={novel} />
       <Separator orientation="horizontal" className="mb-12" />
-      <NovelReviews slug={novel.slug} isAuthenticated={isAuthenticated} />
+      <NovelReviews slug={novel.slug} currentUser={shallowUser} />
       <Suspense fallback={<SkeletonLoader />}>
         <RelatedNovels genre={novel.genres[0]} />
       </Suspense>

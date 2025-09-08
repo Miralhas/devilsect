@@ -1,11 +1,12 @@
 'use client'
 
+import { User } from "@/types/authentication";
 import { PaginatedQuery } from "@/types/pagination";
 import { ThreadedComment } from "@/types/threaded-comment";
 import { FrownIcon } from "lucide-react";
 import Comment from "./comment";
 
-const CommentSection = ({ comments }: { comments?: PaginatedQuery<ThreadedComment[]> }) => {
+const CommentSection = ({ comments, currentUser }: { comments?: PaginatedQuery<ThreadedComment[]>, currentUser?: User }) => {
 
   if (!comments?.results.length) {
     return <Empty />
@@ -14,7 +15,7 @@ const CommentSection = ({ comments }: { comments?: PaginatedQuery<ThreadedCommen
   return (
     <div className="w-full space-y-3 md:space-y-3">
       {comments.results.map(c => {
-        return <Comment key={c.id} comment={c} />
+        return <Comment key={c.id} comment={c} currentUser={currentUser} />
       })}
     </div>
   )

@@ -7,18 +7,17 @@ import {
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
-import { Dispatch, SetStateAction } from "react";
-import { SyntheticEvent, useEffect, useRef, useState } from 'react'
+import { Dispatch, SetStateAction, SyntheticEvent, useEffect, useRef, useState } from "react";
 
-import { setCanvasPreview } from '@/lib/set-canvas-preview'
-import { useDebounceEffect } from '@/hooks/use-debounce-effect'
+import { Button } from "@/components/ui/button";
+import { useDebounceEffect } from '@/hooks/use-debounce-effect';
+import { setCanvasPreview } from '@/lib/set-canvas-preview';
 import ReactCrop, {
   centerCrop,
   Crop,
   makeAspectCrop,
   PixelCrop
-} from 'react-image-crop'
-import { Button } from "@/components/ui/button";
+} from 'react-image-crop';
 
 type Props = {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -126,8 +125,6 @@ const EditImageModal = ({ open, setOpen, imageFile, onStartTransition }: Props) 
     }
 
     blobUrlRef.current = URL.createObjectURL(blob)
-
-    console.log(blobUrlRef.current)
 
     if (hiddenAnchorRef.current) {
       hiddenAnchorRef.current.href = blobUrlRef.current

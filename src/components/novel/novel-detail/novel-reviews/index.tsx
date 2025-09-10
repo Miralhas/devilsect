@@ -4,25 +4,20 @@ import CommentSection from "@/components/comments/comment-section";
 import NewComment from "@/components/comments/new-comment";
 import Loading from "@/components/loading";
 import { Separator } from "@/components/ui/separator";
-import { useNovelReviewMutation } from "@/services/comments/client-mutations";
+import useCommentActions from "@/hooks/use-comment-actions";
 import { useGetNovelReviews } from "@/services/comments/client-queries";
 import { User } from "@/types/authentication";
 import { CommentInput } from "@/types/threaded-comment";
 import { PropsWithChildren } from "react";
-import { toast } from "sonner";
 
 const NovelReviews = ({ slug, currentUser }: { slug: string; currentUser?: User }) => {
   const isAuthenticated = currentUser !== undefined;
   const query = useGetNovelReviews({ novelSlug: slug });
-  const mutation = useNovelReviewMutation({ novelSlug: slug });
+  const { handleNewNovelReview } = useCommentActions();
+
 
   const onSubmit = (commentInput: CommentInput) => {
-    console.log(commentInput)
-    mutation.mutate(commentInput, {
-      onSuccess: () => {
-        toast.success("Review posted!")
-      }
-    })
+    handleNewNovelReview({ commentInput, novelSlug: slug })
   }
 
   if (query.isLoading || query.isError) {

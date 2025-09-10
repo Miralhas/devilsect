@@ -1,10 +1,10 @@
 'use client'
 
+import { CommentInput } from "@/types/threaded-comment";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import RichTextEditor from "../../rich-text-editor";
 import AddCommentButton from "./add-comment-button";
-import { CommentInput } from "@/types/threaded-comment";
 
 type Props = {
   isAuthenticated: boolean;

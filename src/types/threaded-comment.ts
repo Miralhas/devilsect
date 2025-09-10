@@ -7,14 +7,20 @@ export type ThreadedComment = {
   createdAt: string;
   updatedAt: string;
   isSpoiler: boolean;
-  voters: string[];
+  voters: Vote[];
   voteCount: number;
   message: string;
   childComments: ThreadedComment[];
+  type: "NOVEL_REVIEW" | "CHAPTER_REVIEW"
 };
 
 export type CommentInput = {
   message: string;
   isSpoiler: boolean;
   parentCommentId: number | null;
+}
+
+export type Vote = {
+  voter: string;
+  type: "UPVOTE" | "DOWNVOTE"
 }

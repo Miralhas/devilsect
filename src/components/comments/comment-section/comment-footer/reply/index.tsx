@@ -9,42 +9,24 @@ import {
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
-import { useChapterCommentMutation, useNovelReviewMutation } from "@/services/comments/client-mutations";
+import useCommentActions from "@/hooks/use-comment-actions";
 import { CommentInput, ThreadedComment } from "@/types/threaded-comment";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import { MessageCircleMore } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { toast } from "sonner";
 
 const Reply = ({ comment }: { comment: ThreadedComment }) => {
   const [open, setOpen] = useState(false);
-  const { slug: novelSlug, chapterSlug } = useParams<{ slug: string; chapterSlug: string }>();
-  const novelReviewMutation = useNovelReviewMutation({ novelSlug });
-  const chapterReviewMutation = useChapterCommentMutation({ novelSlug, chapterSlug });
+  const { slug: novelSlug,  } = useParams<{ slug: string; chapterSlug: string }>();
+  const { handleNewNovelReview } = useCommentActions();
 
   const onSubmit = (commentInput: CommentInput) => {
-    if (chapterSlug) {
-      onChapterCommentSubmit(commentInput);
-      return;
-    }
-    onNovelReviewSubmit(commentInput);
+    onNovelReplySubmit(commentInput);
   }
 
-  const onChapterCommentSubmit = (commentInput: CommentInput) => {
-    chapterReviewMutation.mutate({ ...commentInput, parentCommentId: comment.id }, {
-      onSuccess: () => {
-        toast.success("Reply posted!")
-      }
-    })
-  }
-
-  const onNovelReviewSubmit = (commentInput: CommentInput) => {
-    novelReviewMutation.mutate({ ...commentInput, parentCommentId: comment.id }, {
-      onSuccess: () => {
-        toast.success("Reply posted!")
-      }
-    })
+  const onNovelReplySubmit = (commentInput: CommentInput) => {
+    handleNewNovelReview({ commentInput: ({ ...commentInput, parentCommentId: comment.id }), novelSlug });
   }
 
   return (

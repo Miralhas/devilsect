@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ThreadedComment } from "@/types/threaded-comment";
 import { motion } from "motion/react";
+import { useEffect, useRef } from "react";
 
 type ShowRepliesProps = {
   hasChildren: boolean;
@@ -10,6 +11,16 @@ type ShowRepliesProps = {
 }
 
 const ShowRepliesButton = ({ hasChildren, handleShowChildren, showChildren, comment }: ShowRepliesProps) => {
+  const commentRef = useRef<number>(comment.childComments.length);
+
+  useEffect(() => {
+    if (comment.childComments.length !== commentRef.current) {
+      commentRef.current = comment.childComments.length;
+      handleShowChildren();
+    }
+  }, [comment.childComments, handleShowChildren])
+
+
   return (
     <>
       {hasChildren && (

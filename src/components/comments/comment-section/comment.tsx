@@ -25,7 +25,7 @@ const Comment = ({ comment, currentUser, depth = 0 }: { comment: ThreadedComment
       <div className="bg-zinc-950/50 border border-white/10 rounded-lg min-h-[80px] relative p-3 md:p-5 space-y-5">
         <CommentHeader comment={comment} />
         <CommentBody comment={comment} />
-        <div className="space-y-2">
+        <div className="space-y-3">
           <CommentFooter comment={comment} currentUser={currentUser} />
           <ShowRepliesButton
             comment={comment}

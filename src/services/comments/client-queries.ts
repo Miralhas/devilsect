@@ -1,3 +1,4 @@
+import { CommentParams } from "@/lib/schemas/comment-params-schema";
 import { useQuery } from "@tanstack/react-query";
 import { getChapterComments, getNovelReviews } from "./api";
 
@@ -6,7 +7,7 @@ export const useGetChapterComments = ({ chapterSlug, novelSlug }: { novelSlug: s
   queryKey: ["chapter", "comments", chapterSlug],
 });
 
-export const useGetNovelReviews = ({ novelSlug }: { novelSlug: string }) => useQuery({
-  queryFn: () => getNovelReviews(novelSlug),
-  queryKey: ["novel", "reviews", novelSlug],
+export const useGetNovelReviews = (props: CommentParams) => useQuery({
+  queryFn: () => getNovelReviews(props),
+  queryKey: ["novel", "reviews", props],
 });

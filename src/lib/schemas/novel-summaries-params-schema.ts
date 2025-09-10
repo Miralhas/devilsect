@@ -11,7 +11,6 @@ export enum SortKey {
 
 export const sortKeyParams = ["views", 'newest', 'popularity', 'rating'] as const
 
-
 export const mapSortKey = (value: string): SortKey => {
   switch (value) {
     case 'views': return SortKey.MOST_VIEWED;

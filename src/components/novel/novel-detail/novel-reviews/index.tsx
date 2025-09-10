@@ -5,19 +5,20 @@ import NewComment from "@/components/comments/new-comment";
 import Loading from "@/components/loading";
 import { Separator } from "@/components/ui/separator";
 import useCommentActions from "@/hooks/use-comment-actions";
+import { SortKey } from "@/lib/schemas/comment-params-schema";
 import { useGetNovelReviews } from "@/services/comments/client-queries";
 import { User } from "@/types/authentication";
 import { CommentInput } from "@/types/threaded-comment";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useState } from "react";
 
 const NovelReviews = ({ slug, currentUser }: { slug: string; currentUser?: User }) => {
   const isAuthenticated = currentUser !== undefined;
-  const query = useGetNovelReviews({ novelSlug: slug });
+  const [selectedFilter, setSelectedFilter] = useState<SortKey>(SortKey.TOP);
+  const query = useGetNovelReviews({ novelSlug: slug, size: 10, sort: selectedFilter });
   const { handleNewNovelReview } = useCommentActions();
 
-
   const onSubmit = (commentInput: CommentInput) => {
-    handleNewNovelReview({ commentInput, novelSlug: slug })
+    handleNewNovelReview({ commentInput, novelSlug: slug });
   }
 
   if (query.isLoading || query.isError) {
@@ -32,7 +33,12 @@ const NovelReviews = ({ slug, currentUser }: { slug: string; currentUser?: User 
     <Layout>
       <NewComment isAuthenticated={isAuthenticated} onSubmit={onSubmit} />
       <Separator />
-      <CommentSection comments={query.data} currentUser={currentUser} />
+      <CommentSection
+        selectedFilter={selectedFilter}
+        setSelectedFilter={setSelectedFilter}
+        comments={query.data}
+        currentUser={currentUser}
+      />
     </Layout>
   )
 }

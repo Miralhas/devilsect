@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { cn } from '@/lib/utils';
-import { CommentInput, ThreadedComment } from '@/types/threaded-comment';
+import { CommentInput } from '@/types/threaded-comment';
 import { Trash } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import Editor, {
@@ -27,12 +27,12 @@ hover:text-accent data-[active=true]:text-accent
 type Props = {
   onCancel: () => void;
   onSubmit: (commentInput: CommentInput) => void;
-  initialComment?: ThreadedComment;
+  initialData?: { message: string, isSpoiler: boolean };
 }
 
-const RichTextEditor = ({ onCancel, onSubmit, initialComment }: Props) => {
-  const [html, setHtml] = useState(initialComment?.message ?? "");
-  const [isSpoiler, setIsSpoiler] = useState(false);
+const RichTextEditor = ({ onCancel, onSubmit, initialData }: Props) => {
+  const [html, setHtml] = useState(initialData?.message ?? "");
+  const [isSpoiler, setIsSpoiler] = useState(initialData?.isSpoiler ?? false);
 
   const hasHtml = html !== null && html !== undefined && html.trim() !== "" && html.trim() !== "<br>";
 

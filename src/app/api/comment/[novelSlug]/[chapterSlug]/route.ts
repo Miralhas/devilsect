@@ -29,13 +29,13 @@ export const POST = async (req: NextRequest, { params }: { params: Promise<{ nov
     if (!res.ok) {
       const error = await res.json() as ApiResponseError;
       console.log(error);
-      NextResponse.json({ error: `Internal Server Error` }, { status: 500 });
+      return NextResponse.json({ error: `Internal Server Error` }, { status: 500 });
     }
 
     return NextResponse.json({ status: 204 });
 
   } catch (err) {
     console.log(err);
-    NextResponse.json({ error: `Internal Server Error ${err}` }, { status: 500 });
+    return NextResponse.json({ error: `Internal Server Error ${err}` }, { status: 500 });
   }
 }

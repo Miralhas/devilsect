@@ -1,10 +1,14 @@
 import { ThreadedComment } from "@/types/threaded-comment";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CommentBody = ({ comment }: { comment: ThreadedComment; }) => {
   const [spoiler, setSpoiler] = useState(comment.isSpoiler);
+
+  useEffect(() => {
+    setSpoiler(comment.isSpoiler);
+  }, [comment.isSpoiler]);
 
   const handleSpoiler = () => setSpoiler(prev => !prev);
 

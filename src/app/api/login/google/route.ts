@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const redirectUri = new URL(req.url).searchParams.get("redirect_uri") ?? "/";
+  const redirectUri = new URL(req.url).searchParams.get("redirectUri") ?? "/";
   const state = generateState();
   const codeVerifier = generateCodeVerifier();
   const url = google.createAuthorizationURL(state, codeVerifier, ["email"]);

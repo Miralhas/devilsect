@@ -28,7 +28,7 @@ const DEFAULT_INVALID_RESET_PASSWORD_TOKEN = "Invalid verification token";
 const DEFAULT_EDIT_PROFILE_MESSAGE = "Failed to Edit Profile. Try again later";
 const DEFAULT_EDIT_PROFILE_IMAGE = "Failed to Edit Profile. Try again later";
 
-export const loginAction = async (prevState: unknown, payload: LoginInput): Promise<AuthenticationFormState> => {
+export const loginAction = async (prevState: unknown, payload: LoginInput & { redirectUri?: string }): Promise<AuthenticationFormState> => {
   const parsed = loginSchema.safeParse(payload);
 
   if (!parsed.success) {
@@ -70,7 +70,7 @@ export const loginAction = async (prevState: unknown, payload: LoginInput): Prom
     };
   }
 
-  redirect("/");
+  redirect(payload.redirectUri ?? "/");
 }
 
 export const signupAction = async (prevState: AuthenticationFormState, payload: SignupInput): Promise<AuthenticationFormState> => {

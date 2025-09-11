@@ -17,10 +17,9 @@ import { startTransition, useActionState, useState } from "react";
 import { useForm } from "react-hook-form";
 import GoogleAuthButton from "../google-auth-button";
 
-const LoginForm = () => {
+const LoginForm = ({ redirectUri = "/" }: { redirectUri?: string }) => {
   const [formState, formAction, isPending] = useActionState(loginAction, { success: false });
   const [showPassword, setShowPassword] = useState(false);
-
   const toggleShowPassword = () => setShowPassword(prev => !prev);
 
   const form = useForm<LoginInput>({
@@ -32,7 +31,7 @@ const LoginForm = () => {
   const { errors: clientErrors } = form.formState;
 
   const onSubmit = form.handleSubmit((data: LoginInput) => {
-    startTransition(() => formAction(data));
+    startTransition(() => formAction({ ...data, redirectUri }));
   });
 
   return (
@@ -105,7 +104,7 @@ const LoginForm = () => {
         </div>
 
         <div className="grid">
-          <GoogleAuthButton />
+          <GoogleAuthButton redirectUri={redirectUri} />
         </div>
       </div>
     </form >

@@ -88,7 +88,7 @@ const ChapterComments = ({ chapterSlug, novelSlug, currentUser }: { chapterSlug:
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <section className="space-y-4">
+    <section className="space-y-4 px-4">
       <p className="text-xl md:text-2xl font-semibold">User Comments</p>
       {children}
     </section>

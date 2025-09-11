@@ -1,56 +1,60 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react';
-
-const synth = window.speechSynthesis;
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const useSpeech = () => {
+  const synthRef = useRef<SpeechSynthesis | null>(null);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [voiceIndex, setVoiceIndex] = useState(0);
   const [text, setText] = useState('');
   const [pitch, setPitch] = useState(1);
   const [rate, setRate] = useState(1);
-  const [speaking, setSpeaking] = useState(synth.speaking);
+  const [speaking, setSpeaking] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
   const populateVoiceList = useCallback(() => {
-    const newVoices = synth.getVoices();
-    setVoices([...newVoices])
+    if (synthRef.current) {
+      const newVoices = synthRef.current.getVoices();
+      setVoices([...newVoices]);
+    }
   }, []);
 
+
   useEffect(() => {
+    synthRef.current = window.speechSynthesis;
     populateVoiceList();
-    if (synth.onvoiceschanged !== undefined) {
-      synth.onvoiceschanged = populateVoiceList;
+    if (synthRef.current.onvoiceschanged !== undefined) {
+      synthRef.current.onvoiceschanged = populateVoiceList;
     }
   }, [populateVoiceList]);
 
   const speak = () => {
+    if (!synthRef.current) return;
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.voice = voices[voiceIndex];
     utterance.rate = rate;
     utterance.pitch = pitch
-    synth.speak(utterance);
+    synthRef.current.speak(utterance);
     setSpeaking(true);
   }
 
   const pause = () => {
-    synth.pause();
+    synthRef.current?.pause();
     setSpeaking(false)
     setIsPaused(true)
   }
 
   const resume = () => {
-    synth.resume();
+    synthRef.current?.resume();
     setSpeaking(true)
     setIsPaused(false);
   }
 
   const cancel = () => {
-    synth.cancel();
+    synthRef.current?.cancel();
     setSpeaking(false)
   }
-  
+
   return {
     cancel,
     resume,

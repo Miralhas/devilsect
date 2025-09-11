@@ -10,12 +10,16 @@ import { StarIcon } from "lucide-react";
 import { useAddUserRatingOnNovel } from "@/services/novels/client-mutations";
 import { toast } from "sonner";
 import { useGetNovelMetrics } from "@/services/novels/client-queries";
+import { User } from "@/types/authentication";
+import { useGlobalLoginContext } from "@/contexts/global-login-context";
 
-const ClientRating = ({ novel, userId }: { novel: Novel, userId: number }) => {
+const ClientRating = ({ novel, user }: { novel: Novel, user?: User }) => {
   const query = useGetNovelMetrics(novel);
   const [rating, setRating] = useState(query.data.ratingValue ?? 0);
   const [userClicked, setUserClicked] = useState(false);
-  const mutation = useAddUserRatingOnNovel({ novel, userId, ratingValue: rating });
+  const mutation = useAddUserRatingOnNovel();
+  const isAuthenticated = user !== undefined;
+  const { handleOpen } = useGlobalLoginContext();
 
   useEffect(() => {
     if (!userClicked) return;
@@ -27,13 +31,29 @@ const ClientRating = ({ novel, userId }: { novel: Novel, userId: number }) => {
     return () => clearTimeout(id);
   }, [userClicked, query.data.ratingValue])
 
+  if (!isAuthenticated) {
+    return (
+      <div className="flex gap-1 items-center ">
+        <Rating
+          value={rating}
+          precision={0.5}
+          max={5}
+          onChange={handleOpen}
+          slotProps={{ icon: { className: "text-[#D3AF37]" } }}
+          sx={{ fontSize: "1.65rem" }}
+        />
+        <RatingLabel size={query.data.ratingSize} value={query.data.ratingValue ?? 0} />
+      </div>
+    )
+  }
+
   const handleRating = (val: number) => {
     setRating(val);
     setUserClicked(true);
   }
 
   const handleMutation = () => {
-    mutation.mutate(undefined, {
+    mutation.mutate({ novel, userId: user.id, ratingValue: rating }, {
       onSuccess: () => {
         toast.success("Rating Saved", { position: "top-center", description: "Rating may take a while to update" });
         setUserClicked(false);
@@ -63,7 +83,7 @@ const ClientRating = ({ novel, userId }: { novel: Novel, userId: number }) => {
           </Button>
         ) : null}
       </div>
-      <CurrentUserRating novelId={novel.id} userId={userId} />
+      <CurrentUserRating novelId={novel.id} userId={user.id} />
     </div>
   )
 }

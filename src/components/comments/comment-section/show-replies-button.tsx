@@ -8,17 +8,18 @@ type ShowRepliesProps = {
   showChildren: boolean;
   handleShowChildren: () => void;
   comment: ThreadedComment;
+  openChildren: () => void;
 }
 
-const ShowRepliesButton = ({ hasChildren, handleShowChildren, showChildren, comment }: ShowRepliesProps) => {
+const ShowRepliesButton = ({ hasChildren, handleShowChildren, showChildren, comment, openChildren }: ShowRepliesProps) => {
   const commentRef = useRef<number>(comment.childComments.length);
 
   useEffect(() => {
     if (comment.childComments.length !== commentRef.current) {
       commentRef.current = comment.childComments.length;
-      handleShowChildren();
+      openChildren();
     }
-  }, [comment.childComments, handleShowChildren])
+  }, [comment.childComments, openChildren])
 
 
   return (

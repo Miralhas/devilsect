@@ -8,13 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import useCommentActions from "@/hooks/use-comment-actions";
 import { SortKey } from "@/lib/schemas/comment-params-schema";
-import { useGetNovelReviews } from "@/services/comments/client-queries";
+import { useGetChapterComments } from "@/services/comments/client-queries";
 import { User } from "@/types/authentication";
 import { CommentInput } from "@/types/threaded-comment";
 import { FrownIcon } from "lucide-react";
 import { Fragment, PropsWithChildren, useState } from "react";
 
-const NovelReviews = ({ slug, currentUser }: { slug: string; currentUser?: User }) => {
+const ChapterComments = ({ chapterSlug, novelSlug, currentUser }: { chapterSlug: string; novelSlug: string; currentUser?: User }) => {
   const isAuthenticated = currentUser !== undefined;
   const [selectedFilter, setSelectedFilter] = useState<SortKey>(SortKey.TOP);
   const {
@@ -25,11 +25,12 @@ const NovelReviews = ({ slug, currentUser }: { slug: string; currentUser?: User 
     hasNextPage,
     fetchNextPage,
     isFetching,
-  } = useGetNovelReviews({ novelSlug: slug, size: 10, sort: selectedFilter });
-  const { handleNewNovelReview } = useCommentActions();
+  } = useGetChapterComments({ chapterSlug, novelSlug, size: 5, sort: selectedFilter });
+  const { handleNewChapterComment } = useCommentActions();
+
 
   const onSubmit = (commentInput: CommentInput) => {
-    handleNewNovelReview({ commentInput, novelSlug: slug });
+    handleNewChapterComment({ commentInput, novelSlug, chapterSlug });
   }
 
   const isEmpty = !data?.pages[0].results.length;
@@ -84,13 +85,12 @@ const NovelReviews = ({ slug, currentUser }: { slug: string; currentUser?: User 
   )
 }
 
+
 const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <section className="px-5 md:px-10">
-      <div className="max-w-[1024px] mx-auto space-y-4">
-        <p className="text-xl md:text-2xl font-semibold">User Reviews</p>
-        {children}
-      </div>
+    <section className="space-y-4">
+      <p className="text-xl md:text-2xl font-semibold">User Comments</p>
+      {children}
     </section>
   )
 }
@@ -109,4 +109,4 @@ const Empty = () => {
   )
 }
 
-export default NovelReviews;
+export default ChapterComments;

@@ -1,14 +1,16 @@
 import { ThreadedComment } from "@/types/threaded-comment";
 import { AnimatePresence, motion } from "motion/react";
 import Comment from "./comment";
+import { User } from "@/types/authentication";
 
 type Props = {
   depth: number;
   showChildren: boolean;
   comment: ThreadedComment;
+  currentUser?: User
 };
 
-const CommentReplies = ({ comment, depth, showChildren }: Props) => {
+const CommentReplies = ({ comment, depth, showChildren, currentUser }: Props) => {
   return (
     <AnimatePresence initial={false}>
       {showChildren && (
@@ -24,8 +26,8 @@ const CommentReplies = ({ comment, depth, showChildren }: Props) => {
           style={{ overflow: "hidden" }}
         >
           <div className="space-y-2 md:space-y-3">
-            {comment.childComments.map(c => (
-              <Comment key={c.id} comment={c} depth={depth + 1} />
+            {comment.childComments.map((c) => (
+              <Comment key={c.id} comment={c} depth={depth + 1} currentUser={currentUser} />
             ))}
           </div>
         </motion.div>

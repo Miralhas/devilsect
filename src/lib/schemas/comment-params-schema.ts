@@ -12,9 +12,11 @@ export const allowedValues = {
 } as const;
 
 export const CommentParamsSchema = z.object({
-  novelSlug: z.string(),
   sort: z.enum(allowedValues.sort).catch(SortKey.TOP).optional(),
   ...zodPagination
 });
 
-export type CommentParams = z.infer<typeof CommentParamsSchema>;
+type CommentParams = z.infer<typeof CommentParamsSchema>;
+
+export type NovelReviewParams = CommentParams & { novelSlug: string };
+export type ChapterCommentParams = CommentParams & { novelSlug: string; chapterSlug: string };

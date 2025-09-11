@@ -13,24 +13,24 @@ export const useNovelReviewMutation = () => {
         throw new Error("Failed to POST novel review!")
       }
     },
-    onSuccess: async (_, { novelSlug }) => {
-      await queryClient.invalidateQueries({ queryKey: ["novel", "reviews", novelSlug] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["novel", "reviews"] });
     },
   });
 }
 
-export const useChapterCommentMutation = ({ novelSlug, chapterSlug }: { novelSlug: string; chapterSlug: string }) => {
+export const useChapterCommentMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (comment: CommentInput) => {
+    mutationFn: async ({ novelSlug, chapterSlug, commentInput }: { novelSlug: string; chapterSlug: string; commentInput: CommentInput; }) => {
       const res = await fetch(`/api/comment/${novelSlug}/${chapterSlug}`, {
         method: "POST",
-        body: JSON.stringify(comment)
+        body: JSON.stringify(commentInput)
       });
       if (!res.ok) throw new Error("Failed to POST chapter comment!")
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["chapter", "comments", chapterSlug] });
+      await queryClient.invalidateQueries({ queryKey: ["chapter", "comments"] });
     }
   });
 }
@@ -46,8 +46,25 @@ export const useDeleteNovelReview = () => {
         throw new Error("Failed to DELETE novel review!")
       }
     },
-    onSuccess: async (_, { novelSlug }) => {
-      await queryClient.invalidateQueries({ queryKey: ["novel", "reviews", novelSlug] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["novel", "reviews"] });
+    }
+  });
+}
+
+export const useDeleteChapterComment = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ commentId, novelSlug, chapterSlug }: { commentId: number, novelSlug: string; chapterSlug: string }) => {
+      const res = await fetch(`/api/comment/${novelSlug}/${chapterSlug}/action/${commentId}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        throw new Error("Failed to DELETE novel review!")
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["chapter", "comments"] });
     }
   });
 }
@@ -64,8 +81,26 @@ export const useUpdateNovelReview = () => {
         throw new Error("Failed to PUT novel review!")
       }
     },
-    onSuccess: async (_, { novelSlug }) => {
-      await queryClient.invalidateQueries({ queryKey: ["novel", "reviews", novelSlug] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["novel", "reviews"] });
+    }
+  });
+}
+
+export const useUpdateChapterComment = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ commentInput, commentId, novelSlug, chapterSlug }: { commentInput: CommentInput, commentId: number, novelSlug: string; chapterSlug: string }) => {
+      const res = await fetch(`/api/comment/${novelSlug}/${chapterSlug}/action/${commentId}`, {
+        method: "PUT",
+        body: JSON.stringify(commentInput)
+      });
+      if (!res.ok) {
+        throw new Error("Failed to PUT novel review!")
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["chapter", "comments"] });
     }
   });
 }

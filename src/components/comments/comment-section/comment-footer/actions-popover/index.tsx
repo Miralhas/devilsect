@@ -13,14 +13,20 @@ import UpdateCommentModal from "./update-comment-modal";
 const ActionsPopover = ({ comment }: { comment: ThreadedComment }) => {
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
-  const { slug: novelSlug,  } = useParams<{ slug: string; chapterSlug: string }>();
-  const { handleDeleteNovelReview, handleUpdateNovelReview } = useCommentActions();
+  const { slug: novelSlug, chapterSlug } = useParams<{ slug: string; chapterSlug: string }>();
+  const { handleDeleteNovelReview, handleUpdateNovelReview, handleUpdateChapterComment, handleDeleteChapterComment } = useCommentActions();
 
   const handleDelete = () => {
+    if (comment.type === "CHAPTER_REVIEW") {
+      return handleDeleteChapterComment({ commentId: comment.id, chapterSlug, novelSlug });
+    }
     handleDeleteNovelReview({ commentId: comment.id, novelSlug });
   }
 
   const handleUpdate = (commentInput: CommentInput) => {
+    if (comment.type === "CHAPTER_REVIEW") {
+      return handleUpdateChapterComment({ commentInput, commentId: comment.id, chapterSlug, novelSlug });
+    }
     handleUpdateNovelReview({ commentInput, commentId: comment.id, novelSlug });
   }
 

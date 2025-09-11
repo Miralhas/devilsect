@@ -18,15 +18,23 @@ import { useState } from "react";
 
 const Reply = ({ comment }: { comment: ThreadedComment }) => {
   const [open, setOpen] = useState(false);
-  const { slug: novelSlug,  } = useParams<{ slug: string; chapterSlug: string }>();
-  const { handleNewNovelReview } = useCommentActions();
+  const { slug: novelSlug, chapterSlug } = useParams<{ slug: string; chapterSlug: string }>();
+  const { handleNewNovelReview, handleNewChapterComment } = useCommentActions();
 
   const onSubmit = (commentInput: CommentInput) => {
+    if (comment.type === "CHAPTER_REVIEW") {
+      return onChapterCommentSubmit(commentInput);
+    }
     onNovelReplySubmit(commentInput);
   }
 
   const onNovelReplySubmit = (commentInput: CommentInput) => {
     handleNewNovelReview({ commentInput: ({ ...commentInput, parentCommentId: comment.id }), novelSlug });
+  }
+
+  const onChapterCommentSubmit = (input: CommentInput) => {
+    const commentInput = { ...input, parentCommentId: comment.id };
+    handleNewChapterComment({ commentInput, novelSlug, chapterSlug });
   }
 
   return (

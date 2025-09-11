@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
+import { useGlobalLoginContext } from "@/contexts/global-login-context";
 import useCommentActions from "@/hooks/use-comment-actions";
 import { CommentInput, ThreadedComment } from "@/types/threaded-comment";
 import { DialogTrigger } from "@radix-ui/react-dialog";
@@ -20,6 +21,7 @@ const Reply = ({ comment, isAuthenticated }: { comment: ThreadedComment; isAuthe
   const [open, setOpen] = useState(false);
   const { slug: novelSlug, chapterSlug } = useParams<{ slug: string; chapterSlug: string }>();
   const { handleNewNovelReview, handleNewChapterComment } = useCommentActions();
+  const { handleOpen: handleLoginDialogOpen } = useGlobalLoginContext();
 
   const onSubmit = (commentInput: CommentInput) => {
     if (comment.type === "CHAPTER_REVIEW") {
@@ -38,7 +40,7 @@ const Reply = ({ comment, isAuthenticated }: { comment: ThreadedComment; isAuthe
   }
 
   const handleOpen = () => {
-    if (!isAuthenticated) return;
+    if (!isAuthenticated) return handleLoginDialogOpen();
     return setOpen(prev => !prev)
   }
 

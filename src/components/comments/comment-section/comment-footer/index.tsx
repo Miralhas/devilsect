@@ -14,7 +14,7 @@ const CommentFooter = ({ comment, currentUser }: { comment: ThreadedComment; cur
     <div className="flex items-center text-muted-foreground gap-5">
       <Vote comment={comment} user={currentUser}/>
       <div className="flex items-center gap-1.5">
-        <Reply comment={comment} />
+        <Reply comment={comment} isAuthenticated={isAuth} />
       </div>
       {(isCommenter || isAdmin) && <ActionsPopover comment={comment} />}
     </div>

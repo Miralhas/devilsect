@@ -16,7 +16,7 @@ import { MessageCircleMore } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
-const Reply = ({ comment }: { comment: ThreadedComment }) => {
+const Reply = ({ comment, isAuthenticated }: { comment: ThreadedComment; isAuthenticated: boolean; }) => {
   const [open, setOpen] = useState(false);
   const { slug: novelSlug, chapterSlug } = useParams<{ slug: string; chapterSlug: string }>();
   const { handleNewNovelReview, handleNewChapterComment } = useCommentActions();
@@ -37,8 +37,13 @@ const Reply = ({ comment }: { comment: ThreadedComment }) => {
     handleNewChapterComment({ commentInput, novelSlug, chapterSlug });
   }
 
+  const handleOpen = () => {
+    if (!isAuthenticated) return;
+    return setOpen(prev => !prev)
+  }
+
   return (
-    <Dialog onOpenChange={setOpen} open={open}>
+    <Dialog onOpenChange={handleOpen} open={open}>
       <DialogTrigger asChild>
         <Button className="hover:text-accent focus-visible:text-accent" variant="pure" size="none">
           <MessageCircleMore className="size-4" strokeWidth={2.5} />

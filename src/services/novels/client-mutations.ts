@@ -1,10 +1,10 @@
 import { Novel } from "@/types/novel";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const useAddUserRatingOnNovel = ({ novel, userId, ratingValue }: { novel: Novel; userId: number, ratingValue: number }) => {
+export const useAddUserRatingOnNovel = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async () => {
+    mutationFn: async ({ novel, ratingValue }: { novel: Novel; userId: number, ratingValue: number }) => {
       const res = await fetch(`/api/novel/ratings/${novel.slug}`, {
         method: 'POST',
         body: JSON.stringify({ ratingValue })
@@ -14,7 +14,7 @@ export const useAddUserRatingOnNovel = ({ novel, userId, ratingValue }: { novel:
     onError: (error) => {
       console.log(`[useAddUserRatingOnNovel] - Error when trying to add rating to novel.': ${error}`);
     },
-    onSettled: () => {
+    onSettled: (_, __, { novel, userId }) => {
       queryClient.invalidateQueries({ queryKey: ["rating", { novelId: novel.id, userId }] });
       queryClient.invalidateQueries({ queryKey: ["novel", "detail", "ratings", novel.id] })
     }

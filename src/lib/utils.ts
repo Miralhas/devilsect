@@ -1,4 +1,4 @@
-import { Role, RoleStatus } from "@/types/authentication";
+import { Role, RoleStatus, User } from "@/types/authentication";
 import { DisplayStatus, NovelStatus } from "@/types/novel";
 import { clsx, type ClassValue } from "clsx";
 import { format, formatDistanceToNowStrict } from "date-fns";
@@ -58,3 +58,5 @@ export const formatFullDate = (date: string) => format(new Date(date), "MMMM dd,
 export const capitalize = (val: string) => {
   return val.split(" ").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");
 }
+
+export const isAdminCheck = (user?: User) => user?.roles.some(r => r === Role.ADMIN);

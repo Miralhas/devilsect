@@ -28,6 +28,7 @@ const UpdatesGrid = ({ recent }: { recent: RecentlyAddedChapter[] }) => {
                     className="w-full h-full object-fill"
                     unoptimized={false}
                     src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${item.novelSlug}/image`}
+                    default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
                   />
                   <BookCoverOverlay />
                 </div>
@@ -61,6 +62,7 @@ const UpdatesGrid = ({ recent }: { recent: RecentlyAddedChapter[] }) => {
                     alt={`${item.novelTitle} cover`}
                     className="w-full h-full object-fill"
                     unoptimized={false}
+                    default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
                     src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${item.novelSlug}/image`}
                   />
                   <BookCoverOverlay />

@@ -16,7 +16,7 @@ export const useAddUserRatingOnNovel = ({ novel, userId, ratingValue }: { novel:
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["rating", { novelId: novel.id, userId }] });
-      queryClient.invalidateQueries({queryKey:  ["novel", "detail", "ratings", novel.id],})
+      queryClient.invalidateQueries({ queryKey: ["novel", "detail", "ratings", novel.id] })
     }
   })
 }

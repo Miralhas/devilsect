@@ -1,6 +1,5 @@
 'use client'
 
-import DynamicBlurImage from "@/components/dynamic-blur-image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,10 +7,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import { createWsrvLoader } from "@/components/wsrvLoader";
 import { env } from "@/env";
 import useLogout from "@/hooks/use-logout";
 import { User } from "@/types/authentication";
 import { BookOpenText, LogOutIcon, Mail, UserIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const UserAccount = ({ user }: { user: User }) => {
@@ -20,13 +21,13 @@ const UserAccount = ({ user }: { user: User }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <DynamicBlurImage
+        <Image
           src={`${env.NEXT_PUBLIC_BASE_URL}/users/${user.id}/image#${new Date().getTime().toString()}`}
           width={32}
           height={32}
-          fill={false}
+          quality={10}
           alt="account image"
-          default={`https://static.devilsect.com/yin-yang.png`}
+          loader={createWsrvLoader({ default: `https://static.devilsect.com/yin-yang-48x48.png` })}
           className="rounded-full size-6 md:size-8 overflow-hidden object-cover object-center shadow-2xl ring-2 ring-secondary cursor-pointer user-profile-header-image"
         />
       </DropdownMenuTrigger>

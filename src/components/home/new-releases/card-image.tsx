@@ -13,6 +13,7 @@ const CardImage = async ({ novelSummary }: { novelSummary: NovelSummary }) => {
         className="w-full h-auto object-cover object-center align-middle duration-300 transition-transform ease-in-out group-hover:scale-110"
         blurData={base64}
         sizes="(max-width: 768px) 25vw, 10vw"
+        default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
       />
     </>
   )

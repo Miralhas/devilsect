@@ -1,6 +1,7 @@
 import { createLoader, parseAsInteger, parseAsString } from 'nuqs/server';
 
 import { z } from "zod";
+import { zodPagination } from './pagination-schema';
 
 
 export enum SortKey {
@@ -33,10 +34,9 @@ export const mapFilter = (value: string): FilterType => {
 
 export const UserLibraryParamsSchema = z.object({
   novelSlug: z.string().optional(),
-  size: z.coerce.number().gt(0).catch(0).optional(),
-  page: z.number().gte(0).catch(0).optional(),
   sort: z.enum(allowedValues.sort).catch(SortKey.LAST_READ).optional(),
   filter: z.enum(allowedValues.filter).catch("").optional(),
+  ...zodPagination
 });
 
 export type UserLibraryParams = z.infer<typeof UserLibraryParamsSchema>;

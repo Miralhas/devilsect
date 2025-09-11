@@ -1,5 +1,6 @@
 import { inferParserType, parseAsArrayOf, parseAsIndex, parseAsInteger, parseAsString, parseAsStringLiteral } from 'nuqs/server';
 import { z } from "zod";
+import { zodPagination } from './pagination-schema';
 
 export enum SortKey {
   MOST_VIEWED = "views,id,desc",
@@ -9,7 +10,6 @@ export enum SortKey {
 }
 
 export const sortKeyParams = ["views", 'newest', 'popularity', 'rating'] as const
-
 
 export const mapSortKey = (value: string): SortKey => {
   switch (value) {
@@ -28,14 +28,13 @@ export const allowedValues = {
 
 export const NovelSummariesParamsSchema = z.object({
   q: z.string().catch("").optional(),
-  size: z.number().gt(0).catch(10).optional(),
   tags: z.string().catch("").optional(),
   genres: z.string().catch("").optional(),
   author: z.string().catch("").optional(),
   chaptersRange: z.enum(allowedValues.chaptersRange).catch("").optional(),
   status: z.enum(allowedValues.status).catch("").optional(),
   sort: z.enum(allowedValues.sort).catch(SortKey.BAYESIAN_RANKING).optional(),
-  page: z.number().gte(0).catch(0).optional(),
+  ...zodPagination
 });
 
 export const nuqsNovelSummariesParams = {

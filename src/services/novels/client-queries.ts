@@ -54,7 +54,9 @@ export const useGetUserRatingOnNovel = (params: { novelId: number, userId: numbe
     if (!res.ok) throw new Error("Failed to fetch user rating on novel");
     return await res.json() as Rating;
   },
-  queryKey: ["rating", params]
+  queryKey: ["rating", params],
+  retry: 0,
+  refetchOnWindowFocus: false
 })
 
 export const useGetNovelSummaries = ({ params, enabled = false }: { params: NovelSummariesParams; enabled?: boolean }) => useQuery({

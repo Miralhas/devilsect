@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction } from "react";
 
 const Filter = ({ selectedFilter, setSelectedFilter }: { selectedFilter: SortKey; setSelectedFilter: Dispatch<SetStateAction<SortKey>> }) => {
   return (
-    <div className="grid w-max grid-cols-3 ms-auto">
+    <div className="grid md:w-max grid-cols-3 ms-auto">
       <Button className="rounded-none"
         size="sm"
         variant={selectedFilter === SortKey.NEWEST ? "cool" : "cool-secondary"}

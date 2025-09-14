@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ChapterContent from "./chapter-content";
 import Settings from "./settings";
+import DisabledLink from "../disabled-link";
 
 const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   const { previous, next } = chapter;
@@ -61,13 +62,13 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
         }} />
 
         <div className="w-full grid grid-cols-[repeat(3,minmax(0px,100px))] gap-4 my-16 items-center justify-center" ref={chapterContentRef}>
-          <Button variant="pure" asChild size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasPrevious} >
-            <Link href={`/novels/${chapter.novelSlug}/${previous?.slug}`} className="pr-1">
+          <Button variant="pure" asChild size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10">
+            <DisabledLink href={`/novels/${chapter.novelSlug}/${previous?.slug}`} className="pr-1" disabled={!hasPrevious}>
               <div className="flex items-center w-full justify-center">
                 <ChevronLeft className="size-5 md:size-6" strokeWidth={4} />
                 <span className="text-sm text-[15px] md:text-base md:text-[17px]">Prev</span>
               </div>
-            </Link>
+            </DisabledLink>
           </Button>
 
           <Button variant="pure" asChild size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10">
@@ -79,13 +80,13 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
             </Link>
           </Button>
 
-          <Button variant="pure" asChild size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10" disabled={!hasNext} >
-            <Link href={`/novels/${chapter.novelSlug}/${next?.slug}`} className="pl-2">
+          <Button variant="pure" asChild size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10">
+            <DisabledLink href={`/novels/${chapter.novelSlug}/${next?.slug}`} className="pl-2" disabled={!hasNext}>
               <div className="flex items-center w-full justify-center">
                 <span className="text-sm text-[15px] md:text-base md:text-[17px]">Next</span>
                 <ChevronRight className="size-5 md:size-6" strokeWidth={4} />
               </div>
-            </Link>
+            </DisabledLink>
           </Button>
         </div>
       </div>

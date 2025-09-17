@@ -13,9 +13,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import useSpeech from "@/hooks/use-speech";
-import { deleteCookie, getCookie, setCookie } from "cookies-next/client";
+import { getCookie, setCookie } from "cookies-next/client";
 import { LanguagesIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { GoogleTranslate } from "./google-trans";
 import TextToSpeech from "./text-to-speech";
 
@@ -23,12 +23,16 @@ const LanguageSettings = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(() => getCookie("googtrans")?.split("/")[2] ?? "en");
   const { cancel } = useSpeech();
 
-  useEffect(() => {
-    if (selectedLanguage) {
-      deleteCookie("googtrans")
-      setCookie("googtrans", `/en/${selectedLanguage}`, { path: "/", encode: (val: string) => val })
+  const handleChangeLanguage = (lang: string) => {
+    const select = document.querySelector<HTMLSelectElement>(".goog-te-combo");
+    if (select) {
+      select.value = lang; // e.g., 'pt' or 'es'
+      select.dispatchEvent(new Event("change"));
+      setSelectedLanguage(lang)
+      setCookie("googtrans", `/en/${lang}`, { path: "/", encode: (val: string) => val });
+      window.location.reload();
     }
-  }, [selectedLanguage]);
+  }
 
   const onReset = () => {
     const select = document.querySelector<HTMLSelectElement>(".goog-te-combo");
@@ -58,7 +62,7 @@ const LanguageSettings = () => {
             </AccordionTrigger>
             <AccordionContent>
               <div className="grid">
-                <GoogleTranslate selectedLanguage={selectedLanguage} setSelectedLanguage={setSelectedLanguage} />
+                <GoogleTranslate selectedLanguage={selectedLanguage} handleChangeLanguage={handleChangeLanguage} />
               </div>
               <p className="text-muted-foreground text-xs">
                 If the page is not translating, try refreshing it.

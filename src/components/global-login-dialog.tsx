@@ -9,15 +9,13 @@ import {
 } from "@/components/ui/dialog";
 import { useGlobalLoginContext } from "@/contexts/global-login-context";
 import Link from "next/link";
-import LoginForm from "./authentication/login/form";
 import { usePathname } from "next/navigation";
-import { User } from "@/types/authentication";
-import { use, useEffect } from "react";
+import { useEffect } from "react";
+import LoginForm from "./authentication/login/form";
 
-const GlobalLoginDialog = ({ shallowUser }: { shallowUser: Promise<User | undefined> }) => {
-  const { handleOpen, open, close } = useGlobalLoginContext();
+const GlobalLoginDialog = () => {
+  const { handleOpen, open, close, currentUser: user } = useGlobalLoginContext();
   const pathname = usePathname();
-  const user = use(shallowUser);
 
   useEffect(() => {
     if (user && open) {

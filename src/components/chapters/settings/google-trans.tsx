@@ -1,6 +1,5 @@
 "use client";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dispatch, SetStateAction } from 'react';
 
 const languages = [
   { value: "en", label: "English" },
@@ -30,21 +29,13 @@ const languages = [
 ]
 interface GoogleTranslateProps {
   selectedLanguage: string;
-  setSelectedLanguage: Dispatch<SetStateAction<string>>
+  handleChangeLanguage: (lang: string) => void;
 }
 
-export function GoogleTranslate({ selectedLanguage, setSelectedLanguage }: GoogleTranslateProps) {
-  const onChange = (lang: string) => {
-    const select = document.querySelector<HTMLSelectElement>(".goog-te-combo");
-    if (select) {
-      select.value = lang; // e.g., 'pt' or 'es'
-      select.dispatchEvent(new Event("change"));
-      setSelectedLanguage(lang)
-    }
-  };
+export function GoogleTranslate({ selectedLanguage, handleChangeLanguage }: GoogleTranslateProps) {
 
   return (
-    <Select value={selectedLanguage} onValueChange={onChange}>
+    <Select value={selectedLanguage} onValueChange={handleChangeLanguage}>
       <SelectTrigger className='w-full'>
         <SelectValue placeholder="Select a language" />
       </SelectTrigger>

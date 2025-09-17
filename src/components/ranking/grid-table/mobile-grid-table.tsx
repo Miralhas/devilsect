@@ -1,11 +1,11 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import { NovelSummary } from "@/types/novel";
 import { env } from "process";
-import { getOverallScore, getRankingLabel } from "./utils";
+import { checkIfNovelIsTrend, getOverallScore, getRankingLabel } from "./utils";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { formatMonthYear, formatViews, statusMap } from "@/lib/utils";
-import { BookOpenText, CalendarIcon, EyeIcon, StarIcon } from "lucide-react";
+import { BookOpenText, CalendarIcon, EyeIcon, FlameIcon, StarIcon } from "lucide-react";
 
 type Props = {
   novels: NovelSummary[];
@@ -42,7 +42,7 @@ const MobileGridTable = async ({ novels }: Props) => {
               </div>
 
               <div className="flex flex-col gap-1 w-full">
-                <div className="space-y-0.5  max-w-[80%]">
+                <div className="space-y-0.5 max-w-[80%]">
                   <Link
                     href={`/novels/${novel.slug}`}
                     className="font-medium transition-colors line-clamp-2 capitalize w-full text-sm leading-none"
@@ -56,11 +56,18 @@ const MobileGridTable = async ({ novels }: Props) => {
                 </div>
 
 
-                <div className="flex items-center whitespace-nowrap">
+                <div className="grid grid-cols-[min-content_min-content] gap-x-2 items-center">
                   <Badge variant="cool"
                     className="text-zinc-200 w-full max-w-[70px] whitespace-nowrap flex items-center py-0.5 pb-1 leading-none text-[10px]">
                     {statusMap[novel.status]}
                   </Badge>
+                  {checkIfNovelIsTrend(novel) && (
+                    <div className="relative flex items-center justify-center">
+                      <span className="inline-flex gap-0.5 items-center justify-center border border-accent/90 bg-primary/40 text-xs text-[10px] text-red-700 font-bold px-1.5 pb-0.25 rounded-sm italic">HOT</span>
+                      <FlameIcon className="size-3.5 absolute -top-1.5 -right-1.5 text-amber-600" />
+                    </div>
+
+                  )}
                 </div>
 
                 <div className="grid grid-cols-[max-content_max-content] grid-rows-2 gap-x-3.5 gap-y-1">

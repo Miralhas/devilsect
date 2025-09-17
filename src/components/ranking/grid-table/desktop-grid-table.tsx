@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { env } from "@/env";
 import { formatMonthYear, formatViews, statusMap } from "@/lib/utils";
 import { NovelSummary } from "@/types/novel";
-import { BookOpenText, CalendarIcon, EyeIcon, StarIcon } from "lucide-react";
+import { BookOpenText, CalendarIcon, EyeIcon, FlameIcon, StarIcon } from "lucide-react";
 import Link from "next/link";
 import { checkIfNovelIsTrend, getOverallScore, getRankingLabel } from "./utils";
 
@@ -39,7 +39,10 @@ const DesktopGridTable = ({ novels }: Props) => {
 
               <div className="min-w-0 justify-self-start space-y-0.5 col-span-1">
                 {checkIfNovelIsTrend(novel) && (
-                  <span className="inline-block border border-accent/90 bg-primary/40 text-xs text-[10px] text-red-700 font-bold px-1.5 py-0.25 rounded-sm ">HOT</span>
+                  <div className="relative w-max">
+                      <span className="inline-flex gap-0.5 items-center justify-center border border-accent/90 bg-primary/40 text-xs text-[10px] text-red-700 font-bold px-1.5 pb-0.25 rounded-sm italic">HOT</span>
+                      <FlameIcon className="size-3.5 absolute -top-0.5 -right-1.5 text-amber-600" />
+                    </div>
                 )}
                 <Link
                   href={`/novels/${novel.slug}`}
@@ -48,7 +51,7 @@ const DesktopGridTable = ({ novels }: Props) => {
                   {novel.title}
                 </Link>
                 <div className="text-xs text-[13px] text-muted-foreground hidden md:block">
-                  <p className="line-clamp-2">{novel.author}</p>
+                  <p className="line-clamp-2"><span className="text-muted-foreground font-light text-xs text-[11px]">by</span>{" "}{novel.author}</p>
                 </div>
               </div>
 

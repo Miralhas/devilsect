@@ -40,7 +40,7 @@ const FontSettings = () => {
           </Button>
         </PopoverTrigger>
 
-        <PopoverContent className="w-[280px] bg-background pt-0" sideOffset={16.5}>
+        <PopoverContent className="w-[280px] bg-background pt-0" sideOffset={22}>
           <AutoScroll />
           <div className="grid gap-5">
             <div className="w-full space-y-2">

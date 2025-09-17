@@ -29,6 +29,7 @@ type ReaderSettingsContextState = {
   textColor: AvailableColors;
   opacity: number;
   autoScroll: AutoScroll,
+  spacing: number;
 }
 
 type ReaderSettingsContextActions = {
@@ -36,6 +37,8 @@ type ReaderSettingsContextActions = {
   increaseFontSize: () => void;
   increaseLineHeight: () => void;
   decreaseFontSize: () => void;
+  increaseSpacing: () => void;
+  decreaseSpacing: () => void;
   decreaseLineHeight: () => void;
   changeFontFamily: (font: AvailableFonts) => void;
   changeTextColor: (color: AvailableColors) => void;
@@ -53,6 +56,7 @@ const INITIAL_DESKTOP_FONT_SIZE = 18;
 
 const initialValues: ReaderSettingsContextState = {
   fontSize: 16,
+  spacing: 16,
   lineHeight: 25,
   fontFamily: "font-atkinson",
   textColor: { name: "lightSilver", color: '#e0e0e0' },
@@ -67,6 +71,7 @@ const { ContextProvider, useContext } = createContext<ReaderSettingsContextState
 export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
   const isMobile = useIsMobile();
   const [fontSize, setFontSize] = useState(initialValues["fontSize"]);
+  const [spacing, setSpacing] = useState(initialValues["spacing"]);
   const [fontFamily, setFontFamily] = useState(initialValues["fontFamily"]);
   const [lineHeight, setLineHeight] = useState(initialValues["lineHeight"]);
   const [textColor, setTextColor] = useState(initialValues["textColor"]);
@@ -78,6 +83,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
     if (readerSettingsString) {
       const readerSettings: InitialValuesType = JSON.parse(readerSettingsString);
       setFontSize(readerSettings.fontSize ?? initialValues["fontSize"]);
+      setSpacing(readerSettings.fontSize ?? initialValues["spacing"]);
       setFontFamily(readerSettings.fontFamily ?? initialValues["fontFamily"]);
       setLineHeight(readerSettings.lineHeight ?? initialValues["lineHeight"]);
       setTextColor(readerSettings.textColor ?? initialValues["textColor"]);
@@ -90,8 +96,8 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("reader-settings", JSON.stringify({ fontSize, fontFamily, lineHeight, textColor, opacity, autoScroll }));
-  }, [fontSize, fontFamily, lineHeight, textColor, opacity, autoScroll]);
+    localStorage.setItem("reader-settings", JSON.stringify({ fontSize, fontFamily, lineHeight, textColor, opacity, autoScroll, spacing }));
+  }, [fontSize, fontFamily, lineHeight, textColor, opacity, autoScroll, spacing]);
 
   const reset = () => {
     setFontSize(isMobile ? initialValues["fontSize"] : INITIAL_DESKTOP_FONT_SIZE);
@@ -100,6 +106,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
     setTextColor(initialValues["textColor"]);
     setOpacity(initialValues["opacity"]);
     setAutoScroll(initialValues["autoScroll"]);
+    setSpacing(initialValues["spacing"]);
   }
 
   const increaseLineHeight = () => {
@@ -116,6 +123,14 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
 
   const decreaseFontSize = () => {
     setFontSize(prev => prev - 1);
+  }
+
+  const increaseSpacing = () => {
+    setSpacing(prev => prev + 1);
+  }
+
+  const decreaseSpacing = () => {
+    setSpacing(prev => prev - 1);
   }
 
   const changeFontFamily = (font: AvailableFonts) => {
@@ -163,6 +178,7 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
         textColor,
         opacity,
         autoScroll,
+        spacing,
         decreaseFontSize,
         increaseFontSize,
         decreaseLineHeight,
@@ -177,6 +193,8 @@ export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
         autoScrollPause,
         autoScrollUnpause,
         onAutoScrollPauseChange,
+        increaseSpacing,
+        decreaseSpacing,
       }}
     >
       {children}

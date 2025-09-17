@@ -79,7 +79,7 @@ const UpdatesGrid = ({ recent }: { recent: RecentlyAddedChapter[] }) => {
 
                 <div className="min-w-0 justify-self-start">
                   <Link
-                    href={`/novels/${item.novelSlug}/${item.chapterNumber}`}
+                    href={`/novels/${item.novelSlug}/${item.slug}`}
                     className="text-sm hover:text-accent transition-colors font-medium text-zinc-300"
                   >
                     {item.title}

@@ -13,6 +13,9 @@ export type NovelSummary = {
   isHidden: boolean;
   chaptersCount: number;
   ratingValue: number | null;
+  views: number;
+  bayesianScore: number;
+  createdAt: string;
 };
 
 export type Novel = {

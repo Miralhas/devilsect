@@ -11,7 +11,7 @@ const InfoOverlay = ({ status, ratingValue }: Pick<NovelSummary, "status" | "rat
 
       <div className="absolute bottom-0 left-0 lg:top-0 lg:bottom-auto bg-gray-950/60 rounded-bl text-white text-xs p-1 font-bold flex gap-1 items-center">
         <StarIcon className="size-2.5 text-[#D3AF37]" fill="#D3AF37" />
-        <span className="text-xs text-[10px]">{ratingValue ?? '0.0'}</span>
+        <span className="text-xs text-[10px]">{ratingValue ?? 'N/A'}</span>
       </div>
     </>
   )

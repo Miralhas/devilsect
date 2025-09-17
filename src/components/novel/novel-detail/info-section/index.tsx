@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import wsrvLoader from "@/components/wsrvLoader";
 import { env } from "@/env";
 import { getBlurData } from "@/lib/get-blur-data";
-import { statusMap } from "@/lib/utils";
+import { formatViews, statusMap } from "@/lib/utils";
 import { Novel } from "@/types/novel";
 import { BookOpenText, Eye } from "lucide-react";
 import Image from "next/image";
@@ -52,7 +52,7 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
               </div>
               <div className="flex items-center gap-1">
                 <Eye className="size-5 relative top-0.25 hidden xs:block" />
-                <p className="text-muted-foreground text-sm whitespace-nowrap">{novel.metrics.views} Views</p>
+                <p className="text-muted-foreground text-sm whitespace-nowrap">{formatViews(novel.metrics.views)} Views</p>
               </div>
             </div>
             <div className="space-y-1">

@@ -13,15 +13,15 @@ const Vote = ({ comment, user }: { comment: ThreadedComment; user?: User }) => {
 
   return (
     <div className="flex items-center gap-2">
-      <Button className="" size="none" variant="pure" onClick={isAuthenticated ? onUpVote : handleOpen}>
+      <Button className="transition-colors hover:text-accent/90 duration-100 hover:fill-accent/40" size="none" variant="pure" onClick={isAuthenticated ? onUpVote : handleOpen}>
         <LucideThumbsUp
-          className={cn("size-4 transition-colors hover:text-accent/90 duration-100 hover:fill-accent/40 cursor-pointer", isUpvoter && "fill-accent/40 text-accent/90")}
+          className={cn("size-4 cursor-pointer", isUpvoter && "fill-accent/40 text-accent/90")}
         />
       </Button>
       <span className="text-xs font-semibold">{voteCount}</span>
-      <Button className="" size="none" variant="pure" onClick={isAuthenticated ? onDownVote : handleOpen}>
+      <Button className="transition-colors hover:text-accent/90 duration-100 hover:fill-accent/40" size="none" variant="pure" onClick={isAuthenticated ? onDownVote : handleOpen}>
         <LucideThumbsDown
-          className={cn("size-4 relative top-0.25 transition-colors hover:text-accent/90 duration-100 hover:fill-accent/40 cursor-pointer", isDownvoter && "fill-accent/40 text-accent/90")}
+          className={cn("size-4 relative top-0.25 cursor-pointer", isDownvoter && "fill-accent/40 text-accent/90")}
         />
       </Button>
     </div>

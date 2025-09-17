@@ -10,7 +10,7 @@ const CommentHeader = ({ comment: { commenter, createdAt } }: { comment: Threade
       <div className="overflow-hidden rounded-full border border-zinc-50/10">
         <Image
           loader={createWsrvLoader({ default: `https://static.devilsect.com/yin-yang-48x48.png` })}
-          src={`${env.NEXT_PUBLIC_BASE_URL}/users/${commenter.id}/image`}
+          src={`${env.NEXT_PUBLIC_BASE_URL}/users/${commenter.id}/image#${new Date().getTime().toString()}`}
           height={40}
           width={40}
           alt="user profile image"

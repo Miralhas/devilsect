@@ -21,7 +21,7 @@ const ReleasesCardHorizontal = async (res: PaginatedQuery<NovelSummary[]>) => {
                 <div className="flex gap-3 items-center text-muted-foreground">
                   <div className="text-xs font-bold flex gap-1 items-center">
                     <StarIcon className="size-3 text-yellow-500" fill="#D3AF37" />
-                    <span className="text-xs text-[11px]">{novel.ratingValue ?? '4.74'}</span>
+                    <span className="text-xs text-[11px]">{novel.ratingValue ?? 'N/A'}</span>
                   </div>
                   <div className="flex items-center gap-1  font-semibold">
                     <BookOpenText className="size-4" />

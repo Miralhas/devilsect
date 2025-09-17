@@ -29,6 +29,9 @@ type ReaderSettingsContextState = {
   textColor: AvailableColors;
   opacity: number;
   autoScroll: AutoScroll,
+}
+
+type ReaderSettingsContextActions = {
   reset: () => void;
   increaseFontSize: () => void;
   increaseLineHeight: () => void;
@@ -48,7 +51,7 @@ type ReaderSettingsContextState = {
 const AUTO_SCROLL_SPEED_OFFSET = 0.25;
 const INITIAL_DESKTOP_FONT_SIZE = 18;
 
-const initialValues: Pick<ReaderSettingsContextState, "fontFamily" | "fontSize" | "lineHeight" | "textColor" | "opacity" | 'autoScroll'> = {
+const initialValues: ReaderSettingsContextState = {
   fontSize: 16,
   lineHeight: 25,
   fontFamily: "font-atkinson",
@@ -59,7 +62,7 @@ const initialValues: Pick<ReaderSettingsContextState, "fontFamily" | "fontSize" 
 
 type InitialValuesType = typeof initialValues;
 
-const { ContextProvider, useContext } = createContext<ReaderSettingsContextState>();
+const { ContextProvider, useContext } = createContext<ReaderSettingsContextState & ReaderSettingsContextActions>();
 
 export const ReaderSettingsProvider = ({ children }: PropsWithChildren) => {
   const isMobile = useIsMobile();

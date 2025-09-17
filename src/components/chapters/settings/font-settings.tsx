@@ -94,7 +94,7 @@ const FontSettings = () => {
                   size="none"
                   className="rounded-full p-2 border bg-secondary"
                   onClick={decreaseLineHeight}
-                  disabled={lineHeight >= MAXIMUM_FONT_LIMIT}
+                  disabled={lineHeight <= MINIMUM_FONT_LIMIT}
                 >
                   <MinusIcon className="size-4 text-zinc-300" strokeWidth={4} />
                 </Button>
@@ -104,7 +104,7 @@ const FontSettings = () => {
                   size="none"
                   className="rounded-full p-2 border bg-secondary"
                   onClick={increaseLineHeight}
-                  disabled={lineHeight <= MINIMUM_FONT_LIMIT}
+                  disabled={lineHeight >= MAXIMUM_FONT_LIMIT}
                 >
                   <PlusIcon className="size-4 text-zinc-300" strokeWidth={4} />
                 </Button>

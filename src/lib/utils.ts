@@ -53,10 +53,17 @@ export const buildQueryString = <T extends Record<string, string | number | bool
 export const leadingZero = (num: number, places: number) => (num).toString().padStart(places, "0");
 
 export const formatDate = (date: string) => formatDistanceToNowStrict(new Date(date).toString(), { locale: enUS, addSuffix: true });
-export const formatFullDate = (date: string) => format(new Date(date), "MMMM dd, yyyy 'at' hh':'mm a", { locale: enUS })
+export const formatFullDate = (date: string) => format(new Date(date), "MMMM dd, yyyy 'at' hh':'mm a", { locale: enUS });
+export const formatMonthYear = (date: string) => format(new Date(date), "MMM yyyy", { locale: enUS });
 
 export const capitalize = (val: string) => {
   return val.split(" ").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");
 }
 
 export const isAdminCheck = (user?: User) => user?.roles.some(r => r === Role.ADMIN);
+
+export const formatViews = (views: number) => {
+  if (views >= 1000000) return `${(views / 1000000).toFixed(1)}M`;
+  if (views >= 1000) return `${(views / 1000).toFixed(1)}K`;
+  return views.toString()
+}

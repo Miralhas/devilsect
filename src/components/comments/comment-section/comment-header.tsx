@@ -1,10 +1,10 @@
 import { createWsrvLoader } from "@/components/wsrvLoader";
 import { env } from "@/env";
 import { formatDate, mapRoles } from "@/lib/utils";
-import { ThreadedComment } from "@/types/threaded-comment";
+import { User } from "@/types/authentication";
 import Image from "next/image";
 
-const CommentHeader = ({ comment: { commenter, createdAt } }: { comment: ThreadedComment }) => {
+const CommentHeader = ({ commenter, createdAt }: { commenter: User, createdAt: string; }) => {
   return (
     <div className="w-full flex gap-2 items-start overflow-hidden">
       <div className="overflow-hidden rounded-full border border-zinc-50/10">

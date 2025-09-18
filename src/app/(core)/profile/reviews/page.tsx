@@ -1,15 +1,42 @@
 import ProfileHeader from "@/components/profile/profile-header";
-import { StarIcon } from "lucide-react";
+import ReviewList from "@/components/profile/user-comments-and-reviews/reviews/review-list";
+import ReviewPageHeader from "@/components/profile/user-comments-and-reviews/reviews/review-page-header";
+import { initialCommentParams } from "@/lib/schemas/comment-params-schema";
+import { deleteSession, getSession } from "@/lib/sessions";
+import { getShallowUser } from "@/services/authentication/server-queries";
+import { getUserReviews } from "@/services/comments/api";
+import { redirect } from "next/navigation";
 
-const ReviewsPage = () => {
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
+
+const ReviewsPage = async () => {
+  const session = await getSession();
+  const user = await getShallowUser();
+
+  if (!user) {
+    await deleteSession();
+    redirect("/login");
+  }
+
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['user', 'reviews', initialCommentParams],
+    queryFn: () => getUserReviews(initialCommentParams, session),
+  })
+
   return (
     <section className="p-4 md:p-10 space-y-12">
       <ProfileHeader />
-      <div className="h-64 flex border flex-col items-center justify-center gap-2 text-muted-foreground">
-        <div className="p-5 rounded-full bg-secondary justify-self-center border border-zinc-50/10">
-          <StarIcon className="size-6.5" />
-        </div>
-        <p className="text-sm md:text-base">No reviews have been written.</p>
+      <div className="space-y-6">
+        <ReviewPageHeader />
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <ReviewList session={session} user={user} />
+        </HydrationBoundary>
       </div>
     </section>
   )

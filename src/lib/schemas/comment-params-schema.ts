@@ -16,7 +16,12 @@ export const CommentParamsSchema = z.object({
   ...zodPagination
 });
 
-type CommentParams = z.infer<typeof CommentParamsSchema>;
+export const initialCommentParams: Required<CommentParams> = {
+  page: 0,
+  size: 4,
+  sort: SortKey.NEWEST
+}
 
+export type CommentParams = z.infer<typeof CommentParamsSchema>;
 export type NovelReviewParams = CommentParams & { novelSlug: string };
 export type ChapterCommentParams = CommentParams & { novelSlug: string; chapterSlug: string };

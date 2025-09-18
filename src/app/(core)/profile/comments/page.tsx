@@ -1,16 +1,36 @@
 import ProfileHeader from "@/components/profile/profile-header";
-import { MessageCircle } from "lucide-react";
+import CommentList from "@/components/profile/user-comments-and-reviews/chapter-comment/comment-list";
+import CommentsPageHeader from "@/components/profile/user-comments-and-reviews/chapter-comment/comments-page-header";
+import { initialCommentParams } from "@/lib/schemas/comment-params-schema";
+import { deleteSession, getSession } from "@/lib/sessions";
+import { getShallowUser } from "@/services/authentication/server-queries";
+import { getUserComments } from "@/services/comments/api";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { redirect } from "next/navigation";
 
-const CommentsPage = () => {
+const CommentsPage = async () => {
+  const session = await getSession();
+  const user = await getShallowUser();
+
+  if (!user) {
+    await deleteSession();
+    redirect("/login");
+  }
+
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['user', 'comments', initialCommentParams],
+    queryFn: () => getUserComments(initialCommentParams, session),
+  })
+
   return (
     <section className="p-4 md:p-10 space-y-12">
       <ProfileHeader />
-      <div className="h-64 flex border flex-col items-center justify-center gap-2 text-muted-foreground">
-        <div className="p-5 rounded-full bg-secondary justify-self-center border border-zinc-50/10">
-          <MessageCircle className="size-6.5" />
-        </div>
-        <p className="text-sm md:text-base">No comments have been written.</p>
-      </div>
+      <CommentsPageHeader />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <CommentList session={session} user={user} />
+      </HydrationBoundary>
     </section>
   )
 }

@@ -8,14 +8,8 @@ import { UserChapterComment } from "@/types/threaded-comment";
 import Image from "next/image";
 import Link from "next/link";
 import UserCommentFooter from "../user-comment-footer";
-import { useState } from "react";
-import ConfirmDeleteDialog from "@/components/confirm-delete-dialog";
-import { useRouter } from "next/navigation";
 
 const UserChapterCommentContainer = ({ comment, user }: { comment: UserChapterComment; user: User }) => {
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
-
   return (
     <>
       <div className="bg-zinc-950/50 border group border-white/10 rounded-lg min-h-[80px] relative p-3 md:p-5 space-y-3 transition-all duration-200 ease-in-out">
@@ -32,12 +26,8 @@ const UserChapterCommentContainer = ({ comment, user }: { comment: UserChapterCo
           </Link>
           <div className="flex flex-col gap-1">
             <Link
-              href={`/novels/${comment.novelSlug}/${comment.chapterSlug}`}
+              href={`/novels/${comment.novelSlug}/${comment.chapterSlug}/comments`}
               className="inline-flex gap-1 font-semibold text-sm text-zinc-300 hover:text-zinc-300/80 duration-200 transition-colors capitalize"
-              onClick={(e) => {
-                e.preventDefault();
-                setOpen(true);
-              }}
             >
               {comment.novelTitle}
               <span className="text-muted-foreground text-sm hidden xs:inline-block">•</span>
@@ -54,11 +44,6 @@ const UserChapterCommentContainer = ({ comment, user }: { comment: UserChapterCo
           </div>
         </div>
       </div>
-      <ConfirmDeleteDialog
-        onSubmit={() => router.push(`/novels/${comment.novelSlug}/${comment.chapterSlug}`)}
-        open={open} setOpen={setOpen}
-        description="When you open a chapter through a comment link, it will be added to your reading history. This may affect your chapter progress and history records."
-        title="Chapter History May Change" />
     </>
   )
 }

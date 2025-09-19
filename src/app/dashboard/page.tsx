@@ -1,0 +1,13 @@
+import DashboardSearch from "@/components/dashboard/search/dashboard-search";
+
+const LayoutPage = () => {
+  return (
+    <section className="pt-8 container w-full mx-auto p-6">
+      <div className="flex w-full items-center justify-center">
+        <DashboardSearch />
+      </div>
+    </section>
+  )
+}
+
+export default LayoutPage;

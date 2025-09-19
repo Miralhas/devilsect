@@ -24,3 +24,26 @@ export type Vote = {
   voter: string;
   type: "UPVOTE" | "DOWNVOTE"
 }
+
+export type UserComment = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  isSpoiler: boolean;
+  voteCount: number;
+  message: string;
+}
+
+export type UserReview = UserComment & {
+  novelSlug: string;
+  novelTitle: string;
+  type: "NOVEL_REVIEW";
+}
+
+export type UserChapterComment = UserComment & {
+  novelSlug: string;
+  novelTitle: string;
+  chapterTitle: string;
+  chapterSlug: string;
+  type: "CHAPTER_REVIEW";
+}

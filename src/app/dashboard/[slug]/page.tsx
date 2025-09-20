@@ -13,7 +13,7 @@ const DashboardNovelPage = async ({ params }: NovelPageProps) => {
   const novel = await getNovelBySlug(slug);
 
   return (
-    <div className="pt-4 space-y-4">
+    <div className="space-y-4">
       <div className="flex items-center gap-2">
         <div className="h-[50px] aspect-[3/4]">
           <DynamicBlurImage

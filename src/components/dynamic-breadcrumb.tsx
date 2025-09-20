@@ -28,13 +28,14 @@ const DynamicBreadcrumb = () => {
         {pathNames.map((p, index) => {
           const href = `/${pathNames.slice(0, index + 1).join('/')}`
           const isLast = index + 1 === pathNames.length;
+          const formattedName = p.replaceAll("-", " ");
           return (
             <>
               {!isLast ? (
                 <>
                   <BreadcrumbItem key={index}>
                     <BreadcrumbLink asChild>
-                      <Link href={href} className="capitalize">{p.replaceAll("-", " ")}</Link>
+                      <Link href={href} className="capitalize">{formattedName}</Link>
                     </BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator>
@@ -43,7 +44,7 @@ const DynamicBreadcrumb = () => {
                 </>
               ) : (
                 <BreadcrumbItem key={index}>
-                  <BreadcrumbPage className="capitalize">{p.replaceAll("-", " ")}</BreadcrumbPage>
+                  <BreadcrumbPage className="capitalize">{formattedName}</BreadcrumbPage>
                 </BreadcrumbItem>
               )}
             </>

@@ -17,10 +17,10 @@ import { Genre, Novel, NovelStatus, Tag } from "@/types/novel";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { startTransition, useActionState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import DescriptionPreviewModal from "./description-preview-modal";
 import NovelGenres from "./novel-genres";
 import TagsCombobox from "./tags-combobox";
-import { toast } from "sonner";
 
 const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
   const action = updateNovelAction.bind(null, novel)

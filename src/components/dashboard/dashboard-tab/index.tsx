@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import NovelInfo from "./novel-info";
 import { Separator } from "@/components/ui/separator";
 import { Novel } from "@/types/novel";
+import NovelChapters from "./novel-chapters";
 
 const DashboardTab = ({ novel }: { novel: Novel }) => {
   return (
@@ -14,7 +15,9 @@ const DashboardTab = ({ novel }: { novel: Novel }) => {
       <TabsContent value="novel-info">
         <NovelInfo novel={novel} />
       </TabsContent>
-      <TabsContent value="chapters">Change your password here.</TabsContent>
+      <TabsContent value="chapters">
+        <NovelChapters novel={novel} />
+      </TabsContent>
     </Tabs>
   )
 }

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const NovelItem = ({ novel }: { novel: NovelSummary }) => {
   return (
-    <Link href={`/novels/${novel.slug}`} className="pr-1">
+    <Link href={`/dashboard/${novel.slug}`} className="pr-1">
       <div className="group w-full border border-zinc-50/15 hover:border-accent/60 hover:bg-primary/10 rounded-md bg-zinc-950/50 p-2 flex gap-3 items-center transition-colors duration-300 ease-in-out hover:text-accent">
         <div className="aspect-[4/4] h-[40px] min-w-[40px] overflow-hidden rounded-none relative">
           <DynamicBlurImage

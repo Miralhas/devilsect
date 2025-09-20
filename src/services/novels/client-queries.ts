@@ -1,7 +1,8 @@
 import { env } from "@/env";
 import { NovelSummariesParams, NovelSummariesParamsSchema } from "@/lib/schemas/novel-summaries-params-schema";
+import { PaginationSchema, PaginationSchemaParams } from "@/lib/schemas/pagination-schema";
 import { buildQueryString } from "@/lib/utils";
-import { Genre, Metrics, Novel, NovelSummary } from "@/types/novel";
+import { Genre, Metrics, Novel, NovelSummary, Tag } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
 import { Rating } from "@/types/rating";
 import { useQuery } from "@tanstack/react-query";
@@ -35,6 +36,22 @@ const getNovelGenres = async () => {
   return await res.json() as Genre[]
 }
 
+const getNovelTags = async (params: PaginationSchemaParams) => {
+  const parsed = PaginationSchema.parse(params);
+  const queryString = buildQueryString(parsed);
+  const url = `${env.NEXT_PUBLIC_BASE_URL}/tags${queryString}`;
+
+  const res = await fetch(url, {
+    method: "GET",
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch tags: ${res.status} ${res.statusText}`);
+  }
+
+  return await res.json() as PaginatedQuery<Tag[]>
+}
+
 const getNovelMetrics = async (novelSlug: string) => {
   const url = `${env.NEXT_PUBLIC_BASE_URL}/novels/${novelSlug}/metric`;
   const res = await fetch(url, {
@@ -57,21 +74,26 @@ export const useGetUserRatingOnNovel = (params: { novelId: number, userId: numbe
   queryKey: ["rating", params],
   retry: 0,
   refetchOnWindowFocus: false
-})
+});
 
 export const useGetNovelSummaries = ({ params, enabled = false }: { params: NovelSummariesParams; enabled?: boolean }) => useQuery({
   queryFn: async () => getNovelSummaries(params),
   queryKey: ["novel", "list", params],
   enabled: () => !!params.q || enabled,
-})
+});
 
 export const useGetGenres = () => useQuery({
   queryFn: getNovelGenres,
   queryKey: ["genre", "list"]
-})
+});
+
+export const useGetTags = (params: PaginationSchemaParams) => useQuery({
+  queryFn: () => getNovelTags(params),
+  queryKey: ["tag", "list", params]
+});
 
 export const useGetNovelMetrics = (novel: Novel) => useQuery({
   queryFn: () => getNovelMetrics(novel.slug),
   queryKey: ["novel", "detail", "ratings", novel.id],
   initialData: novel.metrics,
-})
+});

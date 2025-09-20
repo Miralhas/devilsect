@@ -1,4 +1,4 @@
-import { Home } from "lucide-react"
+import { FilePenLine, Home } from "lucide-react"
 
 import {
   Sidebar,
@@ -15,6 +15,11 @@ import Link from "next/link"
 import { NavUser } from "./nav-user"
 
 const items = [
+  {
+    title: "Dashboard",
+    url: "/dashboard",
+    icon: FilePenLine
+  },
   {
     title: "Home",
     url: "/",

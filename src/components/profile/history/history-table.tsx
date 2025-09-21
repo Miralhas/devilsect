@@ -4,7 +4,7 @@ import HistoryGrid from "./history-grid";
 import HistoryHeader from "./history-header";
 
 const HistoryTable = async () => {
-  const library = await getUserLibrary({ size: 100 });
+  const library = await getUserLibrary({ size: 100 }, "no-store");
   if (!library) redirect("/error");
   
   return (

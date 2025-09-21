@@ -9,6 +9,8 @@ import RankingSkeletonLoader from "@/components/home/skeletons/ranking-skeleton-
 import RecentlyAddedChapterSkeletonLoader from "@/components/home/skeletons/recently-added-chapters-skeleton-loader";
 import { Suspense } from "react";
 
+export const revalidate = 43200; // 12 hours
+
 const HomePage = () => {
   return (
     <div className="min-h-[100vh]">

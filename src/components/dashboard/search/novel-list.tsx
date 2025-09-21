@@ -12,18 +12,16 @@ const NovelList = ({ title }: { title: string }) => {
   const query = useGetNovelSummaries({ params: { q: title, size: 18, sort: SortKey.NEWEST_RELEASES } });
 
   if (query.isLoading) {
-    return <Loading />
+    return <Loading className="min-h-[30vh]" />
   }
 
   if (query.isError) {
     return (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center min-h-[30vh]">
         <p>Error...</p>
       </div>
     )
   }
-
-  console.log(!query.data?.results.length);
 
   if (!query.data?.results.length) {
     return <Empty q={title} />

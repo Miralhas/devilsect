@@ -11,11 +11,11 @@ import {
 import { SlashIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Fragment } from "react";
 
 const DynamicBreadcrumb = () => {
   const pathname = usePathname()
   const pathNames = pathname.split('/').filter(path => path);
-  console.log(pathNames);
 
   if (pathNames.length <= 1) {
     return <Breadcrumb>
@@ -30,10 +30,10 @@ const DynamicBreadcrumb = () => {
           const isLast = index + 1 === pathNames.length;
           const formattedName = p.replaceAll("-", " ");
           return (
-            <>
+            <Fragment key={index}>
               {!isLast ? (
                 <>
-                  <BreadcrumbItem key={index}>
+                  <BreadcrumbItem>
                     <BreadcrumbLink asChild>
                       <Link href={href} className="capitalize">{formattedName}</Link>
                     </BreadcrumbLink>
@@ -43,11 +43,11 @@ const DynamicBreadcrumb = () => {
                   </BreadcrumbSeparator>
                 </>
               ) : (
-                <BreadcrumbItem key={index}>
+                <BreadcrumbItem>
                   <BreadcrumbPage className="capitalize">{formattedName}</BreadcrumbPage>
                 </BreadcrumbItem>
               )}
-            </>
+            </Fragment>
           )
         })}
       </BreadcrumbList>

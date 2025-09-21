@@ -13,7 +13,7 @@ const DashboardLayout = async ({ children }: PropsWithChildren) => {
   return (
     <SidebarProvider>
       <AppSidebar user={user} />
-      <main className="min-h-[300vh] w-full relative max-w-[1120px] mx-auto p-6">
+      <main className="min-h-[300vh] w-full relative p-6">
         <SidebarTrigger className="md:hidden" />
         <SidebarInset className="h-full space-y-8">
           <DynamicBreadcrumb />

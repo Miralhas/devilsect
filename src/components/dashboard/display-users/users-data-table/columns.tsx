@@ -20,7 +20,8 @@ export const columns: ColumnDef<UserInfo>[] = [
         alt="user image"
         className="text-transparent rounded-full"
       />
-    }
+    },
+    enableSorting: false,
   },
   { accessorKey: "id", header: "Id" },
   { accessorKey: "username", header: "Username" },

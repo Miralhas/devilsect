@@ -1,11 +1,13 @@
 import { env } from "@/env";
-import { NovelSummariesParams, NovelSummariesParamsSchema } from "@/lib/schemas/novel-summaries-params-schema";
+import { NovelSummariesParams, NovelSummariesParamsSchema, SortKey } from "@/lib/schemas/novel-summaries-params-schema";
 import { PaginationSchema, PaginationSchemaParams } from "@/lib/schemas/pagination-schema";
 import { buildQueryString } from "@/lib/utils";
 import { Genre, Metrics, Novel, NovelSummary, Tag } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
 import { Rating } from "@/types/rating";
-import { useQuery } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
+
+type NovelSummaryParams = { params: NovelSummariesParams; enabled?: boolean };
 
 const getNovelSummaries = async (params: NovelSummariesParams) => {
   const parsed = NovelSummariesParamsSchema.parse(params);
@@ -76,11 +78,19 @@ export const useGetUserRatingOnNovel = (params: { novelId: number, userId: numbe
   refetchOnWindowFocus: false
 });
 
-export const useGetNovelSummaries = ({ params, enabled = false }: { params: NovelSummariesParams; enabled?: boolean }) => useQuery({
-  queryFn: async () => getNovelSummaries(params),
-  queryKey: ["novel", "list", params],
-  enabled: () => !!params.q || enabled,
-});
+export const useGetNovelSummaries = ({ params, enabled = false }: NovelSummaryParams) => (
+  useQuery(novelSummariesQueryOptions({ params, enabled }))
+);
+
+export const novelSummariesQueryOptions = ({ params, enabled = false }: NovelSummaryParams) => (
+  queryOptions({
+    queryFn: async () => getNovelSummaries(params),
+    queryKey: ["novel", "list", params],
+    enabled: () => !!params.q || enabled,
+  })
+);
+
+export const novelSummariesInitialParams: NovelSummariesParams = { size: 50, page: 0, sort: SortKey.BAYESIAN_RANKING };
 
 export const useGetGenres = () => useQuery({
   queryFn: getNovelGenres,

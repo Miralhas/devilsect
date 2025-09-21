@@ -1,5 +1,6 @@
 'use client'
 
+import GenericPagination from "@/components/generic-pagination";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,6 +8,9 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -16,7 +20,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { allUsersInitialParams, useGetAllUsers } from "@/services/authentication/client-queries";
+import { allUsersInitialParams } from "@/services/authentication/client-queries";
+import { novelSummariesInitialParams, useGetNovelSummaries } from "@/services/novels/client-queries";
 import {
   ColumnFiltersState,
   flexRender,
@@ -29,30 +34,25 @@ import {
   VisibilityState
 } from "@tanstack/react-table";
 import { ChevronDown, ChevronUp, ColumnsIcon, SearchIcon, XIcon } from "lucide-react";
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { useMemo, useRef, useState } from "react";
 import { columns } from "./columns";
-import GenericPagination from "@/components/generic-pagination";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
 
-const UsersDataTable = ({ session }: { session?: RequestCookie }) => {
+const NovelsDataTable = () => {
   const divRef = useRef<HTMLDivElement>(null);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState<string[] | undefined>([])
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
-    completedCount: false,
-    reviewsCount: false,
-    bookmarkCount: false,
-  });
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: allUsersInitialParams["page"],
     pageSize: allUsersInitialParams["size"],
   })
 
-  const query = useGetAllUsers({ page: pagination.pageIndex, size: pagination.pageSize }, session);
+  const query = useGetNovelSummaries({
+    params: { ...novelSummariesInitialParams, page: pagination.pageIndex, size: pagination.pageSize },
+    enabled: true,
+  });
 
   const defaultData = useMemo(() => [], []);
 
@@ -91,8 +91,8 @@ const UsersDataTable = ({ session }: { session?: RequestCookie }) => {
     <section className="space-y-4" >
       <div className="overflow-hidden rounded-md border p-4 space-y-4 min-h-[90vh] scroll-m-4" ref={divRef}>
         <div className="flex items-center justify-between">
-          <p className="text-lg font-semibold tracking-tight inline-flex gap-2 items-center">Users Table
-            <span className="text-xs relative top-0.25 text-muted-foreground font-normal">{query.data?.totalItems} total users</span>
+          <p className="text-lg font-semibold tracking-tight inline-flex gap-2 items-center">Novels Table
+            <span className="text-xs relative top-0.25 text-muted-foreground font-normal">{query.data?.totalItems} total novels</span>
           </p>
           <div className="flex gap-4">
             <div className="relative">
@@ -231,4 +231,4 @@ const UsersDataTable = ({ session }: { session?: RequestCookie }) => {
   )
 }
 
-export default UsersDataTable;
+export default NovelsDataTable;

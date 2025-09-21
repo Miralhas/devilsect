@@ -1,3 +1,4 @@
+import DisplayNovels from "@/components/dashboard/display-novels";
 import DisplayUsers from "@/components/dashboard/display-users";
 import DashboardSearch from "@/components/dashboard/search/dashboard-search";
 
@@ -8,6 +9,7 @@ const LayoutPage = () => {
         <DashboardSearch />
       </div>
       <DisplayUsers />
+      <DisplayNovels />
     </section>
   )
 }

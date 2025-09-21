@@ -35,7 +35,7 @@ export const TagsCombobox = ({ tags, handleTags, handleRemoveSelectedTag }: Prop
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild id="novel-tags">
         <div
           aria-expanded={open}
           className="flex text-sm flex-wrap items-center w-full h-auto bg-secondary/30 border border-zinc-50/15 rounded-md py-1.5 px-3 cursor-pointer [&_svg]:size-5 [&_svg]:ms-auto"

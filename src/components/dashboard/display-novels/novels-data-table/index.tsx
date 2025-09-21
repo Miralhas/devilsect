@@ -90,19 +90,19 @@ const NovelsDataTable = () => {
   return (
     <section className="space-y-4" >
       <div className="overflow-hidden rounded-md border p-4 space-y-4 min-h-[90vh] scroll-m-4" ref={divRef}>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col md:flex-row gap-y-2 md:items-center justify-between">
           <p className="text-lg font-semibold tracking-tight inline-flex gap-2 items-center">Novels Table
             <span className="text-xs relative top-0.25 text-muted-foreground font-normal">{query.data?.totalItems} total novels</span>
           </p>
           <div className="flex gap-4">
-            <div className="relative">
+            <div className="relative w-full">
               <SearchIcon className="absolute top-2.5 left-2.25 size-3.5 text-muted-foreground" />
               <Input
                 type="text"
                 value={globalFilter}
                 onChange={e => table.setGlobalFilter(String(e.target.value))}
                 placeholder="Global filter..."
-                className="max-w-sm h-8 placeholder:text-xs pl-7"
+                className="w-full md:max-w-sm h-8 placeholder:text-xs pl-7"
               />
               {globalFilter?.length ? (
                 <Button variant="pure" size="icon" className="absolute rounded-full right-0.5 -top-0.25 text-muted-foreground hover:text-inherit transition-colors ease-in-out duration-200 cursor-pointer" onClick={() => setGlobalFilter([])} >

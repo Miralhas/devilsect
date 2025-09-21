@@ -192,7 +192,7 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
       </div>
 
       <div className="grid gap-3">
-        <Label htmlFor="" className="font-semibold text-muted-foreground inline-flex gap-2 items-center">Tags
+        <Label htmlFor="novel-tags" className="font-semibold text-muted-foreground inline-flex gap-2 items-center">Tags
           <span className="text-xs relative top-0.25 font-light">{tags.length} selected</span>
         </Label>
         <TagsCombobox handleTags={handleTags} tags={tags} handleRemoveSelectedTag={handleRemoveSelectedTag} />

@@ -67,7 +67,7 @@ export const getRecentlyAddedChapters = async (): Promise<RecentlyAddedChapter[]
   return await res.json() as RecentlyAddedChapter[]
 }
 
-export const getUserLibrary = async (params: UserLibraryParams): Promise<PaginatedQuery<Library[]> | undefined> => {
+export const getUserLibrary = async (params: UserLibraryParams, cache: RequestCache = "default"): Promise<PaginatedQuery<Library[]> | undefined> => {
   const session = await getSession();
   if (!session) return;
 
@@ -83,7 +83,8 @@ export const getUserLibrary = async (params: UserLibraryParams): Promise<Paginat
   const res = await fetch(url, {
     method: "GET",
     headers: myHeaders,
-    next: { tags: ["library"] }
+    next: { tags: ["library"] },
+    cache
   });
 
   if (!res.ok) {

@@ -5,11 +5,11 @@ import { mapSortKey, nuqsNovelSummariesParams } from "@/lib/schemas/novel-summar
 import { useGetNovelSummaries } from "@/services/novels/client-queries";
 import { motion } from "framer-motion";
 import { BookIcon } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useQueryStates } from "nuqs";
 import ClientNovelCard from "../../novel-card/client-novel-card";
 import SkeletonLoader from "./skeleton-loder";
-import Link from "next/link";
 
 const MotionLink = motion.create(Link);
 
@@ -28,7 +28,7 @@ const NovelList = () => {
       page: params.page,
       status: params.status,
       sort: mapSortKey(params.sort),
-      chaptersRange: params.chaptersRange
+      chaptersRange: params.chaptersRange,
     }
   });
 
@@ -78,7 +78,7 @@ const NovelList = () => {
             transition={{ duration: 0.2 }}
             href={`/novels/${novel.slug}`}
           >
-              <ClientNovelCard key={novel.id} novel={novel} size="lg" imageSizes="(max-width: 768px)30vw, 10vw" />
+            <ClientNovelCard key={novel.id} novel={novel} size="lg" imageSizes="(max-width: 768px)30vw, 10vw" />
           </MotionLink>
         ))}
       </div>

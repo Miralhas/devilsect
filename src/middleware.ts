@@ -2,6 +2,7 @@ import { decrypt, deleteSession, updateSession } from '@/lib/sessions';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { SESSION_COOKIE_NAME } from './lib/constants';
+import { isAdminCheck } from './lib/utils';
 
 const protectedRoutes = [
   '/profile',
@@ -12,18 +13,30 @@ const protectedRoutes = [
   '/profile/inbox',
 ];
 
+const adminRoutes = [
+  "/dashboard"
+]
+
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(path);
+  const isAdminRoute = adminRoutes.includes(path);
 
   const cookie = (await cookies()).get(SESSION_COOKIE_NAME)?.value;
   const session = await decrypt(cookie);
+  const isAuthenticated = cookie && !!session?.sub;
 
-  if (cookie && session?.sub) {
+
+  if (isAuthenticated) {
     await updateSession(cookie);
   }
 
-  if (isProtectedRoute && !session?.sub) {
+  if (isAdminRoute && !isAdminCheck(session?.user)) {
+    if (isAuthenticated) return NextResponse.redirect(new URL('/', req.nextUrl));
+    return NextResponse.redirect(new URL('/login', req.nextUrl));
+  }
+
+  if (isProtectedRoute && !isAuthenticated) {
     await deleteSession();
     return NextResponse.redirect(new URL('/login', req.nextUrl));
   }

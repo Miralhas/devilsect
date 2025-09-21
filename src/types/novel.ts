@@ -1,7 +1,7 @@
 import { ChapterSummary } from "./chapter";
 
-export type NovelStatus = 'ON_GOING' | 'COMPLETED';
 export type DisplayStatus = 'Ongoing' | 'Completed';
+export type NovelStatus = 'ON_GOING' | 'COMPLETED';
 
 export type NovelSummary = {
   id: number;
@@ -21,6 +21,7 @@ export type NovelSummary = {
 export type Novel = {
   id: number;
   slug: string;
+  alias: string | null;
   title: string;
   author: string;
   status: NovelStatus;
@@ -56,6 +57,13 @@ export type EldersChoice = {
 }
 
 export type Genre = {
+  id: number;
+  name: string;
+  description: string;
+  slug: string;
+}
+
+export type Tag = {
   id: number;
   name: string;
   description: string;

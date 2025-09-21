@@ -14,7 +14,7 @@ type Props = {
 }
 
 const LibraryTable = async ({ params: { filter, size, sort } }: Props) => {
-  const library = await getUserLibrary({ filter: mapFilter(filter), size, sort: mapSortKey(sort) });
+  const library = await getUserLibrary({ filter: mapFilter(filter), size, sort: mapSortKey(sort) }, "no-store");
   if (!library) redirect("/error");
 
   return (

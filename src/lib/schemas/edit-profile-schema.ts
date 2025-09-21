@@ -31,10 +31,6 @@ export const editProfileSchema = z.object({
     .optional()
     .or(z.literal('')).transform(val => val === "" ? undefined : val),
 })
-// .refine(value => value.password ? value.confirmPassword === value.password : true, {
-//   message: "inc",
-//   path: ["confirmPassword"]
-// })
 .refine(value => value.password === value.confirmPassword, {
   message: "Passwords must be the same",
   path: ["confirmPassword"]

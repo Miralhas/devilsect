@@ -27,10 +27,12 @@ const CommentsPage = async () => {
   return (
     <section className="p-4 md:p-10 space-y-12">
       <ProfileHeader />
-      <CommentsPageHeader />
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <CommentList session={session} user={user} />
-      </HydrationBoundary>
+      <div className="space-y-6">
+        <CommentsPageHeader />
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <CommentList session={session} user={user} />
+        </HydrationBoundary>
+      </div>
     </section>
   )
 }

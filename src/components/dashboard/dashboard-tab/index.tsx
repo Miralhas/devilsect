@@ -5,6 +5,7 @@ import { Novel } from "@/types/novel";
 import NovelChapters from "./novel-chapters";
 
 const DashboardTab = ({ novel }: { novel: Novel }) => {
+  
   return (
     <Tabs defaultValue="novel-info" className="w-full">
       <TabsList className="grid grid-cols-2 w-full border border-zinc-50/10">

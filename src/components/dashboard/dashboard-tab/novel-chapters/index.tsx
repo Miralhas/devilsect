@@ -13,27 +13,56 @@ import {
 import { Novel } from "@/types/novel";
 import { useRef, useState } from "react";
 import ChapterAccordionContent from "./chapters-accordion-content";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const MAX_CHAPTERS_PER_BUTTON = 100;
 
 const NovelChapters = ({ novel }: { novel: Novel }) => {
+  const [goto, setGoto] = useState<number>(0);
   const [sort, setSort] = useState<"NEWEST" | "OLDEST">("NEWEST");
   const totalButtons = Math.ceil(novel.chaptersCount / MAX_CHAPTERS_PER_BUTTON);
+  const router = useRouter();
+
+  const handleSetGoto = (val: string) => {
+    if (isNaN(Number(val))) {
+      return setGoto(0);
+    }
+    return setGoto(Number(val));
+  }
+
+  const onGo = () => {
+    const slugArr = novel.firstChapter.slug.split("-");
+    slugArr[2] = goto > novel.chaptersCount ? novel.chaptersCount.toString() : goto.toString();
+    const slug = slugArr.join("-");
+    router.push(`/dashboard/${novel.slug}/${slug}`);
+  }
 
   return (
     <div className="space-y-3 grid">
-      <Select value={sort} onValueChange={(val) => setSort(val as "NEWEST" | "OLDEST")}>
-        <SelectTrigger className="w-full max-w-[100px] col-span-1 self-center justify-self-end">
-          <SelectValue placeholder="Sort" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Sorts</SelectLabel>
-            <SelectItem value="NEWEST">Newest</SelectItem>
-            <SelectItem value="OLDEST">Oldest</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      <div className="w-full grid grid-cols-2">
+        <div className="space-y-1 col-span-1 col-start-1">
+          <Label htmlFor="goto" className="text-xs text-muted-foreground">Go to chapter</Label>
+          <div className="flex items-center gap-2">
+            <Input id="goto" type="text" className="h-8 max-w-xs" value={goto} onChange={(e) => handleSetGoto(e.target.value)} />
+            <Button className="" variant="cool-secondary" size="sm" disabled={!goto} onClick={onGo}>Go</Button>
+          </div>
+        </div>
+        <Select value={sort} onValueChange={(val) => setSort(val as "NEWEST" | "OLDEST")}>
+          <SelectTrigger className="w-full max-w-[100px] col-span-1 col-start-2 self-center justify-self-end">
+            <SelectValue placeholder="Sort" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Sorts</SelectLabel>
+              <SelectItem value="NEWEST">Newest</SelectItem>
+              <SelectItem value="OLDEST">Oldest</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
       <Accordion
         type="single"
         collapsible

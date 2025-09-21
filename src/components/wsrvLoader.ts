@@ -91,7 +91,7 @@ const wsrvLoader = ({ src, width, quality }: ImageLoaderProps) => {
     output: 'webp',
     fit: 'cover',
     dpr: 2,
-    maxage: '30d',
+    maxage: '3d',
     il: true,
     af: true,
   });
@@ -108,7 +108,7 @@ export const createWsrvLoader = (params?: WsrvParams) => {
       output: params?.output || 'webp',
       fit: params?.fit || 'cover',
       dpr: params?.dpr || 2,
-      maxage: params?.maxage || '30d',
+      maxage: params?.maxage || '3d',
       il: params?.il || true,
       af: params?.af || true,
     });

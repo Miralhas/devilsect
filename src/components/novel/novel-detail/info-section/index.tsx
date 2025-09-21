@@ -28,7 +28,8 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
             blurData={base64}
             alt={novel.title + " cover"}
             src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
-            className="object-contain md:object-cover z-[1] rounded-r-lg h-full shadow-2xl"
+            className="object-contain md:object-cover z-[1] rounded-r-lg h-full shadow-2xl text-transparent"
+            default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
           />
           <div className="absolute inset-0 md:hidden w-full h-full">
             <Image
@@ -37,7 +38,7 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
               src={base64}
               alt="glass effect background"
               sizes="(max-width: 768px) 90vw, 0vw"
-              className="object-center object-cover opacity-30"
+              className="object-center object-cover opacity-30 text-transparent"
               loader={wsrvLoader}
             />
           </div>

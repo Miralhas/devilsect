@@ -153,3 +153,8 @@ export const editNovelImage = async (novel: Novel, prevState: unknown, payload: 
   revalidatePath("/", "layout");
   return { success: true, message: "Success!" };
 }
+
+export const purgeDataCache = async () => {
+  revalidatePath("/", "layout");
+  console.log("Purging All Data Cache");
+}

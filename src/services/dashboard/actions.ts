@@ -16,8 +16,14 @@ type DashboardFormState = {
   errors?: Record<string, string[]>;
 }
 
+type ActionState = {
+  success?: boolean;
+  message?: string;
+}
+
 const DEFAULT_UPDATE_NOVEL_MESSAGE = "Failed to update novel. Try again later!";
 const DEFAULT_UPDATE_CHAPTER_MESSAGE = "Failed to update chapter. Try again later!";
+const DEFAULT_EDIT_NOVEL_IMAGE_MESSAGE = "Failed to Edit Novel Image. Try again later";
 
 export const updateNovelAction = async (novel: Novel, prevState: DashboardFormState, payload: UpdateNovelInput): Promise<DashboardFormState> => {
 
@@ -79,7 +85,7 @@ export const updateChapterAction = async (chapter: Chapter, prevState: Dashboard
     return { success: false, fields, errors };
   }
 
-   try {
+  try {
     const url = `${env.APP_URL}/novels/${chapter.novelSlug}/chapters/${chapter.slug}`;
 
     const session = await getSession();
@@ -117,4 +123,33 @@ export const updateChapterAction = async (chapter: Chapter, prevState: Dashboard
 
   revalidatePath("/", "layout");
   return { success: true, fields: parsed.data };
+}
+
+export const editNovelImage = async (novel: Novel, prevState: unknown, payload: { imageBlob: Blob }): Promise<ActionState> => {
+  const session = await getSession();
+  if (!session) throw new Error(DEFAULT_EDIT_NOVEL_IMAGE_MESSAGE);
+
+  const formData = new FormData();
+
+  formData.append("file", payload.imageBlob);
+
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`, {
+      headers: { "Authorization": `Bearer ${session.value}` },
+      body: formData,
+      method: "PUT"
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      return { success: false, message: data.detail ?? DEFAULT_EDIT_NOVEL_IMAGE_MESSAGE };
+    }
+
+  } catch (err) {
+    console.log(err);
+    return { success: false, message: DEFAULT_EDIT_NOVEL_IMAGE_MESSAGE };
+  }
+
+  revalidatePath("/", "layout");
+  return { success: true, message: "Success!" };
 }

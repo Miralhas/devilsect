@@ -91,9 +91,10 @@ const wsrvLoader = ({ src, width, quality }: ImageLoaderProps) => {
     output: 'webp',
     fit: 'cover',
     dpr: 2,
-    maxage: '3d',
+    maxage: '7d',
     il: true,
     af: true,
+    evict: "1"
   });
   return `https://wsrv.nl/${queryString}`;
 };
@@ -108,9 +109,10 @@ export const createWsrvLoader = (params?: WsrvParams) => {
       output: params?.output || 'webp',
       fit: params?.fit || 'cover',
       dpr: params?.dpr || 2,
-      maxage: params?.maxage || '3d',
+      maxage: params?.maxage || '7d',
       il: params?.il || true,
       af: params?.af || true,
+      evict: "1"
     });
 
     return `https://wsrv.nl/${queryString}`;

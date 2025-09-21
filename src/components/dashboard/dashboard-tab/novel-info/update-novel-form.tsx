@@ -32,9 +32,9 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
     } else if (formState.success) {
       toast.success("Novel updated successfully!");
     } else {
-      toast.error("Failed to update novel!");
+      toast.error("Failed to update novel!", { description: formState.errors!["error"] ?? "" });
     };
-  }, [formState.success]);
+  }, [formState.success, formState.errors]);
 
   const form = useForm<UpdateNovelInput>({
     resolver: zodResolver(updateNovelSchema),

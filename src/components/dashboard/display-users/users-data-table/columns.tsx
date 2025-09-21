@@ -78,6 +78,6 @@ export const columns: ColumnDef<UserInfo>[] = [
       return (
         <span className="inline-flex justify-center w-full">{row.original.completedCount}</span>
       )
-    }
+    },
   },
 ]

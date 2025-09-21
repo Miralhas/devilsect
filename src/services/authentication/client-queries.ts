@@ -51,4 +51,4 @@ export const allUsersQueryOptions = (params: PaginationSchemaParams, session?: R
   }
 }
 
-export const allUsersInitialParams: Required<PaginationSchemaParams> = { page: 0, size: 20 };
+export const allUsersInitialParams: Required<PaginationSchemaParams> = { page: 0, size: 50 };

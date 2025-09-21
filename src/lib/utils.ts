@@ -54,7 +54,7 @@ export const leadingZero = (num: number, places: number) => (num).toString().pad
 
 export const formatDate = (date: string) => formatDistanceToNowStrict(new Date(date).toString(), { locale: enUS, addSuffix: true });
 export const formatFullDate = (date: string) => format(new Date(date), "MMMM dd, yyyy 'at' hh':'mm a", { locale: enUS });
-export const formatFullDateBR = (date: string) => format(new Date(date), "dd 'de' MMMM 'de' yyyy 'às' H':'mm", { locale: ptBR });
+export const formatFullDateBR = (date: string) => format(new Date(date), "dd 'de' MMMM 'de' yyyy 'às' HH':'mm", { locale: ptBR });
 export const formatMonthYear = (date: string) => format(new Date(date), "MMM yyyy", { locale: enUS });
 
 export const capitalize = (val: string) => {

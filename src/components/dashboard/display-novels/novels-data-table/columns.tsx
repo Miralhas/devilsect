@@ -1,12 +1,17 @@
 'use client'
 
 import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { createWsrvLoader } from "@/components/wsrvLoader";
 import { env } from "@/env";
 import { formatFullDateBR, statusMap } from "@/lib/utils";
 import { NovelSummary } from "@/types/novel";
 import { ColumnDef } from "@tanstack/react-table";
-import { ImageIcon, StarIcon } from "lucide-react";
+import { FilePenLine, ImageIcon, StarIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,7 +26,7 @@ export const columns: ColumnDef<NovelSummary>[] = [
         alt="user image"
         className="text-transparent rounded-sm h-[20px]"
       />
-    }, 
+    },
     enableSorting: false,
   },
   {
@@ -33,6 +38,24 @@ export const columns: ColumnDef<NovelSummary>[] = [
     accessorKey: "title",
     header: "Title",
     cell: ({ row }) => <Link href={`/novels/${row.original.slug}`} className="font-medium max-w-[200px] capitalize">{row.original.title}</Link>,
+  },
+  {
+    accessorKey: "alias",
+    header: "Alias",
+    cell: ({ row }) => (
+      <div className="text-xs">
+        {row.original.alias ? (
+          <Tooltip delayDuration={300}>
+            <TooltipTrigger className="text-start w-full max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap">
+              {row.original.alias}
+            </TooltipTrigger>
+            <TooltipContent className="max-w-[300px] text-center bg-secondary border border-zinc-50/10 text-zinc-200">
+              <p>{row.original.alias}</p>
+            </TooltipContent>
+          </Tooltip>
+        ) : <span className="text-muted-foreground">Null</span>}
+      </div>
+    )
   },
   {
     accessorKey: "author",
@@ -97,5 +120,15 @@ export const columns: ColumnDef<NovelSummary>[] = [
     accessorKey: "bayesianScore",
     header: "Score",
     cell: ({ row }) => <span className="text-sm">{(row.original.bayesianScore * 20).toFixed(2)}</span>,
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => (
+      <div className="ml-2">
+        <Link href={`/dashboard/${row.original.slug}`} className="text-muted-foreground transition-colors duration-100 ease-in hover:text-white">
+          <FilePenLine className="size-4.5" />
+        </Link>
+      </div>
+    )
   },
 ]

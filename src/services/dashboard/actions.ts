@@ -154,7 +154,8 @@ export const editNovelImage = async (novel: Novel, prevState: unknown, payload: 
   return { success: true, message: "Success!" };
 }
 
-export const purgeDataCache = async () => {
+export const purgeDataCache = async (prevState: unknown, payload: boolean): Promise<boolean> => {
   revalidatePath("/", "layout");
   console.log("Purging All Data Cache");
+  return payload;
 }

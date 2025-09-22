@@ -1,8 +1,7 @@
 import DisplayNovels from "@/components/dashboard/display-novels";
 import DisplayUsers from "@/components/dashboard/display-users";
+import PurgeCache from "@/components/dashboard/purge-cache";
 import DashboardSearch from "@/components/dashboard/search/dashboard-search";
-import { Button } from "@/components/ui/button";
-import { purgeDataCache } from "@/services/dashboard/actions";
 
 const LayoutPage = () => {
   return (
@@ -10,7 +9,7 @@ const LayoutPage = () => {
       <div className="flex w-full items-center justify-center">
         <DashboardSearch />
       </div>
-      <Button onClick={purgeDataCache} variant="cool">Purge Data Cache</Button>
+      <PurgeCache />
       <DisplayUsers />
       <DisplayNovels />
     </section>

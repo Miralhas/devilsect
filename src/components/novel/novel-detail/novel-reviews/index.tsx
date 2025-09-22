@@ -6,17 +6,20 @@ import NewComment from "@/components/comments/new-comment";
 import Loading from "@/components/loading";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useCommentsContext } from "@/contexts/comments-context";
 import useCommentActions from "@/hooks/use-comment-actions";
-import { SortKey } from "@/lib/schemas/comment-params-schema";
 import { useGetNovelReviews } from "@/services/comments/client-queries";
 import { User } from "@/types/authentication";
 import { CommentInput } from "@/types/threaded-comment";
 import { FrownIcon } from "lucide-react";
-import { Fragment, PropsWithChildren, useState } from "react";
+import { Fragment, PropsWithChildren } from "react";
+
+export const NOVEL_REVIEWS_PAGE_SIZE = 10;
 
 const NovelReviews = ({ slug, currentUser }: { slug: string; currentUser?: User }) => {
   const isAuthenticated = currentUser !== undefined;
-  const [selectedFilter, setSelectedFilter] = useState<SortKey>(SortKey.TOP);
+  const { sort } = useCommentsContext();
+
   const {
     data,
     isError,
@@ -25,7 +28,8 @@ const NovelReviews = ({ slug, currentUser }: { slug: string; currentUser?: User 
     hasNextPage,
     fetchNextPage,
     isFetching,
-  } = useGetNovelReviews({ novelSlug: slug, size: 10, sort: selectedFilter });
+  } = useGetNovelReviews({ novelSlug: slug, size: NOVEL_REVIEWS_PAGE_SIZE, sort });
+
   const { handleNewNovelReview } = useCommentActions();
 
   const onSubmit = (commentInput: CommentInput) => {
@@ -56,7 +60,7 @@ const NovelReviews = ({ slug, currentUser }: { slug: string; currentUser?: User 
     <Layout>
       <NewComment isAuthenticated={isAuthenticated} onSubmit={onSubmit} />
       <Separator />
-      <Filter selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
+      <Filter />
       <div className="w-full space-y-3 md:space-y-3">
         {data?.pages.map((group, i) => (
           <Fragment key={i}>

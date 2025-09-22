@@ -229,3 +229,10 @@ body {
 .rsw-ce:focus {
   outline: 0px solid transparent !important;
 }
+
+br {
+  display: block !important;
+  content: "" !important;
+  margin: 6px 0 !important;
+  line-height: 0px !important;
+}

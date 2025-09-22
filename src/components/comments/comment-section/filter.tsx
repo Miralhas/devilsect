@@ -1,28 +1,29 @@
 import { Button } from "@/components/ui/button";
+import { useCommentsContext } from "@/contexts/comments-context";
 import { SortKey } from "@/lib/schemas/comment-params-schema";
-import { Dispatch, SetStateAction } from "react";
 
-const Filter = ({ selectedFilter, setSelectedFilter }: { selectedFilter: SortKey; setSelectedFilter: Dispatch<SetStateAction<SortKey>> }) => {
+const Filter = () => {
+  const {sort, handleSort} = useCommentsContext();
   return (
     <div className="grid md:w-max grid-cols-3 ms-auto">
       <Button className="rounded-none"
         size="sm"
-        variant={selectedFilter === SortKey.NEWEST ? "cool" : "cool-secondary"}
-        onClick={() => setSelectedFilter(SortKey.NEWEST)}
+        variant={sort === SortKey.NEWEST ? "cool" : "cool-secondary"}
+        onClick={() => handleSort(SortKey.NEWEST)}
       >
         Newest
       </Button>
       <Button className="rounded-none"
         size="sm"
-        variant={selectedFilter === SortKey.TOP ? "cool" : "cool-secondary"}
-        onClick={() => setSelectedFilter(SortKey.TOP)}
+        variant={sort === SortKey.TOP ? "cool" : "cool-secondary"}
+        onClick={() => handleSort(SortKey.TOP)}
       >
         Top
       </Button>
       <Button className="rounded-none"
         size="sm"
-        variant={selectedFilter === SortKey.OLDEST ? "cool" : "cool-secondary"}
-        onClick={() => setSelectedFilter(SortKey.OLDEST)}
+        variant={sort === SortKey.OLDEST ? "cool" : "cool-secondary"}
+        onClick={() => handleSort(SortKey.OLDEST)}
       >
         Oldest
       </Button>

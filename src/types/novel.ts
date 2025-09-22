@@ -7,6 +7,7 @@ export type NovelSummary = {
   id: number;
   slug: string;
   title: string;
+  alias: string | null;
   author: string;
   status: NovelStatus;
   description: string;

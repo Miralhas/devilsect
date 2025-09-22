@@ -27,10 +27,7 @@ const useCommentActions = () => {
   }
 
   const handleDeleteNovelReview = (props: { commentId: number; novelSlug: string }) => {
-    deleteNovelReviewMutation.mutate(props, {
-      onSuccess: () => { toast.success("Review deleted successfully!") },
-      onError: () => { toast.error("Failed to delete review. Try again later!") }
-    })
+    deleteNovelReviewMutation.mutate(props)
   }
 
   const handleUpdateNovelReview = (props: { commentInput: CommentInput, commentId: number, novelSlug: string }) => {
@@ -48,10 +45,7 @@ const useCommentActions = () => {
   }
 
   const handleDeleteChapterComment = (props: { commentId: number, novelSlug: string; chapterSlug: string }) => {
-    deleteChapterComment.mutate(props, {
-      onSuccess: () => { toast.success("Comment deleted successfully!") },
-      onError: () => { toast.error("Failed to delete comment. Try again later!") }
-    })
+    deleteChapterComment.mutate(props)
   }
 
   return {

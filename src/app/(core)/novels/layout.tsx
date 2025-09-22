@@ -1,10 +1,13 @@
+import { CommentsProvider } from "@/contexts/comments-context";
 import Script from "next/script";
 import { PropsWithChildren } from "react";
 
 const NovelLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
-      {children}
+      <CommentsProvider>
+        {children}
+      </CommentsProvider>
       <Script id="google-translate-init" strategy="afterInteractive" async>
         {`
             function googleTranslateElementInit() {

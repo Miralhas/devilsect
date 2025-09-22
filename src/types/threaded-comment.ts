@@ -1,5 +1,7 @@
 import { User } from "./authentication";
 
+export type CommentType = "NOVEL_REVIEW" | "CHAPTER_REVIEW";
+
 export type ThreadedComment = {
   id: number;
   parentId: number | null;
@@ -11,7 +13,7 @@ export type ThreadedComment = {
   voteCount: number;
   message: string;
   childComments: ThreadedComment[];
-  type: "NOVEL_REVIEW" | "CHAPTER_REVIEW"
+  type: CommentType
 };
 
 export type CommentInput = {

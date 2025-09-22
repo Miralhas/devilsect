@@ -12,6 +12,7 @@ export const env = createEnv({
     GOOGLE_OAUTH2_CALLBACK_URL: z.string(),
   },
   client: {
+    NEXT_PUBLIC_EVICT: z.string(),
     NEXT_PUBLIC_BASE_URL: z.string().url(),
     NEXT_PUBLIC_CDN_URL: z.string().url(),
   },
@@ -25,5 +26,6 @@ export const env = createEnv({
     PUBLIC_KEY: process.env.PUBLIC_KEY,
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     NEXT_PUBLIC_CDN_URL: process.env.NEXT_PUBLIC_CDN_URL,
+    NEXT_PUBLIC_EVICT: process.env.NEXT_PUBLIC_EVICT,
   },
 });

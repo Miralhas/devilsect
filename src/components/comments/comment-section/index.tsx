@@ -1,22 +1,18 @@
 'use client'
 
-import { SortKey } from "@/lib/schemas/comment-params-schema";
 import { User } from "@/types/authentication";
 import { PaginatedQuery } from "@/types/pagination";
 import { ThreadedComment } from "@/types/threaded-comment";
 import { FrownIcon } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
 import Comment from "./comment";
 import Filter from "./filter";
 
 type Props = {
   comments?: PaginatedQuery<ThreadedComment[]>;
   currentUser?: User;
-  selectedFilter: SortKey;
-  setSelectedFilter: Dispatch<SetStateAction<SortKey>>
 }
 
-const CommentSection = ({ comments, currentUser, selectedFilter, setSelectedFilter }: Props) => {
+const CommentSection = ({ comments, currentUser }: Props) => {
 
   if (!comments?.results.length) {
     return <Empty />
@@ -24,7 +20,7 @@ const CommentSection = ({ comments, currentUser, selectedFilter, setSelectedFilt
 
   return (
     <>
-      <Filter selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
+      <Filter />
       <div className="w-full space-y-3 md:space-y-3">
         {comments.results.map(c => {
           return <Comment key={c.id} comment={c} currentUser={currentUser} />

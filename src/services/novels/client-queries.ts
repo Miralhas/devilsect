@@ -5,9 +5,25 @@ import { buildQueryString } from "@/lib/utils";
 import { Genre, Metrics, Novel, NovelSummary, Tag } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
 import { Rating } from "@/types/rating";
+import { RecentlyAddedChapter } from "@/types/recently-added-chapters";
 import { queryOptions, useQuery } from "@tanstack/react-query";
 
 type NovelSummaryParams = { params: NovelSummariesParams; enabled?: boolean };
+
+export const getRecentlyAddedChapters = async (params: PaginationSchemaParams): Promise<PaginatedQuery<RecentlyAddedChapter[]>> => {
+  const parsed = PaginationSchema.parse(params);
+  const queryString = buildQueryString(parsed);
+  const url = `${env.NEXT_PUBLIC_BASE_URL}/latest-chapters${queryString}`;
+
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch novel summaries: ${res.status} ${res.statusText}`);
+  }
+
+  return await res.json() as PaginatedQuery<RecentlyAddedChapter[]>
+}
+
 
 const getNovelSummaries = async (params: NovelSummariesParams) => {
   const parsed = NovelSummariesParamsSchema.parse(params);
@@ -107,3 +123,11 @@ export const useGetNovelMetrics = (novel: Novel) => useQuery({
   queryKey: ["novel", "detail", "ratings", novel.id],
   initialData: novel.metrics,
 });
+
+export const getLatestQueryOptions = (params: PaginationSchemaParams) => queryOptions({
+  queryFn: () => getRecentlyAddedChapters(params),
+  queryKey: ["latest", "list", params]
+})
+
+export const useGetLatest = (params: PaginationSchemaParams) => useQuery(getLatestQueryOptions(params));
+export const latestInitialParams: PaginationSchemaParams = { page: 0, size: 96 };

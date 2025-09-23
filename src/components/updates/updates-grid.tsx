@@ -5,13 +5,14 @@ import { env } from "@/env";
 import BookCoverOverlay from "../novel-card/book-cover-overlay";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
+import { PaginatedQuery } from "@/types/pagination";
 
-const UpdatesGrid = ({ recent }: { recent: RecentlyAddedChapter[] }) => {
+const UpdatesGrid = ({ recent }: { recent: PaginatedQuery<RecentlyAddedChapter[]> }) => {
   return (
     <>
       <GridHeader />
       <div className="space-y-0 border-t md:border-none">
-        {recent.map((item) => {
+        {recent.results.map((item) => {
 
           return (
             <div

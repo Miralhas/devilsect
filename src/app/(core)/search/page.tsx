@@ -1,7 +1,11 @@
+import type { Metadata } from 'next';
 import PopularNovels from "@/components/search/popular-novels";
 import SearchContent from "@/components/search/search-content";
 import SearchInput from "@/components/search/search-input";
 
+export const metadata: Metadata = {
+  title: "Search"
+};
 
 const SearchPage = async () => {
   return (

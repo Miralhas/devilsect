@@ -4,6 +4,11 @@ import ProfileLoading from "@/components/profile/profile-loading";
 import { loadUserLibraryParams } from "@/lib/schemas/user-library-params-schema";
 import type { SearchParams } from 'nuqs/server';
 import { Suspense } from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Your Library"
+};
 
 type PageProps = {
   searchParams: Promise<SearchParams>

@@ -6,7 +6,7 @@ const UpdatesLayout = ({ children }: PropsWithChildren) => {
   return (
     <section className="min-h-screen w-full max-w-[1280px] mx-auto p-6.5 pt-6 md:pt-10 space-y-8 md:space-y-12">
       <PageHeader
-        title="Recently Updated Chapters"
+        title="Latest Updates"
         description="Recently updated chapters from ongoing web novels and light novels."
         icon={RefreshCwIcon}
         descriptionClassName="text-sm md:text-base"

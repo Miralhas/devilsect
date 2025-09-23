@@ -9,7 +9,14 @@ import 'react-image-crop/dist/ReactCrop.css';
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Devil Sect | Read Free Webnovels and Light Novels Online",
+  title: {
+    default: "Devil Sect | Read Free Webnovels and Light Novels Online",
+    template: "%s | Devil Sect"
+  },
+  description: "Free digital library where users can explore new stories, read for free, track their progress, and engage with reviews and comments.",
+  twitter: {
+    card: "summary_large_image"
+  },
 }
 
 const manrope = Manrope({

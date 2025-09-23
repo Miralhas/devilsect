@@ -58,7 +58,8 @@ export const formatFullDateBR = (date: string) => format(new Date(date), "dd 'de
 export const formatMonthYear = (date: string) => format(new Date(date), "MMM yyyy", { locale: enUS });
 
 export const capitalize = (val: string) => {
-  return val.split(" ").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");
+  const val1 = val.split(":").map(w => w[0].toUpperCase() + w.slice(1)).join(":")
+  return val1.split(" ").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");
 }
 
 export const isAdminCheck = (user?: User) => user?.roles.some(r => r === Role.ADMIN);

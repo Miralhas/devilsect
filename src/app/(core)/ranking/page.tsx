@@ -3,6 +3,11 @@ import GridTableHeader from "@/components/ranking/grid-table/grid-table-header";
 import MobileGridTable from "@/components/ranking/grid-table/mobile-grid-table";
 import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
 import { getNovelSummariesPaginated } from "@/services/novels/server-queries";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Ranking"
+};
 
 const RankingPage = async () => {
   const query = await getNovelSummariesPaginated({ size: 100, sort: SortKey.BAYESIAN_RANKING });

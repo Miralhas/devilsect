@@ -12,6 +12,11 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Your Reviews"
+};
 
 const ReviewsPage = async () => {
   const session = await getSession();

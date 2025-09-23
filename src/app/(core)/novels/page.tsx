@@ -5,6 +5,11 @@ import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
 import { novelSummariesQueryOptions } from "@/services/novels/client-queries";
 import { Book } from "lucide-react";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Novels"
+};
 
 const NovelsPage = async () => {
   const queryClient = new QueryClient();

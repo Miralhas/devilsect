@@ -1,11 +1,15 @@
-import UpdatesGrid from "@/components/updates/updates-grid";
-import { getRecentlyAddedChapters } from "@/services/novels/server-queries";
+import RecentlyAddedSection from "@/components/updates/recently-added-section";
+import { getLatestQueryOptions, latestInitialParams } from "@/services/novels/client-queries";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 
 const UpdatesPage = async () => {
-  const recent = await getRecentlyAddedChapters();
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(getLatestQueryOptions(latestInitialParams))
   return (
-    <section className="w-full">
-      <UpdatesGrid recent={recent}  />
+    <section className="w-full space-y-8">
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <RecentlyAddedSection />
+      </HydrationBoundary>
     </section>
   )
 }

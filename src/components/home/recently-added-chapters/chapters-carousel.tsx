@@ -13,13 +13,14 @@ import { arrayChunker, formatDate } from "@/lib/utils";
 import { RecentlyAddedChapter } from "@/types/recently-added-chapters";
 import Link from "next/link";
 import ChapterImage from "./chapter-image";
+import { PaginatedQuery } from "@/types/pagination";
 
 const DESKTOP_CHUNK_SIZE = 10;
 const MOBILE_CHUNK_SIZE = 5;
 
-const ChaptersCarousel = ({ chapters }: { chapters: RecentlyAddedChapter[] }) => {
+const ChaptersCarousel = ({ chapters }: { chapters: PaginatedQuery<RecentlyAddedChapter[]> }) => {
   const isMobile = useIsMobile();
-  const chunkedChapters = arrayChunker(chapters, isMobile ? MOBILE_CHUNK_SIZE : DESKTOP_CHUNK_SIZE);
+  const chunkedChapters = arrayChunker(chapters.results, isMobile ? MOBILE_CHUNK_SIZE : DESKTOP_CHUNK_SIZE);
   return (
     <Carousel className="grid gap-3" opts={{ slidesToScroll: 1, align: "start" }}>
       <CarouselContent className="mr-0.5">

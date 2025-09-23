@@ -1,5 +1,6 @@
 import { env } from "@/env";
 import { NovelSummariesParams, NovelSummariesParamsSchema } from "@/lib/schemas/novel-summaries-params-schema";
+import { PaginationSchema, PaginationSchemaParams } from "@/lib/schemas/pagination-schema";
 import { UserLibraryParams, UserLibraryParamsSchema } from "@/lib/schemas/user-library-params-schema";
 import { getSession } from "@/lib/sessions";
 import { buildQueryString } from "@/lib/utils";
@@ -55,8 +56,10 @@ export const getEldersChoice = async (): Promise<EldersChoice[]> => {
   return await res.json() as EldersChoice[];
 }
 
-export const getRecentlyAddedChapters = async (): Promise<RecentlyAddedChapter[]> => {
-  const url = `${env.APP_URL}/latest-chapters`;
+export const getRecentlyAddedChapters = async (params: PaginationSchemaParams): Promise<PaginatedQuery<RecentlyAddedChapter[]>> => {
+  const parsed = PaginationSchema.parse(params);
+  const queryString = buildQueryString(parsed);
+  const url = `${env.APP_URL}/latest-chapters${queryString}`;
 
   const res = await fetch(url);
 
@@ -64,7 +67,7 @@ export const getRecentlyAddedChapters = async (): Promise<RecentlyAddedChapter[]
     throw new Error(`Failed to fetch novel summaries: ${res.status} ${res.statusText}`);
   }
 
-  return await res.json() as RecentlyAddedChapter[]
+  return await res.json() as PaginatedQuery<RecentlyAddedChapter[]>
 }
 
 export const getUserLibrary = async (params: UserLibraryParams, cache: RequestCache = "default"): Promise<PaginatedQuery<Library[]> | undefined> => {

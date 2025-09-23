@@ -9,8 +9,8 @@ const UpdatesLayout = ({ children }: PropsWithChildren) => {
         title="Recently Updated Chapters"
         description="Recently updated chapters from ongoing web novels and light novels."
         icon={RefreshCwIcon}
-        descriptionClassName="md:text-base"
-        titleClassName="md:text-3xl"
+        descriptionClassName="text-sm md:text-base"
+        titleClassName="[&_svg]:size-6.5 md:[&_svg]:size-9 text-xl md:text-3xl"
       />
       {children}
     </section>

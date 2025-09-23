@@ -23,7 +23,7 @@ const ChaptersTab = ({ novel }: { novel: Novel }) => {
         collapsible
         className="flex gap-3 flex-col"
       >
-        {sort === "NEWEST" ? (
+        {sort === "OLDEST" ? (
           Array.from({ length: totalButtons }).map((_, index) => {
             const isLast = index + 1 === totalButtons;
             return <Item index={index} isLast={isLast} novel={novel} key={index} />

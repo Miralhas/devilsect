@@ -25,7 +25,7 @@ const ChaptersGrid = ({ chapters }: { chapters: PaginatedQuery<RecentlyAddedChap
               />
               <BookCoverOverlay />
             </div>
-            <div className="w-full space-y-0.5">
+            <div className=" space-y-0.5">
               <Link
                 href={`/novels/${chapter.novelSlug}`}
                 className="transition-colors line-clamp-1 capitalize text-zinc-300/70 text-sm text-[13px] leading-4"
@@ -35,7 +35,7 @@ const ChaptersGrid = ({ chapters }: { chapters: PaginatedQuery<RecentlyAddedChap
 
               <Link
                 href={`/novels/${chapter.novelSlug}/${chapter.slug}`}
-                className="text-sm text-[13px] transition-colors line-clamp-1 text-zinc-200 font-semibold capitalize"
+                className="text-sm text-[13px] line-clamp-1 w-full transition-colors text-zinc-200 font-semibold"
               >
                 {chapter.title}
               </Link>

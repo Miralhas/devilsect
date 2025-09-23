@@ -6,7 +6,12 @@ import { deleteSession, getSession } from "@/lib/sessions";
 import { getShallowUser } from "@/services/authentication/server-queries";
 import { getUserComments } from "@/services/comments/api";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Your Comments"
+};
 
 const CommentsPage = async () => {
   const session = await getSession();

@@ -1,5 +1,10 @@
 import ProfileHeader from "@/components/profile/profile-header";
 import { InboxIcon } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Your Inbox"
+};
 
 const InboxPage = async () => {
   return (

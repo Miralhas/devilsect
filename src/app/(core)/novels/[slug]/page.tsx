@@ -4,14 +4,26 @@ import NovelReviews from "@/components/novel/novel-detail/novel-reviews";
 import RelatedNovels from "@/components/novel/novel-detail/related-novels";
 import SkeletonLoader from "@/components/novel/novel-detail/related-novels/skeleton-loader";
 import { Separator } from "@/components/ui/separator";
+import { capitalize } from '@/lib/utils';
 import { getShallowUser } from "@/services/authentication/server-queries";
 import { putView } from "@/services/novels/api";
 import { getNovelBySlug } from "@/services/novels/server-queries";
+import type { Metadata } from 'next';
 import { Suspense } from "react";
 
 type NovelPageProps = {
   params: Promise<{ slug: string }>;
 }
+
+export async function generateMetadata({ params }: NovelPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const novel = await getNovelBySlug(slug);
+  return {
+    title: capitalize(novel.title),
+    description: `Read ${capitalize(novel.title)} novel online free from your Mobile, Table, PC...`,
+  }
+}
+
 
 const NovelPage = async ({ params }: NovelPageProps) => {
   const { slug } = await params;

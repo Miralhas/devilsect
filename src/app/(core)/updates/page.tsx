@@ -1,6 +1,11 @@
 import RecentlyAddedSection from "@/components/updates/recently-added-section";
 import { getLatestQueryOptions, latestInitialParams } from "@/services/novels/client-queries";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Latest Updates"
+};
 
 const UpdatesPage = async () => {
   const queryClient = new QueryClient();

@@ -52,8 +52,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#0f172a',
-          background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 33%, #212121 100%)',
+          background: 'linear-gradient(135deg, #000000, #333333, #212121)',
           padding: '60px',
           fontFamily: '"Inter", system-ui, sans-serif',
         }}

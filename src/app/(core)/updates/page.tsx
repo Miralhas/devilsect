@@ -4,7 +4,8 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Latest Updates"
+  title: "Latest Updates",
+  description: "Recently updated chapters from ongoing web novels and light novels."
 };
 
 const UpdatesPage = async () => {

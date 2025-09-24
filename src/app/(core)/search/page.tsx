@@ -4,7 +4,8 @@ import SearchContent from "@/components/search/search-content";
 import SearchInput from "@/components/search/search-input";
 
 export const metadata: Metadata = {
-  title: "Search"
+  title: "Search",
+  description: "Search your favorite web novel, novel, Chinese novel, Japanese novel, Korean novel and English novel by title or alias."
 };
 
 const SearchPage = async () => {

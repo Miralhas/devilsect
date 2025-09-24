@@ -3,12 +3,23 @@ import ChapterComments from "@/components/chapters/chapter-comments";
 import Header from "@/components/chapters/header";
 import Container from "@/components/container";
 import { Separator } from "@/components/ui/separator";
+import { capitalize } from "@/lib/utils";
 import { getShallowUser } from "@/services/authentication/server-queries";
 import { getChapterBySlug } from "@/services/chapters/server-queries";
 import { putView } from "@/services/novels/api";
+import { Metadata } from "next";
 
 type ChapterPageProps = {
   params: Promise<{ slug: string, chapterSlug: string }>;
+}
+
+export async function generateMetadata({ params }: ChapterPageProps): Promise<Metadata> {
+  const { chapterSlug, slug } = await params;
+  const chapter = await getChapterBySlug(chapterSlug, slug);
+  return {
+    title: `${capitalize(chapter.novelTitle)} - Chapter - ${chapter.number}`,
+    description: `Read ${chapter.title} - ${capitalize(chapter.novelTitle)} online now!`,
+  }
 }
 
 const ChapterPage = async ({ params }: ChapterPageProps) => {

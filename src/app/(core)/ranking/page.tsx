@@ -6,7 +6,8 @@ import { getNovelSummariesPaginated } from "@/services/novels/server-queries";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Ranking"
+  title: "Ranking",
+  description: "The Ranking system uses a Bayesian score that blends ratings and views to fairly reflect both quality and popularity."
 };
 
 const RankingPage = async () => {

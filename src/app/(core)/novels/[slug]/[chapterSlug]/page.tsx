@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: ChapterPageProps): Promise<Me
   return {
     title: `${capitalize(chapter.novelTitle)} - Chapter - ${chapter.number}`,
     description: `Read ${chapter.title} - ${capitalize(chapter.novelTitle)} online now!`,
+    openGraph: {siteName: "Devil Sect"}
   }
 }
 

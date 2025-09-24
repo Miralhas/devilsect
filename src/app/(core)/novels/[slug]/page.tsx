@@ -24,7 +24,6 @@ export async function generateMetadata({ params }: NovelPageProps): Promise<Meta
   }
 }
 
-
 const NovelPage = async ({ params }: NovelPageProps) => {
   const { slug } = await params;
   const novel = await getNovelBySlug(slug);

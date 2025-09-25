@@ -15,6 +15,7 @@ export const env = createEnv({
     NEXT_PUBLIC_EVICT: z.string(),
     NEXT_PUBLIC_BASE_URL: z.string().url(),
     NEXT_PUBLIC_CDN_URL: z.string().url(),
+    NEXT_PUBLIC_DOMAIN: z.string().url(),
   },
   runtimeEnv: {
     APP_URL: process.env.APP_URL,
@@ -27,5 +28,6 @@ export const env = createEnv({
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     NEXT_PUBLIC_CDN_URL: process.env.NEXT_PUBLIC_CDN_URL,
     NEXT_PUBLIC_EVICT: process.env.NEXT_PUBLIC_EVICT,
+    NEXT_PUBLIC_DOMAIN: process.env.NEXT_PUBLIC_DOMAIN,
   },
 });

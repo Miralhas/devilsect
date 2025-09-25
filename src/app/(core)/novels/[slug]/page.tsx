@@ -4,15 +4,21 @@ import NovelReviews from "@/components/novel/novel-detail/novel-reviews";
 import RelatedNovels from "@/components/novel/novel-detail/related-novels";
 import SkeletonLoader from "@/components/novel/novel-detail/related-novels/skeleton-loader";
 import { Separator } from "@/components/ui/separator";
+import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
 import { capitalize } from '@/lib/utils';
-import { getShallowUser } from "@/services/authentication/server-queries";
 import { putView } from "@/services/novels/api";
-import { getNovelBySlug } from "@/services/novels/server-queries";
+import { getNovelBySlug, getNovelSummariesPaginated } from "@/services/novels/server-queries";
 import type { Metadata } from 'next';
 import { Suspense } from "react";
 
 type NovelPageProps = {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const novels = await getNovelSummariesPaginated({ size: 50, sort: SortKey.BAYESIAN_RANKING });
+  const { results } = novels;
+  return results.map(r => ({ slug: r.slug }));
 }
 
 export async function generateMetadata({ params }: NovelPageProps): Promise<Metadata> {
@@ -24,10 +30,11 @@ export async function generateMetadata({ params }: NovelPageProps): Promise<Meta
   }
 }
 
+export const revalidate = 3600;
+
 const NovelPage = async ({ params }: NovelPageProps) => {
   const { slug } = await params;
   const novel = await getNovelBySlug(slug);
-  const shallowUser = await getShallowUser();
 
   putView(slug);
 
@@ -36,7 +43,7 @@ const NovelPage = async ({ params }: NovelPageProps) => {
       <InfoSection novel={novel} />
       <AboutSection novel={novel} />
       <Separator orientation="horizontal" className="mb-12" />
-      <NovelReviews slug={novel.slug} currentUser={shallowUser} />
+      <NovelReviews slug={novel.slug} />
       <Suspense fallback={<SkeletonLoader />}>
         <RelatedNovels genre={novel.genres[0]} />
       </Suspense>

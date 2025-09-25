@@ -1,19 +1,30 @@
-import { getCurrentUser } from "@/services/authentication/server-queries";
-import { getUserLibrary } from "@/services/novels/server-queries";
+'use client'
+
+import { Button } from "@/components/ui/button";
+import { useCurrentUserQuery } from "@/services/authentication/client-queries";
+import { useGetUserNovelOnLibrary } from "@/services/novels/client-queries";
 import { Novel } from "@/types/novel";
-import dynamic from "next/dynamic";
 import Link from "next/link";
-import { Button } from "../../../ui/button";
+import BookmarkNovel from "./bookmark-novel";
+import StartReadingButtonLoading from "./start-reading-button-loading";
 
 type StartReadingButtonProps = {
   novel: Novel;
 }
 
-const BookmarkNovel = dynamic(() => import("./bookmark-novel"));
 
-const StartReadingButton = async ({ novel }: StartReadingButtonProps) => {
-  const user = await getCurrentUser();
-  const paginatedUserLibrary = await getUserLibrary({ novelSlug: novel.slug });
+const StartReadingButton = ({ novel }: StartReadingButtonProps) => {
+  const { data: user, isLoading: userLoading } = useCurrentUserQuery();
+  const { data: paginatedUserLibrary, isLoading: libraryLoading } = useGetUserNovelOnLibrary(novel.slug);
+
+  if (libraryLoading) {
+    return <StartReadingButtonLoading />
+  }
+
+  if (userLoading) {
+    return <StartReadingButtonLoading />
+  }
+
   const hasNovelOnHistory = !!paginatedUserLibrary && paginatedUserLibrary?.totalItems > 0;
   const isBookmarked = hasNovelOnHistory && paginatedUserLibrary.results[0].bookmarked;
   const libraryId = paginatedUserLibrary?.results[0]?.libraryElementId;

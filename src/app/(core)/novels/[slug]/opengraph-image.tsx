@@ -40,7 +40,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     );
   }
 
-  const imageUrl = `https://wsrv.nl/?url=${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image&q=100&maxage=7d&default=https://static.devilsect.com/No-Image-Placeholder.svg`
+  const imageUrl = `https://wsrv.nl/?url=${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image&w=150&maxage=7d&default=https://static.devilsect.com/No-Image-Placeholder.svg&w=150`
 
   return new ImageResponse(
     (
@@ -52,7 +52,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #000000, #333333, #212121)',
+          background: 'linear-gradient(135deg, #000000, #292929, #212121)',
           padding: '60px',
           fontFamily: '"Inter", system-ui, sans-serif',
         }}

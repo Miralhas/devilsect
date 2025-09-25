@@ -1,7 +1,5 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import NovelBadge from "@/components/novel/novel-detail/info-section/novel-badge";
-import StartReadingButton from "@/components/novel/novel-detail/info-section/start-reading-button";
-import StartReadingButtonLoading from "@/components/novel/novel-detail/info-section/start-reading-button-loading";
 import { Badge } from "@/components/ui/badge";
 import wsrvLoader from "@/components/wsrvLoader";
 import { env } from "@/env";
@@ -11,9 +9,8 @@ import { Novel } from "@/types/novel";
 import { BookOpenText, Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 import NovelRating from "./rating";
-import RatingLoader from "./rating/rating-loader";
+import StartReadingButton from "./start-reading-button";
 
 const InfoSection = async ({ novel }: { novel: Novel }) => {
   const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`);
@@ -66,13 +63,9 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
               <NovelBadge name={genre} key={genre} />
             ))}
           </div>
-          <Suspense fallback={<RatingLoader />}>
-            <NovelRating novel={novel} />
-          </Suspense>
+          <NovelRating novel={novel} />
           <div className="mt-5 md:mt-auto w-full">
-            <Suspense fallback={<StartReadingButtonLoading />}>
-              <StartReadingButton novel={novel} />
-            </Suspense>
+            <StartReadingButton novel={novel} />
           </div>
         </div>
       </div>

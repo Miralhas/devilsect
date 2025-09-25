@@ -76,7 +76,7 @@ export type NovelInfo = {
   slug: string;
   title: string;
   author: string;
-  status: NovelStatus;
   createdAt: string;
   updatedAt: string;
+  chaptersCount: number;
 }

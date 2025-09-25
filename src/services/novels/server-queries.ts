@@ -6,10 +6,10 @@ import { getSession } from "@/lib/sessions";
 import { buildQueryString } from "@/lib/utils";
 import { ApiResponseError } from "@/types/api";
 import { Library } from "@/types/library";
-import { EldersChoice, Novel, NovelInfo, NovelSummary } from "@/types/novel";
+import { EldersChoice, Genre, Novel, NovelInfo, NovelSummary } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
 import { RecentlyAddedChapter } from "@/types/recently-added-chapters";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 export const getNovelSummariesPaginated = async (params: NovelSummariesParams): Promise<PaginatedQuery<NovelSummary[]>> => {
   const parsed = NovelSummariesParamsSchema.parse(params);
@@ -136,4 +136,44 @@ export const getAllNovelInfo = async (): Promise<NovelInfo[]> => {
   }
 
   return await res.json() as Promise<NovelInfo[]>;
+}
+
+export const getAllNovelSlugs = async (): Promise<PaginatedQuery<string[]>> => {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const url = `${env.APP_URL}/novels/slugs`;
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: myHeaders,
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch novel slugs info: ${res.status} ${res.statusText}`);
+  }
+
+  return await res.json() as Promise<PaginatedQuery<string[]>>;
+}
+
+export const getGenreByName = async (name: string): Promise<Genre> => {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const url = `${env.APP_URL}/genres/${name}`;
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: myHeaders,
+  });
+
+  if (res.status === 404) {
+    return redirect("/genres");
+  }
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch novel slugs info: ${res.status} ${res.statusText}`);
+  }
+
+  return await res.json() as Promise<Genre>;
 }

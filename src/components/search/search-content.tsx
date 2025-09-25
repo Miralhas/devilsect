@@ -14,8 +14,8 @@ import { useRef } from "react";
 const SearchContent = () => {
   const router = useRouter();
   const [params, setParams] = useQueryStates(nuqsNovelSummariesParams);
-  const rf = useRef<HTMLAnchorElement>(null)
   const novelsQuery = useGetNovelSummaries({ params: { q: params.q, page: params.page, size: 18, sort: SortKey.BAYESIAN_RANKING } });
+  const rf = useRef<HTMLAnchorElement>(null);
 
   if (novelsQuery.isLoading) {
     return <SkeletonLoader />

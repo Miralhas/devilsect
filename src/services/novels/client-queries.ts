@@ -42,7 +42,7 @@ const getNovelSummaries = async (params: NovelSummariesParams) => {
   return await res.json() as PaginatedQuery<NovelSummary[]>;
 }
 
-const getNovelGenres = async () => {
+export const getNovelGenres = async () => {
   const url = `${env.NEXT_PUBLIC_BASE_URL}/genres`;
   const res = await fetch(url, {
     method: "GET",

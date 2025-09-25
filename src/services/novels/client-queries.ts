@@ -2,6 +2,7 @@ import { env } from "@/env";
 import { NovelSummariesParams, NovelSummariesParamsSchema, SortKey } from "@/lib/schemas/novel-summaries-params-schema";
 import { PaginationSchema, PaginationSchemaParams } from "@/lib/schemas/pagination-schema";
 import { buildQueryString } from "@/lib/utils";
+import { Library } from "@/types/library";
 import { Genre, Metrics, Novel, NovelSummary, Tag } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
 import { Rating } from "@/types/rating";
@@ -93,6 +94,17 @@ export const useGetUserRatingOnNovel = (params: { novelId: number, userId: numbe
   retry: 0,
   refetchOnWindowFocus: false
 });
+
+export const useGetUserNovelOnLibrary = (novelSlug: string) => useQuery({
+  queryFn: async () => {
+    const res = await fetch(`/api/user/library?novelSlug=${novelSlug}`);
+    if (!res.ok) throw new Error("Failed to fetch user novel on library");
+    return await res.json() as PaginatedQuery<Library[]>;
+  },
+  queryKey: ["library", novelSlug],
+  retry: 0,
+  refetchOnWindowFocus: false,
+})
 
 export const useGetNovelSummaries = ({ params, enabled = false }: NovelSummaryParams) => (
   useQuery(novelSummariesQueryOptions({ params, enabled }))

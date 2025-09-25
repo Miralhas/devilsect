@@ -1,9 +1,11 @@
-import { getShallowUser } from "@/services/authentication/server-queries";
+'use client'
+
+import { useCurrentUserQuery } from "@/services/authentication/client-queries";
 import { Novel } from "@/types/novel";
 import ClientRating from "./client-rating";
 
-const NovelRating = async ({ novel }: { novel: Novel }) => {
-  const user = await getShallowUser();
+const NovelRating = ({ novel }: { novel: Novel }) => {
+  const { data: user } = useCurrentUserQuery();
   return <ClientRating novel={novel} user={user} />
 }
 

@@ -9,16 +9,15 @@ import { Separator } from "@/components/ui/separator";
 import { useCommentsContext } from "@/contexts/comments-context";
 import useCommentActions from "@/hooks/use-comment-actions";
 import { useGetNovelReviews } from "@/services/comments/client-queries";
-import { User } from "@/types/authentication";
 import { CommentInput } from "@/types/threaded-comment";
 import { FrownIcon } from "lucide-react";
 import { Fragment, PropsWithChildren } from "react";
 
 export const NOVEL_REVIEWS_PAGE_SIZE = 10;
 
-const NovelReviews = ({ slug, currentUser }: { slug: string; currentUser?: User }) => {
-  const isAuthenticated = currentUser !== undefined;
-  const { sort } = useCommentsContext();
+const NovelReviews = ({ slug }: { slug: string; }) => {
+  const { sort, user } = useCommentsContext();
+  const isAuthenticated = user !== undefined;
 
   const {
     data,
@@ -65,7 +64,7 @@ const NovelReviews = ({ slug, currentUser }: { slug: string; currentUser?: User 
         {data?.pages.map((group, i) => (
           <Fragment key={i}>
             {group.results.map(c => (
-              <Comment key={c.id} comment={c} currentUser={currentUser} />
+              <Comment key={c.id} comment={c} currentUser={user} />
             ))}
           </Fragment>
         ))}

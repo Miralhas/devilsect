@@ -70,3 +70,13 @@ export type Tag = {
   description: string;
   slug: string;
 }
+
+export type NovelInfo = {
+  id: number;
+  slug: string;
+  title: string;
+  author: string;
+  status: NovelStatus;
+  createdAt: string;
+  updatedAt: string;
+}

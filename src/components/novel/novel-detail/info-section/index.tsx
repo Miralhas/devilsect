@@ -60,7 +60,7 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
           </div>
           <div className="flex gap-2 flex-wrap w-full max-w-[570px]">
             {novel.genres.map(genre => (
-              <NovelBadge name={genre} key={genre} />
+              <NovelBadge name={genre} href={`/genres/${genre.toLowerCase()}`} key={genre} />
             ))}
           </div>
           <NovelRating novel={novel} />

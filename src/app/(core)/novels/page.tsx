@@ -8,7 +8,8 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Novels"
+  title: "Novels",
+  description: "Discover new novels and mastepieces",
 };
 
 const NovelsPage = async () => {

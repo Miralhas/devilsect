@@ -28,7 +28,7 @@ const DynamicBreadcrumb = () => {
         {pathNames.map((p, index) => {
           const href = `/${pathNames.slice(0, index + 1).join('/')}`
           const isLast = index + 1 === pathNames.length;
-          const formattedName = p.replaceAll("-", " ");
+          const formattedName = decodeURIComponent(p).replaceAll("-", " ");
           return (
             <Fragment key={index}>
               {!isLast ? (

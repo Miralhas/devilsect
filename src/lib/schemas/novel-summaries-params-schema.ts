@@ -9,7 +9,7 @@ export enum SortKey {
   MOST_RATED = "ratingValue,id,desc"
 }
 
-export const sortKeyParams = ["views", 'newest', 'popularity', 'rating'] as const
+export const sortKeyParams = ['popularity', "views", 'newest', 'rating'] as const
 
 export const mapSortKey = (value: string): SortKey => {
   switch (value) {

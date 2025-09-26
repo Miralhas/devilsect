@@ -1,6 +1,7 @@
 import { env } from "@/env";
 import { NovelSummariesParams, NovelSummariesParamsSchema, SortKey } from "@/lib/schemas/novel-summaries-params-schema";
 import { PaginationSchema, PaginationSchemaParams } from "@/lib/schemas/pagination-schema";
+import { TagsParams, TagsSchema } from "@/lib/schemas/tags-schema";
 import { buildQueryString } from "@/lib/utils";
 import { Library } from "@/types/library";
 import { Genre, Metrics, Novel, NovelSummary, Tag } from "@/types/novel";
@@ -55,9 +56,10 @@ export const getNovelGenres = async () => {
   return await res.json() as Genre[]
 }
 
-const getNovelTags = async (params: PaginationSchemaParams) => {
-  const parsed = PaginationSchema.parse(params);
+const getNovelTags = async (params: TagsParams) => {
+  const parsed = TagsSchema.parse(params);
   const queryString = buildQueryString(parsed);
+
   const url = `${env.NEXT_PUBLIC_BASE_URL}/tags${queryString}`;
 
   const res = await fetch(url, {
@@ -125,10 +127,12 @@ export const useGetGenres = () => useQuery({
   queryKey: ["genre", "list"]
 });
 
-export const useGetTags = (params: PaginationSchemaParams) => useQuery({
+export const getTagsQueryOptions = (params: TagsParams) => queryOptions({
   queryFn: () => getNovelTags(params),
   queryKey: ["tag", "list", params]
 });
+export const useGetTags = (params: TagsParams) => useQuery(getTagsQueryOptions(params));
+export const getTagsInitialParams: TagsParams = { page: 0, size: 50, firstLetter: "a" };
 
 export const useGetNovelMetrics = (novel: Novel) => useQuery({
   queryFn: () => getNovelMetrics(novel.slug),

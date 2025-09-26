@@ -3,7 +3,7 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import { env } from "@/env";
 import { cn } from "@/lib/utils";
-import { profilePicture } from "@/services/authentication/actions";
+import { editProfilePictureAction } from "@/service/authentication/actions/profile-picture-action";
 import { User } from "@/types/authentication";
 import { Pencil } from "lucide-react";
 import { ChangeEvent, startTransition, useActionState, useEffect, useRef, useState } from 'react';
@@ -16,7 +16,7 @@ const EditImage = ({ user }: { user: User }) => {
   const inputref = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const [open, setOpen] = useState(false);
-  const [state, action, isPending] = useActionState(profilePicture, { success: undefined });
+  const [state, action, isPending] = useActionState(editProfilePictureAction, { success: undefined });
 
   const imgUrl = `${env.NEXT_PUBLIC_BASE_URL}/users/${user.id}/image#${new Date().getTime().toString()}`;
 

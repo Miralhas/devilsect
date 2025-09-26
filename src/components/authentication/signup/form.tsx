@@ -9,12 +9,13 @@ import AuthenticationInput from "@/components/ui/authentication-input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { SignupInput, signUpSchema } from "@/lib/schemas/signup";
-import { signupAction } from "@/services/authentication/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";
 import { startTransition, useActionState, useState } from "react";
 import { useForm } from "react-hook-form";
 import GoogleAuthButton from "../google-auth-button";
+import { signupAction } from "@/service/authentication/actions/signup-action";
+import { actionErrorMessage } from "@/lib/utils";
 
 const SignupForm = () => {
   const [formState, formAction, isPending] = useActionState(signupAction, { success: false });
@@ -63,7 +64,7 @@ const SignupForm = () => {
             <p className="text-red-700/80 text-sm">{clientErrors.email.message}</p>
           ) : null}
           {formState.errors?.email ? (
-            <p className="text-red-700/80 text-sm">{formState.errors.email.join(',')}</p>
+            <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.email)}</p>
           ) : null}
         </div>
 
@@ -81,7 +82,7 @@ const SignupForm = () => {
             <p className="text-red-700/80 text-sm">{clientErrors.username.message}</p>
           ) : null}
           {formState.errors?.username ? (
-            <p className="text-red-700/80 text-sm">{formState.errors.username.join(',')}</p>
+            <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.username)}</p>
           ) : null}
         </div>
 
@@ -107,7 +108,7 @@ const SignupForm = () => {
             <p className="text-red-700/80 text-sm">{clientErrors.password.message}</p>
           ) : null}
           {formState.errors?.password ? (
-            <p className="text-red-700/80 text-sm">{formState.errors.password.join('. ')}</p>
+            <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.password)}</p>
           ) : null}
         </div>
 
@@ -130,7 +131,7 @@ const SignupForm = () => {
             <p className="text-red-700/80 text-sm">{clientErrors.confirmPassword.message}</p>
           ) : null}
           {formState.errors?.confirmPassword ? (
-            <p className="text-red-700/80 text-sm">{formState.errors.confirmPassword.join('. ')}</p>
+            <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.confirmPassword)}</p>
           ) : null}
         </div>
 

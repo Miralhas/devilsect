@@ -1,17 +1,19 @@
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import AuthenticationInput from "@/components/ui/authentication-input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { SendResetPasswordInput } from "@/lib/schemas/reset-password";
+import { actionErrorMessage } from "@/lib/utils";
+import { AuthenticationFormState } from "@/types/action-state";
+import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle } from "lucide-react";
 
 type SendEmailFormProps = {
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
   register: UseFormRegister<SendResetPasswordInput>;
   clientErrors: FieldErrors<SendResetPasswordInput>;
-  actionErrors?: Record<string, string[]>;
+  actionErrors?: AuthenticationFormState["errors"];
   isPending: boolean;
 };
 
@@ -46,7 +48,7 @@ const SendEmailForm = ({ actionErrors, clientErrors, onSubmit, register, isPendi
               <p className="text-red-700/80 text-sm">{clientErrors.email.message}</p>
             ) : null}
             {actionErrors?.email ? (
-              <p className="text-red-700/80 text-sm">{actionErrors.email.join(',')}</p>
+              <p className="text-red-700/80 text-sm">{actionErrorMessage(actionErrors.email)}</p>
             ) : null}
           </div>
           <div className="grid">

@@ -3,16 +3,15 @@ import ReviewList from "@/components/profile/user-comments-and-reviews/reviews/r
 import ReviewPageHeader from "@/components/profile/user-comments-and-reviews/reviews/review-page-header";
 import { initialCommentParams } from "@/lib/schemas/comment-params-schema";
 import { deleteSession, getSession } from "@/lib/sessions";
-import { getShallowUser } from "@/services/authentication/server-queries";
+import { getShallowUser } from "@/service/authentication/api/get-shallow-user";
 import { getUserReviews } from "@/services/comments/api";
-import { redirect } from "next/navigation";
-
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Your Reviews"

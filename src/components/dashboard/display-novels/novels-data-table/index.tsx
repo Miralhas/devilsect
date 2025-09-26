@@ -20,7 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { allUsersInitialParams } from "@/services/authentication/client-queries";
+import { allUsersInitialParams } from "@/service/authentication/queries/use-get-all-users";
 import { novelSummariesInitialParams, useGetNovelSummaries } from "@/services/novels/client-queries";
 import {
   ColumnFiltersState,

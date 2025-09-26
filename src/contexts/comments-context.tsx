@@ -1,10 +1,10 @@
 'use client'
 
 import { SortKey } from "@/lib/schemas/comment-params-schema";
+import { useCurrentUser } from "@/service/authentication/queries/use-get-current-user";
+import { User } from "@/types/authentication";
 import { PropsWithChildren, useState } from "react";
 import { createContext } from "./create-context";
-import { User } from "@/types/authentication";
-import { useCurrentUserQuery } from "@/services/authentication/client-queries";
 
 type CommentsState = {
   sort: SortKey;
@@ -24,7 +24,7 @@ const { ContextProvider, useContext } = createContext<CommentsState & CommentsAc
 
 export const CommentsProvider = ({ children }: PropsWithChildren) => {
   const [sort, setSort] = useState<SortKey>(initialValues["sort"]);
-  const { data: user } = useCurrentUserQuery();
+  const { data: user } = useCurrentUser();
 
 
   const handleSort = (key: SortKey) => {

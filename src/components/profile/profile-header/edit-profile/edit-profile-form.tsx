@@ -10,7 +10,8 @@ import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { EditProfileInput, editProfileSchema } from "@/lib/schemas/edit-profile-schema";
-import { editProfileAction } from "@/services/authentication/actions";
+import { actionErrorMessage } from "@/lib/utils";
+import { editProfileAction } from "@/service/authentication/actions/edit-profile-action";
 import { User } from "@/types/authentication";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";
@@ -71,7 +72,7 @@ const EditProfileForm = ({ user, handleClose }: { user: User; handleClose: () =>
           <p className="text-red-700/80 text-sm">{clientErrors.username.message}</p>
         ) : null}
         {formState.errors?.username ? (
-          <p className="text-red-700/80 text-sm">{formState.errors.username.join(',')}</p>
+          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.username)}</p>
         ) : null}
       </div>
 
@@ -97,7 +98,7 @@ const EditProfileForm = ({ user, handleClose }: { user: User; handleClose: () =>
           <p className="text-red-700/80 text-sm">{clientErrors.password.message}</p>
         ) : null}
         {formState.errors?.password ? (
-          <p className="text-red-700/80 text-sm">{formState.errors.password.join('. ')}</p>
+          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.password)}</p>
         ) : null}
       </div>
 
@@ -120,7 +121,7 @@ const EditProfileForm = ({ user, handleClose }: { user: User; handleClose: () =>
           <p className="text-red-700/80 text-sm">{clientErrors.confirmPassword.message}</p>
         ) : null}
         {formState.errors?.confirmPassword ? (
-          <p className="text-red-700/80 text-sm">{formState.errors.confirmPassword.join('. ')}</p>
+          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.confirmPassword)}</p>
         ) : null}
       </div>
       <div className="grid grid-cols-2 gap-4">

@@ -5,6 +5,8 @@ import AuthenticationInput from "@/components/ui/authentication-input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { ResetPasswordTokenInput } from "@/lib/schemas/reset-password";
+import { actionErrorMessage } from "@/lib/utils";
+import { AuthenticationFormState } from "@/types/action-state";
 import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
@@ -13,7 +15,7 @@ type ResetPasswordFormProps = {
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
   register: UseFormRegister<ResetPasswordTokenInput>;
   clientErrors: FieldErrors<ResetPasswordTokenInput>;
-  actionErrors?: Record<string, string[]>;
+  actionErrors?: AuthenticationFormState["errors"];
   isPending: boolean;
   email: string;
 };
@@ -53,7 +55,7 @@ const ResetPasswordForm = ({ clientErrors, isPending, onSubmit, register, action
               <p className="text-red-700/80 text-sm">{clientErrors.token.message}</p>
             ) : null}
             {actionErrors?.token ? (
-              <p className="text-red-700/80 text-sm">{actionErrors.token.join(',')}</p>
+              <p className="text-red-700/80 text-sm">{actionErrorMessage(actionErrors.token)}</p>
             ) : null}
           </div>
 
@@ -79,7 +81,7 @@ const ResetPasswordForm = ({ clientErrors, isPending, onSubmit, register, action
               <p className="text-red-700/80 text-sm">{clientErrors.newPassword.message}</p>
             ) : null}
             {actionErrors?.token ? (
-              <p className="text-red-700/80 text-sm">{actionErrors.token.join(',')}</p>
+              <p className="text-red-700/80 text-sm">{actionErrorMessage(actionErrors.newPassword)}</p>
             ) : null}
           </div>
 

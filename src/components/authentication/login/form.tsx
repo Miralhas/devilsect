@@ -9,7 +9,8 @@ import AuthenticationInput from "@/components/ui/authentication-input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { LoginInput, loginSchema } from "@/lib/schemas/login";
-import { loginAction } from "@/services/authentication/actions";
+import { actionErrorMessage } from "@/lib/utils";
+import { loginAction } from "@/service/authentication/actions/login-action";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
@@ -62,7 +63,7 @@ const LoginForm = ({ redirectUri = "/" }: { redirectUri?: string }) => {
             <p className="text-red-700/80 text-sm">{clientErrors.email.message}</p>
           ) : null}
           {formState.errors?.email ? (
-            <p className="text-red-700/80 text-sm">{formState.errors.email.join(',')}</p>
+            <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.email)}</p>
           ) : null}
         </div>
 
@@ -91,7 +92,7 @@ const LoginForm = ({ redirectUri = "/" }: { redirectUri?: string }) => {
             <p className="text-red-700/80 text-sm">{clientErrors.password.message}</p>
           ) : null}
           {formState.errors?.password ? (
-            <p className="text-red-700/80 text-sm">{formState.errors.password.join('. ')}</p>
+            <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.password)}</p>
           ) : null}
         </div>
 

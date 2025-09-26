@@ -1,11 +1,11 @@
 'use client'
 
-import { useCurrentUserQuery } from "@/services/authentication/client-queries";
+import { useCurrentUser } from "@/service/authentication/queries/use-get-current-user";
 import { Novel } from "@/types/novel";
 import ClientRating from "./client-rating";
 
 const NovelRating = ({ novel }: { novel: Novel }) => {
-  const { data: user } = useCurrentUserQuery();
+  const { data: user } = useCurrentUser();
   return <ClientRating novel={novel} user={user} />
 }
 

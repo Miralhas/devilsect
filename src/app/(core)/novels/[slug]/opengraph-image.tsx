@@ -40,7 +40,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     );
   }
 
-  const imageUrl = `https://wsrv.nl/?url=${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image&w=150&maxage=7d&default=https://static.devilsect.com/No-Image-Placeholder.svg&w=150`
+  const imageUrl = `https://wsrv.nl/?url=${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image&w=150&maxage=7d&output=jpg&default=https://static.devilsect.com/No-Image-Placeholder.svg&w=150`
 
   return new ImageResponse(
     (

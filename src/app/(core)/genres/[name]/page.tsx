@@ -14,7 +14,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-const genreName = decodeURIComponent((await params).name);
+  const genreName = decodeURIComponent((await params).name);
   const genre = await getGenreByName(genreName);
 
   return {

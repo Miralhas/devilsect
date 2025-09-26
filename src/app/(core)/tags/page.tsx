@@ -14,11 +14,11 @@ export const metadata: Metadata = {
 
 const TagsPage = async ({ searchParams }: { searchParams: Promise<{ letter?: string }> }) => {
   const { letter } = await searchParams;
-  
+
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(getTagsQueryOptions({
     ...getTagsInitialParams,
-    firstLetter: letter as TagsParams["firstLetter"],
+    firstLetter: (letter as TagsParams["firstLetter"]) ?? getTagsInitialParams.firstLetter,
   }));
 
   return (

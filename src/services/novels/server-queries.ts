@@ -6,7 +6,7 @@ import { getSession } from "@/lib/sessions";
 import { buildQueryString } from "@/lib/utils";
 import { ApiResponseError } from "@/types/api";
 import { Library } from "@/types/library";
-import { EldersChoice, Genre, Novel, NovelInfo, NovelSummary } from "@/types/novel";
+import { EldersChoice, Genre, Novel, NovelInfo, NovelSummary, Tag } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
 import { RecentlyAddedChapter } from "@/types/recently-added-chapters";
 import { notFound, redirect } from "next/navigation";
@@ -176,4 +176,26 @@ export const getGenreByName = async (name: string): Promise<Genre> => {
   }
 
   return await res.json() as Promise<Genre>;
+}
+
+export const getTagByName = async (name: string): Promise<Tag> => {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const url = `${env.APP_URL}/tags/${name}`;
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: myHeaders,
+  });
+
+  if (res.status === 404) {
+    return redirect("/tags");
+  }
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch novel slugs info: ${res.status} ${res.statusText}`);
+  }
+
+  return await res.json() as Promise<Tag>;
 }

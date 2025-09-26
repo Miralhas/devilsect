@@ -15,6 +15,7 @@ const NovelTags = ({ tags }: { tags: string[] }) => {
             name={tag}
             variant="secondary"
             className="leading-6 tracking-tighter font-semibold capitalize"
+            href={`/tags/${tag.toLowerCase()}`}
           />
         ))}
       </ShowMore>

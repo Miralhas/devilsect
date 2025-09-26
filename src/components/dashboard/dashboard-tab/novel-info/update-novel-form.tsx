@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { UpdateNovelInput, updateNovelSchema } from "@/lib/schemas/update-novel-schema";
-import { updateNovelAction } from "@/services/dashboard/actions";
 import { Genre, Novel, NovelStatus, Tag } from "@/types/novel";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { startTransition, useActionState, useEffect } from "react";
@@ -21,6 +20,8 @@ import { toast } from "sonner";
 import DescriptionPreviewModal from "./description-preview-modal";
 import NovelGenres from "./novel-genres";
 import TagsCombobox from "./tags-combobox";
+import { updateNovelAction } from "@/service/dashboard/actions/update-novel-action";
+import { actionErrorMessage } from "@/lib/utils";
 
 const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
   const action = updateNovelAction.bind(null, novel)
@@ -92,7 +93,7 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
           <p className="text-red-700/80 text-sm">{clientErrors.title.message}</p>
         ) : null}
         {formState.errors?.title ? (
-          <p className="text-red-700/80 text-sm">{formState.errors.title.join(',')}</p>
+          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.title)}</p>
         ) : null}
       </div>
 
@@ -110,7 +111,7 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
           <p className="text-red-700/80 text-sm">{clientErrors.alias.message}</p>
         ) : null}
         {formState.errors?.alias ? (
-          <p className="text-red-700/80 text-sm">{formState.errors.alias.join(',')}</p>
+          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.alias)}</p>
         ) : null}
       </div>
 
@@ -128,7 +129,7 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
           <p className="text-red-700/80 text-sm">{clientErrors.author.message}</p>
         ) : null}
         {formState.errors?.author ? (
-          <p className="text-red-700/80 text-sm">{formState.errors.author.join(',')}</p>
+          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.author)}</p>
         ) : null}
       </div>
 
@@ -153,7 +154,7 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
           <p className="text-red-700/80 text-sm">{clientErrors.status.message}</p>
         ) : null}
         {formState.errors?.status ? (
-          <p className="text-red-700/80 text-sm">{formState.errors.status.join(',')}</p>
+          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.status)}</p>
         ) : null}
       </div>
 
@@ -174,7 +175,7 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
           <p className="text-red-700/80 text-sm">{clientErrors.description.message}</p>
         ) : null}
         {formState.errors?.description ? (
-          <p className="text-red-700/80 text-sm">{formState.errors.description.join(',')}</p>
+          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.description)}</p>
         ) : null}
       </div>
 
@@ -187,7 +188,7 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
           <p className="text-red-700/80 text-sm">{clientErrors.genres.message}</p>
         ) : null}
         {formState.errors?.genres ? (
-          <p className="text-red-700/80 text-sm">{formState.errors.genres.join(',')}</p>
+          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.genres)}</p>
         ) : null}
       </div>
 

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { purgeDataCache } from "@/services/dashboard/actions";
+import { purgeDataCache } from "@/service/dashboard/actions/purge-data-cache";
 import { startTransition, useActionState, useEffect } from "react";
 import { toast } from "sonner";
 

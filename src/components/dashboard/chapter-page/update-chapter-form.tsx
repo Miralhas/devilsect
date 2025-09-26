@@ -1,18 +1,19 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { UpdateChapterInput, updateChapterSchema } from "@/lib/schemas/update-chapter-schema";
-import { updateChapterAction } from "@/services/dashboard/actions";
+import { updateChapterAction } from "@/service/dashboard/actions/update-chapter-action";
 import { Chapter } from "@/types/chapter";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { startTransition, useActionState, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import DescriptionPreviewModal from "../dashboard-tab/novel-info/description-preview-modal";
-import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
+import { actionErrorMessage } from "@/lib/utils";
 
 const UpdateChapterForm = ({ chapter }: { chapter: Chapter }) => {
   const action = updateChapterAction.bind(null, chapter);
@@ -64,7 +65,7 @@ const UpdateChapterForm = ({ chapter }: { chapter: Chapter }) => {
           <p className="text-red-700/80 text-sm">{clientErrors.title.message}</p>
         ) : null}
         {formState.errors?.title ? (
-          <p className="text-red-700/80 text-sm">{formState.errors.title.join(',')}</p>
+          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.title)}</p>
         ) : null}
       </div>
 
@@ -85,7 +86,7 @@ const UpdateChapterForm = ({ chapter }: { chapter: Chapter }) => {
           <p className="text-red-700/80 text-sm">{clientErrors.body.message}</p>
         ) : null}
         {formState.errors?.body ? (
-          <p className="text-red-700/80 text-sm">{formState.errors.body.join(',')}</p>
+          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.body)}</p>
         ) : null}
       </div>
 
@@ -110,7 +111,7 @@ const UpdateChapterForm = ({ chapter }: { chapter: Chapter }) => {
           <p className="text-red-700/80 text-sm">{clientErrors.number.message}</p>
         ) : null}
         {formState.errors?.number ? (
-          <p className="text-red-700/80 text-sm">{formState.errors.number.join(',')}</p>
+          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.number)}</p>
         ) : null}
       </div>
 

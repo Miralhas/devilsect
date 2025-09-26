@@ -1,4 +1,4 @@
-import YinYangLoading from "@/components/yinyang-loading";
+import YinYangLoading from "@/components/yinyang-loading"
 
 const TagsLoading = () => {
   return (

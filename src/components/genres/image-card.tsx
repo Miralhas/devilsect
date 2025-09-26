@@ -20,7 +20,7 @@ const ImageCard = ({ url, className, ref }: Props) => {
         height={64.5}
         width={45}
         alt="novel cover"
-        className="object-cover h-full"
+        className="object-cover h-full text-transparent"
       />
     </div>
   )

@@ -1,6 +1,6 @@
 'use client'
 
-import { useCurrentUser } from "@/service/authentication/queries/use-get-current-user";
+import { useCurrentUser } from "@/service/user/queries/use-get-current-user";
 import { User } from "@/types/authentication";
 import { PropsWithChildren, useState } from "react";
 import { createContext } from "./create-context";

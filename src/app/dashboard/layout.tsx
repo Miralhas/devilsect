@@ -2,7 +2,7 @@ import DynamicBreadcrumb from "@/components/dynamic-breadcrumb";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { isAdminCheck } from "@/lib/utils";
-import { getCurrentUser } from "@/service/authentication/api/get-current-user";
+import { getCurrentUser } from "@/service/user/api/get-current-user";
 import { redirect } from "next/navigation";
 import { PropsWithChildren } from "react";
 

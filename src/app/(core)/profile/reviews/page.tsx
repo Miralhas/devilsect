@@ -3,7 +3,7 @@ import ReviewList from "@/components/profile/user-comments-and-reviews/reviews/r
 import ReviewPageHeader from "@/components/profile/user-comments-and-reviews/reviews/review-page-header";
 import { initialCommentParams } from "@/lib/schemas/comment-params-schema";
 import { deleteSession, getSession } from "@/lib/sessions";
-import { getShallowUser } from "@/service/authentication/api/get-shallow-user";
+import { getShallowUser } from "@/service/user/api/get-shallow-user";
 import { getUserReviews } from "@/services/comments/api";
 import {
   dehydrate,

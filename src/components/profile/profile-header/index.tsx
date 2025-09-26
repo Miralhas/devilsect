@@ -1,4 +1,5 @@
 import { mapRoles } from "@/lib/utils";
+import { getCurrentUserInfo } from "@/service/user/api/get-current-user-info";
 import { redirect } from "next/navigation";
 import ProfileLinks from "../profile-links";
 import EditImage from "./edit-image";
@@ -6,7 +7,6 @@ import EditProfile from "./edit-profile";
 import LogoutButton from "./logout-button";
 import ProfileStats from "./profile-stats";
 import RoleBadge from "./role-badge";
-import { getCurrentUserInfo } from "@/service/authentication/api/get-current-user-info";
 
 const ProfileHeader = async () => {
   const user = await getCurrentUserInfo();

@@ -1,5 +1,5 @@
 import { getSession } from "@/lib/sessions";
-import { allUsersInitialParams, allUsersQueryOptions } from "@/service/authentication/queries/use-get-all-users";
+import { allUsersInitialParams, allUsersQueryOptions } from "@/service/user/queries/use-get-all-users";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import UsersDataTable from "./users-data-table";
 

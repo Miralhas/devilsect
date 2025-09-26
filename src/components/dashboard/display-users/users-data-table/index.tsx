@@ -20,7 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { allUsersInitialParams, useGetAllUsers } from "@/service/authentication/queries/use-get-all-users";
+import { allUsersInitialParams, useGetAllUsers } from "@/service/user/queries/use-get-all-users";
 import {
   ColumnFiltersState,
   flexRender,

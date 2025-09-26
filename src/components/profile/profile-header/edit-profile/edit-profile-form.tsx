@@ -11,7 +11,7 @@ import { DialogClose } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { EditProfileInput, editProfileSchema } from "@/lib/schemas/edit-profile-schema";
 import { actionErrorMessage } from "@/lib/utils";
-import { editProfileAction } from "@/service/authentication/actions/edit-profile-action";
+import { editProfileAction } from "@/service/user/actions/edit-profile-action";
 import { User } from "@/types/authentication";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";

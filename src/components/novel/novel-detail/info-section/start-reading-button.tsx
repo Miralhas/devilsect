@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { useCurrentUser } from "@/service/authentication/queries/use-get-current-user";
+import { useCurrentUser } from "@/service/user/queries/use-get-current-user";
 import { useGetUserNovelOnLibrary } from "@/services/novels/client-queries";
 import { Novel } from "@/types/novel";
 import Link from "next/link";

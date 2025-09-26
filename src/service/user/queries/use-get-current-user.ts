@@ -1,6 +1,6 @@
 import { queryOptions, useQuery } from "@tanstack/react-query";
-import { authKeys } from "./query-keys";
 import { getCurrentUserClientSide } from "../api/get-current-user-client-side";
+import { authKeys } from "./query-keys";
 
 const currentUserQueryOptions = () => queryOptions({
   queryFn: getCurrentUserClientSide,

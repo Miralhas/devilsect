@@ -4,7 +4,7 @@ import Header from "@/components/chapters/header";
 import Container from "@/components/container";
 import { Separator } from "@/components/ui/separator";
 import { capitalize } from "@/lib/utils";
-import { getShallowUser } from "@/service/authentication/api/get-shallow-user";
+import { getShallowUser } from "@/service/user/api/get-shallow-user";
 import { getChapterBySlug } from "@/services/chapters/server-queries";
 import { putView } from "@/services/novels/api";
 import { Metadata } from "next";

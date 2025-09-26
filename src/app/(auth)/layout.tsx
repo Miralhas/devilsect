@@ -1,5 +1,5 @@
 import BlurCenter from "@/components/ui/blur-center";
-import { getCurrentUser } from "@/service/authentication/api/get-current-user";
+import { getCurrentUser } from "@/service/user/api/get-current-user";
 import { redirect } from "next/navigation";
 import { PropsWithChildren } from "react";
 

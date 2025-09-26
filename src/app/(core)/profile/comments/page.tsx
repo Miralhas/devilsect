@@ -3,7 +3,7 @@ import CommentList from "@/components/profile/user-comments-and-reviews/chapter-
 import CommentsPageHeader from "@/components/profile/user-comments-and-reviews/chapter-comment/comments-page-header";
 import { initialCommentParams } from "@/lib/schemas/comment-params-schema";
 import { deleteSession, getSession } from "@/lib/sessions";
-import { getShallowUser } from "@/service/authentication/api/get-shallow-user";
+import { getShallowUser } from "@/service/user/api/get-shallow-user";
 import { getUserComments } from "@/services/comments/api";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { Metadata } from "next";

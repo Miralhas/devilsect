@@ -1,10 +1,10 @@
 'use server'
 
 import { EditProfileInput, editProfileSchema } from "@/lib/schemas/edit-profile-schema";
+import { ApiError } from "@/service/api-error";
 import { AuthenticationFormState } from "@/types/action-state";
 import { revalidatePath } from "next/cache";
 import { updateUser } from "../api/update-user";
-import { ApiError } from "@/service/api-error";
 
 const DEFAULT_EDIT_PROFILE_MESSAGE = "Failed to Edit Profile. Try again later";
 

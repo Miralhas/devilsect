@@ -56,7 +56,7 @@ export const getNovelGenres = async () => {
   return await res.json() as Genre[]
 }
 
-const getNovelTags = async (params: TagsParams) => {
+export const getNovelTags = async (params: TagsParams) => {
   const parsed = TagsSchema.parse(params);
   const queryString = buildQueryString(parsed);
 

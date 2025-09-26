@@ -1,7 +1,7 @@
 import ChapterComments from "@/components/chapters/chapter-comments";
 import Container from "@/components/container";
 import { Separator } from "@/components/ui/separator";
-import { getShallowUser } from "@/services/authentication/server-queries";
+import { getShallowUser } from "@/service/authentication/api/get-shallow-user";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 

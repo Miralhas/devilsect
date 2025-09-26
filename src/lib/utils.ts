@@ -69,3 +69,8 @@ export const formatViews = (views: number) => {
   if (views >= 1000) return `${(views / 1000).toFixed(1)}K`;
   return views.toString()
 }
+
+export const actionErrorMessage = (error: string | string[]) => {
+  if (Array.isArray(error)) return error.join(", ");
+  return error;
+}

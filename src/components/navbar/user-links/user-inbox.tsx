@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useUserNotificationCount } from "@/services/authentication/client-queries";
+import { useUserNotificationCount } from "@/service/authentication/queries/use-user-notification-count";
 import { Mail } from "lucide-react";
 import Link from "next/link";
 

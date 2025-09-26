@@ -1,5 +1,6 @@
 'use client'
 
+import GenericPagination from "@/components/generic-pagination";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,6 +8,9 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -16,7 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { allUsersInitialParams, useGetAllUsers } from "@/services/authentication/client-queries";
+import { allUsersInitialParams, useGetAllUsers } from "@/service/authentication/queries/use-get-all-users";
 import {
   ColumnFiltersState,
   flexRender,
@@ -32,10 +36,6 @@ import { ChevronDown, ChevronUp, ColumnsIcon, SearchIcon, XIcon } from "lucide-r
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { useMemo, useRef, useState } from "react";
 import { columns } from "./columns";
-import GenericPagination from "@/components/generic-pagination";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
 
 const UsersDataTable = ({ session }: { session?: RequestCookie }) => {
   const divRef = useRef<HTMLDivElement>(null);

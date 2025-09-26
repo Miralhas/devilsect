@@ -1,13 +1,13 @@
 'use client'
 
 import LoginButton from "@/components/navbar/login-button";
-import { useCurrentUserQuery } from "@/services/authentication/client-queries";
+import { useCurrentUser } from "@/service/authentication/queries/use-get-current-user";
 import LibraryLink from "./library-link";
-import UserInbox from "./user-inbox";
 import UserAccount from "./user-account";
+import UserInbox from "./user-inbox";
 
 const UserLinks = () => {
-  const { data, isLoading, isError } = useCurrentUserQuery();
+  const { data, isLoading, isError } = useCurrentUser();
 
   if (isLoading || isError || !data) {
     return <LoginButton isLoading={isLoading} />

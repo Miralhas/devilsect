@@ -1,7 +1,13 @@
 'use client'
 
-import { ResetPasswordTokenInput, SendResetPasswordInput, resetPasswordTokenSchema, sendResetPasswordEmailSchema } from "@/lib/schemas/reset-password";
-import { resetPasswordAction, sendResetPasswordEmailAction } from "@/services/authentication/actions";
+import {
+  ResetPasswordTokenInput,
+  SendResetPasswordInput,
+  resetPasswordTokenSchema,
+  sendResetPasswordEmailSchema
+} from "@/lib/schemas/reset-password";
+import { resetPasswordAction } from "@/service/authentication/actions/reset-password-action";
+import { sendResetPasswordEmailAction } from "@/service/authentication/actions/send-reset-password-email-action";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { startTransition, useActionState } from "react";
 import { useForm } from "react-hook-form";

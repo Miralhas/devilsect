@@ -1,7 +1,7 @@
-import { allUsersInitialParams, allUsersQueryOptions } from "@/services/authentication/client-queries";
+import { getSession } from "@/lib/sessions";
+import { allUsersInitialParams, allUsersQueryOptions } from "@/service/authentication/queries/use-get-all-users";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import UsersDataTable from "./users-data-table";
-import { getSession } from "@/lib/sessions";
 
 const DisplayUsers = async () => {
   const session = await getSession();

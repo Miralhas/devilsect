@@ -1,6 +1,6 @@
 'use client'
 
-import { useLogoutMutation } from "@/services/authentication/client-mutation";
+import { useLogoutMutation } from "@/service/authentication/mutations/use-logout-mutation";
 
 const useLogout = () => {
   const mutation = useLogoutMutation();

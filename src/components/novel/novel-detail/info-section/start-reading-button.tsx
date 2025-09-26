@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { useCurrentUserQuery } from "@/services/authentication/client-queries";
+import { useCurrentUser } from "@/service/authentication/queries/use-get-current-user";
 import { useGetUserNovelOnLibrary } from "@/services/novels/client-queries";
 import { Novel } from "@/types/novel";
 import Link from "next/link";
@@ -10,11 +10,10 @@ import StartReadingButtonLoading from "./start-reading-button-loading";
 
 type StartReadingButtonProps = {
   novel: Novel;
-}
-
+};
 
 const StartReadingButton = ({ novel }: StartReadingButtonProps) => {
-  const { data: user, isLoading: userLoading } = useCurrentUserQuery();
+  const { data: user, isLoading: userLoading } = useCurrentUser();
   const { data: paginatedUserLibrary, isLoading: libraryLoading } = useGetUserNovelOnLibrary(novel.slug);
 
   if (libraryLoading) {

@@ -3,15 +3,15 @@
 import { Button } from "@/components/ui/button";
 import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
 import useAutoScroll from "@/hooks/use-auto-scroll";
-import { useAddChapterToUserHistoryMutation } from "@/services/user-library/client-mutation";
 import { Chapter } from "@/types/chapter";
 import { ChevronLeft, ChevronRight, HouseIcon } from "lucide-react";
 import { motion, useScroll, useSpring } from "motion/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import DisabledLink from "../disabled-link";
 import ChapterContent from "./chapter-content";
 import Settings from "./settings";
-import DisabledLink from "../disabled-link";
+import { useAddChapterToUserHistory } from "@/service/library/mutations/add-chapter-to-user-history";
 
 const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   const { previous, next } = chapter;
@@ -25,11 +25,11 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   const divRef = useRef<HTMLDivElement>(null);
   const chapterContentRef = useRef<HTMLDivElement>(null);
   const { autoScroll } = useReaderSettingsContext();
-  const mutation = useAddChapterToUserHistoryMutation();
+  const mutation = useAddChapterToUserHistory();
   const { onAutoScrollPauseChange, autoScrollPause } = useAutoScroll(chapterContentRef);
 
   useEffect(() => {
-    mutation.mutate({ chapter });
+    mutation.mutate(chapter);
     if (autoScroll.active) {
       autoScrollPause();
     }

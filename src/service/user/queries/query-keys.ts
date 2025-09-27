@@ -1,7 +1,8 @@
 import { PaginationSchemaParams } from "@/lib/schemas/pagination-schema";
 
-export const authKeys = {
+export const userKeys = {
   all: ["user"],
-  notificationCount: () => [...authKeys.all, "notifications"],
-  allUsers: (params: PaginationSchemaParams) => [...authKeys.all, "list", params],
+  notificationCount: () => [...userKeys.all, "notifications"],
+  allUsers: (params: PaginationSchemaParams) => [...userKeys.all, "list", params],
+  userRatingOnNovel: (novelId: number) => [...userKeys.all, "rating", novelId]
 };

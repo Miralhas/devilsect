@@ -1,11 +1,11 @@
 'use client'
 
 import Loading from "@/components/loading";
-import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
-import { useGetNovelSummaries } from "@/services/novels/client-queries";
-import NovelItem from "./novel-item";
-import { SearchIcon } from "lucide-react";
 import { Label } from "@/components/ui/label";
+import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
+import { useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
+import { SearchIcon } from "lucide-react";
+import NovelItem from "./novel-item";
 
 
 const NovelList = ({ title }: { title: string }) => {

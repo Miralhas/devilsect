@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { removeNovelBookmarkAction } from "@/service/library/actions/remove-novel-bookmark-action";
+import { libraryKeys } from "@/service/library/queries/query-keys";
 import { useQueryClient } from "@tanstack/react-query";
 import { CheckIcon } from "lucide-react";
 import { startTransition, useActionState, useEffect } from "react";
@@ -16,7 +17,7 @@ const RemoveBookmarkButton = ({ libraryId, novelTitle }: { libraryId: number; no
 
     if (state.success) {
       toast.success(state.message, { position: "top-center" });
-      queryClient.invalidateQueries({ queryKey: ["library"] })
+      queryClient.invalidateQueries({ queryKey: libraryKeys.all })
       return;
     }
 

@@ -5,8 +5,8 @@ import Container from "@/components/container";
 import { Separator } from "@/components/ui/separator";
 import { capitalize } from "@/lib/utils";
 import { getChapterBySlug } from "@/service/chapters/api/get-chapter-by-slug";
+import { putView } from "@/service/novels/api/put-view";
 import { getShallowUser } from "@/service/user/api/get-shallow-user";
-import { putView } from "@/services/novels/api";
 import { Metadata } from "next";
 
 type ChapterPageProps = {

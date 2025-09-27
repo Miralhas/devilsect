@@ -1,7 +1,7 @@
 import PageHeader from "@/components/page-header";
 import TagNovels from "@/components/tags/tag-novels";
-import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/services/novels/client-queries";
-import { getTagByName } from "@/services/novels/server-queries";
+import { getTagByName } from "@/service/info/api/get-tag-by-name";
+import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { TagsIcon } from "lucide-react";
 import { Metadata } from "next";

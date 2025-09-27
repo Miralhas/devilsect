@@ -1,4 +1,4 @@
-import { getUserLibrary } from "@/services/novels/server-queries";
+import { getUserLibrary } from "@/service/library/api/get-user-library";
 import { redirect } from "next/navigation";
 import HistoryGrid from "./history-grid";
 import HistoryHeader from "./history-header";

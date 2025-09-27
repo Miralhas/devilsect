@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { setNovelBookmarkAction } from "@/service/library/actions/set-novel-bookmark-action";
+import { libraryKeys } from "@/service/library/queries/query-keys";
 import { Novel } from "@/types/novel";
 import { useQueryClient } from "@tanstack/react-query";
 import { BellIcon } from "lucide-react";
@@ -17,7 +18,7 @@ const BookmarkButton = ({ novel }: { novel: Novel }) => {
 
     if (state.success) {
       toast.success(state.message, { position: "top-center" });
-      queryClient.invalidateQueries({ queryKey: ["library"] })
+      queryClient.invalidateQueries({ queryKey: libraryKeys.all })
       return;
     }
 

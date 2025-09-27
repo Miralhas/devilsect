@@ -2,7 +2,7 @@ import GenreNovels from "@/components/genres/genre-novels";
 import PageHeader from "@/components/page-header";
 import { getGenreByName } from "@/service/info/api/get-genre-by-name";
 import { getGenres } from "@/service/info/api/get-genres";
-import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/services/novels/client-queries";
+import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { TagIcon } from "lucide-react";
 import { Metadata } from "next";

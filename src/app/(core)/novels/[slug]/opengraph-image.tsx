@@ -1,6 +1,6 @@
 import { env } from "@/env"
 import { statusMap } from "@/lib/utils"
-import { getNovelBySlug } from "@/services/novels/server-queries"
+import { getNovelBySlug } from "@/service/novels/api/get-novel-by-slug"
 import { ImageResponse } from "next/og"
 
 export const runtime = "edge"

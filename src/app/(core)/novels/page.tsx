@@ -1,10 +1,9 @@
 import ContentSection from "@/components/novel/content-section";
 import PageHeader from "@/components/page-header";
 import BlurCenter from "@/components/ui/blur-center";
-import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
-import { novelSummariesQueryOptions } from "@/services/novels/client-queries";
-import { Book } from "lucide-react";
+import { novelListInitalParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { Book } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,15 +16,7 @@ const NovelsPage = async () => {
 
   await queryClient.prefetchQuery(novelSummariesQueryOptions({
     enabled: true,
-    params: {
-      genres: '',
-      size: 18,
-      q: '',
-      page: 0,
-      status: '',
-      sort: SortKey.BAYESIAN_RANKING,
-      chaptersRange: ''
-    }
+    params: { ...novelListInitalParams }
   }));
 
   return (

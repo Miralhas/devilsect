@@ -6,8 +6,9 @@ import SkeletonLoader from "@/components/novel/novel-detail/related-novels/skele
 import { Separator } from "@/components/ui/separator";
 import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
 import { capitalize } from '@/lib/utils';
-import { putView } from "@/services/novels/api";
-import { getNovelBySlug, getNovelSummariesPaginated } from "@/services/novels/server-queries";
+import { getNovelBySlug } from "@/service/novels/api/get-novel-by-slug";
+import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
+import { putView } from "@/service/novels/api/put-view";
 import type { Metadata } from 'next';
 import { Suspense } from "react";
 
@@ -16,7 +17,7 @@ type NovelPageProps = {
 }
 
 export async function generateStaticParams() {
-  const novels = await getNovelSummariesPaginated({ size: 50, sort: SortKey.BAYESIAN_RANKING });
+  const novels = await getNovelSummaries({ size: 50, sort: SortKey.BAYESIAN_RANKING });
   const { results } = novels;
   return results.map(r => ({ slug: r.slug }));
 }

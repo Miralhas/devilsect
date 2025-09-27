@@ -1,7 +1,7 @@
 'use client'
 
 import { mapSortKey, nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
-import { novelSummariesInitialParams, useGetNovelSummaries } from "@/services/novels/client-queries";
+import { novelSummariesInitialParams, useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
 import { Genre } from "@/types/novel";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

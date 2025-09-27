@@ -1,4 +1,4 @@
-import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/services/novels/client-queries";
+import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import NovelsDataTable from "./novels-data-table";
 

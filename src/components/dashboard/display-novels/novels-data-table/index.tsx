@@ -20,8 +20,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
+import { novelSummariesInitialParams, useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
 import { allUsersInitialParams } from "@/service/user/queries/use-get-all-users";
-import { novelSummariesInitialParams, useGetNovelSummaries } from "@/services/novels/client-queries";
 import {
   ColumnFiltersState,
   flexRender,

@@ -1,6 +1,6 @@
 import GenresContainer from "@/components/genres/genres-container";
 import PageHeader from "@/components/page-header";
-import { getNovelGenres } from "@/services/novels/client-queries";
+import { getGenres } from "@/service/info/api/get-genres";
 import { getAllNovelSlugs } from "@/services/novels/server-queries";
 import { TagIcon } from "lucide-react";
 import { Metadata } from "next";
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const GenresPage = async () => {
-  const genresPromise = getNovelGenres();
+  const genresPromise = getGenres();
   const slugsPromise = getAllNovelSlugs();
   const [genres, slugs] = await Promise.all([genresPromise, slugsPromise]);
 

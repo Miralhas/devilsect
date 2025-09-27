@@ -2,7 +2,7 @@ import PageHeader from "@/components/page-header";
 import TagsContainer from "@/components/tags/tags-container";
 import TagsFilter from "@/components/tags/tags-filter";
 import { TagsParams } from "@/lib/schemas/tags-schema";
-import { getTagsInitialParams, getTagsQueryOptions } from "@/services/novels/client-queries";
+import { getTagsInitialParams, getTagsQueryOptions } from "@/service/info/queries/use-get-tags";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { TagsIcon } from "lucide-react";
 import { Metadata } from "next";

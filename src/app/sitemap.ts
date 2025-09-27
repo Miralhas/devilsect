@@ -1,12 +1,13 @@
 import { env } from "@/env";
-import { getNovelGenres, getNovelTags } from "@/services/novels/client-queries";
+import { getGenres } from "@/service/info/api/get-genres";
+import { getTags } from "@/service/info/api/get-tags";
 import { getAllNovelInfo } from "@/services/novels/server-queries";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const novels = await getAllNovelInfo();
-  const genres = await getNovelGenres();
-  const { results: tags } = await getNovelTags({ size: 2000 });
+  const genres = await getGenres();
+  const { results: tags } = await getTags({ size: 2000 });
 
   const sitemapNovels: MetadataRoute.Sitemap = novels.map(({ slug, updatedAt }) => ({
     url: `${env.NEXT_PUBLIC_DOMAIN}/novels/${slug}`,

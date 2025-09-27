@@ -1,12 +1,12 @@
 'use client'
 
-import { latestInitialParams, useGetLatest } from "@/services/novels/client-queries";
 import Loading from "@/components/loading";
+import { latestInitialParams, useGetLatest } from "@/service/info/queries/use-get-latest-chapters";
+import { BookOpenText } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { parseAsIndex, useQueryState } from "nuqs";
-import ChaptersGrid from "../home/recently-added-chapters/chapters-grid";
 import GenericPagination from "../generic-pagination";
-import { BookOpenText } from "lucide-react";
+import ChaptersGrid from "../home/recently-added-chapters/chapters-grid";
 
 const RecentlyAddedSection = () => {
   const router = useRouter();

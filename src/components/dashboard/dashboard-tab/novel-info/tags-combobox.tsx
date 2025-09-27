@@ -2,6 +2,7 @@
 
 import { Check, ChevronsUpDown, XIcon } from "lucide-react"
 
+import Loading from "@/components/loading"
 import { Button } from "@/components/ui/button"
 import {
   Command,
@@ -17,10 +18,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
-import { useState } from "react"
-import { useGetTags } from "@/services/novels/client-queries"
-import Loading from "@/components/loading"
+import { useGetTags } from "@/service/info/queries/use-get-tags"
 import { Tag } from "@/types/novel"
+import { useState } from "react"
 
 interface Props {
   tags: string[];

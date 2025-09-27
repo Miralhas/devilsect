@@ -2,7 +2,7 @@ import UpdateChapterForm from "@/components/dashboard/chapter-page/update-chapte
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import { Separator } from "@/components/ui/separator";
 import { env } from "@/env";
-import { getChapterBySlug } from "@/services/chapters/server-queries";
+import { getChapterBySlug } from "@/service/chapters/api/get-chapter-by-slug";
 import Link from "next/link";
 
 type NovelPageProps = {

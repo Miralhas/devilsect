@@ -1,5 +1,5 @@
 import { env } from "@/env"
-import { getChapterBySlug } from "@/services/chapters/server-queries"
+import { getChapterBySlug } from "@/service/chapters/api/get-chapter-by-slug"
 import { ImageResponse } from "next/og"
 
 export const runtime = "edge"

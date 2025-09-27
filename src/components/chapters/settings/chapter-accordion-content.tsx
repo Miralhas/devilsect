@@ -1,6 +1,6 @@
 import SpinnerLoader from "@/components/ui/spinner-loader";
 import { cn } from "@/lib/utils";
-import { useGetNovelChapterSummaries } from "@/services/chapters/client-queries";
+import { useGetNovelChapterSummaries } from "@/service/chapters/queries/use-get-novel-chapter-summaries";
 import { Chapter } from "@/types/chapter";
 import { format } from "date-fns";
 import Link from "next/link";

@@ -1,5 +1,5 @@
 import SpinnerLoader from "@/components/ui/spinner-loader";
-import { useGetNovelChapterSummaries } from "@/services/chapters/client-queries";
+import { useGetNovelChapterSummaries } from "@/service/chapters/queries/use-get-novel-chapter-summaries";
 import { format } from "date-fns";
 import Link from "next/link";
 import { RefObject, useEffect } from "react";

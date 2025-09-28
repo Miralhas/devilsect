@@ -1,18 +1,18 @@
 'use client'
 
-import { RefObject, useEffect } from "react";
+import { useEffect } from "react";
 
-type HookProps<T> = {
-  elementRef: T;
+type HookProps = {
+  callback: () => void;
   key: string;
 }
 
-function useCrtlKeyDownHandler<T extends RefObject<HTMLElement | null>>({ elementRef, key }: HookProps<T>) {
+function useCrtlKeyDownHandler({ callback, key }: HookProps) {
   useEffect(() => {
     const keyDownHandler = (e: globalThis.KeyboardEvent) => {
       if (e.ctrlKey && e.key === key) {
         e.preventDefault();
-        if (elementRef.current) elementRef.current.click();
+        callback();
       }
     }
 
@@ -22,7 +22,7 @@ function useCrtlKeyDownHandler<T extends RefObject<HTMLElement | null>>({ elemen
       document.removeEventListener("keydown", keyDownHandler);
     }
 
-  }, [elementRef, key]);
+  }, [callback, key]);
 }
 
 export default useCrtlKeyDownHandler;

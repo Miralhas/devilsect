@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
+import useCrtlKeyDownHandler from '@/hooks/use-ctrl-keydown-handler';
 import { CommentInput } from '@/types/threaded-comment';
 import { cn } from "@/utils/common-utils";
 import { Trash } from 'lucide-react';
@@ -43,6 +44,8 @@ const RichTextEditor = ({ onCancel, onSubmit, initialData }: Props) => {
     onSubmit({ message: html, isSpoiler, parentCommentId: null });
     onCancel();
   }
+
+  useCrtlKeyDownHandler({ callback: handleSubmit, key: "Enter" });
 
   const ClearAllButton = useMemo(() => {
     return createButton("Clear All", <Trash className='size-4' />, "");

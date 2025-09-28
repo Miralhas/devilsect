@@ -17,7 +17,7 @@ import SearchInput from "./search-input";
 
 const DashboardSearch = () => {
   const searchRef = useRef<HTMLButtonElement>(null);
-  useCrtlKeyDownHandler({ elementRef: searchRef, key: "k" });
+  useCrtlKeyDownHandler({ callback: () => searchRef.current?.click(), key: "k" });
   const [value, setValue] = useState<string>("");
 
   return (

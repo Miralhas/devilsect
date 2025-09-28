@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 
 const SearchInput = () => {
   const searchRef = useRef<HTMLButtonElement>(null);
-  useCrtlKeyDownHandler({ elementRef: searchRef, key: "k" });
+  useCrtlKeyDownHandler({ callback: () => searchRef.current?.click(), key: "k" });
 
   return (
     <Button asChild className="transition-colors ease-in-out duration-200 hover:bg-background text-muted-foreground border bg-background hover:text-accent-foreground/70 cursor-text shadow-xs" ref={searchRef}>

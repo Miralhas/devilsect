@@ -1,0 +1,38 @@
+import { NOVEL_REVIEWS_PAGE_SIZE } from "@/components/novel/novel-detail/novel-reviews";
+import { useCommentsContext } from "@/contexts/comments-context";
+import { PaginatedQuery } from "@/types/pagination";
+import { ThreadedComment } from "@/types/threaded-comment";
+import { InfiniteData, useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { deleteNovelReview } from "../api/delete-novel-review";
+import { reviewKeys } from "../queries/query-keys";
+
+export const useDeleteNovelReview = () => {
+  const queryClient = useQueryClient();
+  const { sort, user } = useCommentsContext();
+  return useMutation({
+    mutationFn: deleteNovelReview,
+    onSuccess: () => { toast.success("Review deleted successfully!") },
+    onError: () => { toast.error("Failed to delete review. Try again later!") },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey: reviewKeys.all });
+    },
+    onMutate: async ({ commentId, novelSlug }) => {
+      const queryKey = reviewKeys.getNovelReviews({ novelSlug, size: NOVEL_REVIEWS_PAGE_SIZE, sort });
+      await queryClient.cancelQueries({ queryKey });
+
+      queryClient.setQueryData(queryKey, (prevData: InfiniteData<PaginatedQuery<ThreadedComment[]>, unknown>) => {
+        try {
+          if (!prevData) return undefined;
+          if (!user) return undefined;
+
+          const prevDataResults = prevData.pages[0].results;
+          const newResults = prevDataResults.filter(comment => comment.id !== commentId);
+          return { ...prevData, pages: [{ ...prevData.pages[0], results: newResults }] };
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    }
+  });
+}

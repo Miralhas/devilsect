@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils"
 import { NovelSummary } from "@/types/novel"
+import { cn } from "@/utils/common-utils"
 import { differenceInMonths } from "date-fns"
 import { CrownIcon, MedalIcon, TrophyIcon } from "lucide-react"
 

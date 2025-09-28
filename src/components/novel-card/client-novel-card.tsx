@@ -1,6 +1,6 @@
 import { env } from "@/env";
-import { cn } from "@/lib/utils";
 import { NovelSummary } from "@/types/novel";
+import { cn } from "@/utils/common-utils";
 import DynamicBlurImage from "../dynamic-blur-image";
 import BookCoverOverlay from "../novel-card/book-cover-overlay";
 import HoverOverlay from "../novel-card/hover-overlay";

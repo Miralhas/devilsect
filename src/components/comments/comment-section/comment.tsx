@@ -1,8 +1,8 @@
 'use client'
 
-import { cn } from "@/lib/utils";
 import { User } from "@/types/authentication";
 import { ThreadedComment } from "@/types/threaded-comment";
+import { cn } from "@/utils/common-utils";
 import { motion } from "motion/react";
 import { useState } from "react";
 import CommentBody from "./comment-body";

@@ -1,8 +1,8 @@
 import { env } from "@/env";
-import { INVALID_SESSION_MESSAGE } from "@/lib/constants";
 import { getSession } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
 import { ApiResponseError } from "@/types/api";
+import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 
 export const putNovelLibraryBookmark = async (novelSlug: string) => {
   const url = `${env.APP_URL}/library/bookmark/${novelSlug}`;

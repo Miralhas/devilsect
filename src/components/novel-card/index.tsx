@@ -1,11 +1,11 @@
 import { env } from "@/env";
+import { getBlurData } from "@/lib/get-blur-data";
 import { NovelSummary } from "@/types/novel";
+import { cn } from "@/utils/common-utils";
 import DynamicBlurImage from "../dynamic-blur-image";
 import BookCoverOverlay from "./book-cover-overlay";
 import HoverOverlay from "./hover-overlay";
 import InfoOverlay from "./info-overlay";
-import { cn } from "@/lib/utils";
-import { getBlurData } from "@/lib/get-blur-data";
 
 export type Size = "sm" | "lg";
 

@@ -1,12 +1,12 @@
 'use client'
 
 import { env } from "@/env";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Genre } from "@/types/novel";
+import { cn } from "@/utils/common-utils";
 import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import ImageCard from "./image-card";
-import { cn } from "@/lib/utils";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const MotionCard = motion.create(ImageCard);
 

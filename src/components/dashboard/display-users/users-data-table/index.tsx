@@ -19,8 +19,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { cn } from "@/lib/utils";
 import { allUsersInitialParams, useGetAllUsers } from "@/service/user/queries/use-get-all-users";
+import { cn } from "@/utils/common-utils";
 import {
   ColumnFiltersState,
   flexRender,

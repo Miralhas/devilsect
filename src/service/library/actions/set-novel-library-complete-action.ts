@@ -1,8 +1,8 @@
 'use server'
 
-import { capitalize } from "@/lib/utils";
 import { ApiError } from "@/service/api-error";
 import { SimpleState } from "@/types/action-state";
+import { capitalize } from "@/utils/string-utils";
 import { putNovelLibraryComplete } from "../api/put-novel-library-complete";
 
 const DEFAULT_ERROR_MESSAGE = "Failed to set novel as complete! Try again later."

@@ -1,7 +1,7 @@
 import { env } from "@/env";
-import { SESSION_COOKIE_NAME } from "@/lib/constants";
 import { deleteSession } from "@/lib/sessions";
 import { User } from "@/types/authentication";
+import { SESSION_COOKIE_NAME } from "@/utils/constants";
 import { cookies } from "next/headers";
 
 export const getCurrentUser = async (): Promise<User | undefined> => {

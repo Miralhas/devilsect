@@ -1,8 +1,10 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import { Badge } from "@/components/ui/badge";
 import { env } from "@/env";
-import { formatMonthYear, formatViews, statusMap } from "@/lib/utils";
 import { NovelSummary } from "@/types/novel";
+import { statusMap } from "@/utils/api-utils";
+import { formatMonthYear } from "@/utils/date-utils";
+import { formatViews } from "@/utils/number-utils";
 import { BookOpenText, CalendarIcon, EyeIcon, FlameIcon, StarIcon } from "lucide-react";
 import Link from "next/link";
 import { checkIfNovelIsTrend, getOverallScore, getRankingLabel } from "./utils";

@@ -1,6 +1,6 @@
-import { SESSION_COOKIE_NAME } from "@/lib/constants";
 import { decrypt } from "@/lib/sessions";
 import { User } from "@/types/authentication";
+import { SESSION_COOKIE_NAME } from "@/utils/constants";
 import { cookies } from "next/headers";
 
 // A shallow user is a user that didn't have it's cookie session verified by the stalkers api.   

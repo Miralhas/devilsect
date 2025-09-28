@@ -1,7 +1,7 @@
 import { UserLibraryParams, UserLibraryParamsSchema } from "@/lib/schemas/user-library-params-schema";
-import { buildQueryString } from "@/lib/utils";
 import { Library } from "@/types/library";
 import { PaginatedQuery } from "@/types/pagination";
+import { buildQueryString } from "@/utils/string-utils";
 
 export const getUserLibraryClientSide = async (params: UserLibraryParams) => {
   const parsed = UserLibraryParamsSchema.parse(params);

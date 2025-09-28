@@ -1,7 +1,7 @@
 'use client'
 
 import { env } from "@/env";
-import { buildQueryString } from "@/lib/utils";
+import { buildQueryString } from "@/utils/string-utils";
 import { ImageLoaderProps } from "next/image";
 
 export type WsrvParams = {

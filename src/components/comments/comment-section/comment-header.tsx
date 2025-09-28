@@ -1,7 +1,8 @@
 import { createWsrvLoader } from "@/components/wsrvLoader";
 import { env } from "@/env";
-import { formatDate, mapRoles } from "@/lib/utils";
 import { User } from "@/types/authentication";
+import { mapRoles } from "@/utils/api-utils";
+import { formatDate } from "@/utils/date-utils";
 import Image from "next/image";
 
 const CommentHeader = ({ commenter, createdAt }: { commenter: User, createdAt: string; }) => {

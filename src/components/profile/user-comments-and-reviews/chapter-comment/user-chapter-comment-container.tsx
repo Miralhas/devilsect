@@ -2,9 +2,9 @@
 
 import { createWsrvLoader } from "@/components/wsrvLoader";
 import { env } from "@/env";
-import { formatDate } from "@/lib/utils";
 import { User } from "@/types/authentication";
 import { UserChapterComment } from "@/types/threaded-comment";
+import { formatDate } from "@/utils/date-utils";
 import Image from "next/image";
 import Link from "next/link";
 import UserCommentFooter from "../user-comment-footer";

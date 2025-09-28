@@ -1,8 +1,8 @@
 import { env } from "@/env";
 import { CommentParamsSchema, NovelReviewParams } from "@/lib/schemas/comment-params-schema";
-import { buildQueryString } from "@/lib/utils";
 import { PaginatedQuery } from "@/types/pagination";
 import { ThreadedComment } from "@/types/threaded-comment";
+import { buildQueryString } from "@/utils/string-utils";
 
 export const getNovelReviews = async (params: NovelReviewParams): Promise<PaginatedQuery<ThreadedComment[]>> => {
   const parsed = CommentParamsSchema.parse(params);

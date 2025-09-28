@@ -1,9 +1,9 @@
 import { env } from "@/env";
-import { INVALID_SESSION_MESSAGE } from "@/lib/constants";
 import { PaginationSchema, PaginationSchemaParams } from "@/lib/schemas/pagination-schema";
-import { buildQueryString } from "@/lib/utils";
 import { UserInfo } from "@/types/authentication";
 import { PaginatedQuery } from "@/types/pagination";
+import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
+import { buildQueryString } from "@/utils/string-utils";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export const getAllUsers = async (params: PaginationSchemaParams, session?: RequestCookie) => {

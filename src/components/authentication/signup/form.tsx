@@ -9,13 +9,13 @@ import AuthenticationInput from "@/components/ui/authentication-input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { SignupInput, signUpSchema } from "@/lib/schemas/signup";
+import { signupAction } from "@/service/authentication/actions/signup-action";
+import { actionErrorMessage } from "@/utils/string-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";
 import { startTransition, useActionState, useState } from "react";
 import { useForm } from "react-hook-form";
 import GoogleAuthButton from "../google-auth-button";
-import { signupAction } from "@/service/authentication/actions/signup-action";
-import { actionErrorMessage } from "@/lib/utils";
 
 const SignupForm = () => {
   const [formState, formAction, isPending] = useActionState(signupAction, { success: false });

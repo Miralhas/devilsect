@@ -1,5 +1,5 @@
-import { mapRoles } from "@/lib/utils";
 import { getCurrentUserInfo } from "@/service/user/api/get-current-user-info";
+import { mapRoles } from "@/utils/api-utils";
 import { redirect } from "next/navigation";
 import ProfileLinks from "../profile-links";
 import EditImage from "./edit-image";

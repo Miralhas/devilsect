@@ -1,8 +1,8 @@
 import { env } from "@/env";
 import { PaginationSchema, PaginationSchemaParams } from "@/lib/schemas/pagination-schema";
-import { buildQueryString } from "@/lib/utils";
 import { ChapterSummary } from "@/types/chapter";
 import { PaginatedQuery } from "@/types/pagination";
+import { buildQueryString } from "@/utils/string-utils";
 
 export const getNovelChapterSummaries = async (
   novelSlug: string, params: PaginationSchemaParams

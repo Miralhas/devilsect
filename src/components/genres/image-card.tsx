@@ -1,9 +1,9 @@
 'use client'
 
+import { cn } from "@/utils/common-utils";
 import Image from "next/image";
-import { createWsrvLoader } from "../wsrvLoader";
-import { cn } from "@/lib/utils";
 import { Ref } from "react";
+import { createWsrvLoader } from "../wsrvLoader";
 
 type Props = {
   ref?: Ref<HTMLDivElement>;

@@ -1,10 +1,10 @@
 import { env } from "@/env";
 import { PaginationSchema, PaginationSchemaParams } from "@/lib/schemas/pagination-schema";
-import { buildQueryString } from "@/lib/utils";
 import { ApiError } from "@/service/api-error";
 import { ApiResponseError } from "@/types/api";
 import { PaginatedQuery } from "@/types/pagination";
 import { RecentlyAddedChapter } from "@/types/recently-added-chapters";
+import { buildQueryString } from "@/utils/string-utils";
 
 export const getLatestChapters = async (params: PaginationSchemaParams): Promise<PaginatedQuery<RecentlyAddedChapter[]>> => {
   const parsed = PaginationSchema.parse(params);

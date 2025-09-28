@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/common-utils";
 import { PropsWithChildren } from "react";
 
 const Container = ({ children, className }: PropsWithChildren<{className?: string}>) => {

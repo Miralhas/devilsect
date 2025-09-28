@@ -19,9 +19,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { cn } from "@/lib/utils";
 import { novelSummariesInitialParams, useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
 import { allUsersInitialParams } from "@/service/user/queries/use-get-all-users";
+import { cn } from "@/utils/common-utils";
 import {
   ColumnFiltersState,
   flexRender,

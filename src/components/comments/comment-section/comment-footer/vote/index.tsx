@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { useGlobalLoginContext } from "@/contexts/global-login-context";
 import useVote from "@/hooks/use-vote";
-import { cn } from "@/lib/utils";
 import { User } from "@/types/authentication";
 import { ThreadedComment } from "@/types/threaded-comment";
+import { cn } from "@/utils/common-utils";
 import { LucideThumbsDown, LucideThumbsUp } from "lucide-react";
 
 const Vote = ({ comment, user }: { comment: ThreadedComment; user?: User }) => {

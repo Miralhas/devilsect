@@ -2,9 +2,9 @@
 
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import { env } from "@/env";
-import { cn } from "@/lib/utils";
 import { editProfilePictureAction } from "@/service/user/actions/profile-picture-action";
 import { User } from "@/types/authentication";
+import { cn } from "@/utils/common-utils";
 import { Pencil } from "lucide-react";
 import { ChangeEvent, startTransition, useActionState, useEffect, useRef, useState } from 'react';
 import { toast } from "sonner";

@@ -1,10 +1,10 @@
 import { env } from "@/env";
-import { INVALID_SESSION_MESSAGE } from "@/lib/constants";
 import { UpdateChapterInput } from "@/lib/schemas/update-chapter-schema";
 import { getSession } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
 import { ApiResponseError } from "@/types/api";
 import { Chapter } from "@/types/chapter";
+import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 
 export const updateChapter = async (chapter: Chapter, data: UpdateChapterInput) => {
   const url = `${env.APP_URL}/novels/${chapter.novelSlug}/chapters/${chapter.slug}`;

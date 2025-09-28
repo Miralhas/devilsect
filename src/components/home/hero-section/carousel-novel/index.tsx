@@ -9,7 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { createWsrvLoader } from "@/components/wsrvLoader";
-import { statusMap } from "@/lib/utils";
+import { statusMap } from "@/utils/api-utils";
 import Autoplay from "embla-carousel-autoplay";
 import { StarIcon } from "lucide-react";
 import Image from "next/image";

@@ -5,9 +5,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import { NovelSearchParams, nuqsNovelSummariesParams, sortKeyParams } from "@/lib/schemas/novel-summaries-params-schema";
-import { capitalize, cn } from "@/lib/utils";
+import { cn } from "@/utils/common-utils";
+import { capitalize } from "@/utils/string-utils";
 import { useQueryStates } from "nuqs";
 
 const SortGenreNovels = ({ className }: { className?: string }) => {

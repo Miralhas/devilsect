@@ -9,11 +9,12 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { arrayChunker, formatDate } from "@/lib/utils";
+import { PaginatedQuery } from "@/types/pagination";
 import { RecentlyAddedChapter } from "@/types/recently-added-chapters";
+import { arrayChunker } from "@/utils/array-utils";
+import { formatDate } from "@/utils/date-utils";
 import Link from "next/link";
 import ChapterImage from "./chapter-image";
-import { PaginatedQuery } from "@/types/pagination";
 
 const DESKTOP_CHUNK_SIZE = 10;
 const MOBILE_CHUNK_SIZE = 5;

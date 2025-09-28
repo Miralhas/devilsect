@@ -1,5 +1,6 @@
-import { formatFullDate, roleMap } from "@/lib/utils";
 import { getCurrentUserInfo } from "@/service/user/api/get-current-user-info";
+import { roleMap } from "@/utils/api-utils";
+import { formatFullDate } from "@/utils/date-utils";
 import { UserIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import RoleBadge from "../profile-header/role-badge";

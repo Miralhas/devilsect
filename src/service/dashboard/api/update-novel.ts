@@ -1,10 +1,10 @@
 import { env } from "@/env";
-import { INVALID_SESSION_MESSAGE } from "@/lib/constants";
 import { UpdateNovelInput } from "@/lib/schemas/update-novel-schema";
 import { getSession } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
 import { ApiResponseError } from "@/types/api";
 import { Novel } from "@/types/novel";
+import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 
 export const updateNovel = async (novel: Novel, data: UpdateNovelInput) => {
   const url = `${env.APP_URL}/novels/${novel.slug}`;

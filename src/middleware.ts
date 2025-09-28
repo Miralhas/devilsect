@@ -1,8 +1,8 @@
 import { decrypt, deleteSession, updateSession } from '@/lib/sessions';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import { SESSION_COOKIE_NAME } from './lib/constants';
-import { isAdminCheck } from './lib/utils';
+import { isAdminCheck } from "./utils/api-utils";
+import { SESSION_COOKIE_NAME } from './utils/constants';
 
 // has to be unauthenticated to access
 const authRoutes = [

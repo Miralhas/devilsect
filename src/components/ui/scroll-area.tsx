@@ -1,9 +1,9 @@
 "use client"
 
-import * as React from "react"
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area"
+import * as React from "react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/utils/common-utils"
 
 function ScrollArea({
   className,
@@ -56,3 +56,4 @@ function ScrollBar({
 }
 
 export { ScrollArea, ScrollBar }
+

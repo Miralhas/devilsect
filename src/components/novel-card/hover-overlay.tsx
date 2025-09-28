@@ -1,7 +1,7 @@
 import { NovelSummary } from "@/types/novel";
+import { cn } from "@/utils/common-utils";
 import { BookOpenText } from "lucide-react";
 import type { Size } from "./index";
-import { cn } from "@/lib/utils";
 
 type HoverOverlayProps = {
   info: Pick<NovelSummary, "author" | "title">;

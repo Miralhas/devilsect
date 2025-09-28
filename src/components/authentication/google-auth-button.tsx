@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/common-utils";
 import GoogleIcon from "../ui/google-icon";
 
 const GoogleAuthButton = ({ redirectUri = "/" }: { redirectUri?: string }) => {

@@ -3,8 +3,8 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import BookCoverOverlay from "@/components/novel-card/book-cover-overlay";
 import { env } from "@/env";
-import { formatDate } from "@/lib/utils";
 import { Library } from "@/types/library";
+import { formatDate } from "@/utils/date-utils";
 import { BookOpenText } from "lucide-react";
 import Link from "next/link";
 import BookmarkButtonIcon from "./bookmark-button-icon";

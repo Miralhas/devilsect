@@ -8,12 +8,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { UpdateChapterInput, updateChapterSchema } from "@/lib/schemas/update-chapter-schema";
 import { updateChapterAction } from "@/service/dashboard/actions/update-chapter-action";
 import { Chapter } from "@/types/chapter";
+import { actionErrorMessage } from "@/utils/string-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { startTransition, useActionState, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import DescriptionPreviewModal from "../dashboard-tab/novel-info/description-preview-modal";
-import { actionErrorMessage } from "@/lib/utils";
 
 const UpdateChapterForm = ({ chapter }: { chapter: Chapter }) => {
   const action = updateChapterAction.bind(null, chapter);

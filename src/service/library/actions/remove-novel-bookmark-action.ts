@@ -1,8 +1,8 @@
 'use server'
 
-import { capitalize } from "@/lib/utils";
 import { ApiError } from "@/service/api-error";
 import { SimpleState } from "@/types/action-state";
+import { capitalize } from "@/utils/string-utils";
 import { deleteNovelLibraryBookmark } from "../api/delete-novel-library-bookmark";
 
 const DEFAULT_ERROR_MESSAGE = "Failed to bookmark novel! Try again later.";

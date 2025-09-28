@@ -1,9 +1,9 @@
 import { env } from "@/env";
-import { INVALID_SESSION_MESSAGE } from "@/lib/constants";
 import { getSession } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
 import { ApiResponseError } from "@/types/api";
 import { Novel } from "@/types/novel";
+import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 
 export const updateNovelImage = async (novel:Novel,imageBlob: Blob) => {
   const session = await getSession();

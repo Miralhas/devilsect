@@ -1,10 +1,10 @@
 import { env } from "@/env";
 import { UserLibraryParams, UserLibraryParamsSchema } from "@/lib/schemas/user-library-params-schema";
 import { getSession } from "@/lib/sessions";
-import { buildQueryString } from "@/lib/utils";
 import { ApiResponseError } from "@/types/api";
 import { Library } from "@/types/library";
 import { PaginatedQuery } from "@/types/pagination";
+import { buildQueryString } from "@/utils/string-utils";
 
 export const getUserLibrary = async (
   params: UserLibraryParams, cache: RequestCache = "default"

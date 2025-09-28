@@ -1,6 +1,6 @@
-import { statusMap } from "@/lib/utils";
 import { NovelSummary } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
+import { statusMap } from "@/utils/api-utils";
 import { BookOpenText, StarIcon } from "lucide-react";
 import Link from "next/link";
 import CardImage from "./card-image";

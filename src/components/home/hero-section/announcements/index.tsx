@@ -10,8 +10,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { arrayChunker } from "@/lib/utils";
 import { Announcement as AnnouncementType } from "@/types/announcement";
+import { arrayChunker } from "@/utils/array-utils";
 import { Megaphone } from "lucide-react";
 import Link from "next/link";
 

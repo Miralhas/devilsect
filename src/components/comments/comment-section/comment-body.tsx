@@ -1,6 +1,6 @@
-import { ThreadedComment } from "@/types/threaded-comment";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { ThreadedComment } from "@/types/threaded-comment";
+import { cn } from "@/utils/common-utils";
 import { useEffect, useState } from "react";
 
 const CommentBody = ({ comment }: { comment: ThreadedComment; }) => {

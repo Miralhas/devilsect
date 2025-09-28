@@ -17,9 +17,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { cn } from "@/lib/utils"
 import { useGetTags } from "@/service/info/queries/use-get-tags"
 import { Tag } from "@/types/novel"
+import { cn } from "@/utils/common-utils"
 import { useState } from "react"
 
 interface Props {

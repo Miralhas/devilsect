@@ -1,5 +1,5 @@
 import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/common-utils";
 
 type Props = {
   content: string;

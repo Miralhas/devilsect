@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { removeNovelBookmarkAction } from "@/service/library/actions/remove-novel-bookmark-action";
 import { revalidateFetchTag } from "@/service/library/actions/revalidate-fetch-tag";
 import { Library } from "@/types/library";
+import { cn } from "@/utils/common-utils";
 import { BookmarkMinus } from "lucide-react";
 import { Dispatch, SetStateAction, startTransition, useActionState, useEffect } from "react";
 import { toast } from "sonner";

@@ -6,9 +6,9 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { formatDate } from "@/lib/utils";
-import { Novel } from "@/types/novel"
+} from "@/components/ui/select";
+import { Novel } from "@/types/novel";
+import { formatDate } from "@/utils/date-utils";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 

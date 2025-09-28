@@ -1,7 +1,7 @@
 import { env } from "@/env";
-import { INVALID_SESSION_MESSAGE } from "@/lib/constants";
 import { getSession } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
+import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 
 export const deleteNovelLibraryBookmark = async (libraryId: number) => {
   const url = `${env.APP_URL}/library/bookmark/${libraryId}`;

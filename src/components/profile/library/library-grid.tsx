@@ -1,6 +1,6 @@
 import { env } from "@/env";
-import { formatDate } from "@/lib/utils";
 import { Library } from "@/types/library";
+import { formatDate } from "@/utils/date-utils";
 import { BookOpenText } from "lucide-react";
 import Link from "next/link";
 import DynamicBlurImage from "../../dynamic-blur-image";

@@ -1,8 +1,8 @@
 import { env } from "@/env";
 import { TagsParams, TagsSchema } from "@/lib/schemas/tags-schema";
-import { buildQueryString } from "@/lib/utils";
 import { Tag } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
+import { buildQueryString } from "@/utils/string-utils";
 
 export const getTags = async (params: TagsParams) => {
   const parsed = TagsSchema.parse(params);

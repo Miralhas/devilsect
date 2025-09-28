@@ -1,8 +1,8 @@
 import { env } from "@/env";
 import { NovelSummariesParams, NovelSummariesParamsSchema } from "@/lib/schemas/novel-summaries-params-schema";
-import { buildQueryString } from "@/lib/utils";
 import { NovelSummary } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
+import { buildQueryString } from "@/utils/string-utils";
 
 export const getNovelSummaries = async (params: NovelSummariesParams) => {
   const parsed = NovelSummariesParamsSchema.parse(params);

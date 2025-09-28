@@ -5,10 +5,10 @@ import RelatedNovels from "@/components/novel/novel-detail/related-novels";
 import SkeletonLoader from "@/components/novel/novel-detail/related-novels/skeleton-loader";
 import { Separator } from "@/components/ui/separator";
 import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
-import { capitalize } from '@/lib/utils';
 import { getNovelBySlug } from "@/service/novels/api/get-novel-by-slug";
 import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
 import { putView } from "@/service/novels/api/put-view";
+import { capitalize } from "@/utils/string-utils";
 import type { Metadata } from 'next';
 import { Suspense } from "react";
 

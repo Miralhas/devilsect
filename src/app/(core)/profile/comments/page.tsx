@@ -3,8 +3,8 @@ import CommentList from "@/components/profile/user-comments-and-reviews/chapter-
 import CommentsPageHeader from "@/components/profile/user-comments-and-reviews/chapter-comment/comments-page-header";
 import { initialCommentParams } from "@/lib/schemas/comment-params-schema";
 import { deleteSession, getSession } from "@/lib/sessions";
+import { getUserCommentsQueryOptions } from "@/service/comments/queries/use-get-user-comments";
 import { getShallowUser } from "@/service/user/api/get-shallow-user";
-import { getUserComments } from "@/services/comments/api";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
@@ -24,10 +24,7 @@ const CommentsPage = async () => {
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: ['user', 'comments', initialCommentParams],
-    queryFn: () => getUserComments(initialCommentParams, session),
-  })
+  await queryClient.prefetchQuery(getUserCommentsQueryOptions({ params: initialCommentParams, session }))
 
   return (
     <section className="p-4 md:p-10 space-y-12">

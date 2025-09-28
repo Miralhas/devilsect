@@ -3,9 +3,8 @@
 import GenericPagination from "@/components/generic-pagination";
 import Loading from "@/components/loading";
 import { initialCommentParams, SortKey } from "@/lib/schemas/comment-params-schema";
-import { getUserComments } from "@/services/comments/api";
+import { useGetUserComments } from "@/service/comments/queries/use-get-user-comments";
 import { User } from "@/types/authentication";
-import { useQuery } from "@tanstack/react-query";
 import { MessageCircleIcon } from "lucide-react";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { redirect } from "next/navigation";
@@ -22,10 +21,10 @@ const CommentList = ({ session, user }: Props) => {
   const [page, setPage] = useState(initialCommentParams["page"]);
   const [sort, setSort] = useState(initialCommentParams["sort"]);
 
-  const { data: comments, isLoading, isError } = useQuery({
-    queryFn: () => getUserComments({ ...initialCommentParams, page, sort }, session),
-    queryKey: ['user', 'comments', { ...initialCommentParams, page, sort }],
-  });
+  const { data: comments, isLoading, isError } = useGetUserComments({
+    session,
+    params: { ...initialCommentParams, page, sort }
+  })
 
   const handlePage = (page: number) => {
     setPage(page);

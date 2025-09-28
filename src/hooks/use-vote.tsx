@@ -1,5 +1,5 @@
-import { useVoteMutation } from "@/services/comments/client-mutations";
-import { deleteVote } from "@/services/comments/server-actions";
+import { deleteVoteAction } from "@/service/comments/actions/delete-vote-action";
+import { useVoteMutation } from "@/service/comments/mutations/use-vote-mutation";
 import { User } from "@/types/authentication";
 import { ThreadedComment, Vote } from "@/types/threaded-comment";
 import { useState } from "react";
@@ -69,7 +69,7 @@ const useVote = ({ comment, user }: { comment: ThreadedComment; user?: User }) =
   }
 
   const onDeleteVoteMutation = async () => {
-    await deleteVote(comment.id)
+    await deleteVoteAction(comment.id)
   }
 
   const onUpvoteMutation = (vote: Vote) => {

@@ -2,7 +2,7 @@
 
 import Loading from "@/components/loading";
 import { Label } from "@/components/ui/label";
-import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
+import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
 import { SearchIcon } from "lucide-react";
 import NovelItem from "./novel-item";

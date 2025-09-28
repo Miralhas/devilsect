@@ -17,7 +17,7 @@ import { Genre, Novel, NovelStatus, Tag } from "@/types/novel";
 import { actionErrorMessage } from "@/utils/string-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { startTransition, useActionState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useController, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import DescriptionPreviewModal from "./description-preview-modal";
 import NovelGenres from "./novel-genres";
@@ -37,17 +37,35 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
     };
   }, [formState.success, formState.errors]);
 
+
   const form = useForm<UpdateNovelInput>({
     resolver: zodResolver(updateNovelSchema),
-    defaultValues: { ...novel },
+    defaultValues: {
+      alias: novel.alias,
+      author: novel.author,
+      description: novel.description,
+      genres: novel.genres,
+      status: novel.status,
+      tags: novel.tags,
+      title: novel.title
+    },
     mode: "onSubmit"
+  });
+
+  const { field: genresField } = useController({
+    name: "genres",
+    control: form.control,
+  });
+
+
+  const { field: tagsField } = useController({
+    name: "tags",
+    control: form.control,
   });
 
   const { errors: clientErrors, isDirty } = form.formState;
 
   const description = form.watch("description");
-  const genres = form.watch("genres");
-  const tags = form.watch("tags");
 
   const onSubmit = form.handleSubmit((data: UpdateNovelInput) => {
     startTransition(() => formAction(data));
@@ -58,23 +76,25 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
   }
 
   const handleGenres = (g: Genre) => {
-    const isSelected = genres.some(selectedGenre => g.name === selectedGenre);
+    const isSelected = genresField.value.includes(g.name);
     if (isSelected) {
-      return form.setValue("genres", genres.filter(selectedGenre => selectedGenre !== g.name));
+      genresField.onChange(genresField.value.filter((v: string) => v !== g.name));
+    } else {
+      genresField.onChange([...genresField.value, g.name]);
     }
-    form.setValue("genres", [...genres, g.name])
-  }
+  };
 
   const handleTags = (t: Tag) => {
-    const isSelected = tags.some(selectedTag => t.name === selectedTag);
+    const isSelected = tagsField.value.includes(t.name);
     if (isSelected) {
-      return form.setValue("tags", tags.filter(selectedTag => selectedTag !== t.name));
+      tagsField.onChange(tagsField.value.filter(selectedTag => selectedTag !== t.name));
+    } else {
+      tagsField.onChange([...tagsField.value, t.name]);
     }
-    form.setValue("tags", [...tags, t.name]);
   }
 
   const handleRemoveSelectedTag = (tagName: string) => {
-    return form.setValue("tags", tags.filter(selectedTag => selectedTag !== tagName));
+    return tagsField.onChange(tagsField.value.filter(selectedTag => selectedTag !== tagName));
   }
 
   return (
@@ -181,9 +201,9 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
 
       <div className="grid gap-3">
         <Label htmlFor="" className="font-semibold text-muted-foreground inline-flex gap-2 items-center">Genres
-          <span className="text-xs relative top-0.25 font-light">{genres.length} selected</span>
+          <span className="text-xs relative top-0.25 font-light">{genresField.value.length} selected</span>
         </Label>
-        <NovelGenres selectedGenres={genres} handleGenres={handleGenres} />
+        <NovelGenres selectedGenres={genresField.value} handleGenres={handleGenres} />
         {clientErrors.genres ? (
           <p className="text-red-700/80 text-sm">{clientErrors.genres.message}</p>
         ) : null}
@@ -194,9 +214,9 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
 
       <div className="grid gap-3">
         <Label htmlFor="novel-tags" className="font-semibold text-muted-foreground inline-flex gap-2 items-center">Tags
-          <span className="text-xs relative top-0.25 font-light">{tags.length} selected</span>
+          <span className="text-xs relative top-0.25 font-light">{tagsField.value.length} selected</span>
         </Label>
-        <TagsCombobox handleTags={handleTags} tags={tags} handleRemoveSelectedTag={handleRemoveSelectedTag} />
+        <TagsCombobox handleTags={handleTags} tags={tagsField.value} handleRemoveSelectedTag={handleRemoveSelectedTag} />
       </div>
 
       <div className="flex items-center gap-4">

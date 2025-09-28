@@ -236,3 +236,7 @@ br {
   margin: 6px 0 !important;
   line-height: 0px !important;
 }
+
+.overlay {
+  border-image: linear-gradient(hsl(0 100% 0% / 0.80), hsl(0 100% 0% / 0.80)) fill 1;
+}

@@ -1,7 +1,7 @@
 import ProfileHeader from "@/components/profile/profile-header";
 import ReviewList from "@/components/profile/user-comments-and-reviews/reviews/review-list";
 import ReviewPageHeader from "@/components/profile/user-comments-and-reviews/reviews/review-page-header";
-import { initialCommentParams } from "@/lib/schemas/comment-params-schema";
+import { initialCommentParams } from "@/lib/schemas/search-params/comment-params-schema";
 import { deleteSession, getSession } from "@/lib/sessions";
 import { getUserReviewsQueryOptions } from "@/service/comments/queries/use-get-user-reviews";
 import { getShallowUser } from "@/service/user/api/get-shallow-user";

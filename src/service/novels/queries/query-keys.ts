@@ -1,4 +1,4 @@
-import { NovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
+import { NovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 
 export const novelKeys = {
   all: ["novel"],

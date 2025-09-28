@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { nuqsUserLibrarySeachParams } from "@/lib/schemas/user-library-params-schema";
+import { nuqsUserLibrarySeachParams } from "@/lib/schemas/search-params/user-library-params-schema";
 import { useQueryStates } from 'nuqs';
 
 const SortFilter = () => {

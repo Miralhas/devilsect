@@ -1,6 +1,6 @@
 import { CHAPTER_COMMENTS_PAGE_SIZE } from "@/components/chapters/chapter-comments";
 import { useCommentsContext } from "@/contexts/comments-context";
-import { SortKey } from "@/lib/schemas/comment-params-schema";
+import { SortKey } from "@/lib/schemas/search-params/comment-params-schema";
 import { PaginatedQuery } from "@/types/pagination";
 import { ThreadedComment } from "@/types/threaded-comment";
 import { InfiniteData, useMutation, useQueryClient } from "@tanstack/react-query";

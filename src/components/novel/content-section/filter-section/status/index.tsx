@@ -1,9 +1,9 @@
-import { Label } from "@/components/ui/label";
-import { NovelSearchParams, nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
-import { AlignJustify, CheckCheck, CircleCheck, LoaderCircle, LucideIcon } from "lucide-react";
-import StatusButton from "./status-button";
-import { useQueryStates } from "nuqs";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { NovelSearchParams, nuqsNovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
+import { AlignJustify, CheckCheck, CircleCheck, LoaderCircle, LucideIcon } from "lucide-react";
+import { useQueryStates } from "nuqs";
+import StatusButton from "./status-button";
 
 export type Statuses = {
   value: NovelSearchParams["status"];

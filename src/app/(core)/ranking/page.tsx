@@ -1,7 +1,7 @@
 import DesktopGridTable from "@/components/ranking/grid-table/desktop-grid-table";
 import GridTableHeader from "@/components/ranking/grid-table/grid-table-header";
 import MobileGridTable from "@/components/ranking/grid-table/mobile-grid-table";
-import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
+import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
 import { Metadata } from "next";
 

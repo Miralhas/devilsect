@@ -1,9 +1,9 @@
-import { mapFilter, mapSortKey } from "@/lib/schemas/user-library-params-schema";
+import { mapFilter, mapSortKey } from "@/lib/schemas/search-params/user-library-params-schema";
+import { getUserLibrary } from "@/service/library/api/get-user-library";
 import { redirect } from "next/navigation";
 import LibraryFilters from "./library-filters";
 import LibraryGrid from "./library-grid";
 import LibraryHeader from "./library-header";
-import { getUserLibrary } from "@/service/library/api/get-user-library";
 
 type Props = {
   params: {

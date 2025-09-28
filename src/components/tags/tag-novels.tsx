@@ -1,6 +1,6 @@
 'use client'
 
-import { mapSortKey, nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
+import { mapSortKey, nuqsNovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { novelSummariesInitialParams, useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
 import { Tag } from "@/types/novel";
 import { BookIcon } from "lucide-react";

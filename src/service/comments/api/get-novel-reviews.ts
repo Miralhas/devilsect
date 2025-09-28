@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { CommentParamsSchema, NovelReviewParams } from "@/lib/schemas/comment-params-schema";
+import { CommentParamsSchema, NovelReviewParams } from "@/lib/schemas/search-params/comment-params-schema";
 import { PaginatedQuery } from "@/types/pagination";
 import { ThreadedComment } from "@/types/threaded-comment";
 import { buildQueryString } from "@/utils/string-utils";

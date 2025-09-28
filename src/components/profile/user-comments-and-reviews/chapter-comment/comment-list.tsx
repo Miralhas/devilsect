@@ -2,7 +2,7 @@
 
 import GenericPagination from "@/components/generic-pagination";
 import Loading from "@/components/loading";
-import { initialCommentParams, SortKey } from "@/lib/schemas/comment-params-schema";
+import { initialCommentParams, SortKey } from "@/lib/schemas/search-params/comment-params-schema";
 import { useGetUserComments } from "@/service/comments/queries/use-get-user-comments";
 import { User } from "@/types/authentication";
 import { MessageCircleIcon } from "lucide-react";

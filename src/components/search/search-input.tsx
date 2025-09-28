@@ -1,7 +1,7 @@
 'use client'
 
 import { Input } from "@/components/ui/input";
-import { nuqsSearchParams } from "@/lib/schemas/search-params-schema";
+import { nuqsSearchParams } from "@/lib/schemas/search-params/search-params-schema";
 import { SearchIcon, XIcon } from "lucide-react";
 import { useQueryStates } from "nuqs";
 import { ChangeEvent, useState } from "react";

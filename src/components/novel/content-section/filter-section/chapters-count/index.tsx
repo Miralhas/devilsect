@@ -1,9 +1,9 @@
-import { Label } from "@/components/ui/label";
-import { ArrowUp01, ChevronRight, ChevronsRightLeft, GripIcon } from "lucide-react";
-import ChaptersRange from "./chapters-range-button";
-import { nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
-import { useQueryStates } from "nuqs";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { nuqsNovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
+import { ArrowUp01, ChevronRight, ChevronsRightLeft, GripIcon } from "lucide-react";
+import { useQueryStates } from "nuqs";
+import ChaptersRange from "./chapters-range-button";
 
 const ChaptersCount = () => {
   const [values, setValues] = useQueryStates(nuqsNovelSummariesParams);

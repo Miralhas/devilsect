@@ -1,4 +1,4 @@
-import { UserLibraryParams } from "@/lib/schemas/user-library-params-schema";
+import { UserLibraryParams } from "@/lib/schemas/search-params/user-library-params-schema";
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import { getUserLibraryClientSide } from "../api/get-user-library-client-side";
 import { libraryKeys } from "./query-keys";

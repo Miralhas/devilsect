@@ -1,4 +1,4 @@
-import { ChapterCommentParams } from "@/lib/schemas/comment-params-schema";
+import { ChapterCommentParams } from "@/lib/schemas/search-params/comment-params-schema";
 import { infiniteQueryOptions, useInfiniteQuery } from "@tanstack/react-query";
 import { getChapterComments } from "../api/get-chapter-comments";
 import { commentKeys } from "./query-keys";

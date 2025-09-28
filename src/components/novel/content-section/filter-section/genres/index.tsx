@@ -1,12 +1,12 @@
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { nuqsNovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
+import { useGetGenres } from "@/service/info/queries/use-get-genres";
 import { FrownIcon, LibraryIcon } from "lucide-react";
+import { useQueryStates } from "nuqs";
 import { PropsWithChildren } from "react";
 import GenreButton from "./genre-button";
 import SkeletonLoader from "./skeleton-loader";
-import { useQueryStates } from "nuqs";
-import { nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
-import { Button } from "@/components/ui/button";
-import { useGetGenres } from "@/service/info/queries/use-get-genres";
 
 const Genres = () => {
   const query = useGetGenres();

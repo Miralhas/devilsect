@@ -1,4 +1,4 @@
-import { NovelReviewParams } from "@/lib/schemas/comment-params-schema";
+import { NovelReviewParams } from "@/lib/schemas/search-params/comment-params-schema";
 import { infiniteQueryOptions, useInfiniteQuery } from "@tanstack/react-query";
 import { getNovelReviews } from "../api/get-novel-reviews";
 import { reviewKeys } from "./query-keys";

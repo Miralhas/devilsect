@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { CommentParams, CommentParamsSchema } from "@/lib/schemas/comment-params-schema";
+import { CommentParams, CommentParamsSchema } from "@/lib/schemas/search-params/comment-params-schema";
 import { PaginatedQuery } from "@/types/pagination";
 import { UserReview } from "@/types/threaded-comment";
 import { INVALID_SESSION_MESSAGE } from "@/utils/constants";

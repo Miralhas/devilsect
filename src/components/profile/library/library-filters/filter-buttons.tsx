@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { nuqsUserLibrarySeachParams } from "@/lib/schemas/user-library-params-schema";
+import { nuqsUserLibrarySeachParams } from "@/lib/schemas/search-params/user-library-params-schema";
 import { useQueryStates } from "nuqs";
 
 const FilterButtons = () => {

@@ -1,11 +1,11 @@
 'use client'
 
-import { Label } from "@/components/ui/label";
-import { NovelSearchParams, nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
-import { CalendarIcon, EyeIcon, FlameIcon, LucideIcon, SlidersVertical, StarIcon } from "lucide-react";
-import SortBtn from "./sort-button";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { NovelSearchParams, nuqsNovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
+import { CalendarIcon, EyeIcon, FlameIcon, LucideIcon, SlidersVertical, StarIcon } from "lucide-react";
 import { useQueryStates } from "nuqs";
+import SortBtn from "./sort-button";
 
 export type SortButton = {
   value: NovelSearchParams["sort"];

@@ -1,7 +1,7 @@
 import { createSerializer, parseAsIndex, parseAsString } from 'nuqs/server';
 
 import { z } from "zod";
-import { zodPagination } from './pagination-schema';
+import { zodPagination } from '../pagination-schema';
 
 export const SearchParamsSchema = z.object({
   q: z.string().catch(""),

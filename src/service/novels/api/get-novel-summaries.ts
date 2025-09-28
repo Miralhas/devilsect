@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { NovelSummariesParams, NovelSummariesParamsSchema } from "@/lib/schemas/novel-summaries-params-schema";
+import { NovelSummariesParams, NovelSummariesParamsSchema } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { NovelSummary } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
 import { buildQueryString } from "@/utils/string-utils";

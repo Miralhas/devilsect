@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { UserLibraryParams, UserLibraryParamsSchema } from "@/lib/schemas/user-library-params-schema";
+import { UserLibraryParams, UserLibraryParamsSchema } from "@/lib/schemas/search-params/user-library-params-schema";
 import { getSession } from "@/lib/sessions";
 import { ApiResponseError } from "@/types/api";
 import { Library } from "@/types/library";

@@ -1,4 +1,4 @@
-import { NovelSummariesParams, SortKey } from "@/lib/schemas/novel-summaries-params-schema";
+import { NovelSummariesParams, SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import { getNovelSummaries } from "../api/get-novel-summaries";
 import { novelKeys } from "./query-keys";

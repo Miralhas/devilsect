@@ -1,6 +1,6 @@
 'use client'
 
-import { SortKey } from "@/lib/schemas/comment-params-schema";
+import { SortKey } from "@/lib/schemas/search-params/comment-params-schema";
 import { useCurrentUser } from "@/service/user/queries/use-get-current-user";
 import { User } from "@/types/authentication";
 import { PropsWithChildren, useState } from "react";

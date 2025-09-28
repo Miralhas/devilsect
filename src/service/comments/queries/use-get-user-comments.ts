@@ -1,4 +1,4 @@
-import { CommentParams } from "@/lib/schemas/comment-params-schema";
+import { CommentParams } from "@/lib/schemas/search-params/comment-params-schema";
 import { getUserComments } from "@/service/user/api/get-user-comments";
 import { userKeys } from "@/service/user/queries/query-keys";
 import { queryOptions, useQuery } from "@tanstack/react-query";

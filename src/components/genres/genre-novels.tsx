@@ -1,17 +1,17 @@
 'use client'
 
-import { mapSortKey, nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
+import { mapSortKey, nuqsNovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { novelSummariesInitialParams, useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
 import { Genre } from "@/types/novel";
+import { BookIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useQueryStates } from "nuqs";
+import { PropsWithChildren } from "react";
+import GenericPagination from "../generic-pagination";
 import ClientNovelCard from "../novel-card/client-novel-card";
 import SkeletonLoader from "../search/skeleton-loader";
-import GenericPagination from "../generic-pagination";
 import SortGenreNovels from "./sort-genre-novels";
-import { PropsWithChildren } from "react";
-import { BookIcon } from "lucide-react";
 
 const GenreNovels = ({ genre }: { genre: Genre }) => {
   const router = useRouter();

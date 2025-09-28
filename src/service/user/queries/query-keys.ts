@@ -1,5 +1,5 @@
-import { CommentParams } from "@/lib/schemas/comment-params-schema";
 import { PaginationSchemaParams } from "@/lib/schemas/pagination-schema";
+import { CommentParams } from "@/lib/schemas/search-params/comment-params-schema";
 
 export const userKeys = {
   all: ["user"],

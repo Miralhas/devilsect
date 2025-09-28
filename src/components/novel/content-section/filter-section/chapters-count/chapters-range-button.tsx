@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { NovelSearchParams, nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
+import { NovelSearchParams, nuqsNovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { cn } from "@/utils/common-utils";
 import { LucideIcon } from "lucide-react";
 import { useQueryStates } from "nuqs";

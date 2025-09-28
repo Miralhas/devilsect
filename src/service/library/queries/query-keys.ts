@@ -1,4 +1,4 @@
-import { UserLibraryParams } from "@/lib/schemas/user-library-params-schema";
+import { UserLibraryParams } from "@/lib/schemas/search-params/user-library-params-schema";
 import { userKeys } from "@/service/user/queries/query-keys";
 
 export const libraryKeys = {

@@ -1,7 +1,7 @@
 'use client'
 
 import GenericPagination from "@/components/generic-pagination";
-import { mapSortKey, nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
+import { mapSortKey, nuqsNovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
 import { motion } from "framer-motion";
 import { BookIcon } from "lucide-react";

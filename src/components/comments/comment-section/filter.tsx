@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useCommentsContext } from "@/contexts/comments-context";
-import { SortKey } from "@/lib/schemas/comment-params-schema";
+import { SortKey } from "@/lib/schemas/search-params/comment-params-schema";
 
 const Filter = () => {
   const {sort, handleSort} = useCommentsContext();

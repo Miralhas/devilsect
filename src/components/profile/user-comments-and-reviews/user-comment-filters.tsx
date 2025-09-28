@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { SortKey } from "@/lib/schemas/comment-params-schema";
+import { SortKey } from "@/lib/schemas/search-params/comment-params-schema";
 
 type Props = {
   onChangeFilter: (sort: SortKey) => void;

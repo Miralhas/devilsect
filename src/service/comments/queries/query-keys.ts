@@ -1,4 +1,4 @@
-import { ChapterCommentParams, NovelReviewParams } from "@/lib/schemas/comment-params-schema"
+import { ChapterCommentParams, NovelReviewParams } from "@/lib/schemas/search-params/comment-params-schema"
 import { chapterKeys } from "@/service/chapters/queries/query-keys"
 import { novelKeys } from "@/service/novels/queries/query-keys"
 

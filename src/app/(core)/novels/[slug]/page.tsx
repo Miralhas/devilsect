@@ -4,7 +4,7 @@ import NovelReviews from "@/components/novel/novel-detail/novel-reviews";
 import RelatedNovels from "@/components/novel/novel-detail/related-novels";
 import SkeletonLoader from "@/components/novel/novel-detail/related-novels/skeleton-loader";
 import { Separator } from "@/components/ui/separator";
-import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
+import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { getNovelBySlug } from "@/service/novels/api/get-novel-by-slug";
 import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
 import { putView } from "@/service/novels/api/put-view";

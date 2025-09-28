@@ -1,4 +1,4 @@
-import { UserLibraryParams, UserLibraryParamsSchema } from "@/lib/schemas/user-library-params-schema";
+import { UserLibraryParams, UserLibraryParamsSchema } from "@/lib/schemas/search-params/user-library-params-schema";
 import { Library } from "@/types/library";
 import { PaginatedQuery } from "@/types/pagination";
 import { buildQueryString } from "@/utils/string-utils";

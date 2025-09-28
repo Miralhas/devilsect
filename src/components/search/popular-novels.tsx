@@ -1,6 +1,6 @@
 'use client'
 
-import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
+import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
 import Link from "next/link";
 import ClientNovelCard from "../novel-card/client-novel-card";

@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
+import { nuqsNovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, SlidersHorizontal, XIcon } from "lucide-react";
 import { useQueryStates } from "nuqs";

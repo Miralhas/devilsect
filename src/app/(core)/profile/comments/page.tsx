@@ -1,7 +1,7 @@
 import ProfileHeader from "@/components/profile/profile-header";
 import CommentList from "@/components/profile/user-comments-and-reviews/chapter-comment/comment-list";
 import CommentsPageHeader from "@/components/profile/user-comments-and-reviews/chapter-comment/comments-page-header";
-import { initialCommentParams } from "@/lib/schemas/comment-params-schema";
+import { initialCommentParams } from "@/lib/schemas/search-params/comment-params-schema";
 import { deleteSession, getSession } from "@/lib/sessions";
 import { getUserCommentsQueryOptions } from "@/service/comments/queries/use-get-user-comments";
 import { getShallowUser } from "@/service/user/api/get-shallow-user";

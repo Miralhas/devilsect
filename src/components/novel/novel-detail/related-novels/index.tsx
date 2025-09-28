@@ -1,5 +1,5 @@
 import NovelCard from "@/components/novel-card";
-import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
+import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
 import Link from "next/link";
 

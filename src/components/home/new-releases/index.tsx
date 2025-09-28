@@ -1,5 +1,5 @@
 import SectionHeader from "@/components/section-header";
-import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
+import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
 import { Clock } from "lucide-react";
 import ReleasesCardHorizontal from "./releases-card-horizontal";

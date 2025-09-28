@@ -1,10 +1,10 @@
 import LibraryTable from "@/components/profile/library/library-table";
 import ProfileHeader from "@/components/profile/profile-header";
 import ProfileLoading from "@/components/profile/profile-loading";
-import { loadUserLibraryParams } from "@/lib/schemas/user-library-params-schema";
+import { loadUserLibraryParams } from "@/lib/schemas/search-params/user-library-params-schema";
+import { Metadata } from "next";
 import type { SearchParams } from 'nuqs/server';
 import { Suspense } from "react";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Your Library"

@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { NovelSearchParams, nuqsNovelSummariesParams, sortKeyParams } from "@/lib/schemas/novel-summaries-params-schema";
+import { NovelSearchParams, nuqsNovelSummariesParams, sortKeyParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { cn } from "@/utils/common-utils";
 import { capitalize } from "@/utils/string-utils";
 import { useQueryStates } from "nuqs";

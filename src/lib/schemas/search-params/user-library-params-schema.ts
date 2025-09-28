@@ -1,7 +1,7 @@
 import { createLoader, parseAsInteger, parseAsString } from 'nuqs/server';
 
 import { z } from "zod";
-import { zodPagination } from './pagination-schema';
+import { zodPagination } from '../pagination-schema';
 
 
 export enum SortKey {

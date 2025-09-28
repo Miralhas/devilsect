@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { deleteBookmarkAction, revalidateFetchTag } from "@/services/user-library/action";
+import { removeNovelBookmarkAction } from "@/service/library/actions/remove-novel-bookmark-action";
+import { revalidateFetchTag } from "@/service/library/actions/revalidate-fetch-tag";
 import { Library } from "@/types/library";
+import { cn } from "@/utils/common-utils";
 import { BookmarkMinus } from "lucide-react";
 import { Dispatch, SetStateAction, startTransition, useActionState, useEffect } from "react";
 import { toast } from "sonner";
@@ -9,7 +10,7 @@ import { toast } from "sonner";
 type RemoveBookmarkButtonProps = { setOpen: Dispatch<SetStateAction<boolean>>, item: Library };
 
 const RemoveBookmarkButton = ({ setOpen, item: { novelTitle, libraryElementId } }: RemoveBookmarkButtonProps) => {
-  const [state, action, isPending] = useActionState(deleteBookmarkAction, { success: undefined });
+  const [state, action, isPending] = useActionState(removeNovelBookmarkAction, { success: undefined });
 
   useEffect(() => {
     if (state.success === undefined) return;

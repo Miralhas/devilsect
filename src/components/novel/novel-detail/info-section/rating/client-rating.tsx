@@ -1,23 +1,23 @@
 'use client'
 
+import { Button } from "@/components/ui/button";
+import { useGlobalLoginContext } from "@/contexts/global-login-context";
+import { useAddNovelRating } from "@/service/novels/mutations/use-add-novel-rating";
+import { useGetNovelMetrics } from "@/service/novels/queries/use-get-novel-metrics";
+import { User } from "@/types/authentication";
 import { Novel } from "@/types/novel";
 import Rating from '@mui/material/Rating';
-import { useEffect, useState } from "react";
-import RatingLabel from "./rating-label";
-import CurrentUserRating from "./current-user-rating";
-import { Button } from "@/components/ui/button";
 import { StarIcon } from "lucide-react";
-import { useAddUserRatingOnNovel } from "@/services/novels/client-mutations";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useGetNovelMetrics } from "@/services/novels/client-queries";
-import { User } from "@/types/authentication";
-import { useGlobalLoginContext } from "@/contexts/global-login-context";
+import CurrentUserRating from "./current-user-rating";
+import RatingLabel from "./rating-label";
 
 const ClientRating = ({ novel, user }: { novel: Novel, user?: User }) => {
   const query = useGetNovelMetrics(novel);
   const [rating, setRating] = useState(query.data.ratingValue ?? 0);
   const [userClicked, setUserClicked] = useState(false);
-  const mutation = useAddUserRatingOnNovel();
+  const mutation = useAddNovelRating();
   const isAuthenticated = user !== undefined;
   const { handleOpen } = useGlobalLoginContext();
 
@@ -53,7 +53,7 @@ const ClientRating = ({ novel, user }: { novel: Novel, user?: User }) => {
   }
 
   const handleMutation = () => {
-    mutation.mutate({ novel, userId: user.id, ratingValue: rating }, {
+    mutation.mutate({ novel, ratingValue: rating }, {
       onSuccess: () => {
         toast.success("Rating Saved", { position: "top-center", description: "Rating may take a while to update" });
         setUserClicked(false);
@@ -83,7 +83,7 @@ const ClientRating = ({ novel, user }: { novel: Novel, user?: User }) => {
           </Button>
         ) : null}
       </div>
-      <CurrentUserRating novelId={novel.id} userId={user.id} />
+      <CurrentUserRating novelId={novel.id} />
     </div>
   )
 }

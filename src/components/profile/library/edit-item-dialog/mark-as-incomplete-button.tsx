@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { deleteCompleteAction, revalidateFetchTag } from "@/services/user-library/action";
+import { removeNovelLibraryCompleteAction } from "@/service/library/actions/remove-novel-library-complete-action";
+import { revalidateFetchTag } from "@/service/library/actions/revalidate-fetch-tag";
 import { Library } from "@/types/library";
+import { cn } from "@/utils/common-utils";
 import { MinusCircleIcon } from "lucide-react";
 import { startTransition, useActionState, useEffect } from "react";
 import { toast } from "sonner";
 
 const MarkAsIncompleteButton = ({ close, library: { libraryElementId, novelTitle } }: { library: Library, close: () => void }) => {
-  const [state, action, isPending] = useActionState(deleteCompleteAction, { success: undefined });
+  const [state, action, isPending] = useActionState(removeNovelLibraryCompleteAction, { success: undefined });
 
   useEffect(() => {
     if (state.success === undefined) return;

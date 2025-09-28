@@ -1,8 +1,10 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import { env } from "@/env";
-import { cn, leadingZero, statusMap } from "@/lib/utils";
 import { NovelSummary } from "@/types/novel";
 import { PaginatedQuery } from "@/types/pagination";
+import { statusMap } from "@/utils/api-utils";
+import { cn } from "@/utils/common-utils";
+import { leadingZero } from "@/utils/number-utils";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { BookOpenText, StarIcon } from "lucide-react";
 import Link from "next/link";

@@ -3,8 +3,8 @@
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { cn } from '@/lib/utils';
 import { CommentInput } from '@/types/threaded-comment';
+import { cn } from "@/utils/common-utils";
 import { Trash } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import Editor, {

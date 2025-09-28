@@ -1,6 +1,6 @@
 import { Input } from "./input";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/utils/common-utils";
 
 const AuthenticationInput = ({ className, type, ...props }: React.ComponentProps<"input">) => {
   return (

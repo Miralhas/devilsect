@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { NovelSearchParams, nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/common-utils";
 import { useQueryStates } from "nuqs";
 import { type SortButton } from ".";
 

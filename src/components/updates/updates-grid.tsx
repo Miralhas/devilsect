@@ -1,11 +1,11 @@
-import { RecentlyAddedChapter } from "@/types/recently-added-chapters";
-import GridHeader from "./grid-header";
-import DynamicBlurImage from "../dynamic-blur-image";
 import { env } from "@/env";
-import BookCoverOverlay from "../novel-card/book-cover-overlay";
-import Link from "next/link";
-import { formatDate } from "@/lib/utils";
 import { PaginatedQuery } from "@/types/pagination";
+import { RecentlyAddedChapter } from "@/types/recently-added-chapters";
+import { formatDate } from "@/utils/date-utils";
+import Link from "next/link";
+import DynamicBlurImage from "../dynamic-blur-image";
+import BookCoverOverlay from "../novel-card/book-cover-overlay";
+import GridHeader from "./grid-header";
 
 const UpdatesGrid = ({ recent }: { recent: PaginatedQuery<RecentlyAddedChapter[]> }) => {
   return (

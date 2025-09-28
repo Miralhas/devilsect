@@ -1,6 +1,6 @@
 'use client'
 
-import { useCurrentUser } from "@/service/authentication/queries/use-get-current-user";
+import { useCurrentUser } from "@/service/user/queries/use-get-current-user";
 import { Novel } from "@/types/novel";
 import ClientRating from "./client-rating";
 

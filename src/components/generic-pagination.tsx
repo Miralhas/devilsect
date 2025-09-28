@@ -9,8 +9,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { cn } from "@/lib/utils";
 import { PaginatedQuery } from "@/types/pagination";
+import { cn } from "@/utils/common-utils";
 import { MouseEvent, useMemo } from "react";
 
 const DELTA = 2;

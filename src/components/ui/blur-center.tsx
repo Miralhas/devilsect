@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/common-utils";
 
 type Opacity = "ultra-low" | "low" | "medium" | "high" | "ultra-high";
 

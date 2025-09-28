@@ -1,9 +1,9 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import BookCoverOverlay from "@/components/novel-card/book-cover-overlay";
 import { env } from "@/env";
-import { formatDate } from "@/lib/utils";
 import { PaginatedQuery } from "@/types/pagination";
 import { RecentlyAddedChapter } from "@/types/recently-added-chapters";
+import { formatDate } from "@/utils/date-utils";
 import { BookOpenText, TimerIcon } from "lucide-react";
 import Link from "next/link";
 

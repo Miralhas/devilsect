@@ -10,12 +10,12 @@ import {
 } from "@/components/ui/dialog";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Library } from "@/types/library";
+import { cn } from "@/utils/common-utils";
 import { SquarePen } from "lucide-react";
 import { useState } from "react";
-import CompleteActionButton from "./complete-action-button";
 import RemoveBookmarkButton from "../../remove-bookmark-button";
+import CompleteActionButton from "./complete-action-button";
 
 const EditItemDialog = ({ display, item }: { display: "MOBILE" | "DESKTOP", item: Library; }) => {
   const displayMobile = display === "MOBILE";

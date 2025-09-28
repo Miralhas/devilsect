@@ -1,7 +1,7 @@
 import DashboardTab from "@/components/dashboard/dashboard-tab";
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import { env } from "@/env";
-import { getNovelBySlug } from "@/services/novels/server-queries";
+import { getNovelBySlug } from "@/service/novels/api/get-novel-by-slug";
 import Link from "next/link";
 
 type NovelPageProps = {

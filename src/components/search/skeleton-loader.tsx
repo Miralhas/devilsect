@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/common-utils";
 import { Skeleton } from "../ui/skeleton";
 
 const SkeletonLoader = ({ className, size = 12 }: { className?: string; size?: number }) => {

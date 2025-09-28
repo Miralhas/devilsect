@@ -2,7 +2,7 @@
 
 import GenericPagination from "@/components/generic-pagination";
 import { mapSortKey, nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
-import { useGetNovelSummaries } from "@/services/novels/client-queries";
+import { useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
 import { motion } from "framer-motion";
 import { BookIcon } from "lucide-react";
 import Link from "next/link";

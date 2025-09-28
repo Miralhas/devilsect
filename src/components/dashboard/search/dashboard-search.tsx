@@ -37,10 +37,9 @@ const DashboardSearch = () => {
       </DialogTrigger>
       <DialogContent className="h-[400px] pt-11 overflow-hidden">
         <DialogHeader className="sr-only">
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogTitle>Novel Search</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete your account
-            and remove your data from our servers.
+            Search for novels by title
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-5">

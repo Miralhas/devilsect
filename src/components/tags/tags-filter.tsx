@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ALPHABET, nuqsTagsParams } from "@/lib/schemas/tags-schema";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/common-utils";
 import { useQueryStates } from "nuqs";
 
 const TagsFilter = () => {

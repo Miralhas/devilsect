@@ -1,5 +1,5 @@
-import { statusMap } from "@/lib/utils";
 import { NovelSummary } from "@/types/novel";
+import { statusMap } from "@/utils/api-utils";
 import { StarIcon } from "lucide-react";
 
 const InfoOverlay = ({ status, ratingValue }: Pick<NovelSummary, "status" | "ratingValue">) => {

@@ -1,5 +1,4 @@
 import { Label } from "@/components/ui/label";
-import { useGetGenres } from "@/services/novels/client-queries";
 import { FrownIcon, LibraryIcon } from "lucide-react";
 import { PropsWithChildren } from "react";
 import GenreButton from "./genre-button";
@@ -7,6 +6,7 @@ import SkeletonLoader from "./skeleton-loader";
 import { useQueryStates } from "nuqs";
 import { nuqsNovelSummariesParams } from "@/lib/schemas/novel-summaries-params-schema";
 import { Button } from "@/components/ui/button";
+import { useGetGenres } from "@/service/info/queries/use-get-genres";
 
 const Genres = () => {
   const query = useGetGenres();

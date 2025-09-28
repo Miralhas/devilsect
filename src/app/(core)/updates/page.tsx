@@ -1,5 +1,5 @@
 import RecentlyAddedSection from "@/components/updates/recently-added-section";
-import { getLatestQueryOptions, latestInitialParams } from "@/services/novels/client-queries";
+import { getLatestQueryOptions, latestInitialParams } from "@/service/info/queries/use-get-latest-chapters";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { Metadata } from "next";
 

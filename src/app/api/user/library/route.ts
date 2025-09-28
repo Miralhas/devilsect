@@ -1,9 +1,9 @@
 import { env } from "@/env";
 import { getSession } from "@/lib/sessions";
-import { buildQueryString } from "@/lib/utils";
 import { ApiResponseError } from "@/types/api";
 import { Library } from "@/types/library";
 import { PaginatedQuery } from "@/types/pagination";
+import { buildQueryString } from "@/utils/string-utils";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {

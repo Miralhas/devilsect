@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import { RoleStatus } from "@/types/authentication";
+import { cn } from "@/utils/common-utils";
 
 const roleClasses: Record<RoleStatus, string> = {
   Admin: "bg-primary/50 border-accent text-accent",

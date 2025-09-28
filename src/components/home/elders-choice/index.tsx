@@ -1,5 +1,5 @@
 import SectionHeader from "@/components/section-header";
-import { getEldersChoice } from "@/services/novels/server-queries";
+import { getEldersChoice } from "@/service/novels/api/get-elders-choice";
 import { GraduationCap } from "lucide-react";
 import ChoicesCarousel from "./choices-carousel";
 

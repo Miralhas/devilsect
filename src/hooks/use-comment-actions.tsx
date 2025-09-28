@@ -1,6 +1,11 @@
 'use client'
 
-import { useChapterCommentMutation, useDeleteChapterComment, useDeleteNovelReview, useNovelReviewMutation, useUpdateChapterComment, useUpdateNovelReview } from "@/services/comments/client-mutations";
+import { useChapterCommentMutation } from "@/service/comments/mutations/use-chapter-comment-mutation";
+import { useDeleteChapterComment } from "@/service/comments/mutations/use-delete-chapter-comment";
+import { useDeleteNovelReview } from "@/service/comments/mutations/use-delete-novel-review";
+import { useNovelReviewMutation } from "@/service/comments/mutations/use-novel-review-mutation";
+import { useUpdateChapterComment } from "@/service/comments/mutations/use-update-chapter-comment";
+import { useUpdateNovelReview } from "@/service/comments/mutations/use-update-novel-review";
 import { CommentInput } from "@/types/threaded-comment";
 import { toast } from "sonner";
 

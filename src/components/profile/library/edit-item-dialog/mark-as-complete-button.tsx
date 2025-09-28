@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { completeAction, revalidateFetchTag } from "@/services/user-library/action";
+import { revalidateFetchTag } from "@/service/library/actions/revalidate-fetch-tag";
+import { setNovelLibraryCompleteAction } from "@/service/library/actions/set-novel-library-complete-action";
 import { Library } from "@/types/library";
+import { cn } from "@/utils/common-utils";
 import { CheckCircle2Icon } from "lucide-react";
 import { startTransition, useActionState, useEffect } from "react";
 import { toast } from "sonner";
 
 const MarkAsCompleteButton = ({ close, library: { novelSlug, novelTitle } }: { library: Library, close: () => void }) => {
-  const [state, action, isPending] = useActionState(completeAction, { success: undefined });
+  const [state, action, isPending] = useActionState(setNovelLibraryCompleteAction, { success: undefined });
 
   useEffect(() => {
     if (state.success === undefined) return;

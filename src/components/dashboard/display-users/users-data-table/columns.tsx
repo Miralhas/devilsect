@@ -3,8 +3,9 @@
 import RoleBadge from "@/components/profile/profile-header/role-badge";
 import { createWsrvLoader } from "@/components/wsrvLoader";
 import { env } from "@/env";
-import { formatFullDateBR, roleMap } from "@/lib/utils";
 import { Role, UserInfo } from "@/types/authentication";
+import { roleMap } from "@/utils/api-utils";
+import { formatFullDateBR } from "@/utils/date-utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { UserIcon } from "lucide-react";
 import Image from "next/image";

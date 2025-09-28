@@ -2,7 +2,7 @@
 
 import Loading from "@/components/loading";
 import { Button } from "@/components/ui/button";
-import { useGetGenres } from "@/services/novels/client-queries";
+import { useGetGenres } from "@/service/info/queries/use-get-genres";
 import { Genre } from "@/types/novel";
 
 type Props = {

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useCommentsContext } from "@/contexts/comments-context";
 import useCommentActions from "@/hooks/use-comment-actions";
-import { useGetChapterComments } from "@/services/comments/client-queries";
+import { useGetChapterComments } from "@/service/comments/queries/use-get-chapter-comments";
 import { User } from "@/types/authentication";
 import { CommentInput } from "@/types/threaded-comment";
 import { FrownIcon } from "lucide-react";

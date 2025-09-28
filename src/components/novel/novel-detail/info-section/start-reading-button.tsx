@@ -1,8 +1,8 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { useCurrentUser } from "@/service/authentication/queries/use-get-current-user";
-import { useGetUserNovelOnLibrary } from "@/services/novels/client-queries";
+import { useGetUserLibrary } from "@/service/library/queries/get-user-library";
+import { useCurrentUser } from "@/service/user/queries/use-get-current-user";
 import { Novel } from "@/types/novel";
 import Link from "next/link";
 import BookmarkNovel from "./bookmark-novel";
@@ -14,7 +14,7 @@ type StartReadingButtonProps = {
 
 const StartReadingButton = ({ novel }: StartReadingButtonProps) => {
   const { data: user, isLoading: userLoading } = useCurrentUser();
-  const { data: paginatedUserLibrary, isLoading: libraryLoading } = useGetUserNovelOnLibrary(novel.slug);
+  const { data: paginatedUserLibrary, isLoading: libraryLoading } = useGetUserLibrary({ novelSlug: novel.slug, size: 1 });
 
   if (libraryLoading) {
     return <StartReadingButtonLoading />

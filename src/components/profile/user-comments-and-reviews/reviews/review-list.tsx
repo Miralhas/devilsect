@@ -3,9 +3,8 @@
 import GenericPagination from "@/components/generic-pagination";
 import Loading from "@/components/loading";
 import { initialCommentParams, SortKey } from "@/lib/schemas/comment-params-schema";
-import { getUserReviews } from "@/services/comments/api";
+import { useGetUserReviews } from "@/service/comments/queries/use-get-user-reviews";
 import { User } from "@/types/authentication";
-import { useQuery } from "@tanstack/react-query";
 import { StarIcon } from "lucide-react";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { redirect } from "next/navigation";
@@ -22,9 +21,9 @@ const ReviewList = ({ user, session }: Props) => {
   const [page, setPage] = useState(initialCommentParams["page"]);
   const [sort, setSort] = useState(initialCommentParams["sort"]);
 
-  const { data: reviews, isLoading, isError } = useQuery({
-    queryFn: () => getUserReviews({ ...initialCommentParams, page, sort }, session),
-    queryKey: ['user', 'reviews', { ...initialCommentParams, page, sort }],
+  const { data: reviews, isLoading, isError } = useGetUserReviews({
+    session,
+    params: { ...initialCommentParams, page, sort }
   });
 
   const handlePage = (page: number) => {

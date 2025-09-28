@@ -6,8 +6,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { cn } from "@/lib/utils";
+} from "@/components/ui/dialog";
+import { cn } from "@/utils/common-utils";
 
 
 type Props = {

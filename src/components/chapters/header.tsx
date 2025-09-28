@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { env } from "@/env";
-import { cn } from "@/lib/utils";
 import { ChapterSummary } from "@/types/chapter";
+import { cn } from "@/utils/common-utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import DynamicBlurImage from "../dynamic-blur-image";

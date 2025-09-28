@@ -2,7 +2,7 @@
 
 import Loading from "@/components/loading";
 import { nuqsTagsParams } from "@/lib/schemas/tags-schema";
-import { getTagsInitialParams, useGetTags } from "@/services/novels/client-queries";
+import { getTagsInitialParams, useGetTags } from "@/service/info/queries/use-get-tags";
 import { HashIcon } from "lucide-react";
 import Link from "next/link";
 import { useQueryStates } from "nuqs";

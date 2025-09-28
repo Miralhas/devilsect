@@ -2,7 +2,7 @@ import DesktopGridTable from "@/components/ranking/grid-table/desktop-grid-table
 import GridTableHeader from "@/components/ranking/grid-table/grid-table-header";
 import MobileGridTable from "@/components/ranking/grid-table/mobile-grid-table";
 import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
-import { getNovelSummariesPaginated } from "@/services/novels/server-queries";
+import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const RankingPage = async () => {
-  const query = await getNovelSummariesPaginated({ size: 100, sort: SortKey.BAYESIAN_RANKING });
+  const query = await getNovelSummaries({ size: 100, sort: SortKey.BAYESIAN_RANKING });
 
   return (
     <section className="md:pt-8 space-y-2.5">

@@ -8,8 +8,9 @@ import {
 } from "@/components/ui/tooltip";
 import { createWsrvLoader } from "@/components/wsrvLoader";
 import { env } from "@/env";
-import { formatFullDateBR, statusMap } from "@/lib/utils";
 import { NovelSummary } from "@/types/novel";
+import { statusMap } from "@/utils/api-utils";
+import { formatFullDateBR } from "@/utils/date-utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { FilePenLine, ImageIcon, StarIcon } from "lucide-react";
 import Image from "next/image";

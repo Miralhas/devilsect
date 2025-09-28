@@ -1,6 +1,6 @@
+import { cn } from "@/utils/common-utils";
 import { LucideIcon } from "lucide-react";
 import BlurCenter from "./ui/blur-center";
-import { cn } from "@/lib/utils";
 
 type Props = {
   icon: LucideIcon;

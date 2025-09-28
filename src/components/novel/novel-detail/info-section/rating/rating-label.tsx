@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/common-utils";
 
 const RatingLabel = ({ value, className, size }: { size: number; value: number, className?: string }) => {
   return (

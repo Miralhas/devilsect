@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/common-utils";
 import { LoaderIcon } from "lucide-react";
 
 type LoaderProps = {

@@ -3,8 +3,8 @@ import ReviewList from "@/components/profile/user-comments-and-reviews/reviews/r
 import ReviewPageHeader from "@/components/profile/user-comments-and-reviews/reviews/review-page-header";
 import { initialCommentParams } from "@/lib/schemas/comment-params-schema";
 import { deleteSession, getSession } from "@/lib/sessions";
-import { getShallowUser } from "@/service/authentication/api/get-shallow-user";
-import { getUserReviews } from "@/services/comments/api";
+import { getUserReviewsQueryOptions } from "@/service/comments/queries/use-get-user-reviews";
+import { getShallowUser } from "@/service/user/api/get-shallow-user";
 import {
   dehydrate,
   HydrationBoundary,
@@ -28,10 +28,7 @@ const ReviewsPage = async () => {
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: ['user', 'reviews', initialCommentParams],
-    queryFn: () => getUserReviews(initialCommentParams, session),
-  })
+  await queryClient.prefetchQuery(getUserReviewsQueryOptions({ params: initialCommentParams, session }))
 
   return (
     <section className="p-4 md:p-10 space-y-12">

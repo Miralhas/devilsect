@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Chapter } from "@/types/chapter";
+import { cn } from "@/utils/common-utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 

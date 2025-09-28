@@ -1,15 +1,15 @@
 'use client'
 
 import { nuqsNovelSummariesParams, SortKey } from "@/lib/schemas/novel-summaries-params-schema";
-import { useGetNovelSummaries } from "@/services/novels/client-queries";
+import { useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
 import { SearchIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useQueryStates } from "nuqs";
+import { useRef } from "react";
 import GenericPagination from "../generic-pagination";
 import ClientNovelCard from "../novel-card/client-novel-card";
 import SkeletonLoader from "./skeleton-loader";
-import { useRef } from "react";
 
 const SearchContent = () => {
   const router = useRouter();

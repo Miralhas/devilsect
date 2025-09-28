@@ -1,6 +1,6 @@
-import { isAdminCheck } from "@/lib/utils";
 import { User } from "@/types/authentication";
 import { ThreadedComment } from "@/types/threaded-comment";
+import { isAdminCheck } from "@/utils/api-utils";
 import ActionsPopover from "./actions-popover";
 import Reply from "./reply";
 import Vote from "./vote";

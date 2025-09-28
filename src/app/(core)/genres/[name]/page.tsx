@@ -1,7 +1,8 @@
 import GenreNovels from "@/components/genres/genre-novels";
 import PageHeader from "@/components/page-header";
-import { getNovelGenres, novelSummariesInitialParams, novelSummariesQueryOptions } from "@/services/novels/client-queries";
-import { getGenreByName } from "@/services/novels/server-queries";
+import { getGenreByName } from "@/service/info/api/get-genre-by-name";
+import { getGenres } from "@/service/info/api/get-genres";
+import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { TagIcon } from "lucide-react";
 import { Metadata } from "next";
@@ -9,7 +10,7 @@ import { Metadata } from "next";
 type Props = { params: Promise<{ name: string }> };
 
 export async function generateStaticParams() {
-  const genres = await getNovelGenres();
+  const genres = await getGenres();
   return genres.map(r => ({ name: r.name }));
 }
 

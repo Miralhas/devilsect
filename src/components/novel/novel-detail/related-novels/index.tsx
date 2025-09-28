@@ -1,10 +1,10 @@
 import NovelCard from "@/components/novel-card";
 import { SortKey } from "@/lib/schemas/novel-summaries-params-schema";
-import { getNovelSummariesPaginated } from "@/services/novels/server-queries";
+import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
 import Link from "next/link";
 
 const RelatedNovels = async ({ genre }: { genre?: string }) => {
-  const related = await getNovelSummariesPaginated({ sort: SortKey.NEWEST_RELEASES, genres: genre, size: 6 });
+  const related = await getNovelSummaries({ sort: SortKey.NEWEST_RELEASES, genres: genre, size: 6 });
   return (
     <section className="w-full px-5 md:px-10 mt-24">
       <div className="max-w-[1024px] mx-auto w-full space-y-4.5">

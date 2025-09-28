@@ -3,14 +3,14 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import { Button } from "@/components/ui/button";
 import { env } from "@/env";
-import { editNovelImage } from "@/services/dashboard/actions";
+import { updateNovelImageAction } from "@/service/dashboard/actions/update-novel-image-action";
 import { Novel } from "@/types/novel";
 import { CameraIcon } from "lucide-react";
 import { ChangeEvent, startTransition, useActionState, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 const EditNovelImage = ({ novel }: { novel: Novel }) => {
-  const action = editNovelImage.bind(null, novel);
+  const action = updateNovelImageAction.bind(null, novel);
   const inputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const imageRef = useRef<HTMLImageElement>(null);

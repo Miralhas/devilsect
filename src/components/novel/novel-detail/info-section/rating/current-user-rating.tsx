@@ -1,8 +1,8 @@
-import { useGetUserRatingOnNovel } from "@/services/novels/client-queries";
+import { useGetUserRatingOnNovel } from "@/service/user/queries/use-get-user-rating-on-novel";
 import { StarIcon } from "lucide-react";
 
-const CurrentUserRating = ({ novelId, userId }: { novelId: number, userId: number }) => {
-  const query = useGetUserRatingOnNovel({ novelId, userId });
+const CurrentUserRating = ({ novelId }: { novelId: number }) => {
+  const query = useGetUserRatingOnNovel(novelId);
 
   if (query.isLoading || query.isError) return null;
 

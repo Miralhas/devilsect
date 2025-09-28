@@ -1,7 +1,7 @@
 'use client'
 
 import LoginButton from "@/components/navbar/login-button";
-import { useCurrentUser } from "@/service/authentication/queries/use-get-current-user";
+import { useCurrentUser } from "@/service/user/queries/use-get-current-user";
 import LibraryLink from "./library-link";
 import UserAccount from "./user-account";
 import UserInbox from "./user-inbox";

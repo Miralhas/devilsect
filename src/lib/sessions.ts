@@ -10,7 +10,7 @@ import {
   MILLISECONDS,
   SESSION_COOKIE_NAME,
   SESSION_ENCRYPTION_ALGORITHM
-} from './constants';
+} from '../utils/constants';
 
 const publicKeyPromise = importSPKI(env.PUBLIC_KEY, SESSION_ENCRYPTION_ALGORITHM);
 const SESSION_EXPIRATION_SECONDS = 60 * 60 * 24 * 7;

@@ -19,9 +19,10 @@ type Props = {
   onErrorImage?: string;
   unoptimized?: boolean;
   imageRef?: RefObject<HTMLImageElement | null>;
+  loading?: "eager" | "lazy"
 } & WsrvParams;
 
-const DynamicBlurImage = ({ src, alt, className, height, width, blurData, sizes, priority, imageRef, unoptimized = false, quality = 70, fill = true, ...rest }: Props) => {
+const DynamicBlurImage = ({ src, alt, className, height, width, blurData, sizes, priority, imageRef, unoptimized = false, quality = 70, fill = true, loading, ...rest }: Props) => {
   return (
     <Image
       src={src}
@@ -38,6 +39,7 @@ const DynamicBlurImage = ({ src, alt, className, height, width, blurData, sizes,
       loader={createWsrvLoader(rest)}
       unoptimized={unoptimized}
       ref={imageRef}
+      loading={loading}
     />
   )
 }

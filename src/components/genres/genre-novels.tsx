@@ -58,7 +58,7 @@ const GenreNovels = ({ genre }: { genre: Genre }) => {
 
   return (
     <Layout>
-      <section className="grid grid-cols-3 md:grid-cols-6 gap-4 gap-y-6">
+      <section className="grid grid-cols-3 md:grid-cols-6 gap-4">
         <div className="flex items-center justify-between col-span-full">
           <h2 className="text-xl md:text-2xl font-bold capitalize">{genre.name} Novels</h2>
           <p className="text-base text-[15px] text-muted-foreground">{query.data?.totalItems} novels found</p>

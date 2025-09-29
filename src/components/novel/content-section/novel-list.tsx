@@ -65,9 +65,9 @@ const NovelList = () => {
     >
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-xl md:text-2xl font-bold">All Novels</h2>
-        <p className="text-base text-[15px] text-muted-foreground">{query.data.totalItems} novels found</p>
+        <p className="text-sm text-[13px] md:text-base md:text-[15px] text-muted-foreground">{query.data.totalItems} novels found</p>
       </div>
-      <div className="relative grid grid-cols-3 md:grid-cols-6 gap-4 gap-y-6 min-h-[50vh] items-start">
+      <div className="relative grid grid-cols-3 md:grid-cols-6 gap-4 min-h-[50vh] items-start">
         {query.data?.results.map((novel) => (
           <MotionLink
             layout

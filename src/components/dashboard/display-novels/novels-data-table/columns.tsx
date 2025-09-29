@@ -11,6 +11,7 @@ import { env } from "@/env";
 import { NovelSummary } from "@/types/novel";
 import { statusMap } from "@/utils/api-utils";
 import { formatFullDateBR } from "@/utils/date-utils";
+import { formatViews } from "@/utils/number-utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { FilePenLine, ImageIcon, StarIcon } from "lucide-react";
 import Image from "next/image";
@@ -19,14 +20,18 @@ import Link from "next/link";
 export const columns: ColumnDef<NovelSummary>[] = [
   {
     accessorKey: "image", header: () => <ImageIcon className="size-3.5 ms-0.5" aria-description="novel image" />, cell: ({ row }) => {
-      return <Image
-        loader={createWsrvLoader({ default: `https://static.devilsect.com/yin-yang-48x48.png` })}
-        height={20}
-        width={20}
-        src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${row.original.slug}/image`}
-        alt="user image"
-        className="text-transparent rounded-sm h-[20px]"
-      />
+      return (
+        <div className="w-[20px] h-[20px] overflow-hidden">
+          <Image
+            loader={createWsrvLoader({ default: `https://static.devilsect.com/yin-yang-48x48.png` })}
+            height={20}
+            width={20}
+            src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${row.original.slug}/image`}
+            alt="user image"
+            className="text-transparent rounded-sm h-full object-center object-cover"
+          />
+        </div>
+      )
     },
     enableSorting: false,
   },
@@ -38,7 +43,16 @@ export const columns: ColumnDef<NovelSummary>[] = [
   {
     accessorKey: "title",
     header: "Title",
-    cell: ({ row }) => <Link href={`/novels/${row.original.slug}`} className="font-medium max-w-[200px] capitalize">{row.original.title}</Link>,
+    cell: ({ row }) => (
+      <Tooltip delayDuration={300}>
+        <TooltipTrigger className="text-start w-full max-w-[255px] overflow-hidden text-ellipsis whitespace-nowrap">
+          <Link href={`/novels/${row.original.slug}`} className="font-medium capitalize">{row.original.title}</Link>
+        </TooltipTrigger>
+        <TooltipContent className="capitalize max-w-[300px] text-center bg-secondary border border-zinc-50/10 text-zinc-200">
+          <p>{row.original.title}</p>
+        </TooltipContent>
+      </Tooltip>
+    ),
   },
   {
     accessorKey: "alias",
@@ -95,7 +109,7 @@ export const columns: ColumnDef<NovelSummary>[] = [
   {
     accessorKey: "chaptersCount",
     header: "Chapters",
-    cell: ({ row }) => <span className="text-sm">{row.original.chaptersCount}</span>,
+    cell: ({ row }) => <span className="text-sm ms-2">{row.original.chaptersCount}</span>,
   },
   {
     accessorKey: "ratingValue",
@@ -115,7 +129,7 @@ export const columns: ColumnDef<NovelSummary>[] = [
   {
     accessorKey: "views",
     header: "Views",
-    cell: ({ row }) => <span className="text-sm">{row.original.views.toLocaleString()}</span>,
+    cell: ({ row }) => <span className="text-sm">{formatViews(row.original.views)}</span>,
   },
   {
     accessorKey: "bayesianScore",

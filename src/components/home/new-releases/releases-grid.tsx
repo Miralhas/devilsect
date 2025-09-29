@@ -10,7 +10,7 @@ type Props = {
 
 const ReleasesGrid = ({ novels }: Props) => {
   return (
-    <div className="grid grid-cols-3 xs:grid-cols-4 md:grid-cols-5 gap-4 justify-items-center">
+    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 justify-items-center">
       {novels.map(async (novel) => {
         const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`);
         return (

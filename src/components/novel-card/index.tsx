@@ -5,6 +5,11 @@ import DynamicBlurImage from "../dynamic-blur-image";
 import BookCoverOverlay from "./book-cover-overlay";
 import HoverOverlay from "./hover-overlay";
 import InfoOverlay from "./info-overlay";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export type Size = "sm" | "lg";
 
@@ -24,7 +29,7 @@ const NovelCard = ({ novelSummary, imageSizes, titleClassName, blurData64, size 
         <DynamicBlurImage
           src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${slug}/image`}
           alt={`${title} cover`}
-          className="object-cover object-center w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105 opacity-90"
+          className="object-cover object-center w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105 opacity-90 text-transparent"
           blurData={blurData64}
           sizes={imageSizes ?? "20vw"}
           fill
@@ -35,11 +40,18 @@ const NovelCard = ({ novelSummary, imageSizes, titleClassName, blurData64, size 
         <InfoOverlay ratingValue={ratingValue} status={status} />
       </div>
 
-      <h3
-        className={cn("tracking-tight font-semibold leading-tight text-foreground/90 capitalize line-clamp-2 break-words hyphens-auto group-hover:text-foreground/60 transition-colors duration-300 text-xs md:text-sm", titleClassName)}
-      >
-        {title}
-      </h3>
+      <Tooltip delayDuration={300}>
+        <TooltipTrigger className="text-start cursor-pointer">
+          <h3
+            className={cn("tracking-tight font-semibold leading-tight text-foreground/90 capitalize line-clamp-2 break-words hyphens-auto group-hover:text-foreground/60 transition-colors duration-300 text-xs md:text-sm", titleClassName)}
+          >
+            {title}
+          </h3>
+        </TooltipTrigger>
+        <TooltipContent className="capitalize text-center bg-secondary border border-zinc-50/10 text-zinc-200">
+          {title}
+        </TooltipContent>
+      </Tooltip>
     </>
   )
 }

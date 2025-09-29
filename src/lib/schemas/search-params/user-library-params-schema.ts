@@ -1,6 +1,6 @@
 import { createLoader, parseAsInteger, parseAsString } from 'nuqs/server';
 
-import { z } from "zod";
+import * as z from "zod";
 import { zodPagination } from '../pagination-schema';
 
 

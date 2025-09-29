@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 import { NovelSearchParams, nuqsNovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { cn } from "@/utils/common-utils";
 import { useQueryStates } from "nuqs";
-import { type SortButton } from ".";
+import { type SortButtonType } from "./index";
 
-const SortButton = (props: SortButton) => {
+const SortButton = (props: SortButtonType) => {
   const [values, setValues] = useQueryStates(nuqsNovelSummariesParams);
 
   const onSortClick = (val: NovelSearchParams["sort"]) => {

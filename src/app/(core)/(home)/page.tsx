@@ -13,7 +13,7 @@ export const revalidate = 43200; // 12 hours
 
 const HomePage = () => {
   return (
-    <div className="min-h-[100vh]">
+    <div className="min-h-screen">
       <div className="mt-4 w-full p-1 space-y-16">
         <HeroSection />
         <Suspense fallback={<NewReleasesSkeletonLoader />}>

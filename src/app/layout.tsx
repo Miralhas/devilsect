@@ -1,6 +1,5 @@
 import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata } from "next";
 import { Atkinson_Hyperlegible, Inter, Manrope, Roboto, Tilt_Warp } from 'next/font/google';
@@ -69,7 +68,6 @@ export default function RootLayout({
           <NuqsAdapter>{children}</NuqsAdapter>
         </Providers>
         <Toaster richColors />
-        <SpeedInsights />
         <Analytics />
       </body>
     </html>

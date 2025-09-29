@@ -1,5 +1,10 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import BookCoverOverlay from "@/components/novel-card/book-cover-overlay";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { env } from "@/env";
 import { PaginatedQuery } from "@/types/pagination";
 import { RecentlyAddedChapter } from "@/types/recently-added-chapters";
@@ -25,20 +30,34 @@ const ChaptersGrid = ({ chapters }: { chapters: PaginatedQuery<RecentlyAddedChap
               />
               <BookCoverOverlay />
             </div>
-            <div className=" space-y-0.5">
-              <Link
-                href={`/novels/${chapter.novelSlug}`}
-                className="transition-colors line-clamp-1 capitalize text-zinc-300/70 text-sm text-[13px] leading-4"
-              >
-                {chapter.novelTitle}
-              </Link>
+            <div className="space-y-0.5">
+              <Tooltip delayDuration={300}>
+                <TooltipTrigger className="flex cursor-pointer text-start">
+                  <Link
+                    href={`/novels/${chapter.novelSlug}`}
+                    className="transition-colors line-clamp-1 capitalize text-zinc-300/70 text-sm text-[13px] leading-4"
+                  >
+                    {chapter.novelTitle}
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent className="capitalize text-center bg-secondary border border-zinc-50/10 text-zinc-200">
+                  {chapter.novelTitle}
+                </TooltipContent>
+              </Tooltip>
 
-              <Link
-                href={`/novels/${chapter.novelSlug}/${chapter.slug}`}
-                className="text-sm text-[13px] line-clamp-1 w-full transition-colors text-zinc-200 font-semibold"
-              >
-                {chapter.title}
-              </Link>
+              <Tooltip delayDuration={300}>
+                <TooltipTrigger className="flex cursor-pointer text-start">
+                  <Link
+                    href={`/novels/${chapter.novelSlug}/${chapter.slug}`}
+                    className="text-sm text-[13px] line-clamp-1 w-full transition-colors text-zinc-200 font-semibold"
+                  >
+                    {chapter.title}
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent className="capitalize text-center bg-secondary border border-zinc-50/10 text-zinc-200">
+                  {chapter.title}
+                </TooltipContent>
+              </Tooltip>
               <div className="flex flex-col text-muted-foreground text-xs">
                 <span className="text-muted-foreground text-xs">{chapter.author}</span>
                 <div className="flex items-center gap-1.5">

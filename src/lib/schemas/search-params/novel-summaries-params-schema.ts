@@ -1,5 +1,5 @@
 import { inferParserType, parseAsArrayOf, parseAsIndex, parseAsInteger, parseAsString, parseAsStringLiteral } from 'nuqs/server';
-import { z } from "zod";
+import * as z from "zod";
 import { zodPagination } from '../pagination-schema';
 
 export enum SortKey {

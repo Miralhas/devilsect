@@ -1,7 +1,11 @@
 import { env } from "@/env";
 import type { NextConfig } from "next";
 import withPlaceholder from "@plaiceholder/next";
+import BundleAnalyzer from "@next/bundle-analyzer";
 
+const withBundleAnalyzer = BundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -13,7 +17,9 @@ const nextConfig: NextConfig = {
     loader: 'custom',
   },
   experimental: {
-    authInterrupts: true,
+    optimizePackageImports: ["zod", "motion", "sonner"],
+    inlineCss: true,
+    reactCompiler: true,
   },
   turbopack: {
     rules: {
@@ -25,4 +31,4 @@ const nextConfig: NextConfig = {
   }
 };
 
-export default withPlaceholder(nextConfig);
+export default withPlaceholder(withBundleAnalyzer(nextConfig));

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import * as z from "zod";
 
 export const zodPagination = {
   page: z.coerce.number().gt(0).catch(0).optional(),

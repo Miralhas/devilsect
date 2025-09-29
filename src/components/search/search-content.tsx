@@ -35,7 +35,7 @@ const SearchContent = () => {
 
   return (
     <>
-      <section className="grid grid-cols-3 md:grid-cols-6 gap-4 gap-y-6">
+      <section className="grid grid-cols-3 md:grid-cols-6 gap-4">
         {novelsQuery.data?.results.map(novel => (
           <Link href={`/novels/${novel.slug}`} key={novel.id} className="relative group space-y-1" ref={rf}>
             <NovelCard novelSummary={novel} size="lg" />

@@ -9,6 +9,11 @@ import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { BookOpenText, StarIcon } from "lucide-react";
 import Link from "next/link";
 import ShowMoreButton from "./show-more-button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 type DesktopRankingProps<T> = {
   queries: PaginatedQuery<T>[]
@@ -30,7 +35,7 @@ const DesktopRanking = ({ queries }: DesktopRankingProps<NovelSummary[]>) => {
         <ScrollArea className="w-32 min-h-0 flex-1 overflow-x-scroll overflow-y-hidden lg:overflow-hidden">
           <div
             id="ranking-grid"
-            className={`w-full grid grid-cols-[repeat(4,minmax(280px,1fr))] grid-rows-[min-content_max-content] gap-x-5 gap-y-7 pb-1 ${maxHeight}`} 
+            className={`w-full grid grid-cols-[repeat(4,minmax(280px,1fr))] grid-rows-[min-content_max-content] gap-x-5 gap-y-7 pb-1 ${maxHeight}`}
           >
             <div className="col-span-1 row-start-1 relative w-full">
               <div className="max-w-max border border-accent px-3 lg:px-6 py-1.5 bg-primary">
@@ -69,7 +74,16 @@ const DesktopRanking = ({ queries }: DesktopRankingProps<NovelSummary[]>) => {
                       <p className={rankingClassnames(i)}>{leadingZero(i + 1, 2)}</p>
                     </div>
                     <div className="flex-1 gap-1.5 self-stretch flex flex-col">
-                      <p className="font-bold line-clamp-1 text-sm text-[12px] md:text-[14px] overflow-hidden capitalize">{novel.title}</p>
+                      <Tooltip delayDuration={300}>
+                        <TooltipTrigger className="text-start cursor-pointer">
+                          <p className="font-bold line-clamp-1 text-sm text-[12px] md:text-[14px] overflow-hidden capitalize">
+                            {novel.title}
+                          </p>
+                        </TooltipTrigger>
+                        <TooltipContent className="capitalize text-center bg-secondary border border-zinc-50/10 text-zinc-200">
+                          {novel.title}
+                        </TooltipContent>
+                      </Tooltip>
                       <div className="flex gap-3 items-center text-muted-foreground">
                         <div className="text-xs font-bold flex gap-1 items-center">
                           <StarIcon className="size-3 text-yellow-500" fill="#D3AF37" />

@@ -1,12 +1,15 @@
 import { CommentsProvider } from "@/contexts/comments-context";
 import Script from "next/script";
 import { PropsWithChildren } from "react";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 
 const NovelLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <CommentsProvider>
-        {children}
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          {children}
+        </AppRouterCacheProvider>
       </CommentsProvider>
       <Script id="google-translate-init" strategy="afterInteractive" async>
         {`

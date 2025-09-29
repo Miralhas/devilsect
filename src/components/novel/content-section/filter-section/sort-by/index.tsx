@@ -5,14 +5,15 @@ import { Label } from "@/components/ui/label";
 import { NovelSearchParams, nuqsNovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { CalendarIcon, EyeIcon, FlameIcon, LucideIcon, SlidersVertical, StarIcon } from "lucide-react";
 import { useQueryStates } from "nuqs";
-import SortBtn from "./sort-button";
+import SortButton from "./sort-button";
 
-export type SortButton = {
+
+export type SortButtonType = {
   value: NovelSearchParams["sort"];
   icon: LucideIcon;
 }
 
-const SORTS: SortButton[] = [
+const SORTS: SortButtonType[] = [
   { value: "popularity", icon: FlameIcon },
   { value: "views", icon: EyeIcon },
   { value: "rating", icon: StarIcon },
@@ -39,7 +40,7 @@ const SortBy = () => {
       </div>
       <div className="grid gap-2.5">
         {SORTS.map(s => (
-          <SortBtn key={s.value} value={s.value} icon={s.icon} />
+          <SortButton key={s.value} value={s.value} icon={s.icon} />
         ))}
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { createSerializer, parseAsIndex, parseAsString } from 'nuqs/server';
 
-import { z } from "zod";
+import * as z from "zod";
 import { zodPagination } from '../pagination-schema';
 
 export const SearchParamsSchema = z.object({

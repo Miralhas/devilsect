@@ -44,7 +44,6 @@ const Announcements = () => {
           <Megaphone className="size-5 md:size-7" fill="" />
           <p className="text-lg sm:text-2xl font-semibold tracking-tight">Announcements</p>
         </div>
-        <Link href="/" className="text-sm md:text-base text-muted-foreground hover:text-zinc-200 transition-colors duration-200">View all</Link>
       </div>
       {chunkedAnnouncements.length > 0 ? (
         <Carousel className="grid">

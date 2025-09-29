@@ -18,7 +18,7 @@ const EditProfile = ({ user }: { user: User }) => {
         Edit Profile
       </Button>
 
-        <EditProfileModal open={open} setOpen={setOpen} user={user} />
+      <EditProfileModal open={open} setOpen={setOpen} user={user} />
     </>
   )
 }

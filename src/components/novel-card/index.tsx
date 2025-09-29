@@ -29,7 +29,7 @@ const NovelCard = ({ novelSummary, imageSizes, titleClassName, blurData64, size 
         <DynamicBlurImage
           src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${slug}/image`}
           alt={`${title} cover`}
-          className="object-cover object-center w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105 opacity-90"
+          className="object-cover object-center w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105 opacity-90 text-transparent"
           blurData={blurData64}
           sizes={imageSizes ?? "20vw"}
           fill

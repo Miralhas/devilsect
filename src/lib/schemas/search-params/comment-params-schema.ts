@@ -1,4 +1,4 @@
-import { z } from "zod";
+import * as z from "zod";
 import { zodPagination } from "../pagination-schema";
 
 export enum SortKey {

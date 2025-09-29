@@ -1,7 +1,7 @@
 'use client'
 
 import { GlobalLoginProvider } from '@/contexts/global-login-context';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+
 import {
   isServer,
   QueryClient,
@@ -36,11 +36,9 @@ const Providers = ({ children }: PropsWithChildren) => {
   const queryClient = getQueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-        <GlobalLoginProvider>
-          {children}
-        </GlobalLoginProvider>
-      </AppRouterCacheProvider>
+      <GlobalLoginProvider>
+        {children}
+      </GlobalLoginProvider>
     </QueryClientProvider>
   )
 }

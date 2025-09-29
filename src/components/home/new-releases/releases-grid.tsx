@@ -1,16 +1,28 @@
 import NovelCard from "@/components/novel-card";
+import { env } from "@/env";
+import { getBlurData } from "@/lib/get-blur-data";
 import { NovelSummary } from "@/types/novel";
-import { PaginatedQuery } from "@/types/pagination";
 import Link from "next/link";
 
-const ReleasesGrid = (res: PaginatedQuery<NovelSummary[]>) => {
+type Props = {
+  novels: NovelSummary[];
+}
+
+const ReleasesGrid = ({ novels }: Props) => {
   return (
     <div className="grid grid-cols-3 md:grid-cols-5 gap-4 justify-around">
-      {res.results.slice(4).map(novel => (
-        <Link href={`/novels/${novel.slug}`} className="group space-y-2 [&:nth-child(n+7)]:hidden md:[&:nth-child(n+7)]:block max-w-[115px]" key={novel.id} >
-          <NovelCard novelSummary={novel} imageSizes="(max-width: 768px) 25vw, 10vw" />
-        </Link>
-      ))}
+      {novels.map(async (novel) => {
+        const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`);
+        return (
+          <Link
+            href={`/novels/${novel.slug}`}
+            className="group space-y-2 [&:nth-child(n+7)]:hidden md:[&:nth-child(n+7)]:block max-w-[115px]"
+            key={novel.id}
+          >
+            <NovelCard novelSummary={novel} imageSizes="(max-width: 768px) 25vw, 10vw" blurData64={base64} />
+          </Link>
+        )
+      })}
     </div>
   )
 }

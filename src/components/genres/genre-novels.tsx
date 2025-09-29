@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useQueryStates } from "nuqs";
 import { PropsWithChildren } from "react";
 import GenericPagination from "../generic-pagination";
-import ClientNovelCard from "../novel-card/client-novel-card";
+import NovelCard from "../novel-card";
 import SkeletonLoader from "../search/skeleton-loader";
 import SortGenreNovels from "./sort-genre-novels";
 
@@ -58,14 +58,14 @@ const GenreNovels = ({ genre }: { genre: Genre }) => {
 
   return (
     <Layout>
-      <section className="grid grid-cols-3 md:grid-cols-6 gap-4">
+      <section className="grid grid-cols-3 md:grid-cols-6 gap-4 gap-y-6">
         <div className="flex items-center justify-between col-span-full">
           <h2 className="text-xl md:text-2xl font-bold capitalize">{genre.name} Novels</h2>
           <p className="text-base text-[15px] text-muted-foreground">{query.data?.totalItems} novels found</p>
         </div>
         {query.data?.results.map(novel => (
-          <Link href={`/novels/${novel.slug}`} key={novel.id} className="relative group">
-            <ClientNovelCard novel={novel} size="lg" />
+          <Link href={`/novels/${novel.slug}`} key={novel.id} className="relative group space-y-1">
+            <NovelCard novelSummary={novel} size="lg" />
           </Link>
         ))}
       </section>

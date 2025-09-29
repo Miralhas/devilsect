@@ -1,15 +1,18 @@
 import { NovelSummary } from "@/types/novel";
-import { PaginatedQuery } from "@/types/pagination";
 import { statusMap } from "@/utils/api-utils";
 import { BookOpenText, StarIcon } from "lucide-react";
 import Link from "next/link";
 import CardImage from "./card-image";
 
-const ReleasesCardHorizontal = async (res: PaginatedQuery<NovelSummary[]>) => {
+type Props = {
+  novels: NovelSummary[];
+}
+
+const ReleasesCardHorizontal = async ({ novels }: Props) => {
   return (
     <>
       <div className="flex flex-1 flex-col gap-3.5 h-full">
-        {res.results.slice(0, 4).map((novel, index) => (
+        {novels.map((novel, index) => (
           <Link href={`/novels/${novel.slug}`} key={index}>
             <div className="group w-full p-2 px-3 border hover:border-accent/60 hover:bg-primary/10 rounded-xl bg-muted-foreground/5 flex gap-3 items-center transition-all duration-300 ease-in-out hover:translate-x-1 hover:-translate-y-1 hover:text-accent">
               <div className="aspect-[3/4] h-[75px] overflow-hidden rounded-lg relative">

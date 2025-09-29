@@ -1,6 +1,7 @@
 'use client'
 
 import GenericPagination from "@/components/generic-pagination";
+import NovelCard from "@/components/novel-card";
 import { mapSortKey, nuqsNovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
 import { motion } from "framer-motion";
@@ -8,7 +9,6 @@ import { BookIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useQueryStates } from "nuqs";
-import ClientNovelCard from "../../novel-card/client-novel-card";
 import SkeletonLoader from "./skeleton-loder";
 
 const MotionLink = motion.create(Link);
@@ -71,14 +71,14 @@ const NovelList = () => {
         {query.data?.results.map((novel) => (
           <MotionLink
             layout
-            className="relative group col-span-1"
+            className="relative group col-span-1 space-y-1"
             key={novel.id}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.2 }}
             href={`/novels/${novel.slug}`}
           >
-            <ClientNovelCard key={novel.id} novel={novel} size="lg" imageSizes="(max-width: 768px)30vw, 10vw" />
+            <NovelCard key={novel.id} novelSummary={novel} size="lg" imageSizes="(max-width: 768px)30vw, 10vw" />
           </MotionLink>
         ))}
       </div>

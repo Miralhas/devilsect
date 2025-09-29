@@ -10,7 +10,7 @@ import { useQueryStates } from "nuqs";
 import { PropsWithChildren } from "react";
 import GenericPagination from "../generic-pagination";
 import SortGenreNovels from "../genres/sort-genre-novels";
-import ClientNovelCard from "../novel-card/client-novel-card";
+import NovelCard from "../novel-card";
 import SkeletonLoader from "../search/skeleton-loader";
 
 const TagNovels = ({ tag }: { tag: Tag }) => {
@@ -65,7 +65,7 @@ const TagNovels = ({ tag }: { tag: Tag }) => {
         </div>
         {query.data?.results.map(novel => (
           <Link href={`/novels/${novel.slug}`} key={novel.id} className="relative group">
-            <ClientNovelCard novel={novel} size="lg" />
+            <NovelCard novelSummary={novel} size="lg" />
           </Link>
         ))}
       </section>

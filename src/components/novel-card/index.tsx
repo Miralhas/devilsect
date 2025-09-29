@@ -1,5 +1,4 @@
 import { env } from "@/env";
-import { getBlurData } from "@/lib/get-blur-data";
 import { NovelSummary } from "@/types/novel";
 import { cn } from "@/utils/common-utils";
 import DynamicBlurImage from "../dynamic-blur-image";
@@ -13,11 +12,12 @@ type NovelCardProps = {
   novelSummary: NovelSummary;
   size?: Size;
   imageSizes?: string;
+  titleClassName?: string;
+  blurData64?: string;
 }
 
-const NovelCard = async ({ novelSummary: { author, ratingValue, status, title, slug }, imageSizes, size = "sm" }: NovelCardProps) => {
-  const isLarge = size === "lg";
-  const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${slug}/image`);
+const NovelCard = ({ novelSummary, imageSizes, titleClassName, blurData64, size = "sm" }: NovelCardProps) => {
+  const { author, ratingValue, status, title, slug } = novelSummary;
   return (
     <>
       <div className="relative aspect-[2/3] overflow-hidden rounded-r-md shadow-sm transition-all duration-300 ease-in-out group-hover:-translate-y-2 group-hover:shadow-md shadow-accent">
@@ -25,7 +25,7 @@ const NovelCard = async ({ novelSummary: { author, ratingValue, status, title, s
           src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${slug}/image`}
           alt={`${title} cover`}
           className="object-cover object-center w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105 opacity-90"
-          blurData={base64}
+          blurData={blurData64}
           sizes={imageSizes ?? "20vw"}
           fill
           default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
@@ -35,9 +35,11 @@ const NovelCard = async ({ novelSummary: { author, ratingValue, status, title, s
         <InfoOverlay ratingValue={ratingValue} status={status} />
       </div>
 
-      <p className={cn("font-semibold text-ellipsis whitespace-nowrap max-w-full text-[12px] md:text-[13px] overflow-hidden capitalize group-hover:opacity-50 transition-opacity duration-300", { "text-[13px] md:text-[14px]": isLarge })}>
+      <h3
+        className={cn("tracking-tight font-semibold leading-tight text-foreground/90 capitalize line-clamp-2 break-words hyphens-auto group-hover:text-foreground/60 transition-colors duration-300 text-xs md:text-sm", titleClassName)}
+      >
         {title}
-      </p>
+      </h3>
     </>
   )
 }

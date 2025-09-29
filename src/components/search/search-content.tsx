@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { useQueryStates } from "nuqs";
 import { useRef } from "react";
 import GenericPagination from "../generic-pagination";
-import ClientNovelCard from "../novel-card/client-novel-card";
+import NovelCard from "../novel-card";
 import SkeletonLoader from "./skeleton-loader";
 
 const SearchContent = () => {
@@ -35,10 +35,10 @@ const SearchContent = () => {
 
   return (
     <>
-      <section className="grid grid-cols-3 md:grid-cols-6 gap-4">
+      <section className="grid grid-cols-3 md:grid-cols-6 gap-4 gap-y-6">
         {novelsQuery.data?.results.map(novel => (
-          <Link href={`/novels/${novel.slug}`} key={novel.id} className="relative group" ref={rf}>
-            <ClientNovelCard novel={novel} size="lg" />
+          <Link href={`/novels/${novel.slug}`} key={novel.id} className="relative group space-y-1" ref={rf}>
+            <NovelCard novelSummary={novel} size="lg" />
           </Link>
         ))}
       </section>

@@ -24,9 +24,12 @@ export default function ErrorPage({ reset }: { reset: () => void }) {
             Try again
           </Button>
 
-          <Link href="/">
-            <Button variant="cool">Home Page</Button>
-          </Link>
+          <Button
+            variant="cool"
+            onClick={() => window.location.assign(window.location.origin)}
+          >
+            Home Page
+          </Button>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
 import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
 import Link from "next/link";
-import ClientNovelCard from "../novel-card/client-novel-card";
+import NovelCard from "../novel-card";
 import SkeletonLoader from "./skeleton-loader";
 
 const PopularNovels = () => {
@@ -26,7 +26,7 @@ const PopularNovels = () => {
             key={novel.id}
             className="group space-y-2 "
             href={`/novels/${novel.slug}`}>
-            <ClientNovelCard novel={novel} size="sm" imageSizes="(max-width: 768px) 30vw, 10vw" />
+            <NovelCard novelSummary={novel} size="sm" imageSizes="(max-width: 768px) 30vw, 10vw" />
           </Link>
         ))}
       </div>

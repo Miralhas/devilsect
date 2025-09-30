@@ -38,6 +38,8 @@ import { useMemo, useRef, useState } from "react";
 import { columns } from "./columns";
 
 const UsersDataTable = ({ session }: { session?: RequestCookie }) => {
+  "use no memo";
+  
   const divRef = useRef<HTMLDivElement>(null);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState<string[] | undefined>([])

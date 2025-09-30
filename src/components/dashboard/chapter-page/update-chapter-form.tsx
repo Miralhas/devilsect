@@ -11,7 +11,7 @@ import { Chapter } from "@/types/chapter";
 import { actionErrorMessage } from "@/utils/string-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { startTransition, useActionState, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 import DescriptionPreviewModal from "../dashboard-tab/novel-info/description-preview-modal";
 
@@ -37,7 +37,7 @@ const UpdateChapterForm = ({ chapter }: { chapter: Chapter }) => {
     mode: "onSubmit"
   });
 
-  const body = form.watch("body");
+  const body = useWatch({ control: form.control, name: "body", defaultValue: chapter.body});
 
   const { errors: clientErrors, isDirty } = form.formState;
 

@@ -38,8 +38,8 @@ import { useMemo, useRef, useState } from "react";
 import { columns } from "./columns";
 
 const UsersDataTable = ({ session }: { session?: RequestCookie }) => {
-  "use no memo";
-  
+  "use no memo"; // TODO: React compiler breaks data table functionality. Remove after tasntack table fix.
+
   const divRef = useRef<HTMLDivElement>(null);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState<string[] | undefined>([])

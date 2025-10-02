@@ -8,10 +8,12 @@ import { Novel } from "@/types/novel";
 import { CameraIcon, InfoIcon } from "lucide-react";
 import EditNovelImage from "./edit-novel-image";
 import UpdateNovelForm from "./update-novel-form";
+import PurgeNovelCache from "../purge-novel-cache";
 
 const NovelInfo = ({ novel }: { novel: Novel }) => {
   return (
     <div className="pt-4 space-y-4">
+      <PurgeNovelCache novelSlug={novel.slug} />
       <Accordion type="single" collapsible defaultValue="info">
         <AccordionItem value="image">
           <AccordionTrigger>

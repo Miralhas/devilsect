@@ -23,6 +23,7 @@ const DashboardNovelPage = async ({ params }: NovelPageProps) => {
             fill={false}
             alt="novel image"
             className="object-cover inline-block"
+            default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
           />
         </div>
         <h1 className="inline-flex flex-col">

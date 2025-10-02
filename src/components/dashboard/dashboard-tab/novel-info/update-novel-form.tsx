@@ -157,7 +157,7 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
         <Label htmlFor="status" className="font-semibold text-muted-foreground">Status</Label>
         <Select
           defaultValue={novel.status}
-          onValueChange={(val: NovelStatus) => form.setValue("status", val)}
+          onValueChange={(val: NovelStatus) => form.setValue("status", val, {shouldDirty: true})}
           aria-invalid={Boolean(clientErrors.status) || Boolean(formState.errors?.status)}
           {...form.register("status")}
         >

@@ -32,6 +32,7 @@ export const updateChapterAction = async (
     return { errors, success: false, fields: parsed.data };
   }
 
-  revalidatePath("/", "layout");
+  revalidatePath(`/novels/${chapter.novelSlug}`);
+  revalidatePath(`/(core)/novels/${chapter.novelSlug}/[chapterSlug]`, "page")
   return { success: true, fields: parsed.data };
 }

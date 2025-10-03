@@ -80,3 +80,8 @@ export type NovelInfo = {
   updatedAt: string;
   chaptersCount: number;
 }
+
+export type AuthorInfo = {
+  name: string;
+  novelsCount: number;
+}

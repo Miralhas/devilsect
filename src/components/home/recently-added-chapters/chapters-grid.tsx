@@ -6,7 +6,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { env } from "@/env";
-import { getBlurData } from "@/lib/get-blur-data";
 import { PaginatedQuery } from "@/types/pagination";
 import { RecentlyAddedChapter } from "@/types/recently-added-chapters";
 import { formatDate } from "@/utils/date-utils";
@@ -18,8 +17,7 @@ const ChaptersGrid = ({ chapters }: { chapters: PaginatedQuery<RecentlyAddedChap
   return (
     <section className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-3 md:gap-y-2">
-        {chapters.results.map(async (chapter) => {
-          const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${chapter.novelSlug}/image`);
+        {chapters.results.map((chapter) => {
           return (
             <div className="group flex gap-2 relative items-center px-1 col-span-1 hover:bg-secondary/60 rounded-md" key={chapter.id}>
               <div className="h-[65px] min-w-[50px] overflow-hidden rounded-r-sm relative">
@@ -30,7 +28,6 @@ const ChaptersGrid = ({ chapters }: { chapters: PaginatedQuery<RecentlyAddedChap
                   className="object-cover w-full transition-transform group-hover:scale-105 duration-200 ease-in-out"
                   src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${chapter.novelSlug}/image`}
                   default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
-                  blurData={base64}
                 />
                 <BookCoverOverlay />
               </div>

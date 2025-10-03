@@ -19,7 +19,12 @@ const ReleasesGrid = ({ novels }: Props) => {
             className="group space-y-2 [&:nth-child(n+7)]:hidden md:[&:nth-child(n+7)]:block max-w-[115px] self-stretch justify-self-stretch"
             key={novel.id}
           >
-            <NovelCard titleClassName="md:text-xs" novelSummary={novel} imageSizes="(max-width: 768px) 25vw, 10vw" blurData64={base64} />
+            <NovelCard
+              titleClassName="md:text-xs"
+              novelSummary={novel}
+              imageSizes="(max-width: 768px) 25vw, 10vw"
+              blurData64={base64}
+            />
           </Link>
         )
       })}

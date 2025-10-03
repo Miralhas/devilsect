@@ -5,8 +5,15 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import PageHeader from "@/components/page-header";
 import { UserPenIcon } from "lucide-react";
 import AuthorNovels from "@/components/authors/author-novels";
+import { getAllAuthors } from "@/service/info/api/get-all-authors";
+import { SortKey } from "@/lib/schemas/search-params/author-params-schema";
 
 type Props = { params: Promise<{ name: string }> };
+
+export async function generateStaticParams() {
+  const { results: authors } = await getAllAuthors({ size: 50, sort: SortKey.COUNT });
+  return authors.map(a => ({ name: a.name.toLowerCase() }));
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const authorName = decodeURIComponent((await params).name);

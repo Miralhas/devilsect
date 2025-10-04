@@ -9,8 +9,8 @@ import { useRouter } from "next/navigation";
 import { useQueryStates } from "nuqs";
 import { PropsWithChildren } from "react";
 import GenericPagination from "../generic-pagination";
-import SortGenreNovels from "../genres/sort-genre-novels";
 import NovelCard from "../novel-card";
+import NovelsSort from "../novels-sort";
 import SkeletonLoader from "../search/skeleton-loader";
 
 const TagNovels = ({ tag }: { tag: Tag }) => {
@@ -80,7 +80,7 @@ const Layout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="flex items-center justify-end">
-        <SortGenreNovels className="w-full md:max-w-[180px]" />
+        <NovelsSort className="w-full md:max-w-[180px]" />
       </div>
       {children}
     </>

@@ -11,7 +11,7 @@ type Props = { params: Promise<{ name: string }> };
 
 export async function generateStaticParams() {
   const genres = await getGenres();
-  return genres.map(r => ({ name: r.name }));
+  return genres.map(r => ({ name: r.name.toLowerCase() }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

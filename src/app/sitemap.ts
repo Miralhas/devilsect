@@ -1,4 +1,5 @@
 import { env } from "@/env";
+import { getAllAuthors } from "@/service/info/api/get-all-authors";
 import { getGenres } from "@/service/info/api/get-genres";
 import { getTags } from "@/service/info/api/get-tags";
 import { getAllNovelInfo } from "@/service/novels/api/get-all-novel-info";
@@ -8,6 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const genres = await getGenres();
   const novels = await getAllNovelInfo();
   const { results: tags } = await getTags({ size: 2000 });
+  const { results: authors } = await getAllAuthors({ size: 2000 });
 
   const sitemapNovels: MetadataRoute.Sitemap = novels.map(({ slug, updatedAt }) => ({
     url: `${env.NEXT_PUBLIC_DOMAIN}/novels/${slug}`,
@@ -21,6 +23,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemapTags: MetadataRoute.Sitemap = tags.map(({ name }) => ({
     url: `${env.NEXT_PUBLIC_DOMAIN}/tags/${name.toLowerCase()}`,
   }));
+
+  const sitemapAuthors: MetadataRoute.Sitemap = authors.map(({ name }) => ({
+    url: `${env.NEXT_PUBLIC_DOMAIN}/authors/${name.toLowerCase()}`
+  }))
 
   return [
     {
@@ -40,6 +46,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${env.NEXT_PUBLIC_DOMAIN}/search`,
     },
     {
+      url: `${env.NEXT_PUBLIC_DOMAIN}/authors`,
+    },
+    {
       url: `${env.NEXT_PUBLIC_DOMAIN}/genres`,
     },
     {
@@ -48,5 +57,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...sitemapNovels,
     ...sitemapGenres,
     ...sitemapTags,
+    ...sitemapAuthors,
   ]
 }

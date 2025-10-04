@@ -2,7 +2,7 @@
 
 import { mapSortKey, nuqsNovelSummariesParams } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { novelSummariesInitialParams, useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
-import { Genre } from "@/types/novel";
+import { AuthorInfo } from "@/types/novel";
 import { BookIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,7 @@ import NovelCard from "../novel-card";
 import NovelsSort from "../novels-sort";
 import SkeletonLoader from "../search/skeleton-loader";
 
-const GenreNovels = ({ genre }: { genre: Genre }) => {
+const AuthorNovels = ({ author }: { author: AuthorInfo }) => {
   const router = useRouter();
   const [params, setParams] = useQueryStates(nuqsNovelSummariesParams);
   const query = useGetNovelSummaries({
@@ -22,8 +22,8 @@ const GenreNovels = ({ genre }: { genre: Genre }) => {
       ...novelSummariesInitialParams,
       page: params.page,
       size: 18,
-      genres: genre.name,
-      sort: mapSortKey(params.sort)
+      sort: mapSortKey(params.sort),
+      author: author.name
     }
   });
 
@@ -60,7 +60,7 @@ const GenreNovels = ({ genre }: { genre: Genre }) => {
     <Layout>
       <section className="grid grid-cols-3 md:grid-cols-6 gap-4">
         <div className="flex items-center justify-between col-span-full">
-          <h2 className="text-xl md:text-2xl font-bold capitalize">{genre.name} Novels</h2>
+          <h2 className="text-xl md:text-2xl font-bold capitalize">{author.name} Novels</h2>
           <p className="text-base text-[15px] text-muted-foreground">{query.data?.totalItems} novels found</p>
         </div>
         {query.data?.results.map(novel => (
@@ -87,4 +87,4 @@ const Layout = ({ children }: PropsWithChildren) => {
   )
 }
 
-export default GenreNovels;
+export default AuthorNovels;

@@ -56,7 +56,7 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
             </div>
             <div className="space-y-1">
               <h1 className="capitalize text-2xl md:text-3xl font-bold">{novel.title}</h1>
-              <p className="text-muted-foreground font-normal text-sm md:text-[15px] ml-0.5">Author: <Link href="/" className="text-accent font-semibold">{novel.author}</Link></p>
+              <p className="text-muted-foreground font-normal text-sm md:text-[15px] ml-0.5">Author: <Link href={`/authors/${novel.author.toLowerCase()}`} className="text-accent font-semibold">{novel.author}</Link></p>
             </div>
           </div>
           <div className="flex gap-2 flex-wrap w-full max-w-[570px]">

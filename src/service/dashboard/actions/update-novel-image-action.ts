@@ -8,10 +8,10 @@ import { updateNovelImage } from "../api/update-novel-image";
 const DEFAULT_EDIT_NOVEL_IMAGE_MESSAGE = "Failed to Edit Novel Image. Try again later";
 
 export const updateNovelImageAction = async (
-  novel: Novel, prevState: unknown, payload: { imageBlob: Blob }
+  novel: Novel, prevState: unknown, payload: { formData: FormData }
 ): Promise<SimpleState> => {
   try {
-    await updateNovelImage(novel, payload.imageBlob)
+    await updateNovelImage(novel, payload.formData)
   } catch (err) {
     if (err instanceof ApiError) {
       return { success: false, message: err.detail };

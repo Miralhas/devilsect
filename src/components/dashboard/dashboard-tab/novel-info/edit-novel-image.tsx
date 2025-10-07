@@ -73,11 +73,14 @@ const EditNovelImage = ({ novel }: { novel: Novel }) => {
       ctx.drawImage(image, 0, 0);
 
       const blob = await offscreen.convertToBlob({
-        type: 'image/jpeg',
+        type: 'image/webp',
         quality: 0.75
       });
 
-      startTransition(() => imageAction({ imageBlob: blob }));
+      const formData = new FormData();
+      formData.append("file", blob, `${novel.title}-cover.webp`);
+
+      startTransition(() => imageAction({ formData: formData }));
     }
   }
 
@@ -129,7 +132,16 @@ const EditNovelImage = ({ novel }: { novel: Novel }) => {
         />
       </div>
       {!!imgSrc && (
-        <Button variant="cool" className="w-full max-w-[150px]" onClick={onSend} disabled={isPending}>Change image</Button>
+        <>
+          <Button
+            variant="cool"
+            className="w-full max-w-[150px]"
+            onClick={onSend}
+            disabled={isPending}
+          >
+            Change image
+          </Button>
+        </>
       )}
     </div>
   )

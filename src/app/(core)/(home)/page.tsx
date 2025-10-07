@@ -7,6 +7,7 @@ import EldersChoiceSkeletonLoader from "@/components/home/skeletons/elders-choic
 import NewReleasesSkeletonLoader from "@/components/home/skeletons/new-releases-skeleton-loader";
 import RankingSkeletonLoader from "@/components/home/skeletons/ranking-skeleton-loader";
 import RecentlyAddedChapterSkeletonLoader from "@/components/home/skeletons/recently-added-chapters-skeleton-loader";
+import UserHistory from "@/components/home/user-history";
 import { Suspense } from "react";
 
 export const revalidate = 43200; // 12 hours
@@ -19,6 +20,7 @@ const HomePage = () => {
         <Suspense fallback={<NewReleasesSkeletonLoader />}>
           <NewReleases />
         </Suspense>
+        <UserHistory />
         <Suspense fallback={<EldersChoiceSkeletonLoader />}>
           <EldersChoice />
         </Suspense>

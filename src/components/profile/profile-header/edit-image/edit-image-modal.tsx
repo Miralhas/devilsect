@@ -55,8 +55,6 @@ const EditImageModal = ({ open, setOpen, imageFile, onStartTransition }: Props) 
   const [imgSrc, setImgSrc] = useState('');
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
-  const hiddenAnchorRef = useRef<HTMLAnchorElement>(null);
-  const blobUrlRef = useRef('');
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
 
@@ -115,21 +113,9 @@ const EditImageModal = ({ open, setOpen, imageFile, onStartTransition }: Props) 
     // You might want { type: "image/jpeg", quality: <0 to 1> } to
     // reduce image size
     const blob = await offscreen.convertToBlob({
-      type: 'image/jpeg',
+      type: 'image/webp',
       quality: 0.3
     })
-
-
-    if (blobUrlRef.current) {
-      URL.revokeObjectURL(blobUrlRef.current)
-    }
-
-    blobUrlRef.current = URL.createObjectURL(blob)
-
-    if (hiddenAnchorRef.current) {
-      hiddenAnchorRef.current.href = blobUrlRef.current
-      hiddenAnchorRef.current.click()
-    }
 
     setOpen(false);
     onStartTransition(blob);

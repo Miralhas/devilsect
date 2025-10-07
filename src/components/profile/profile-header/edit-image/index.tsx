@@ -49,7 +49,9 @@ const EditImage = ({ user }: { user: User }) => {
   }
 
   const onStartTransition = (file: Blob) => {
-    startTransition(() => action({ imageBlob: file, userId: user.id }));
+    const formData = new FormData();
+    formData.append("file", file, `${user.username}-image.webp`);
+    startTransition(() => action({ formData, userId: user.id }));
   }
 
   return (

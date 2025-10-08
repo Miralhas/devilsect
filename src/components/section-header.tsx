@@ -1,3 +1,4 @@
+import { cn } from "@/utils/common-utils";
 import { LucideIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -5,24 +6,23 @@ type SectionHeaderProps = {
   icon: LucideIcon;
   title: string;
   viewMore?: { title: string, href: string }
+  titleClassName?: string;
 }
 
 const SectionHeader = (props: SectionHeaderProps) => {
   const { title, viewMore } = props;
   return (
-    <>
-      <div className="flex justify-between items-center border-b pb-3">
-        <div className="flex gap-2 items-center">
-          <div className="p-2 bg-gradient-to-r from-red-700/50 to-primary/50 rounded-full">
-            <props.icon className="size-5" />
-          </div>
-          <p className="text-xl md:text-3xl font-bold tracking-tight bg-gradient-to-r from-red-700/80 to-primary bg-clip-text text-transparent">{title}</p>
+    <div className="flex justify-between items-center border-b pb-3">
+      <div className="flex gap-2 items-center">
+        <div className="p-2 bg-gradient-to-r from-red-700/50 to-primary/50 rounded-full">
+          <props.icon className="size-5" />
         </div>
-        {viewMore ? (
-          <Link href={viewMore.href} className="text-sm md:text-base text-muted-foreground hover:text-zinc-200 transition-colors duration-200">{viewMore.title}</Link>
-        ) : null}
+        <p className={cn("text-xl md:text-3xl font-bold tracking-tight bg-gradient-to-r from-red-700/80 to-primary bg-clip-text text-transparent", props.titleClassName)}>{title}</p>
       </div>
-    </>
+      {viewMore ? (
+        <Link href={viewMore.href} className="whitespace-nowrap text-xs md:text-base text-muted-foreground hover:text-zinc-200 transition-colors duration-200">{viewMore.title}</Link>
+      ) : null}
+    </div>
   )
 }
 

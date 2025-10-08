@@ -14,16 +14,13 @@ export const GET = async (req: NextRequest) => {
       return NextResponse.json({ error: 'Unauthorized: Missing or invalid session' }, { status: 401 });
     }
 
-    const novelSlug = new URL(req.url).searchParams.get("novelSlug");
-    if (!novelSlug) {
-      return NextResponse.json({ error: "Query String 'novelSlug' is required" }, { status: 400 });
-    }
-
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${session}`);
     myHeaders.append("Content-Type", "application/json");
 
-    const queryString = buildQueryString({novelSlug})
+    const searchParams = new URLSearchParams(new URL(req.url).searchParams.toString())
+    const queryString = buildQueryString(Object.fromEntries(searchParams));
+
     const url = `${env.APP_URL}/library${queryString}`;
 
     const res = await fetch(url, {

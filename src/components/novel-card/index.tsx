@@ -19,9 +19,11 @@ type NovelCardProps = {
   imageSizes?: string;
   titleClassName?: string;
   blurData64?: string;
+  loading?: "lazy" | "eager"
+
 }
 
-const NovelCard = ({ novelSummary, imageSizes, titleClassName, blurData64, size = "sm" }: NovelCardProps) => {
+const NovelCard = ({ novelSummary, imageSizes, titleClassName, blurData64, size = "sm", loading = "lazy" }: NovelCardProps) => {
   const { author, ratingValue, status, title, slug } = novelSummary;
   return (
     <>
@@ -33,6 +35,7 @@ const NovelCard = ({ novelSummary, imageSizes, titleClassName, blurData64, size 
           blurData={blurData64}
           sizes={imageSizes ?? "20vw"}
           fill
+          loading={loading}
           default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
         />
         <BookCoverOverlay />

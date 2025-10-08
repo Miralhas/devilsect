@@ -13,7 +13,7 @@ const RankingSection = async () => {
 
   return (
     <section className="space-y-6">
-      <SectionHeader icon={Trophy} title="Ranking" viewMore={{ href: "/", title: "View More" }} />
+      <SectionHeader icon={Trophy} title="Ranking" viewMore={{ href: "/ranking", title: "View More" }} />
       <DesktopRanking queries={queries} />
     </section>
   )

@@ -11,7 +11,7 @@ const Ongoing = async () => {
       <SectionHeader
         icon={LoaderIcon}
         title="Ongoing Series"
-        viewMore={{ href: "/novels?status=COMPLETED", title: "View More" }}
+        viewMore={{ href: "/novels?status=ON_GOING", title: "View More" }}
         titleClassName="text-lg"
       />
       <NovelsCarousel novels={ongoing.results} />

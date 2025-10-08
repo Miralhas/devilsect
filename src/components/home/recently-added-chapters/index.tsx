@@ -7,7 +7,12 @@ const RecentlyAddedChapters = async () => {
   const chapters = await getLatestChapters({ size: 32 });
   return (
     <section className="space-y-4 w-full">
-      <SectionHeader icon={Clock} title="Recently Added Chapters" viewMore={{ href: "/updates", title: "View More" }} />
+      <SectionHeader
+        icon={Clock}
+        title="Recently Added Chapters"
+        viewMore={{ href: "/updates", title: "View More" }} 
+        titleClassName="text-lg"
+      />
       <div className="w-full">
         <ChaptersGrid chapters={chapters} />
       </div>

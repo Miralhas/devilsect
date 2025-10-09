@@ -20,7 +20,7 @@ const SortFilter = () => {
       onValueChange={(value) => setSearchParams({ sort: value })}
       value={params.sort}
     >
-      <SelectTrigger className="text-sm w-full">
+      <SelectTrigger className="text-xs sm:text-sm w-full">
         <SelectValue placeholder="Sort" />
       </SelectTrigger>
       <SelectContent>

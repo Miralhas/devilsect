@@ -13,20 +13,21 @@ import { nuqsUserLibrarySeachParams } from "@/lib/schemas/search-params/user-lib
 import { useQueryStates } from 'nuqs';
 
 const SortFilter = () => {
-  const [, setSearchParams] = useQueryStates(nuqsUserLibrarySeachParams);
+  const [params, setSearchParams] = useQueryStates(nuqsUserLibrarySeachParams);
 
   return (
     <Select
       onValueChange={(value) => setSearchParams({ sort: value })}
+      value={params.sort}
     >
-      <SelectTrigger className="text-sm md:ml-auto">
+      <SelectTrigger className="text-sm w-full">
         <SelectValue placeholder="Sort" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Sort</SelectLabel>
-          <SelectItem value="Last Read">Last Read</SelectItem>
-          <SelectItem value="Longest">Longest</SelectItem>
+          <SelectItem value="Last Read"><span className="text-[11px] text-xs text-muted-foreground">Sort:</span> Last Read</SelectItem>
+          <SelectItem value="Longest"><span className="text-[11px] text-xs text-muted-foreground">Sort:</span> Longest</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

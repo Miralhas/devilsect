@@ -20,7 +20,7 @@ const FilterSelect = () => {
     <Select
       onValueChange={(value) => setSearchParams({ filter: value })}
     >
-      <SelectTrigger className="text-sm">
+      <SelectTrigger className="text-sm w-full">
         <SelectValue placeholder="Filter by" />
       </SelectTrigger>
       <SelectContent>

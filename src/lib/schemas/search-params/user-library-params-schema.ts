@@ -41,6 +41,9 @@ export const UserLibraryParamsSchema = z.object({
 
 export type UserLibraryParams = z.infer<typeof UserLibraryParamsSchema>;
 
+export const initialHistoryParams: UserLibraryParams = { size: 20, page: 0, sort: SortKey.LAST_READ };
+export const initialLibraryParams: UserLibraryParams = { size: 20, page: 0, sort: SortKey.LAST_READ, filter: "BOOKMARKED" };
+
 export const nuqsUserLibrarySeachParams = {
   size: parseAsInteger.withDefault(20).withOptions({ shallow: false }),
   filter: parseAsString.withDefault("bookmarked").withOptions({ shallow: false }),
@@ -48,3 +51,4 @@ export const nuqsUserLibrarySeachParams = {
 }
 
 export const loadUserLibraryParams = createLoader(nuqsUserLibrarySeachParams);
+

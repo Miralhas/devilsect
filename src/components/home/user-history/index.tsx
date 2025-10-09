@@ -2,7 +2,7 @@
 
 import SectionHeader from "@/components/section-header";
 import { SortKey } from "@/lib/schemas/search-params/user-library-params-schema";
-import { useGetUserLibrary } from "@/service/library/queries/get-user-library";
+import { useGetUserLibrary } from "@/service/library/queries/use-get-user-library";
 import { HistoryIcon } from "lucide-react";
 import HistoryNovels from "./history-novels";
 

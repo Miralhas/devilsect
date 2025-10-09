@@ -3,7 +3,7 @@ import { queryOptions, useQuery } from "@tanstack/react-query";
 import { getUserLibraryClientSide } from "../api/get-user-library-client-side";
 import { libraryKeys } from "./query-keys";
 
-const getUserLibraryQueryOptions = (params: UserLibraryParams) => queryOptions({
+export const getUserLibraryQueryOptions = (params: UserLibraryParams) => queryOptions({
   retry: 0,
   refetchOnWindowFocus: false,
   queryFn: () => getUserLibraryClientSide(params),

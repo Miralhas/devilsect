@@ -8,6 +8,7 @@ const getNovelReviewsQueryOptions = (params: NovelReviewParams) => infiniteQuery
   getNextPageParam: (lastPage) => lastPage.next,
   queryKey: reviewKeys.getNovelReviews(params),
   initialPageParam: 0,
+  structuralSharing: false
 })
 
 export const useGetNovelReviews = (params: NovelReviewParams) => useInfiniteQuery(

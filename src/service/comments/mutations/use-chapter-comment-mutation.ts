@@ -41,8 +41,23 @@ export const useChapterCommentMutation = () => {
             voteCount: 0,
             commenter: user,
           }
-          const newResults = [newComment, ...prevDataResults];
-          return { ...prevData, pages: [{ ...prevData.pages[0], results: newResults }] };
+
+          if (commentInput.parentCommentId !== null) {
+            const newResults = prevDataResults.map(r => {
+              if (r.id === commentInput.parentCommentId) {
+                return {
+                  ...r,
+                  childComments: [...r.childComments, newComment]
+                };
+              }
+              return r;
+            })
+            return { ...prevData, pages: [{ ...prevData.pages[0], results: newResults }] };
+          } else {
+            const newResults = [newComment, ...prevDataResults];
+            return { ...prevData, pages: [{ ...prevData.pages[0], results: newResults }] };
+          }
+          
         } catch (error) {
           console.log(error);
         }

@@ -52,7 +52,7 @@ const Reply = ({ comment, isAuthenticated }: { comment: ThreadedComment; isAuthe
           <span className="text-xs text-[13px]">Reply</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="">
+      <DialogContent className=" max-h-[500px] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-zinc-300/90">Write a Reply</DialogTitle>
           <DialogDescription>

@@ -7,17 +7,21 @@ const FilterButtons = () => {
   const isCompleted = searchParams.filter === "completed";
 
   return (
-    <div className="flex gap-3 md:justify-between">
+    <div className="grid grid-cols-2 w-full md:w-max gap-2">
       <Button
-        className="text-xs md:text-sm"
+        className="text-xs w-full md:text-sm rounded-xs"
         variant={!isCompleted ? "cool" : "cool-secondary"}
         onClick={() => setSearchParams({ filter: "bookmarked" })}
-      >All</Button>
+      >
+        All
+      </Button>
       <Button
-        className="text-xs md:text-sm"
+        className="text-xs w-full md:text-sm rounded-xs"
         variant={isCompleted ? "cool" : "cool-secondary"}
         onClick={() => setSearchParams({ filter: "completed" })}
-      >Completed</Button>
+      >
+        Completed
+      </Button>
     </div>
   )
 }

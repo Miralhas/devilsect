@@ -1,14 +1,20 @@
+'use client'
+
 import { Button } from "@/components/ui/button";
 import { removeNovelLibraryCompleteAction } from "@/service/library/actions/remove-novel-library-complete-action";
 import { revalidateFetchTag } from "@/service/library/actions/revalidate-fetch-tag";
+import { libraryKeys } from "@/service/library/queries/query-keys";
 import { Library } from "@/types/library";
 import { cn } from "@/utils/common-utils";
+import { useQueryClient } from "@tanstack/react-query";
 import { MinusCircleIcon } from "lucide-react";
 import { startTransition, useActionState, useEffect } from "react";
 import { toast } from "sonner";
 
 const MarkAsIncompleteButton = ({ close, library: { libraryElementId, novelTitle } }: { library: Library, close: () => void }) => {
   const [state, action, isPending] = useActionState(removeNovelLibraryCompleteAction, { success: undefined });
+  const client = useQueryClient();
+
 
   useEffect(() => {
     if (state.success === undefined) return;
@@ -16,13 +22,14 @@ const MarkAsIncompleteButton = ({ close, library: { libraryElementId, novelTitle
     if (state.success) {
       toast.success(state.message, { position: "top-center" });
       close()
-      revalidateFetchTag()
+      revalidateFetchTag();
+      client.invalidateQueries({ queryKey: libraryKeys.all });
       return;
     }
 
     toast.error(state.message, { position: "top-center" });
 
-  }, [state]);
+  }, [state, client]);
 
   const handleAction = () => {
     startTransition(() => action({ novelTitle, libraryId: libraryElementId }));

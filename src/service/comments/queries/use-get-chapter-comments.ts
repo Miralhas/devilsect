@@ -8,6 +8,7 @@ const getChapterCommentsQueryOptions = (params: ChapterCommentParams) => infinit
   queryKey: commentKeys.getChapterComments(params),
   getNextPageParam: (lastPage) => lastPage.next,
   initialPageParam: 0,
+  structuralSharing: false
 });
 
 export const useGetChapterComments = (params: ChapterCommentParams) => useInfiniteQuery(

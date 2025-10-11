@@ -1,22 +1,39 @@
+'use client'
+
+import Loading from "@/components/loading";
 import { env } from "@/env";
-import { Library } from "@/types/library";
+import { initialLibraryParams, mapFilter, mapSortKey, nuqsUserLibrarySeachParams } from "@/lib/schemas/search-params/user-library-params-schema";
+import { useGetUserLibraryWithSession } from "@/service/library/queries/use-get-user-library-with-session";
 import { formatDate } from "@/utils/date-utils";
 import { BookOpenText } from "lucide-react";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import Link from "next/link";
+import { useQueryStates } from "nuqs";
 import DynamicBlurImage from "../../dynamic-blur-image";
 import BookCoverOverlay from "../../novel-card/book-cover-overlay";
 import EditItemDialog from "./edit-item-dialog";
 
-type LibraryGridProps = {
-  library: Library[];
-}
+const getProgressPercentage = (current: number, total: number) => {
+  return Math.min((current / total) * 100, 100);
+};
 
-const LibraryGrid = ({ library }: LibraryGridProps) => {
-  const getProgressPercentage = (current: number, total: number) => {
-    return Math.min((current / total) * 100, 100);
-  };
+const LibraryGrid = ({ session }: { session: RequestCookie }) => {
+  const [searchParams] = useQueryStates(nuqsUserLibrarySeachParams);
 
-  if (!library.length) {
+  const query = useGetUserLibraryWithSession({
+    ...initialLibraryParams,
+    sort: mapSortKey(searchParams.sort),
+    size: searchParams.size,
+    filter: mapFilter(searchParams.filter)
+  }, session);
+
+  const noResults = !query.data || query.data?.results.length <= 0;
+
+  if (query.isLoading) {
+    return <Loading />
+  }
+
+  if (noResults) {
     return (
       <div className="flex flex-col items-center justify-center pb-4 md:pb-10 text-center  mx">
         <div className="w-14 md:w-16 h-14 md:h-16 bg-secondary border rounded-full flex items-center justify-center mb-2 md:mb-4">
@@ -57,7 +74,7 @@ const LibraryGrid = ({ library }: LibraryGridProps) => {
 
       {/* Table Rows */}
       <div className="space-y-0 border-t md:border-none">
-        {library.map((item) => {
+        {query.data.results.map((item) => {
           const progressPercent = getProgressPercentage(item.chapterNumber, item.totalChapters);
 
           return (

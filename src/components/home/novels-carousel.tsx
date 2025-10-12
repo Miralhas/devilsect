@@ -16,7 +16,7 @@ const NovelsCarousel = ({ novels }: { novels: NovelSummary[] }) => {
   return (
     <Carousel className="grid gap-3" opts={{ slidesToScroll: 2, align: "start" }}>
       <CarouselContent className="mr-0.5">
-        {novels.map(async (novel, index) => {
+        {novels.map(async (novel) => {
           const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`);
           return (
             <CarouselItem className="basis-1/3 md:basis-1/6" key={novel.id}>
@@ -27,9 +27,9 @@ const NovelsCarousel = ({ novels }: { novels: NovelSummary[] }) => {
                   novelSummary={novel}
                   size="lg"
                   titleClassName="md:text-[15px]"
-                  imageSizes="(max-width: 768px) 20vw, 10vw"
+                  imageSizes="(max-width: 768px) 10vw, 10vw"
                   blurData64={base64}
-                  loading={index <= 2 ? "eager" : "lazy"}
+                  loading="lazy"
                 />
               </Link>
             </CarouselItem>

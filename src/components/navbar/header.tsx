@@ -94,7 +94,7 @@ const Header = () => {
 
         <div className="flex gap-4 items-center w-full justify-end">
 
-          <div className="hidden w-full lg:flex lg:w-[230px] xl:w-[320px] sm:flex-none items-center ">
+          <div className="hidden w-full lg:flex lg:w-[230px] xl:w-[320px] sm:flex-none items-center">
             <SearchInput />
           </div>
 

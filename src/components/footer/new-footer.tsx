@@ -2,6 +2,7 @@ import Link from "next/link";
 import LogoImage from "../logo-image";
 import { Separator } from "../ui/separator";
 import React from "react";
+import { ArrowRight, ChevronRightIcon, MoveUpRight } from "lucide-react";
 
 const CURRENT_YEAR = new Date().getUTCFullYear();
 
@@ -54,7 +55,9 @@ const NewFooter = () => {
                   <p className="text-foreground/90 capitalize">{k}</p>
                   <div className="flex flex-col gap-0.5 font-light text-xs md:text-sm">
                     {v.map((link, idx) => (
-                      <Link className="group text-muted-foreground transition-all hover:text-zinc-200 duration-200 cursor-pointer ease-in hover:translate-x-0.25 hover:-translate-y-0.25 relative underline underline-offset-3" key={idx} href={link.href}>{link.name}</Link>
+                      <Link className="group inline-flex text-muted-foreground transition-all hover:text-zinc-200 duration-200 cursor-pointer ease-in hover:translate-x-0.25 hover:-translate-y-0.25 relative underline decoration-[0.25px] underline-offset-3 gap-0.25" key={idx} href={link.href}>{link.name}
+                        <ArrowRight className="size-3 rotate-310 opacity-70" />
+                      </Link>
                     ))}
                   </div>
                 </div>

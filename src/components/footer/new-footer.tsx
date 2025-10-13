@@ -6,13 +6,13 @@ import { Separator } from "../ui/separator";
 const CURRENT_YEAR = new Date().getUTCFullYear();
 
 const links = {
-  resources: [
+  platform: [
     { href: "/novels", name: "Novels" },
     { href: "/ranking", name: "Ranking" },
     { href: "/updates", name: "Updates" },
     { href: "/search", name: "Search" },
   ],
-  platform: [
+  resources: [
     { href: "/authors", name: "Authors" },
     { href: "/genres", name: "Genres" },
     { href: "/tags", name: "Tags" },

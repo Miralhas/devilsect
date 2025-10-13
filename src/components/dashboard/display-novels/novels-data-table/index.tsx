@@ -20,7 +20,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { novelSummariesInitialParams, useGetNovelSummaries } from "@/service/novels/queries/use-get-novel-summaries";
-import { allUsersInitialParams } from "@/service/user/queries/use-get-all-users";
 import { cn } from "@/utils/common-utils";
 import {
   ColumnFiltersState,
@@ -47,8 +46,8 @@ const NovelsDataTable = () => {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: allUsersInitialParams["page"],
-    pageSize: allUsersInitialParams["size"],
+    pageIndex: 0,
+    pageSize: 250,
   })
 
   const query = useGetNovelSummaries({
@@ -218,7 +217,7 @@ const NovelsDataTable = () => {
                 />
               </SelectTrigger>
               <SelectContent side="top">
-                {[10, 20, 30, 40, 50, 9999].map((pageSize) => (
+                {[250, 500, 750, 1000, 9999].map((pageSize) => (
                   <SelectItem key={pageSize} value={`${pageSize}`}>
                     {pageSize}
                   </SelectItem>

@@ -1,8 +1,7 @@
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import LogoImage from "../logo-image";
 import { Separator } from "../ui/separator";
-import React from "react";
-import { ArrowRight, ChevronRightIcon, MoveUpRight } from "lucide-react";
 
 const CURRENT_YEAR = new Date().getUTCFullYear();
 
@@ -23,7 +22,7 @@ const links = {
     { href: "/dmca", name: "DMCA" },
     { href: "/privacy-policy", name: "Privacy Policy" },
     { href: "/terms-of-service", name: "Terms of Service" },
-    { href: "/cookie-policy", name: "Cookie Policy" },
+    { href: "/cookies-policy", name: "Cookies Policy" },
   ],
 }
 
@@ -63,11 +62,11 @@ const NewFooter = () => {
                 </div>
               ))}
             </div>
-            <p className="text-xs text-center md:text-sm text-muted-foreground italic font-medium leading-none mt-auto block md:hidden">Copyright {CURRENT_YEAR} © Devil Sect</p>
+            <p className="text-xs text-center md:text-sm text-zinc-500 italic font-medium leading-none mt-auto block md:hidden">Copyright {CURRENT_YEAR} © Devil Sect</p>
           </div>
           <Separator orientation="horizontal" className="mt-3" />
           <div className="flex justify-between text-sm text-[13px] items-center mt-3 text-muted-foreground">
-            <p className="text-xs md:text-sm text-muted-foreground italic font-medium leading-none mt-auto hidden md:block">Copyright {CURRENT_YEAR} © Devil Sect</p>
+            <p className="text-xs md:text-sm text-zinc-500 italic font-medium leading-none mt-auto hidden md:block">Copyright {CURRENT_YEAR} © Devil Sect</p>
             <Link href="/contact-us" className="text-sm text-[13px] text-muted-foreground block md:hidden transition-all hover:text-zinc-200 duration-200 cursor-pointer ease-in hover:translate-x-0.25 hover:-translate-y-0.25 relative">Contact Us</Link>
             <Link href="/sitemap.xml" className="text-sm text-[13px] text-muted-foreground transition-all hover:text-zinc-200 duration-200 cursor-pointer ease-in hover:translate-x-0.25 hover:-translate-y-0.25 relative">Sitemap</Link>
           </div>

@@ -1,4 +1,4 @@
-import { BookOpenText } from "lucide-react";
+import { BookOpenText, HistoryIcon, UserIcon } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { Separator } from "../ui/separator";
@@ -22,7 +22,7 @@ const MobileMenu = ({ containerRef, toggleMenu }: MobileMenuProps) => {
       ref={containerRef}
       key="modal"
     >
-      <ul className="p-4 text-foreground/70 flex flex-col gap-2" onClick={toggleMenu}>
+      <ul className="p-4 text-foreground/70 flex flex-col gap-1" onClick={toggleMenu}>
 
         <li className="flex w-full items-center">
           <SearchInput />
@@ -36,8 +36,16 @@ const MobileMenu = ({ containerRef, toggleMenu }: MobileMenuProps) => {
 
         <Separator className="my-2" />
 
-        <li className="flex w-full items-center">
+        <li className="flex flex-col">
+          <NavItem href="/profile" title="Profile" icon={UserIcon} />
+        </li>
+
+        <li className="flex flex-col">
           <NavItem href="/profile/library" title="Library" icon={BookOpenText} />
+        </li>
+
+        <li className="flex flex-col">
+          <NavItem href="/profile/history" title="History" icon={HistoryIcon} />
         </li>
       </ul>
     </motion.div>

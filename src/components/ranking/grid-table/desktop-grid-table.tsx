@@ -19,7 +19,7 @@ const DesktopGridTable = ({ novels }: Props) => {
       {novels.map((novel, index) => {
         return (
           <div key={novel.id}
-            className="group bg-zinc-950/50 border border-white/10 rounded-lg cursor-pointer transition-all duration-200 shadow-sm group hover:shadow-accent/70 hover:text-accent ease-in-out hover:translate-x-1 hover:-translate-y-1"
+            className="group bg-zinc-950/50 border border-white/10 rounded-lg transition-all duration-200 shadow-sm group hover:shadow-accent/70 hover:text-accent ease-in-out hover:translate-x-1 hover:-translate-y-1"
           >
             <div className="grid grid-cols-[minmax(0,70px)_minmax(0,70px)_minmax(0,1fr)_minmax(0,0.4fr)_minmax(0,0.5fr)_minmax(0,0.4fr)_minmax(0,0.5fr)_minmax(0,0.5fr)_minmax(0,0.5fr)] gap-4 auto-rows-[96px] items-center justify-center">
 

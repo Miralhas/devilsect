@@ -20,7 +20,7 @@ const MobileGridTable = async ({ novels }: Props) => {
       {novels.map((novel, index) => {
         return (
           <div key={novel.id}
-            className="group bg-zinc-950/50 border border-white/10 rounded-lg cursor-pointer transition-all duration-200 shadow-sm group hover:shadow-accent/70 hover:text-accent ease-in-out hover:translate-x-1 hover:-translate-y-1"
+            className="group bg-zinc-950/50 border border-white/10 rounded-lg transition-all duration-200 shadow-sm group hover:shadow-accent/70 hover:text-accent ease-in-out hover:translate-x-1 hover:-translate-y-1"
           >
             <div className="px-4 py-2.5 flex items-start gap-4 relative">
               <div className="flex flex-col items-center gap-2">

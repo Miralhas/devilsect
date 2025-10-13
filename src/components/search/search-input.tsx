@@ -13,8 +13,10 @@ const SearchInput = () => {
   const [text, setText] = useState(value.q);
 
   const handleSearch = useDebouncedCallback((val: string) => {
-    setValue({ q: val });
-    if (!val) {
+    const q = val.toLowerCase().trim();
+    if (q) {
+      setValue({ q });
+    } else {
       setValue({ page: null, q: null });
     }
   }, 300);
@@ -25,8 +27,8 @@ const SearchInput = () => {
   }
 
   const handleClear = () => {
-    setValue({ q: null, page: null })
-    setText("")
+    setValue({ q: null, page: null });
+    setText("");
   }
 
 

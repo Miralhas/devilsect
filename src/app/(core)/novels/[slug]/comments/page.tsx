@@ -11,7 +11,7 @@ const NovelCommentsPage = async ({ params }: Props) => {
   const { slug } = await params;
 
   return (
-    <section className="min-h-[calc(100vh-(70px+65px))] pb-12 space-y-16 pt-12">
+    <section className="min-h-screen pb-12 space-y-16 pt-12">
       <div className="flex justify-center w-full">
         <Link
           href={`/novels/${slug}`}

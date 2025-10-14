@@ -54,6 +54,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${env.NEXT_PUBLIC_DOMAIN}/tags`,
     },
+    {
+      url: `${env.NEXT_PUBLIC_DOMAIN}/privacy-policy`,
+    },
+    {
+      url: `${env.NEXT_PUBLIC_DOMAIN}/terms-of-service`,
+    },
+    {
+      url: `${env.NEXT_PUBLIC_DOMAIN}/cookies-policy`,
+    },
+    {
+      url: `${env.NEXT_PUBLIC_DOMAIN}/dmca`,
+    },
+    {
+      url: `${env.NEXT_PUBLIC_DOMAIN}/contact-us`,
+    },
     ...sitemapNovels,
     ...sitemapGenres,
     ...sitemapTags,

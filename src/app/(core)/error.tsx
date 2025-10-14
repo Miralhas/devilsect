@@ -2,9 +2,21 @@
 
 import LogoImage from "@/components/logo-image";
 import { Button } from "@/components/ui/button";
+import * as Sentry from "@sentry/nextjs";
 import Link from "next/link";
+import { useEffect } from "react";
 
-export default function ErrorPage({ reset }: { reset: () => void }) {
+type Props = {
+  error: Error & { digest?: string };
+  reset: () => void;
+}
+
+export default function ErrorPage({ reset, error }: Props) {
+
+  useEffect(() => {
+    Sentry.captureException(error);
+  }, [error]);
+
   return (
     <div className="h-[calc(100vh-70px)] w-full grid place-items-center p-4">
       <div className="flex flex-col items-center justify-center gap-4">

@@ -1,4 +1,4 @@
-import NewFooter from "@/components/footer/new-footer";
+import Footer from "@/components/footer";
 import GlobalLoginDialog from "@/components/global-login-dialog";
 import Header from "@/components/navbar/header";
 import { ReaderSettingsProvider } from "@/contexts/reader-settings-context";
@@ -9,7 +9,7 @@ const CoreLayout = async ({ children }: PropsWithChildren) => {
     <ReaderSettingsProvider>
       <Header />
       {children}
-      <NewFooter />
+      <Footer />
       <GlobalLoginDialog />
     </ReaderSettingsProvider>
   )

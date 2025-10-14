@@ -10,7 +10,6 @@ export const env = createEnv({
     GOOGLE_CLIENT_STALKERS_API_SECRET: z.string(),
     GOOGLE_CLIENT_STALKERS_API_HEADER: z.string(),
     GOOGLE_OAUTH2_CALLBACK_URL: z.string(),
-    SENTRY_DSN: z.string().url(),
   },
   client: {
     NEXT_PUBLIC_EVICT: z.string(),
@@ -19,7 +18,6 @@ export const env = createEnv({
     NEXT_PUBLIC_DOMAIN: z.string().url(),
   },
   runtimeEnv: {
-    SENTRY_DSN: process.env.SENTRY_DSN,
     APP_URL: process.env.APP_URL,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,

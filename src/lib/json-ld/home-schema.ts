@@ -5,7 +5,7 @@ export const generateHomeJsonLDSchema = (): Graph => {
   const websiteUrl = `${env.NEXT_PUBLIC_DOMAIN}`;
   const logoUrl = `https://wsrv.nl/?url=https://static.devilsect.com/devilsect-logo.png&w=100&maxage=15d&output=webp`;
 
-  const websiteSchema: WebSite = {
+   const websiteSchema: WebSite = {
     "@type": "WebSite",
     "@id": `${websiteUrl}/#website`,
     url: websiteUrl,
@@ -14,13 +14,13 @@ export const generateHomeJsonLDSchema = (): Graph => {
     inLanguage: "en",
     potentialAction: {
       "@type": "SearchAction",
-      target: `${websiteUrl}/search?q={search_term_string}`,
-      "query": "required name=search_term_string",
+      target: `${websiteUrl}/search?q={query}`,
+      query: "required",
     },
     publisher: {
-      "@id": `${websiteUrl}/#organization`
-    }
-  }
+      "@id": `${websiteUrl}/#organization`,
+    },
+  };
 
   const orgSchema: Organization = {
     "@type": "Organization",
@@ -49,6 +49,22 @@ export const generateHomeJsonLDSchema = (): Graph => {
       "@type": "Thing",
       name: "Web Novels",
       description: "Online serialized fiction including Xianxia, Fantasy, Romance, and other genres",
+    },
+    mainEntity: {
+      "@type": "Collection",
+      name: "Web Novels Collection",
+      description: "A curated collection of thousands of web novels across multiple genres",
+    },
+     breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: websiteUrl,
+        },
+      ],
     },
   }
 

@@ -2,7 +2,6 @@
 
 import LogoImage from "@/components/logo-image";
 import { Button } from "@/components/ui/button";
-import * as Sentry from "@sentry/nextjs";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -14,7 +13,7 @@ type Props = {
 export default function ErrorPage({ reset, error }: Props) {
 
   useEffect(() => {
-    Sentry.captureException(error);
+    console.error(error);
   }, [error]);
 
   return (

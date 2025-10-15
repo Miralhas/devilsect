@@ -27,6 +27,8 @@ export type Novel = {
   author: string;
   status: NovelStatus;
   isHidden: boolean;
+  createdAt: string;
+  updatedAt: string;
   description: string;
   chaptersCount: number;
   metrics: Metrics;

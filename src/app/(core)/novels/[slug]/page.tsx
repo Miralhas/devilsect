@@ -4,6 +4,7 @@ import NovelReviews from "@/components/novel/novel-detail/novel-reviews";
 import RelatedNovels from "@/components/novel/novel-detail/related-novels";
 import SkeletonLoader from "@/components/novel/novel-detail/related-novels/skeleton-loader";
 import { Separator } from "@/components/ui/separator";
+import { generateNovelJsonLDSchema } from "@/lib/json-ld/novel-schema";
 import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { getNovelBySlug } from "@/service/novels/api/get-novel-by-slug";
 import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
@@ -41,6 +42,15 @@ const NovelPage = async ({ params }: NovelPageProps) => {
 
   return (
     <section className="min-h-[100vh] pb-10 space-y-6">
+      
+      {/* JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateNovelJsonLDSchema(novel)).replace(/</g, '\\u003c'),
+        }}
+      />
+
       <InfoSection novel={novel} />
       <AboutSection novel={novel} />
       <Separator orientation="horizontal" className="mb-12" />

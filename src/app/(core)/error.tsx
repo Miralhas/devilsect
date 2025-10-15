@@ -2,7 +2,6 @@
 
 import LogoImage from "@/components/logo-image";
 import { Button } from "@/components/ui/button";
-import * as Sentry from "@sentry/nextjs";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -11,10 +10,10 @@ type Props = {
   reset: () => void;
 }
 
-export default function ErrorPage({ reset, error }: Props) {
+export default function ErrorPage({ error }: Props) {
 
   useEffect(() => {
-    Sentry.captureException(error);
+    console.error(error);
   }, [error]);
 
   return (
@@ -32,8 +31,8 @@ export default function ErrorPage({ reset, error }: Props) {
         </div>
 
         <div className="flex space-x-4">
-          <Button onClick={() => reset()} variant="cool-secondary">
-            Try again
+          <Button onClick={() => window.location.reload()} variant="cool-secondary">
+            Reload Page
           </Button>
 
           <Button

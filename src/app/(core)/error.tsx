@@ -10,7 +10,7 @@ type Props = {
   reset: () => void;
 }
 
-export default function ErrorPage({ reset, error }: Props) {
+export default function ErrorPage({ error }: Props) {
 
   useEffect(() => {
     console.error(error);
@@ -31,8 +31,8 @@ export default function ErrorPage({ reset, error }: Props) {
         </div>
 
         <div className="flex space-x-4">
-          <Button onClick={() => reset()} variant="cool-secondary">
-            Try again
+          <Button onClick={() => window.location.reload()} variant="cool-secondary">
+            Reload Page
           </Button>
 
           <Button

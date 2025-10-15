@@ -1,5 +1,6 @@
 import GenreNovels from "@/components/genres/genre-novels";
 import PageHeader from "@/components/page-header";
+import { generateGenreJsonLDSchema } from "@/lib/json-ld/genre-schema";
 import { getGenreByName } from "@/service/info/api/get-genre-by-name";
 import { getGenres } from "@/service/info/api/get-genres";
 import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
@@ -40,6 +41,12 @@ const GenrePage = async ({ params }: Props) => {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateGenreJsonLDSchema(genre)).replace(/</g, '\\u003c'),
+        }}
+      />
       <PageHeader
         icon={TagIcon}
         title={genre.name}

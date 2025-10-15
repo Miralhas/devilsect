@@ -1,5 +1,6 @@
 import AuthorNovels from "@/components/authors/author-novels";
 import PageHeader from "@/components/page-header";
+import { generateAuthorJsonLDSchema } from "@/lib/json-ld/author-schema";
 import { getAuthorByName } from "@/service/info/api/get-author-by-name";
 import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
@@ -34,6 +35,12 @@ const AuthorPage = async ({ params }: Props) => {
   }));
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateAuthorJsonLDSchema(author)).replace(/</g, '\\u003c'),
+        }}
+      />
       <PageHeader
         icon={UserPenIcon}
         title={author.name}

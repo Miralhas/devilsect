@@ -22,3 +22,7 @@ export const actionErrorMessage = (error: string | string[]) => {
   if (Array.isArray(error)) return error.join(", ");
   return error;
 };
+
+export const stripHtml = (html: string): string => {
+  return html.replace(/<[^>]*>?/gm, "").trim();
+}

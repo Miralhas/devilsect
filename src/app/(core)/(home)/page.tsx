@@ -13,6 +13,7 @@ import RankingSkeletonLoader from "@/components/home/skeletons/ranking-skeleton-
 import RecentlyAddedChapterSkeletonLoader from "@/components/home/skeletons/recently-added-chapters-skeleton-loader";
 import Trending from "@/components/home/trending";
 import UserHistory from "@/components/home/user-history";
+import { generateHomeJsonLDSchema } from "@/lib/json-ld/home-schema";
 import { BookCheckIcon, EyeIcon, GraduationCapIcon, LoaderIcon, TrendingUpIcon } from "lucide-react";
 import { Suspense } from "react";
 
@@ -21,6 +22,12 @@ export const revalidate = 43200; // 12 hours
 const HomePage = () => {
   return (
     <div className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateHomeJsonLDSchema()).replace(/</g, '\\u003c'),
+        }}
+      />
       <div className="mt-4 w-full p-1 space-y-16">
         <HeroSection />
         <Suspense fallback={<NewReleasesSkeletonLoader />}>

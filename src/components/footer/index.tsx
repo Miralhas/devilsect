@@ -45,11 +45,11 @@ const Footer = () => {
                 <p className="text-xs md:text-[13px] text-zinc-300/90 leading-none">Free webnovel digital library</p>
               </div>
             </Link>
-            <div className="flex md:justify-start lg:gap-24 w-full md:w-auto flex-wrap text-lg gap-x-12 gap-y-6 pl-6 md:pl-0">
+            <div className="flex justify-around md:justify-start md:gap-12 lg:gap-24 w-full md:w-auto">
               {Object.entries(links).map(([k, v], i) => (
-                <div className="space-y-1 text-muted-foreground" key={i}>
-                  <p className="text-foreground/90 capitalize ml-3 md:ml-0">{k}</p>
-                  <div className="ml-3 md:ml-0 flex flex-col gap-0.5 font-light text-base">
+                <div className="space-y-1 text-muted-foreground text-sm xs:text-lg" key={i}>
+                  <p className="text-foreground/90 capitalize ml-3">{k}</p>
+                  <div className="ml-3 flex flex-col gap-0.5 font-light text-sm xs:text-base">
                     {v.map((link, idx) => (
                       <Link className="group inline-flex text-muted-foreground transition-all hover:text-zinc-200 duration-200 cursor-pointer ease-in hover:translate-x-0.25 hover:-translate-y-0.25 relative underline decoration-[0.25px] underline-offset-3 gap-0.25" key={idx} href={link.href}>{link.name}
                         <ArrowRight className="size-3 rotate-310 opacity-70" />

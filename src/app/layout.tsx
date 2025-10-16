@@ -62,7 +62,7 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body
-        className={`vsc-initialized antialiased text-zinc-200 relative font-main notranslate `}
+        className={`vsc-initialized antialiased text-zinc-200 relative font-main notranslate`}
       >
         <Providers>
           <NuqsAdapter>{children}</NuqsAdapter>

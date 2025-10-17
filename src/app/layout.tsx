@@ -1,8 +1,9 @@
 import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
-import { Analytics } from "@vercel/analytics/next"
+import { env } from "@/env";
 import type { Metadata } from "next";
 import { Atkinson_Hyperlegible, Inter, Manrope, Roboto, Tilt_Warp } from 'next/font/google';
+import Script from "next/script";
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import 'react-image-crop/dist/ReactCrop.css';
 import "./globals.css";
@@ -68,7 +69,12 @@ export default function RootLayout({
           <NuqsAdapter>{children}</NuqsAdapter>
         </Providers>
         <Toaster richColors />
-        <Analytics />
+        <Script
+          src="https://app.rybbit.io/api/script.js"
+          data-site-id={env.NEXT_PUBLIC_RYBBIT_SITE_ID}
+          strategy="afterInteractive"
+          defer
+        />
       </body>
     </html>
   );

@@ -8,7 +8,7 @@ import { arrayShuffler } from "@/utils/array-utils";
 const RankingSection = async () => {
   const bayesianP = getNovelSummaries({ size: 10, sort: SortKey.BAYESIAN_RANKING });
   const viewsP = getNovelSummaries({ size: 10, sort: SortKey.MOST_VIEWED });
-  const newTrendsP = getNovelSummaries({ size: 10, sort: SortKey.NEWEST_RELEASES });
+  const newTrendsP = getNovelSummaries({ size: 30, sort: SortKey.NEWEST_RELEASES });
   const ratedP = getNovelSummaries({ size: 10, sort: SortKey.MOST_RATED });
 
   const [bayesian, newTrends, views, rated] = await Promise.all([bayesianP, newTrendsP, viewsP, ratedP]);
@@ -17,7 +17,7 @@ const RankingSection = async () => {
 
   newTrends.results = newTrends.results.sort((a, b) => {
     return b.bayesianScore - a.bayesianScore
-  });
+  }).slice(0, 10);
 
   return (
     <section className="space-y-6">

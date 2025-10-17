@@ -91,7 +91,7 @@ const UsersDataTable = ({ session }: { session?: RequestCookie }) => {
 
   return (
     <section className="space-y-4" >
-      <div className="overflow-hidden rounded-md border p-4 space-y-4 min-h-[90vh] scroll-m-4" ref={divRef}>
+      <div className="overflow-hidden rounded-md border p-4 space-y-4 scroll-m-4" ref={divRef}>
         <div className="flex flex-col md:flex-row gap-y-2 md:items-center justify-between">
           <p className="text-lg font-semibold tracking-tight inline-flex gap-2 items-center">Users Table
             <span className="text-xs relative top-0.25 text-muted-foreground font-normal">{query.data?.totalItems} total users</span>

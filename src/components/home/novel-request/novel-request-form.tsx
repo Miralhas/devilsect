@@ -60,6 +60,7 @@ const NovelRequestForm = () => {
       onSuccess: () => {
         toast.success("Rating Saved", { position: "top-center", description: "Novel request sent successfully!." });
         handleSetCookie();
+        form.reset();
       },
       onError: () => {
         toast.error("Rating Failed", { position: "top-center", description: "Failed to send novel request. Please try again later." });

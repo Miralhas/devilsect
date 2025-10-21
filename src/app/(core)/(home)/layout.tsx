@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 
 const HomeLayout = async ({ children }: PropsWithChildren) => {
   return (
-    <section className="bg-[radial-gradient(80%_50%_at_50%_-20%,_rgba(255,0,0,0.015),_transparent)] bg-no-repeat">
+    <section className="relative overflow-hidden bg-gradient-to-br from-zinc-950/20 to-zinc-950/40 backdrop-blur-sm">
       <Container className="">
         {children}
       </Container>

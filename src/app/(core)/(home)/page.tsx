@@ -4,6 +4,7 @@ import EldersChoice from "@/components/home/elders-choice";
 import HeroSection from "@/components/home/hero-section";
 import MostRead from "@/components/home/most-read";
 import NewReleases from "@/components/home/new-releases";
+import NovelRequest from "@/components/home/novel-request";
 import Ongoing from "@/components/home/ongoing";
 import RankingSection from "@/components/home/ranking-section";
 import RecentlyAddedChapters from "@/components/home/recently-added-chapters";
@@ -55,6 +56,7 @@ const HomePage = () => {
         <Suspense fallback={<CarouselSkeleton icon={BookCheckIcon} title="Completed Series" />}>
           <Completed />
         </Suspense>
+        <NovelRequest />
         <Suspense fallback={<RecentlyAddedChapterSkeletonLoader />}>
           <RecentlyAddedChapters />
         </Suspense>

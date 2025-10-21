@@ -10,7 +10,7 @@ export const getChapterBySlug = async (chapterSlug: string, novelSlug: string): 
   });
 
   if (!res.ok) {
-    console.log(`Failed to fetch chapter ${chapterSlug}: ${res.status} ${res.statusText}`);
+    console.log(`Failed to fetch chapter ${chapterSlug} from novel ${novelSlug}: ${res.status} ${res.statusText}`);
     notFound();
   }
 

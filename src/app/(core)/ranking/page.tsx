@@ -4,6 +4,7 @@ import MobileGridTable from "@/components/ranking/grid-table/mobile-grid-table";
 import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
 import { Metadata } from "next";
+import BayesianScoreDescription from "./bayesian-score-description";
 
 export const metadata: Metadata = {
   title: "Ranking",
@@ -14,20 +15,13 @@ const RankingPage = async () => {
   const query = await getNovelSummaries({ size: 100, sort: SortKey.BAYESIAN_RANKING });
 
   return (
-    <section className="md:pt-8 space-y-2.5">
+    <section className="md:pt-3 space-y-2.5">
       <GridTableHeader />
       <DesktopGridTable novels={query.results} />
       <MobileGridTable novels={query.results} />
-      <Footer />
+      <BayesianScoreDescription />
     </section>
   )
 }
 
-const Footer = () => {
-  return (
-    <div className="flex items-center justify-center w-full text-center">
-      <p className="text-xs text-muted-foreground font-medium">The Ranking system uses a Bayesian score that blends ratings and views to fairly reflect both quality and popularity.</p>
-    </div>
-  )
-}
 export default RankingPage;

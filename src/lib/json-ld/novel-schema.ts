@@ -32,7 +32,7 @@ export const generateNovelJsonLDSchema = (novel: Novel): WithContext<Book> => {
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: novel.metrics.ratingValue?.toFixed(2) ?? novel.metrics.bayesianScore.toFixed(2),
-      ratingCount: novel.metrics.ratingSize,
+      ratingCount: novel.metrics.ratingSize ?? 0,
       bestRating: "5",
       worstRating: "1",
     },

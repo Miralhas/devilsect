@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { Graph, WebSite, WithContext } from "schema-dts";
+import { WebSite, WithContext } from "schema-dts";
 
 export const generateHomeJsonLDSchema = (): WithContext<WebSite> => {
   const websiteUrl = `${env.NEXT_PUBLIC_DOMAIN}`;

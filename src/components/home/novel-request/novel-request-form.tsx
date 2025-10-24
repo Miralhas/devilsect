@@ -50,7 +50,7 @@ const NovelRequestForm = () => {
   }, []);
 
 
-  function onSubmit({ novelTitle }: NovelRequestInput) {
+  const onSubmit = ({ novelTitle }: NovelRequestInput) => {
     if (!isAuthenticated) {
       handleOpen();
       return;
@@ -58,12 +58,12 @@ const NovelRequestForm = () => {
 
     mutation.mutate(novelTitle, {
       onSuccess: () => {
-        toast.success("Rating Saved", { position: "top-center", description: "Novel request sent successfully!." });
+        toast.success("Novel request sent successfully!.", { position: "top-center" });
         handleSetCookie();
         form.reset();
       },
       onError: () => {
-        toast.error("Rating Failed", { position: "top-center", description: "Failed to send novel request. Please try again later." });
+        toast.error("Request Failed", { position: "top-center", description: "Failed to send novel request. Please try again later." });
       },
     })
   }

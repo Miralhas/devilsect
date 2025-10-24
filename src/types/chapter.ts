@@ -1,3 +1,5 @@
+import { NovelStatus } from "./novel";
+
 export type ChapterSummary = {
   id: number;
   title: string;
@@ -15,6 +17,7 @@ export type Chapter = {
   body: string;
   number: number;
   novelSlug: string;
+  novelStatus: NovelStatus;
   novelTitle: string;
   previous: ChapterSummary | null;
   next: ChapterSummary | null;

@@ -14,7 +14,7 @@ import Settings from "./settings";
 import { useAddChapterToUserHistory } from "@/service/library/mutations/add-chapter-to-user-history";
 
 const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
-  const { previous, next } = chapter;
+  const { previous, next, novelStatus } = chapter;
   const [isNavHidden, setIsNavHidden] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -40,6 +40,9 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
 
   const hasNext = next !== null;
   const hasPrevious = previous !== null;
+  const novelIsOngoing = novelStatus === "ON_GOING";
+
+  console.log(novelIsOngoing);
 
   return (
     <div className="w-full relative" ref={divRef}>
@@ -81,7 +84,11 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
           </Button>
 
           <Button variant="pure" asChild size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10">
-            <DisabledLink href={`/novels/${chapter.novelSlug}/${next?.slug}`} className="pl-2" disabled={!hasNext}>
+            <DisabledLink
+              href={novelIsOngoing ? `/novels/${chapter.novelSlug}/request` : `/novels/${chapter.novelSlug}/${next?.slug}`}
+              className="pl-2"
+              disabled={!hasNext && !novelIsOngoing}
+            >
               <div className="flex items-center w-full justify-center">
                 <span className="text-sm text-[15px] md:text-base md:text-[17px]">Next</span>
                 <ChevronRight className="size-5 md:size-6" strokeWidth={4} />

@@ -66,7 +66,6 @@ const NovelRequestForm = () => {
         toast.error("Rating Failed", { position: "top-center", description: "Failed to send novel request. Please try again later." });
       },
     })
-
   }
 
   return (

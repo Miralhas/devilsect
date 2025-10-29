@@ -31,7 +31,7 @@ const ChapterRequestButton = () => {
       path: '/',
       sameSite: 'lax',
     })
-  }, []);
+  }, [COOKIE_NAME]);
 
 
   const onSubmit = () => {

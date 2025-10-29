@@ -42,8 +42,6 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   const hasPrevious = previous !== null;
   const novelIsOngoing = novelStatus === "ON_GOING";
 
-  console.log(novelIsOngoing);
-
   return (
     <div className="w-full relative" ref={divRef}>
       <motion.div

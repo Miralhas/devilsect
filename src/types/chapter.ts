@@ -9,6 +9,14 @@ export type ChapterSummary = {
   updatedAt: string;
 };
 
+export type ChapterInfo = {
+  novelSlug: string
+  novelTitle: string
+  chapterTitle: string
+  chapterSlug: string
+  number: number
+}
+
 export type Chapter = {
   id: number;
   novelId: number;

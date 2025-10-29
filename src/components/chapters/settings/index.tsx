@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import dynamic from 'next/dynamic';
 import { Dispatch, RefObject, SetStateAction } from "react";
 import LanguageSettings from "./language-settings-popover";
+import ChapterError from "./chapter-error";
 
 const FontSettings = dynamic(() => import("./font-settings"), {ssr: false});
 const PrevAndNextButtons = dynamic(() => import("./prev-and-next-buttons"), {ssr: false});
@@ -18,24 +19,6 @@ type SettingsProps = {
 }
 
 const Settings = ({ chapter, isNavHidden}: SettingsProps) => {
-  // const { scrollY } = useScroll();
-
-  // useMotionValueEvent(scrollY, "change", (latest) => {
-  //   const previous = scrollY.getPrevious();
-
-  //   if (divRef.current && latest >= (divRef.current.clientHeight - 1000)) {
-  //     setIsNavHidden(true);
-  //     return;
-  //   }
-
-  //   if (previous && latest > previous) {
-  //     setIsNavHidden(true);
-  //     return;
-  //   }
-
-  //   setIsNavHidden(false);
-  // });
-
   return (
     <AnimatePresence>
       {!isNavHidden ? (
@@ -49,6 +32,7 @@ const Settings = ({ chapter, isNavHidden}: SettingsProps) => {
           <div className="max-w-[1280px] mx-auto flex items-center px-4 h-14">
             <ShowChaptersSheet chapter={chapter} />
             <div className="ms-auto flex items-center gap-4 text-zinc-300">
+              <ChapterError />
               <LanguageSettings />
               <FontSettings />
               <PrevAndNextButtons {...chapter} />

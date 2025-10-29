@@ -3,7 +3,7 @@ import NovelRequestForm from "./novel-request-form";
 
 const NovelRequest = () => {
   return (
-    <section className="relative border-y border-zinc-50/10 py-8 md:py-10 rounde-xl">
+    <section className="relative border-y border-zinc-50/10 py-8 md:py-10 rounded-xl">
       <div className="flex flex-col items-center justify-center md:max-w-2xl mx-auto">
         <div className="bg-primary/40 border border-accent/90 rounded-full p-3 md:p-4 mb-3 md:mb-4">
           <BookHeartIcon className="size-6 md:size-7 text-accent" />

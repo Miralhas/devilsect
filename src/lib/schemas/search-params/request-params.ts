@@ -3,7 +3,7 @@ import { zodPagination } from "../pagination-schema";
 
 export const allowedValues = {
   type: ["NOVEL", "CHAPTER", "FIX_CHAPTER"],
-  status: ["DENIED", "PENDING", "COMPLETED"],
+  status: ["PENDING", "COMPLETED", "DENIED"],
 } as const;
 
 export const RequestParamsSchema = z.object({

@@ -47,7 +47,7 @@ const NovelsDataTable = () => {
 
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 250,
+    pageSize: 50,
   })
 
   const query = useGetNovelSummaries({
@@ -217,7 +217,7 @@ const NovelsDataTable = () => {
                 />
               </SelectTrigger>
               <SelectContent side="top">
-                {[250, 500, 750, 1000, 9999].map((pageSize) => (
+                {[50, 500, 750, 1000, 9999].map((pageSize) => (
                   <SelectItem key={pageSize} value={`${pageSize}`}>
                     {pageSize}
                   </SelectItem>

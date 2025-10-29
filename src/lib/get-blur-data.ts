@@ -12,7 +12,7 @@ export const getBlurData = async (src: string) => {
     return data;
   // eslint-disable-next-line
   } catch (err: any) {
-    console.log("Error fetching or processing image:", err.message);
+    console.log(`Error fetching or processing image for source [${src}]:`, err.message);
     return { base64: "", img: "" };
   }
 }

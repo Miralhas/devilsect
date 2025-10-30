@@ -12,7 +12,9 @@ import {
   SESSION_ENCRYPTION_ALGORITHM
 } from '../utils/constants';
 
-const publicKeyPromise = importSPKI(env.PUBLIC_KEY, SESSION_ENCRYPTION_ALGORITHM);
+const pubKey = env.PUBLIC_KEY.replace(/\\n/g, '\n');
+
+const publicKeyPromise = importSPKI(pubKey, SESSION_ENCRYPTION_ALGORITHM);
 const SESSION_EXPIRATION_SECONDS = 60 * 60 * 24 * 7;
 
 export const getSession = async () => {

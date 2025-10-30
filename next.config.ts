@@ -1,14 +1,10 @@
 import { env } from "@/env";
-import BundleAnalyzer from "@next/bundle-analyzer";
 import withPlaceholder from "@plaiceholder/next";
 import type { NextConfig } from "next";
 
-const withBundleAnalyzer = BundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-})
-
 const nextConfig: NextConfig = {
   /* config options here */
+  output: "standalone",
   images: {
     remotePatterns: [
       new URL(`${env.APP_URL}/**`),
@@ -31,4 +27,4 @@ const nextConfig: NextConfig = {
   }
 };
 
-withPlaceholder(withBundleAnalyzer(nextConfig));
+withPlaceholder(nextConfig);

@@ -83,7 +83,7 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
 
           <Button variant="pure" asChild size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10">
             <DisabledLink
-              href={novelIsOngoing ? `/novels/${chapter.novelSlug}/request` : `/novels/${chapter.novelSlug}/${next?.slug}`}
+              href={novelIsOngoing && !hasNext ? `/novels/${chapter.novelSlug}/request` : `/novels/${chapter.novelSlug}/${next?.slug}`}
               className="pl-2"
               disabled={!hasNext && !novelIsOngoing}
             >

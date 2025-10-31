@@ -1,6 +1,5 @@
 import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
-import { env } from "@/env";
 import type { Metadata } from "next";
 import { Atkinson_Hyperlegible, Inter, Manrope, Roboto, Tilt_Warp } from 'next/font/google';
 import Script from "next/script";
@@ -70,9 +69,8 @@ export default function RootLayout({
         </Providers>
         <Toaster richColors />
         <Script
-          src="https://app.rybbit.io/api/script.js"
-          data-site-id={env.NEXT_PUBLIC_RYBBIT_SITE_ID}
-          strategy="afterInteractive"
+          src="https://rybbit.devilsect.com/api/script.js"
+          data-site-id="1"
           defer
         />
       </body>

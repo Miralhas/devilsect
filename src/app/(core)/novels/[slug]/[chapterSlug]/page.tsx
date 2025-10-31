@@ -39,7 +39,7 @@ const ChapterPage = async ({ params }: ChapterPageProps) => {
         }}
       />
       <Header novelSlug={slug} next={chapter.next} previous={chapter.previous} />
-      <ChapterBody chapter={chapter} />
+      <ChapterBody chapter={chapter} shallowUser={shallowUser} />
       <Separator />
       <ChapterComments novelSlug={slug} chapterSlug={chapterSlug} currentUser={shallowUser} />
     </Container>

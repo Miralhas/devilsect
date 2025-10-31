@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: NovelPageProps): Promise<Meta
   }
 }
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 const NovelPage = async ({ params }: NovelPageProps) => {
   const { slug } = await params;

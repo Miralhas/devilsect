@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
 import useAutoScroll from "@/hooks/use-auto-scroll";
+import { useAddChapterToUserHistory } from "@/service/library/mutations/add-chapter-to-user-history";
+import { User } from "@/types/authentication";
 import { Chapter } from "@/types/chapter";
 import { ChevronLeft, ChevronRight, HouseIcon } from "lucide-react";
 import { motion, useScroll, useSpring } from "motion/react";
@@ -11,9 +13,8 @@ import { useEffect, useRef, useState } from "react";
 import DisabledLink from "../disabled-link";
 import ChapterContent from "./chapter-content";
 import Settings from "./settings";
-import { useAddChapterToUserHistory } from "@/service/library/mutations/add-chapter-to-user-history";
 
-const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
+const ChapterBody = ({ chapter, shallowUser }: { chapter: Chapter; shallowUser: User | undefined }) => {
   const { previous, next, novelStatus } = chapter;
   const [isNavHidden, setIsNavHidden] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -29,7 +30,10 @@ const ChapterBody = ({ chapter }: { chapter: Chapter }) => {
   const { onAutoScrollPauseChange, autoScrollPause } = useAutoScroll(chapterContentRef);
 
   useEffect(() => {
-    mutation.mutate(chapter);
+    if (shallowUser) {
+      mutation.mutate(chapter);
+    }
+
     if (autoScroll.active) {
       autoScrollPause();
     }

@@ -62,7 +62,6 @@
     "nuqs": "^2.4.3",
     "plaiceholder": "^3.0.0",
     "react": "^19.0.0",
-    "react-day-picker": "^8.10.1",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.3",
     "react-image-crop": "^11.0.10",

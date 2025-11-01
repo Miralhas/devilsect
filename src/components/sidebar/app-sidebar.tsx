@@ -1,4 +1,4 @@
-import { FilePenLine, Home, OmegaIcon } from "lucide-react"
+import { FilePenLine, Home, MegaphoneIcon, OmegaIcon } from "lucide-react"
 
 import {
   Sidebar,
@@ -29,7 +29,12 @@ const items = [
     title: "Requests",
     url: "/dashboard/requests",
     icon: OmegaIcon
-  }
+  },
+  {
+    title: "Announcements",
+    url: "/dashboard/announcements",
+    icon: MegaphoneIcon
+  },
 ]
 
 export function AppSidebar({ user }: { user: User }) {

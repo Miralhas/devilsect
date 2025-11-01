@@ -2,7 +2,7 @@
 const NewAnnouncementPage = () => {
   return (
     <section>
-      <p>new</p>
+      <p>{new Date().toISOString()}</p>
     </section>
   )
 }

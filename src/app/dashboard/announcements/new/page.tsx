@@ -1,7 +1,8 @@
+
 const NewAnnouncementPage = () => {
   return (
     <section>
-      
+      <p>new</p>
     </section>
   )
 }

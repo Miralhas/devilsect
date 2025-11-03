@@ -12,9 +12,14 @@ import { StarIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { BANNERS } from "./banners-data";
+import { cn } from "@/utils/common-utils";
+import { arrayShuffler } from "@/utils/array-utils";
 
 
 const CarouselNovel = async () => {
+
+  const banners = BANNERS;
+  arrayShuffler(banners);
 
   return (
     <Carousel
@@ -22,10 +27,10 @@ const CarouselNovel = async () => {
       opts={{
         loop: false,
       }}
-      // plugins={[Autoplay({ delay: 3000 })]}
+    // plugins={[Autoplay({ delay: 3000 })]}
     >
       <CarouselContent className="h-64 will-change-auto">
-        {BANNERS.map((banner, index) => (
+        {banners.map((banner, index) => (
           <CarouselItem key={index}>
             <Link href={`/novels/${banner.slug}`}>
               <div className="h-full relative rounded-lg overflow-hidden bg-black">
@@ -43,12 +48,14 @@ const CarouselNovel = async () => {
                   />
                 </div>
 
-                <div className="absolute z-[2] right-0 md:right-13 top-0 overflow-hidden aspect-[3/4] w-full max-w-[200px]">
+                <div
+                  className={cn("absolute z-[2] right-0 top-0 overflow-hidden aspect-[3/4] w-full", banner.className)}
+                >
                   <Image
                     fill
                     alt="novel main character"
                     src={banner.mc}
-                    quality={50}
+                    quality={100}
                     priority={index === 0} // first image = priority
                     loading={index === 0 ? "eager" : "lazy"}
                     sizes="(max-width: 768px) 30vw, 10vw"
@@ -64,8 +71,11 @@ const CarouselNovel = async () => {
                   <p className="text-white text-lg md:text-[28px] font-bold leading-[115%] tracking-[-0.02em]">{banner.name}</p>
                   <div className="flex flex-col gap-2">
                     <div className="flex gap-1 items-center">
-                      <StarIcon className="size-4 md:size-5 text-[#D3AF37]" fill="#D3AF37" />
-                      <p className="text-white text-sm md:text-[16px] font-semibold leading-[120%] tracking-[-0.02em]">4.73</p>
+                      <StarIcon className="size-4 text-[#D3AF37]" fill="#D3AF37" />
+                      <StarIcon className="size-4 text-[#D3AF37]" fill="#D3AF37" />
+                      <StarIcon className="size-4 text-[#D3AF37]" fill="#D3AF37" />
+                      <StarIcon className="size-4 text-[#D3AF37]" fill="#D3AF37" />
+                      <StarIcon className="size-4 text-[#D3AF37]" fill="#D3AF37" />
                     </div>
                     <p className="text-white text-sm md:text-[20px] font-semibold leading-[120%] tracking-[-0.02em]">
                       {statusMap[banner.status]}

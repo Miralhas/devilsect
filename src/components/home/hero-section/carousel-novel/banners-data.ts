@@ -7,7 +7,8 @@ export const BANNERS: NovelBanner[] = [
     src: "https://static.devilsect.com/reverend-insanity-banner.jpg",
     status: "COMPLETED",
     mc: "https://static.devilsect.com/fang.png",
-    slug: "reverend-insanity"
+    slug: "reverend-insanity",
+    className: "md:right-13 max-w-[200px]"
   },
   {
     name: "Shadow Slave",
@@ -15,6 +16,25 @@ export const BANNERS: NovelBanner[] = [
     src: "https://static.devilsect.com/shadow-slave-banner.jpg",
     status: "ON_GOING",
     mc: "https://static.devilsect.com/sunny.png",
-    slug: "shadow-slave"
+    slug: "shadow-slave",
+    className: "-right-4 md:right-13 max-w-[240px] top-auto bottom-0"
   },
-]
+  {
+    name: "Red Rising",
+    description: `Darrow is a miner and a Red, a member of the lowest caste in the color-coded society of the future. Like his fellow Reds, he digs all day, believing that he and his people are making the surface of the planet livable for future generations. Darrow has never seen the sky. Yet he spends his life willingly, knowing that his blood and sweat will one day result in a better future for his children.`,
+    src: "https://static.devilsect.com/red-rising-banner-opacity.jpg",
+    status: "COMPLETED",
+    mc: "https://static.devilsect.com/darrow-of-lykos.png",
+    slug: "red-rising",
+    className: "md:right-5 max-w-[240px]"
+  },
+  {
+    name: "Barbarian Quest",
+    description: `In the Stone Axe Tribe, a band of young warriors, led by the spirited Urich, embarks on a hunt in the forbidden Sky Mountains. Unknowingly, they cross into an unseen civilization, revealing two distinct worlds divided by the mountains. Urich, a curious and charismatic barbarian, is enthralled by this new world of endless wonders. Join Urich as he explores unfamiliar lands and make thrilling discoveries, and unexpected alliances.`,
+    src: "https://static.devilsect.com/barbarian-quest-banner.png",
+    status: "COMPLETED",
+    mc: "https://static.devilsect.com/urich-2.png",
+    slug: "barbarian-quest",
+    className: "md:right-0 max-w-[300px]"
+  },
+] 

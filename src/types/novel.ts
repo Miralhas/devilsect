@@ -52,6 +52,7 @@ export type NovelBanner = {
   status: NovelStatus;
   mc: string;
   slug: string;
+  className: string;
 };
 
 export type EldersChoice = {

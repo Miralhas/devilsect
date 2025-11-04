@@ -33,7 +33,7 @@ const CarouselNovel = async () => {
         {banners.map((banner, index) => (
           <CarouselItem key={index}>
             <Link href={`/novels/${banner.slug}`}>
-              <div className="h-full relative rounded-lg overflow-hidden bg-black">
+              <div className="h-full relative rounded-lg overflow-hidden bg-black group">
                 <div className="absolute z-[1] top-0 h-full w-full overflow-hidden rounded-12 aspect-[3/1]">
                   <Image
                     fill
@@ -49,7 +49,7 @@ const CarouselNovel = async () => {
                 </div>
 
                 <div
-                  className={cn("absolute z-[2] right-0 top-0 overflow-hidden aspect-[3/4] w-full", banner.className)}
+                  className={cn("absolute z-[2] right-0 top-0 overflow-hidden aspect-[3/4] w-full group-hover:scale-105 transition-transform duration-300 ease-in-out", banner.className)}
                 >
                   <Image
                     fill
@@ -58,7 +58,7 @@ const CarouselNovel = async () => {
                     quality={100}
                     priority={index === 0} // first image = priority
                     loading={index === 0 ? "eager" : "lazy"}
-                    sizes="(max-width: 768px) 30vw, 10vw"
+                    sizes="(max-width: 768px) 45vw, 30vw"
                     loader={wsrvLoader}
                   />
                 </div>

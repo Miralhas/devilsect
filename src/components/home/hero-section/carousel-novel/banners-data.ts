@@ -35,6 +35,16 @@ export const BANNERS: NovelBanner[] = [
     status: "COMPLETED",
     mc: "https://static.devilsect.com/urich-2.png",
     slug: "barbarian-quest",
-    className: "md:right-0 max-w-[300px]"
+    className: "-right-12 md:-right-15 max-w-[250px] md:max-w-[400px] md:top-auto md:-bottom-64"
   },
+  {
+    name: "Lord of the Mysteries",
+    description: `With the rising tide of steam power and machinery, who can hope to become a Beyonder? Shrouded in the fog of history and darkness, what lurking evil murmurs into our ears? Waking up to face a string of mysteries, Zhou Mingrui finds himself reincarnated as Klein Moretti in an alternate Victorian-era world. He discovers a realm filled with machinery, cannons, dreadnoughts, airships and various contraptions, alongside Potions, Divination, Hexes, Tarot Cards and Sealed Artifacts…`,
+    src: "https://static.devilsect.com/lotm-banner.png",
+    status: "COMPLETED",
+    mc: "https://static.devilsect.com/klein.png",
+    slug: "barbarian-quest",
+    className: "-right-12 md:-right-2 max-w-[280px] top-auto -bottom-15 md:-bottom-25"
+  },
+
 ] 

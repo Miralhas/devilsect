@@ -104,7 +104,7 @@ const UpdateChapterForm = ({ chapter }: { chapter: Chapter }) => {
           defaultValue={chapter.number}
           placeholder="Chapter number"
           aria-invalid={Boolean(clientErrors.number) || Boolean(formState.errors?.number)}
-          {...form.register("number")}
+          onChange={(e) => form.setValue("number", e.target.valueAsNumber, {shouldDirty: true})}
           disabled={numberDisabled}
         />
         {clientErrors.number ? (

@@ -40,7 +40,7 @@ const CarouselNovel = async () => {
                     sizes="(max-width: 768px) 90vw, 25vw"
                     src={banner.src}
                     alt="novel banner"
-                    className="w-full object-cover opacity-40"
+                    className="w-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-300 ease-in-out"
                     quality={10}
                     priority={index === 0} // first image = priority
                     loading={index === 0 ? "eager" : "lazy"}

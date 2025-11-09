@@ -29,7 +29,7 @@ const TagsContainer = () => {
     <>
       <div className="grid gap-y-6 gap-x-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-5 text-xs xs:text-sm lg:text-base">
         {query.data?.results.map(tag => (
-          <Link href={`/tags/${tag.name.toLowerCase()}`} key={tag.id} className="capitalize group text-zinc-300/90 transition-all hover:text-zinc-200 duration-200 cursor-pointer ease-in hover:translate-x-1 hover:-translate-y-0.5 relative">
+          <Link href={`/tags/${tag.slug}`} key={tag.id} className="capitalize group text-zinc-300/90 transition-all hover:text-zinc-200 duration-200 cursor-pointer ease-in hover:translate-x-1 hover:-translate-y-0.5 relative">
             <div className="flex items-center gap-1">
               <HashIcon className="size-3.5 shrink-0 sm:block group-hover:text-red-700/80" />
               <p className="line-clamp-1">

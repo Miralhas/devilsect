@@ -16,12 +16,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(updatedAt),
   }));
 
-  const sitemapGenres: MetadataRoute.Sitemap = genres.map(({ name }) => ({
-    url: `${env.NEXT_PUBLIC_DOMAIN}/genres/${name.toLowerCase()}`,
+  const sitemapGenres: MetadataRoute.Sitemap = genres.map(({ slug }) => ({
+    url: `${env.NEXT_PUBLIC_DOMAIN}/genres/${slug}`,
   }));
 
-  const sitemapTags: MetadataRoute.Sitemap = tags.map(({ name }) => ({
-    url: `${env.NEXT_PUBLIC_DOMAIN}/tags/${name.toLowerCase()}`,
+  const sitemapTags: MetadataRoute.Sitemap = tags.map(({ slug }) => ({
+    url: `${env.NEXT_PUBLIC_DOMAIN}/tags/${slug}`,
   }));
 
   const sitemapAuthors: MetadataRoute.Sitemap = authors.map(({ name }) => ({

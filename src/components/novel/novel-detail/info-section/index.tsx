@@ -12,6 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import NovelRating from "./rating";
 import StartReadingButton from "./start-reading-button";
+import { toSlug } from "@/utils/string-utils";
 
 const InfoSection = async ({ novel }: { novel: Novel }) => {
   const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`);
@@ -61,7 +62,7 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
           </div>
           <div className="flex gap-2 flex-wrap w-full max-w-[570px]">
             {novel.genres.map(genre => (
-              <NovelBadge name={genre} href={`/genres/${genre.toLowerCase()}`} key={genre} />
+              <NovelBadge name={genre} href={`/genres/${toSlug(genre)}`} key={genre} />
             ))}
           </div>
           <NovelRating novel={novel} />

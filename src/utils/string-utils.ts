@@ -1,3 +1,6 @@
+import slugify from "slugify"
+
+
 export const buildQueryString = <T extends Record<string, string | number | boolean | undefined>>(
   params: T
 ): string => {
@@ -25,4 +28,11 @@ export const actionErrorMessage = (error: string | string[]) => {
 
 export const stripHtml = (html: string): string => {
   return html.replace(/<[^>]*>?/gm, "").trim();
+}
+
+export const toSlug = (str: string): string => {
+  return slugify(str, {
+    trim: true,
+    lower: true
+  })
 }

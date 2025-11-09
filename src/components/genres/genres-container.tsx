@@ -32,7 +32,7 @@ const GenresContainer = ({ genres, slugs }: { genres: Genre[]; slugs: string[] }
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-x-2 gap-y-3">
         {filteredGenres.map(genre => {
           return (
-            <Link key={genre.id} href={`/genres/${genre.name.toLowerCase()}`}>
+            <Link key={genre.id} href={`/genres/${genre.slug}`}>
               <GenreCard genre={genre} slugs={slugs} />
             </Link>
           )

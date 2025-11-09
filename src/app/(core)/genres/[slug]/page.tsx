@@ -1,23 +1,23 @@
 import GenreNovels from "@/components/genres/genre-novels";
 import PageHeader from "@/components/page-header";
 import { generateGenreJsonLDSchema } from "@/lib/json-ld/genre-schema";
-import { getGenreByName } from "@/service/info/api/get-genre-by-name";
+import { getGenreBySlug } from "@/service/info/api/get-genre-by-name";
 import { getGenres } from "@/service/info/api/get-genres";
 import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { TagIcon } from "lucide-react";
 import { Metadata } from "next";
 
-type Props = { params: Promise<{ name: string }> };
+type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
   const genres = await getGenres();
-  return genres.map(r => ({ name: r.name.toLowerCase() }));
+  return genres.map(r => ({ slug: r.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const genreName = decodeURIComponent((await params).name);
-  const genre = await getGenreByName(genreName);
+  const { slug } = await params;
+  const genre = await getGenreBySlug(slug);
 
   return {
     title: `Genre - ${genre.name}`,
@@ -26,8 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const GenrePage = async ({ params }: Props) => {
-  const genreName = decodeURIComponent((await params).name);
-  const genre = await getGenreByName(genreName);
+  const { slug } = await params;
+  const genre = await getGenreBySlug(slug);
 
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(novelSummariesQueryOptions({

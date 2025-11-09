@@ -1,3 +1,4 @@
+import { toSlug } from "@/utils/string-utils";
 import NovelBadge from "../../info-section/novel-badge";
 import ShowMore from "./show-more";
 
@@ -15,7 +16,7 @@ const NovelTags = ({ tags }: { tags: string[] }) => {
             name={tag}
             variant="secondary"
             className="leading-6 tracking-tighter font-semibold capitalize"
-            href={`/tags/${tag.toLowerCase()}`}
+            href={`/tags/${toSlug(tag)}`}
           />
         ))}
       </ShowMore>

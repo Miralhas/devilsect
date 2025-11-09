@@ -1,16 +1,16 @@
 import PageHeader from "@/components/page-header";
 import TagNovels from "@/components/tags/tag-novels";
-import { getTagByName } from "@/service/info/api/get-tag-by-name";
+import { getTagBySlug } from "@/service/info/api/get-tag-by-name";
 import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { TagsIcon } from "lucide-react";
 import { Metadata } from "next";
 
-type Props = { params: Promise<{ name: string }> };
+type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const tagName = decodeURIComponent((await params).name);
-  const tag = await getTagByName(tagName);
+  const { slug } = await params;
+  const tag = await getTagBySlug(slug);
 
   return {
     title: `Tag - ${tag.name}`,
@@ -19,8 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const TagPage = async ({ params }: Props) => {
-  const tagName = decodeURIComponent((await params).name);
-  const tag = await getTagByName(tagName);
+  const { slug } = await params;
+  const tag = await getTagBySlug(slug);
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery(novelSummariesQueryOptions({

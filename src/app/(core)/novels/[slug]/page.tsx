@@ -9,7 +9,7 @@ import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-sche
 import { getNovelBySlug } from "@/service/novels/api/get-novel-by-slug";
 import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
 import { putView } from "@/service/novels/api/put-view";
-import { capitalize } from "@/utils/string-utils";
+import { capitalize, getNovelDescription } from "@/utils/string-utils";
 import type { Metadata } from 'next';
 import { Suspense } from "react";
 
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: NovelPageProps): Promise<Meta
   const novel = await getNovelBySlug(slug);
   return {
     title: capitalize(novel.title),
-    description: `Read ${capitalize(novel.title)} novel online free from your Mobile, Table, PC...`,
+    description: getNovelDescription(novel),
   }
 }
 
@@ -42,7 +42,7 @@ const NovelPage = async ({ params }: NovelPageProps) => {
 
   return (
     <section className="min-h-[100vh] pb-10 space-y-6">
-      
+
       {/* JSON-LD */}
       <script
         type="application/ld+json"

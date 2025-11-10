@@ -1,3 +1,4 @@
+import { Novel } from "@/types/novel";
 import slugify from "slugify"
 
 
@@ -35,4 +36,10 @@ export const toSlug = (str: string): string => {
     trim: true,
     lower: true
   })
+}
+
+export const getNovelDescription = (novel: Novel) => {
+  const synopsis = stripHtml(novel.description).split(". ").slice(0, 2).join(". ")
+  const tags = novel.tags.slice(0, 4).join(", ");
+  return `Read '${capitalize(novel.title)}' Online for Free, written by the author ${novel.author}, This book is a ${novel.genres[0]} Novel, covering ${tags}, and the synopsis is: ${synopsis}`;
 }

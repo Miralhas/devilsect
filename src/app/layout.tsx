@@ -9,10 +9,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Devil Sect | Read Free Webnovels and Light Novels Online",
+    default: "Devil Sect | Read Webnovels and Light Novels Online for free",
     template: "%s | Devil Sect"
   },
-  description: "Free digital library where users can explore new stories, read for free, track their progress, and engage with reviews and comments.",
+  description: "Devilsect provides fantasy novels and adventure book stories! Read newest web novels updates which are translated from Chinese/Korean. Communication with same bibliophilia in our fantasy world!",
   twitter: {
     card: "summary_large_image"
   },

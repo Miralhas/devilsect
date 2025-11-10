@@ -1,65 +1,87 @@
 import { env } from "@/env";
 import { Novel } from "@/types/novel";
-import { stripHtml } from "@/utils/string-utils";
-import { Book, WithContext } from "schema-dts";
+import { capitalize, getNovelDescription } from "@/utils/string-utils";
 
-export const generateNovelJsonLDSchema = (novel: Novel): WithContext<Book> => {
-  const alias = novel.alias ?? novel.title.toLowerCase();
+
+export const generateNovelJsonLDSchema = (novel: Novel) => {
+  const title = capitalize(novel.title);
+  const websiteUrl = `${env.NEXT_PUBLIC_DOMAIN}`;
   const novelUrl = `${env.NEXT_PUBLIC_DOMAIN}/novels/${novel.slug}`;
-  const imageUrl = `https://wsrv.nl/?url=${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image&w=1200&maxage=15d&output=webp&default=https://static.devilsect.com/No-Image-Placeholder.svg`;
+  const logoUrl = `https://wsrv.nl/?url=https://static.devilsect.com/devilsect-logo.png&w=300&maxage=1y&output=webp`;
+  const imageUrl = `https://wsrv.nl/?url=${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image&w=300&maxage=15d&output=webp&default=https://static.devilsect.com/No-Image-Placeholder.svg`;
 
-  const schema: WithContext<Book> = {
-    "@context": "https://schema.org",
-    "@type": "Book",
-    "@id": novelUrl,
-    url: novelUrl,
-    name: novel.title,
-    alternateName: alias,
-    description: stripHtml(novel.description),
-    author: {
-      "@type": "Person",
-      name: novel.author,
-      url: `${env.NEXT_PUBLIC_DOMAIN}/authors/${encodeURIComponent(novel.author)}`
-    },
-    image: [imageUrl, imageUrl.replace("output=webp", "output=jpeg")],
-    genre: novel.genres,
-    keywords: novel.tags.join(", "),
-    inLanguage: "en",
-    bookFormat: "EBook",
-    datePublished: new Date(novel.createdAt).toISOString(),
-    dateModified: new Date(novel.updatedAt).toISOString(),
-    numberOfPages: novel.chaptersCount,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: novel.metrics.ratingValue?.toFixed(2) ?? novel.metrics.bayesianScore.toFixed(2),
-      ratingCount: novel.metrics.ratingSize ?? 0,
-      bestRating: "5",
-      worstRating: "1",
-    },
-    interactionStatistic: {
-      "@type": "InteractionCounter",
-      interactionType: { "@type": "ViewAction" },
-      userInteractionCount: novel.metrics.views
-    },
-    workExample: [
-      {
-        "@type": "Chapter",
-        name: novel.firstChapter.title,
-        url: `${novelUrl}/${novel.firstChapter.slug}`,
-        position: novel.firstChapter.number
+  const schemas = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      mainEntityOfPage: novelUrl,
+      headline: title,
+      name: title,
+      genre: novel.genres[0],
+      image: {
+        "@type": "ImageObject",
+        url: imageUrl,
+        width: 300
       },
-      {
-        "@type": "Chapter",
-        name: novel.lastChapter.title,
-        url: `${novelUrl}/${novel.lastChapter.slug}`,
-        position: novel.lastChapter.number
+      bookFormat: "https://schema.org/EBook",
+      datePublished: new Date(novel.createdAt).toISOString(),
+      dateModified: new Date(novel.updatedAt).toISOString(),
+      author: {
+        "@type": "Person",
+        name: novel.author,
+        url: `${env.NEXT_PUBLIC_DOMAIN}/authors/${encodeURIComponent(novel.author)}`
       },
-    ],
-    isPartOf: {
-      "@type": "BookSeries",
-      name: `${novel.title} Series`
+      copyrightHolder: novel.author,
+      publisher: {
+        "@type": "Organization",
+        name: "Devilsect",
+        logo: {
+          "@type": "ImageObject",
+          url: logoUrl,
+          width: 300
+        }
+      },
+      description: getNovelDescription(novel),
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: novel.metrics.ratingValue?.toFixed(2) ?? novel.metrics.bayesianScore.toFixed(2),
+        ratingCount: novel.metrics.ratingSize ?? 0,
+        bestRating: "5",
+        worstRating: "1",
+      },
+      potentialAction: {
+        "@type": "ReadAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${novelUrl}/${novel.firstChapter.slug}`
+        }
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: websiteUrl
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Novels",
+          item: `${websiteUrl}/novels`
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: title,
+          item: novelUrl
+        }
+      ]
     }
-  };
+  ]
 
-  return schema;
+  return schemas;
 };

@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import PageHeader from "@/components/page-header";
+import { generateBreadcrumbJsonLDSchema } from "@/lib/json-ld/bread-crumb-schema";
 import { CookieIcon } from "lucide-react";
 import { Metadata } from "next";
 
@@ -12,6 +13,12 @@ export const metadata: Metadata = {
 const CookiesPolicyPage = () => {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateBreadcrumbJsonLDSchema("Cookies Policy", "/cookies-policy")).replace(/</g, '\\u003c'),
+        }}
+      />
       <PageHeader
         icon={CookieIcon}
         title="Cookies Policy"

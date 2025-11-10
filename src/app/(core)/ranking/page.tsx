@@ -5,6 +5,7 @@ import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-sche
 import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
 import { Metadata } from "next";
 import BayesianScoreDescription from "./bayesian-score-description";
+import { generateBreadcrumbJsonLDSchema } from "@/lib/json-ld/bread-crumb-schema";
 
 export const metadata: Metadata = {
   title: "Ranking",
@@ -16,6 +17,12 @@ const RankingPage = async () => {
 
   return (
     <section className="md:pt-3 space-y-2.5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateBreadcrumbJsonLDSchema("Ranking", "/ranking")).replace(/</g, '\\u003c'),
+        }}
+      />
       <GridTableHeader />
       <DesktopGridTable novels={query.results} />
       <MobileGridTable novels={query.results} />

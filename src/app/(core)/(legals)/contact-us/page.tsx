@@ -1,5 +1,6 @@
 import PageHeader from "@/components/page-header";
 import { Label } from "@/components/ui/label";
+import { generateBreadcrumbJsonLDSchema } from "@/lib/json-ld/bread-crumb-schema";
 import { Users } from "lucide-react";
 import { Metadata } from "next";
 
@@ -11,6 +12,12 @@ export const metadata: Metadata = {
 const ContactUsPage = () => {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateBreadcrumbJsonLDSchema("Contact Us", "/contact-us")).replace(/</g, '\\u003c'),
+        }}
+      />
       <PageHeader
         icon={Users}
         description="We'd love to hear from you! Whether you have a question about our services, need assistance, or just want to provide feedback, please feel free to reach out to us."

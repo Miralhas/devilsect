@@ -1,6 +1,7 @@
 import PageHeader from "@/components/page-header";
 import TagsContainer from "@/components/tags/tags-container";
 import TagsFilter from "@/components/tags/tags-filter";
+import { generateBreadcrumbJsonLDSchema } from "@/lib/json-ld/bread-crumb-schema";
 import { TagsParams } from "@/lib/schemas/tags-schema";
 import { getTagsInitialParams, getTagsQueryOptions } from "@/service/info/queries/use-get-tags";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
@@ -23,6 +24,12 @@ const TagsPage = async ({ searchParams }: { searchParams: Promise<{ letter?: str
 
   return (
     <div className="space-y-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateBreadcrumbJsonLDSchema("Tags", "/tags")).replace(/</g, '\\u003c'),
+        }}
+      />
       <PageHeader
         icon={TagsIcon}
         description="Explore our collection of tags to easily find novels that match your interests."

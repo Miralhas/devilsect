@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import PageHeader from "@/components/page-header";
+import { generateBreadcrumbJsonLDSchema } from "@/lib/json-ld/bread-crumb-schema";
 import { FlagOff } from "lucide-react";
 import { Metadata } from "next";
 
@@ -11,6 +12,12 @@ export const metadata: Metadata = {
 const DmcaPage = () => {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateBreadcrumbJsonLDSchema("DMCA", "/dmca")).replace(/</g, '\\u003c'),
+        }}
+      />
       <PageHeader
         icon={FlagOff}
         title="DMCA"

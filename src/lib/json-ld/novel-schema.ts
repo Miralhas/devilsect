@@ -42,13 +42,13 @@ export const generateNovelJsonLDSchema = (novel: Novel) => {
         }
       },
       description: getNovelDescription(novel),
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: novel.metrics.ratingValue?.toFixed(2) ?? novel.metrics.bayesianScore.toFixed(2),
-        ratingCount: novel.metrics.ratingSize ?? 0,
-        bestRating: "5",
-        worstRating: "1",
-      },
+      // aggregateRating: {
+      //   "@type": "AggregateRating",
+      //   ratingValue: novel.metrics.ratingValue?.toFixed(2) ?? novel.metrics.bayesianScore.toFixed(2),
+      //   ratingCount: novel.metrics.ratingSize ?? 0,
+      //   bestRating: "5",
+      //   worstRating: "1",
+      // },
       potentialAction: {
         "@type": "ReadAction",
         target: {

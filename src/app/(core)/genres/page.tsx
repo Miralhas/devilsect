@@ -1,5 +1,6 @@
 import GenresContainer from "@/components/genres/genres-container";
 import PageHeader from "@/components/page-header";
+import { generateBreadcrumbJsonLDSchema } from "@/lib/json-ld/bread-crumb-schema";
 import { getGenres } from "@/service/info/api/get-genres";
 import { getAllNovelSlugs } from "@/service/novels/api/get-all-novel-slugs";
 import { TagIcon } from "lucide-react";
@@ -17,6 +18,12 @@ const GenresPage = async () => {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateBreadcrumbJsonLDSchema("Genres", "/genres")).replace(/</g, '\\u003c'),
+        }}
+      />
       <PageHeader
         icon={TagIcon}
         description="Explore our collection of genres to easily find novels that match your interests."

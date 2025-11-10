@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import PageHeader from "@/components/page-header";
+import { generateBreadcrumbJsonLDSchema } from "@/lib/json-ld/bread-crumb-schema";
 import { Scale } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -12,6 +13,12 @@ export const metadata: Metadata = {
 const TermsOfServicePage = () => {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateBreadcrumbJsonLDSchema("Terms Of Service", "/terms-of-service")).replace(/</g, '\\u003c'),
+        }}
+      />
       <PageHeader
         icon={Scale}
         title="Terms of Service"

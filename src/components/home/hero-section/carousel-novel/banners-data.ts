@@ -7,7 +7,7 @@ export const BANNERS: NovelBanner[] = [
     src: "https://static.devilsect.com/lotm-banner.png",
     status: "COMPLETED",
     mc: "https://static.devilsect.com/klein.png",
-    slug: "barbarian-quest",
+    slug: "lord-of-the-mysteries",
     className: "-right-12 md:-right-2 max-w-[280px] top-auto -bottom-15 md:-bottom-25"
   },
   {

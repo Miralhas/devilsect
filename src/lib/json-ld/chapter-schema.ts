@@ -1,10 +1,6 @@
 import { env } from "@/env";
 import { type Chapter as ChapterType } from "@/types/chapter";
-import { capitalize } from "@/utils/string-utils";
-
-const getFirstParagraph = (body: string) => {
-  return body.split("</p>")[0] + "</p>"
-}
+import { capitalize, truncate } from "@/utils/string-utils";
 
 export const generateChapterJsonLDSchema = (chapter: ChapterType) => {
   const novelUrl = `${env.NEXT_PUBLIC_DOMAIN}/novels/${chapter.novelSlug}`;
@@ -41,7 +37,7 @@ export const generateChapterJsonLDSchema = (chapter: ChapterType) => {
           width: 300
         }
       },
-      description: getFirstParagraph(chapter.body)
+      description: truncate(chapter.body, 160)
     },
     {
       "@context": "https://schema.org",

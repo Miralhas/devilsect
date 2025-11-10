@@ -18,6 +18,7 @@ export const buildQueryString = <T extends Record<string, string | number | bool
 };
 
 export const capitalize = (val: string) => {
+  val = val.trim().toLowerCase().replace("  ", " ")
   const val1 = val.split(":").map(w => w[0].toUpperCase() + w.slice(1)).join(":")
   return val1.split(" ").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");
 }
@@ -38,8 +39,18 @@ export const toSlug = (str: string): string => {
   })
 }
 
+export const truncate = (text: string, numberOfWords: number) => {
+  const strippedText = stripHtml(text);
+  const words = strippedText.split(" ");
+  const wordCount = words.length;
+  let result = words.splice(0, numberOfWords).join(" ");
+  if (wordCount > numberOfWords) result += "..."
+
+  return result;
+}
+
 export const getNovelDescription = (novel: Novel) => {
-  const synopsis = stripHtml(novel.description).split(". ").slice(0, 2).join(". ")
+  const synopsis = truncate(novel.description, 25)
   const tags = novel.tags.slice(0, 4).join(", ");
   return `Read '${capitalize(novel.title)}' Online for Free, written by the author ${novel.author}, This book is a ${novel.genres[0]} Novel, covering ${tags}, and the synopsis is: ${synopsis}`;
 }

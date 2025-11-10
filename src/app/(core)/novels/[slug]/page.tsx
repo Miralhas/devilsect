@@ -18,7 +18,7 @@ type NovelPageProps = {
 }
 
 export async function generateStaticParams() {
-  const novels = await getNovelSummaries({ size: 50, sort: SortKey.BAYESIAN_RANKING });
+  const novels = await getNovelSummaries({ size: 99999, sort: SortKey.BAYESIAN_RANKING });
   const { results } = novels;
   return results.map(r => ({ slug: r.slug }));
 }

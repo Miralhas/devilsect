@@ -8,4 +8,4 @@ export const getTagsQueryOptions = (params: TagsParams) => queryOptions({
   queryKey: infoKeys.tags(params),
 });
 export const useGetTags = (params: TagsParams) => useQuery(getTagsQueryOptions(params));
-export const getTagsInitialParams: TagsParams = { page: 0, size: 50, firstLetter: "a" };
+export const getTagsInitialParams: TagsParams = { page: 0, size: 50, firstLetter: "a", q: "" };

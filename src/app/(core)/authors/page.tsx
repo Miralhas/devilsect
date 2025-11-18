@@ -34,10 +34,8 @@ const AuthorsPage = async () => {
         title="Authors"
         descriptionClassName="text-sm md:text-base"
       />
-      <div className="space-y-12">
-        <div className="flex justify-end">
-          <AuthorsFilter />
-        </div>
+      <div className="space-y-6 md:space-y-8">
+        <AuthorsFilter />
         <HydrationBoundary state={dehydrate(queryClient)}>
           <AuthorsContainer />
         </HydrationBoundary>

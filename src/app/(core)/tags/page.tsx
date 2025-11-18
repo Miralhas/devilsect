@@ -13,13 +13,14 @@ export const metadata: Metadata = {
   description: "Explore our collection of tags to easily find novels that match your interests.",
 };
 
-const TagsPage = async ({ searchParams }: { searchParams: Promise<{ letter?: string }> }) => {
-  const { letter } = await searchParams;
+const TagsPage = async ({ searchParams }: { searchParams: Promise<{ letter?: string; q?: string }> }) => {
+  const { letter, q } = await searchParams;
 
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(getTagsQueryOptions({
     ...getTagsInitialParams,
     firstLetter: (letter as TagsParams["firstLetter"]) ?? getTagsInitialParams.firstLetter,
+    q: q ?? getTagsInitialParams.q
   }));
 
   return (
@@ -36,7 +37,7 @@ const TagsPage = async ({ searchParams }: { searchParams: Promise<{ letter?: str
         title="Tags"
         descriptionClassName="text-sm md:text-base"
       />
-      <div className="space-y-12">
+      <div className="space-y-8">
         <TagsFilter />
         <HydrationBoundary state={dehydrate(queryClient)}>
           <TagsContainer />

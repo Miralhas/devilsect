@@ -14,7 +14,8 @@ const TagsContainer = () => {
   const query = useGetTags({
     ...getTagsInitialParams,
     firstLetter: params.letter,
-    page: params.page
+    page: params.page,
+    q: params.q
   });
 
   if (query.isLoading) {

@@ -15,7 +15,7 @@ import GenericPagination from "../generic-pagination";
 
 const AuthorsContainer = () => {
   const [params, setParams] = useQueryStates(nuqsAuthorsParams);
-  const query = useGetAuthors({ ...initialAuthorsParams, page: params.page, sort: mapSortKey(params.sort) });
+  const query = useGetAuthors({ ...initialAuthorsParams, page: params.page, sort: mapSortKey(params.sort), q: params.q });
 
   if (query.isLoading) {
     return <Loading />

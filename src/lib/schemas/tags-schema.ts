@@ -8,7 +8,7 @@ export const ALPHABET = [
 ] as const;
 
 export const TagsSchema = z.object({
-  q: z.string().catch(""),
+  q: z.string().catch("").optional(),
   ...zodPagination,
   firstLetter: z.enum(ALPHABET).catch("a").optional()
 });

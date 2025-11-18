@@ -19,7 +19,7 @@ export const mapSortKey = (key: typeof sortKeyParams[number]) => {
 const SORT = [SortKey.COUNT, SortKey.NAME] as const;
 
 export const AuthorsParamsSchema = z.object({
-  q: z.string().catch(""),
+  q: z.string().catch("").optional(),
   sort: z.enum(SORT).catch(SortKey.COUNT).optional(),
   ...zodPagination,
 });

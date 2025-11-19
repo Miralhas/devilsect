@@ -41,7 +41,7 @@ const Header = ({ novelSlug: slug, next, previous }: HeaderProps) => {
               size="none"
               disabled={!hasPrevious}
             >
-              <Link prefetch={hasPrevious} href={`/novels/${slug}/${previous?.slug}`}><ChevronLeft className="size-6 relative right-[1px]" strokeWidth={3} /></Link>
+              <Link prefetch={false} href={`/novels/${slug}/${previous?.slug}`}><ChevronLeft className="size-6 relative right-[1px]" strokeWidth={3} /></Link>
             </Button>
 
             <Button

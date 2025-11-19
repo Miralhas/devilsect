@@ -11,7 +11,7 @@ const PrevAndNextButtons = ({ next, previous, novelSlug }: Chapter) => {
   return (
     <div className="flex gap-4 md:gap-6 items-center">
       <Button className="hover:underline" variant="pure" size="none" disabled={!hasPrevious}>
-        <Link prefetch={hasPrevious} href={`/novels/${novelSlug}/${previous?.slug}`} className="flex items-center font-normal">
+        <Link prefetch={false} href={`/novels/${novelSlug}/${previous?.slug}`} className="flex items-center font-normal">
           <ChevronLeft className={cn("size-6 md:size-8", {})} />
           <span className="sr-only md:not-sr-only">Prev</span>
         </Link>

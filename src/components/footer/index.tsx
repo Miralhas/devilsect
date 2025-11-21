@@ -14,7 +14,7 @@ const links = {
   ],
   resources: [
     { href: "/authors", name: "Authors" },
-    { href: "/library", name: "Library" },
+    { href: "/profile/library", name: "Library" },
     { href: "/genres", name: "Genres" },
     { href: "/tags", name: "Tags" },
   ],

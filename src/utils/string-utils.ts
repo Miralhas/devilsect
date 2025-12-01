@@ -35,7 +35,8 @@ export const stripHtml = (html: string): string => {
 export const toSlug = (str: string): string => {
   return slugify(str, {
     trim: true,
-    lower: true
+    lower: true,
+    remove: /[*+~.()'"!:@]/g
   })
 }
 

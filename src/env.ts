@@ -16,7 +16,9 @@ export const env = createEnv({
     NEXT_PUBLIC_BASE_URL: z.string().url(),
     NEXT_PUBLIC_CDN_URL: z.string().url(),
     NEXT_PUBLIC_DOMAIN: z.string().url(),
-    NEXT_PUBLIC_MAINANTANCE: z.coerce.boolean(),
+    NEXT_PUBLIC_MAINANTANCE: z.string()
+      .refine((s) => s === "true" || s === "false")
+      .transform((s) => s === "true"),
   },
   runtimeEnv: {
     APP_URL: process.env.APP_URL,

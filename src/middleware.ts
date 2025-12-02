@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { isAdminCheck } from "./utils/api-utils";
 import { SESSION_COOKIE_NAME } from './utils/constants';
+import { env } from './env';
 
 // has to be unauthenticated to access
 const authRoutes = [
@@ -33,6 +34,13 @@ export default async function middleware(req: NextRequest) {
   const cookie = (await cookies()).get(SESSION_COOKIE_NAME)?.value;
   const session = await decrypt(cookie);
   const isAuthenticated = cookie && !!session?.sub;
+
+  const underMainantance = env.NEXT_PUBLIC_MAINANTANCE;
+  console.log(underMainantance);
+
+  if (underMainantance && path !== "/mainantance") {
+    return NextResponse.redirect(new URL("/mainantance", req.nextUrl))
+  }
 
   if (isAuthenticated) {
     await updateSession(cookie);

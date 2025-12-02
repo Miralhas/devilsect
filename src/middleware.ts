@@ -35,11 +35,10 @@ export default async function middleware(req: NextRequest) {
   const session = await decrypt(cookie);
   const isAuthenticated = cookie && !!session?.sub;
 
-  const underMainantance = env.NEXT_PUBLIC_MAINANTANCE;
-  console.log(underMainantance);
+  const underMaintenance = env.NEXT_PUBLIC_MAINTENANCE;
 
-  if (underMainantance && path !== "/mainantance") {
-    return NextResponse.redirect(new URL("/mainantance", req.nextUrl))
+  if (underMaintenance && path !== "/maintenance") {
+    return NextResponse.redirect(new URL("/maintenance", req.nextUrl))
   }
 
   if (isAuthenticated) {

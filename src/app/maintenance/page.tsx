@@ -2,7 +2,7 @@ import ShowQuote from "@/components/not-found/show-quote";
 
 const BG_IMAGE = `https://wsrv.nl/?url=https://static.devilsect.com/divine-tribulation.jpg&w=1920&q=25&output=webp&fit=cover&dpr=2&maxage=1y&il=true&af=true`;
 
-const MainantancePage = () => {
+const MaintenancePage = () => {
   return (
     <div className="h-screen bg-no-repeat bg-cover overlay" style={{
       backgroundImage: `url(${BG_IMAGE})`
@@ -20,4 +20,4 @@ const MainantancePage = () => {
   )
 }
 
-export default MainantancePage;
+export default MaintenancePage;

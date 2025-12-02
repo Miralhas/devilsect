@@ -3,15 +3,14 @@
 import { quotes } from "@/app/quotes";
 import { toSlug } from "@/utils/string-utils";
 import Link from "next/link";
-import { useState } from "react";
-import HomePageButton from "./home-page-button";
+import { PropsWithChildren, useState } from "react";
 import NewQuote from "./new-quote";
 
 const getRandint = (length: number) => {
   return Math.floor(Math.random() * length);
 }
 
-const ShowQuote = () => {
+const ShowQuote = ({ children }: PropsWithChildren) => {
   const [randint, setRandint] = useState<number>(() => getRandint(quotes.length));
   const quote = quotes[randint]
 
@@ -31,7 +30,7 @@ const ShowQuote = () => {
       </Link>
       <div className="flex flex-col md:flex-row gap-2.5 items-center justify-center w-full mt-8">
         <NewQuote onClick={onNewQuote} className="w-full sm:max-w-[180px]" />
-        <HomePageButton className="w-full sm:max-w-[180px]" />
+        {children}
       </div>
     </>
   )

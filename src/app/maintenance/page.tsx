@@ -9,7 +9,7 @@ const MaintenancePage = () => {
     }}>
       <div className="h-full w-full grid place-items-center p-4 relative z-10">
         <div className="space-y-2 md:space-y-2 max-w-lg text-center">
-          <h1 className="font-tilt-warp text-4xl md:text-5xl font-bold">Under Mainantance</h1>
+          <h1 className="font-tilt-warp text-4xl md:text-5xl font-bold">Under Maintenance</h1>
           <p className="font-medium text-muted-foreground text-sm md:text-base">We are currently undergoing maintenance. Please comeback later!</p>
           <div className="mt-6">
             <ShowQuote />

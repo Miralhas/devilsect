@@ -238,5 +238,5 @@ br {
 }
 
 .overlay {
-  border-image: linear-gradient(hsl(0 100% 0% / 0.80), hsl(0 100% 0% / 0.80)) fill 1;
+  border-image: linear-gradient(hsl(0 100% 0% / 0.85), hsl(0 100% 0% / 0.85)) fill 1;
 }

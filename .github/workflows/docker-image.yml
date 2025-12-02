@@ -58,6 +58,7 @@ jobs:
                   NEXT_PUBLIC_CDN_URL=${{ vars.NEXT_PUBLIC_CDN_URL }}
                   NEXT_PUBLIC_EVICT=${{ vars.NEXT_PUBLIC_EVICT }}
                   NEXT_PUBLIC_DOMAIN=${{ vars.NEXT_PUBLIC_DOMAIN }}
+                  NEXT_PUBLIC_MAINANTANCE=${{ vars.NEXT_PUBLIC_MAINANTANCE }}
             
 
       - name: Trigger dokploy redeploy

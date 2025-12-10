@@ -184,6 +184,10 @@
   word-spacing: 0.05em;
 }
 
+.chapter-body>h2,h3,h4{
+  text-align: center;
+}
+
 body {
   top: 0px !important;
 }

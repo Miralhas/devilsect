@@ -184,7 +184,9 @@
   word-spacing: 0.05em;
 }
 
-.chapter-body>h2,h3,h4{
+.chapter-body > h2,
+.chapter-body > h3,
+.chapter-body > h4 {
   text-align: center;
 }
 

@@ -246,3 +246,15 @@ br {
 .overlay {
   border-image: linear-gradient(hsl(0 100% 0% / 0.85), hsl(0 100% 0% / 0.85)) fill 1;
 }
+
+blockquote {
+  background: #212121;
+  border-left: 10px solid #313131;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  border-radius: 4px;
+}
+
+blockquote p {
+  margin: 6px 0px;
+}

@@ -29,13 +29,13 @@ const ContactUsPage = () => {
           <Label className="text-lg md:text-2xl">Email:</Label>
           <p className="text-sm md:text-base">
             For general inquiries and support, please email us at: {" "}
-            <a href="mailto:victorsouza.miralhas@gmail.com" target="_blank" aria-label="Mail" className="underline text-accent/80 font-semibold md:text-lg ">contact@devilsect.com</a>
+            <a href="mailto:contact@devilsect.com" target="_blank" aria-label="Mail" className="underline text-accent/80 font-semibold md:text-lg ">contact@devilsect.com</a>
           </p>
         </div>
         <div className="mt-6">
           <p className="text-sm md:text-base">
             For DMCA-related matters, please email us at: {" "}
-            <a href="mailto:victorsouza.miralhas@gmail.com" target="_blank" aria-label="Mail" className="underline text-accent/80 font-semibold md:text-lg ">dmca@devilsect.com</a>
+            <a href="mailto:contact@devilsect.com" target="_blank" aria-label="Mail" className="underline text-accent/80 font-semibold md:text-lg ">dmca@devilsect.com</a>
           </p>
         </div>
       </div>

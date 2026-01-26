@@ -18,4 +18,5 @@ export const mapRoles = (roles: Role[]) => {
 
   return roleMap["USER"];
 };
+
 export const isAdminCheck = (user?: User) => user?.roles.some(r => r === Role.ADMIN);

@@ -69,7 +69,6 @@ function GenericPagination<T>({ query, handlePage, className }: Props<T>) {
           </>
         )}
 
-
         {range.map((page, index) => (
           <PaginationItem key={index}>
             <PaginationLink

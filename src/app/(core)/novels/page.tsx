@@ -21,7 +21,7 @@ const NovelsPage = async () => {
   }));
 
   return (
-    <section className="grid grid-rows-[min-content_max-content] w-full max-w-[1280px] mx-auto relative p-4 md:pt-12 space-y-10 min-h-screen pb-8">
+    <section id="main-content" className="grid grid-rows-[min-content_max-content] w-full max-w-[1280px] mx-auto relative p-4 md:pt-12 space-y-10 min-h-screen pb-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

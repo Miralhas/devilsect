@@ -64,6 +64,7 @@ export default function RootLayout({
       <body
         className={`vsc-initialized antialiased text-zinc-200 relative font-main notranslate`}
       >
+        <a id="skip-to-main-content" className="absolute -top-[100vh] z-[999]" href="#main-content">Skip to main content</a>
         <Providers>
           <NuqsAdapter>{children}</NuqsAdapter>
         </Providers>

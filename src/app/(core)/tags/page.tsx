@@ -24,7 +24,7 @@ const TagsPage = async ({ searchParams }: { searchParams: Promise<{ letter?: str
   }));
 
   return (
-    <div className="space-y-6">
+    <div  className="space-y-6">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -47,7 +47,7 @@ const ChapterBody = ({ chapter, shallowUser }: { chapter: Chapter; shallowUser: 
   const novelIsOngoing = novelStatus === "ON_GOING";
 
   return (
-    <div className="w-full relative" ref={divRef}>
+    <div id="main-content" className="w-full relative" ref={divRef}>
       <motion.div
         id="scroll-indicator"
         className="bg-primary fixed z-[2] will-change-transform backface-hidden"

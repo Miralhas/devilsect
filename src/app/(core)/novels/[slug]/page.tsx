@@ -41,7 +41,7 @@ const NovelPage = async ({ params }: NovelPageProps) => {
   putView(slug);
 
   return (
-    <section className="min-h-[100vh] pb-10 space-y-6">
+    <section id="main-content" className="min-h-[100vh] pb-10 space-y-6">
 
       {/* JSON-LD */}
       <script

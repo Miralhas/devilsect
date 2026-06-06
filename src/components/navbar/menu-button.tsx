@@ -23,16 +23,15 @@ const MenuButton = ({ isMenuOpen, toggleMenu }: MenuButtonProps) => {
   };
 
   useEffect(() => {
+    path1Controls.start(path1Variants.closed);
+    path2Controls.start(path2Variants.closed);
+
+    document.body.classList.remove("overflow-hidden");
+    
     if (isMenuOpen) {
-      path1Controls.start(path1Variants.open);
-      path2Controls.start(path2Variants.open);
       document.body.classList.add("overflow-hidden");
-      return;
     }
 
-    path1Controls.start(path1Variants.closed)
-    path2Controls.start(path2Variants.closed)
-    document.body.classList.remove("overflow-hidden");
   }, [isMenuOpen]);
 
   return (

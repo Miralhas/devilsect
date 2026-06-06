@@ -7,12 +7,12 @@ import { getBlurData } from "@/lib/get-blur-data";
 import { Novel } from "@/types/novel";
 import { statusMap } from "@/utils/api-utils";
 import { formatViews } from "@/utils/number-utils";
+import { toSlug } from "@/utils/string-utils";
 import { BookOpenText, Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import NovelRating from "./rating";
 import StartReadingButton from "./start-reading-button";
-import { toSlug } from "@/utils/string-utils";
 
 const InfoSection = async ({ novel }: { novel: Novel }) => {
   const { base64 } = await getBlurData(`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`);
@@ -23,11 +23,13 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
         <div className="relative max-h-[300px] md:max-h-[350px] aspect-[2/3] w-full md:col-span-1 h-full">
           <DynamicBlurImage
             priority
+            magnifier
             sizes="(max-width: 768px) 40vw, 15vw"
             blurData={base64}
             alt={novel.title + " cover"}
             src={`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`}
             className="object-contain md:object-cover z-[1] rounded-r-lg h-full shadow-2xl text-transparent"
+            magnifiedClassName="md:object-contain "
             default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
           />
           <div className="absolute inset-0 md:hidden w-full h-full">

@@ -258,3 +258,40 @@ blockquote {
 blockquote p {
   margin: 6px 0px;
 }
+
+.chapter-body table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #212121;
+    line-height: 1.4;
+    border: 1px solid #aeb0b0;
+}
+
+.chapter-body table col:first-child {
+    width: 140px;
+}
+
+.chapter-body table td {
+    border: 1px solid #aeb0b0;
+    padding: 11px 13px;
+    height: 44px;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+.chapter-body table td:first-child {
+    width: 140px;
+    white-space: nowrap;
+}
+
+.chapter-body table td:nth-child(2) {
+    padding-left: 13px;
+}
+
+.chapter-body table td p {
+    margin: 0 0 10px;
+}
+
+.chapter-body table td p:last-child {
+    margin-bottom: 0;
+}

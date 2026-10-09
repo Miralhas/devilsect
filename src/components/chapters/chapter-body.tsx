@@ -61,10 +61,13 @@ const ChapterBody = ({ chapter, shallowUser }: { chapter: Chapter; shallowUser: 
         }}
       />
       <div className="w-full px-4 max-w-[840px] mx-auto relative">
-        <ChapterContent content={chapter.body} title={chapter.title} onClickCallback={() => {
-          setIsNavHidden(prev => !prev);
-          onAutoScrollPauseChange();
-        }} />
+        <ChapterContent
+          chapter={chapter}
+          onClickCallback={() => {
+            setIsNavHidden(prev => !prev);
+            onAutoScrollPauseChange();
+          }}
+        />
 
         <div className="w-full grid grid-cols-[repeat(3,minmax(0px,100px))] gap-4 my-16 items-center justify-center" ref={chapterContentRef}>
           <Button variant="pure" asChild size="none" className="col-span-1 bg-gradient-to-r from-accent to-primary/70 max-w-[100px] w-full border border-accent rounded-sm h-10">

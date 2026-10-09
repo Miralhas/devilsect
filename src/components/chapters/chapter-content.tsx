@@ -1,21 +1,27 @@
+'use client'
+
 import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
+import useCheckpoint from "@/hooks/use-checkpoint";
+import { Chapter } from "@/types/chapter";
 import { cn } from "@/utils/common-utils";
 
 type Props = {
-  content: string;
   onClickCallback: () => void;
-  title: string
+  chapter: Chapter;
 }
 
 
-const ChapterContent = ({ content, onClickCallback, title }: Props) => {
+const ChapterContent = ({ chapter, onClickCallback }: Props) => {
+  const { chapterRef } = useCheckpoint(chapter);
   const { fontSize, lineHeight, fontFamily, textColor, opacity } = useReaderSettingsContext();
   const opacityDecimal = (opacity / 100);
+  const { title, body } = chapter;
 
   return (
     <>
       <h2 className="capitalize text-center text-white/95 text-xl md:text-2xl font-tilt-warp mb-4 translate">{title}</h2>
       <div
+        ref={chapterRef}
         className={cn("chapter-body translate max-w-none scroll-mt-[100px] text-pretty text-shadow-none px-1 space-y-4", fontFamily)}
         style={{
           wordWrap: "break-word",
@@ -24,7 +30,7 @@ const ChapterContent = ({ content, onClickCallback, title }: Props) => {
           color: textColor.color,
           opacity: opacityDecimal,
         }}
-        dangerouslySetInnerHTML={{ __html: content }}
+        dangerouslySetInnerHTML={{ __html: body }}
         onClick={onClickCallback}
         id="chapter-content"
       >

@@ -12,16 +12,15 @@ type Props = {
 
 
 const ChapterContent = ({ chapter, onClickCallback }: Props) => {
-  const { chapterRef } = useCheckpoint(chapter);
   const { fontSize, lineHeight, fontFamily, textColor, opacity } = useReaderSettingsContext();
   const opacityDecimal = (opacity / 100);
   const { title, body } = chapter;
+  useCheckpoint(chapter);
 
   return (
     <>
       <h2 className="capitalize text-center text-white/95 text-xl md:text-2xl font-tilt-warp mb-4 translate">{title}</h2>
       <div
-        ref={chapterRef}
         className={cn("chapter-body translate max-w-none scroll-mt-[100px] text-pretty text-shadow-none px-1 space-y-4", fontFamily)}
         style={{
           wordWrap: "break-word",

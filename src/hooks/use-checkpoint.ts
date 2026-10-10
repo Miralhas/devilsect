@@ -1,7 +1,7 @@
 'use client'
 
 import { Chapter } from "@/types/chapter";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 type Checkpoint = {
@@ -10,34 +10,36 @@ type Checkpoint = {
 }
 
 const useCheckpoint = (chapter: Chapter) => {
-  const chapterRef = useRef<HTMLDivElement | null>(null);
+  const { slug } = chapter
 
   const handleScroll = useDebouncedCallback(() => {
-    if (chapterRef.current) {
-      const { y } = chapterRef.current.getBoundingClientRect();
-      const position = window.innerHeight - (y + window.innerHeight / 2);
-      const checkpoint: Checkpoint = { id: chapter.slug, position };
-      localStorage.setItem('checkpoint', JSON.stringify(checkpoint));
-    }
+    const position = window.scrollY || window.pageYOffset;
+    const checkpoint: Checkpoint = { id: slug, position };
+    localStorage.setItem('checkpoint', JSON.stringify(checkpoint));
   }, 5_000);
 
   useEffect(() => {
     const checkpointString = localStorage.getItem('checkpoint');
     if (checkpointString) {
       const checkpoint = JSON.parse(checkpointString) as Checkpoint;
-      if (checkpoint.id !== chapter.slug) return;
-      window.scroll({ top: checkpoint.position, behavior: 'smooth' });
+      if (checkpoint.id !== slug) return;
+      const id = requestAnimationFrame(() => {
+        window.scrollTo({ top: checkpoint.position, behavior: 'instant' });
+      });
+      return () => cancelAnimationFrame(id);
     }
 
-    window.addEventListener('scroll', () => handleScroll(), false);
+  }, [slug]);
+
+  useEffect(() => {
+    const onScroll = () => handleScroll()
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', () => handleScroll(), false);
-      handleScroll.cancel?.();
+      window.removeEventListener('scroll', onScroll);
+      handleScroll.flush();
     }
-  // eslint-disable-next-line
-  }, []);
+  }, [handleScroll]);
 
-  return { chapterRef };
 }
 
 export default useCheckpoint;

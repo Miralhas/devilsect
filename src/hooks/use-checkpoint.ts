@@ -19,7 +19,7 @@ const useCheckpoint = (chapter: Chapter) => {
       const checkpoint: Checkpoint = { id: chapter.slug, position };
       localStorage.setItem('checkpoint', JSON.stringify(checkpoint));
     }
-  }, 100);
+  }, 5_000);
 
   useEffect(() => {
     const checkpointString = localStorage.getItem('checkpoint');

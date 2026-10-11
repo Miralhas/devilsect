@@ -11,7 +11,7 @@ import { createWsrvLoader } from "@/components/wsrvLoader";
 import { env } from "@/env";
 import useLogout from "@/hooks/use-logout";
 import { User } from "@/types/authentication";
-import { BookOpenText, LogOutIcon, Mail, UserIcon } from "lucide-react";
+import { BookOpenText, HistoryIcon, LogOutIcon, Mail, UserIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -28,7 +28,7 @@ const UserAccount = ({ user }: { user: User }) => {
           quality={10}
           alt="account image"
           loader={createWsrvLoader({ default: `https://static.devilsect.com/yin-yang-48x48.png` })}
-          className="rounded-full size-6 md:size-8 overflow-hidden object-cover object-center shadow-2xl ring-2 ring-secondary cursor-pointer user-profile-header-image"
+          className="shrink-0 rounded-full size-6 md:size-8 overflow-hidden object-cover object-center shadow-2xl ring-2 ring-secondary cursor-pointer user-profile-header-image"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[150px] text-zinc-200 bg-zinc-900">
@@ -42,6 +42,12 @@ const UserAccount = ({ user }: { user: User }) => {
           <Link href="/profile/library">
             <BookOpenText className="text-zinc-200 mt-[2px]" />
             Library
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/profile/history">
+            <HistoryIcon className="text-zinc-200 mt-[2px]" />
+            History
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>

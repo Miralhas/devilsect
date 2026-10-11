@@ -6,7 +6,8 @@ export enum SortKey {
   MOST_VIEWED = "views,id,desc",
   NEWEST_RELEASES = "createdAt,id,desc",
   BAYESIAN_RANKING = "bayesianScore,id,desc",
-  MOST_RATED = "ratingValue,id,desc"
+  MOST_RATED = "ratingValue,id,desc",
+  OLDEST_RELEASES = "createdAt,id,asc", 
 }
 
 export const sortKeyParams = ['popularity', "views", 'newest', 'rating'] as const
@@ -22,7 +23,7 @@ export const mapSortKey = (value: string): SortKey => {
 
 export const allowedValues = {
   status: ["COMPLETED", "ON_GOING", ""],
-  sort: [SortKey.BAYESIAN_RANKING, SortKey.MOST_RATED, SortKey.MOST_VIEWED, SortKey.NEWEST_RELEASES],
+  sort: [SortKey.BAYESIAN_RANKING, SortKey.MOST_RATED, SortKey.MOST_VIEWED, SortKey.NEWEST_RELEASES, SortKey.OLDEST_RELEASES],
   chaptersRange: ["", "1:500", "500:1000", "1000:2000", "2000:3000", "3000:100000"],
 } as const
 
@@ -31,6 +32,7 @@ export const NovelSummariesParamsSchema = z.object({
   tags: z.string().catch("").optional(),
   genres: z.string().catch("").optional(),
   author: z.string().catch("").optional(),
+  series: z.string().catch("").optional(),
   chaptersRange: z.enum(allowedValues.chaptersRange).catch("").optional(),
   status: z.enum(allowedValues.status).catch("").optional(),
   sort: z.enum(allowedValues.sort).catch(SortKey.BAYESIAN_RANKING).optional(),

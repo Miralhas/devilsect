@@ -11,7 +11,7 @@ const LogoLink = () => {
         height={25}
         className="ml-2 w-auto h-7 xs:h-8"
       />
-      <p className="text-base xs:text-2xl uppercase tracking-widest bg-gradient-to-r from-red-700/80 to-primary/70 bg-clip-text text-transparent font-tilt-warp">
+      <p className="text-xl xs:text-2xl uppercase tracking-widest bg-gradient-to-r from-red-700/80 to-primary/70 bg-clip-text text-transparent font-tilt-warp">
         DevilSect
       </p>
     </Link>

@@ -55,10 +55,20 @@ const NovelPage = async ({ params }: NovelPageProps) => {
       <AboutSection novel={novel} />
       <Separator orientation="horizontal" className="mb-12" />
       <NovelReviews slug={novel.slug} />
-      <Suspense fallback={<SkeletonLoader />}>
-        <RelatedNovels genre={novel.genres[0]} />
+      <Suspense fallback={<Fallback />}>
+        <div className="w-full px-5 md:px-10 mt-24">
+          <RelatedNovels genre={novel.genres[0]} className="max-w-[1024px] mx-auto" />
+        </div>
       </Suspense>
     </section>
+  )
+}
+
+const Fallback = () => {
+  return (
+    <div className="w-full px-5 md:px-10 mt-24">
+      <SkeletonLoader className="max-w-[1024px]" />
+    </div>
   )
 }
 

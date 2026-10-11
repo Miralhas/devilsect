@@ -3,6 +3,11 @@ import { ChapterSummary } from "./chapter";
 export type DisplayStatus = 'Ongoing' | 'Completed';
 export type NovelStatus = 'ON_GOING' | 'COMPLETED';
 
+export type Series = {
+  slug: string;
+  title: string;
+}
+
 export type NovelSummary = {
   id: number;
   slug: string;
@@ -17,6 +22,7 @@ export type NovelSummary = {
   views: number;
   bayesianScore: number;
   createdAt: string;
+  series: Series | null;
 };
 
 export type Novel = {
@@ -36,6 +42,7 @@ export type Novel = {
   tags: string[];
   firstChapter: ChapterSummary;
   lastChapter: ChapterSummary;
+  series: Series | null;
 };
 
 export type Metrics = {

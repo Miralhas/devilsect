@@ -785,5 +785,240 @@ export const quotes = [
     "author": "Orthos",
     "novel": "Underlord"
   },
+  {
+    "quote": "The hottest places in Hell are reserved for those who maintain neutrality in a crisis.",
+    "author": "Hadrian Marlowe",
+    "novel": "Howling Dark"
+  },
+  {
+    "quote": "And if you had truly read Dante, Marlowe, you would know that the deepest pit of hell is cold.",
+    "author": "Kharn Sagara",
+    "novel": "Howling Dark"
+  },
+  {
+    "quote": "Flesh is the cheapest resource in the human universe, Lord Marlowe. It spends more easily than gold.",
+    "author": "Kharn Sagara",
+    "novel": "Howling Dark"
+  },
+  {
+    "quote": "Deep truths there may be, but none is deeper than this: Those lost to us do not return, nor the years turn back.",
+    "author": "Hadrian Marlowe",
+    "novel": "Howling Dark"
+  },
+  {
+    "quote": "I am the Reaper and death is my shadow.",
+    "author": "Darrow",
+    "novel": "Red Rising"
+  },
+  {
+    "quote": "Sharpened by hate. Strengthened by love.",
+    "author": "Darrow",
+    "novel": "Red Rising"
+  },
+  {
+    "quote": "Man cannot be freed by the same injustice that enslaved it.",
+    "author": "Darrow",
+    "novel": "Red Rising"
+  },
+  {
+    "quote": "Emptiness is life without freedom. Emptiness is living chained by fear, fear of loss, of death.",
+    "author": "Darrow",
+    "novel": "Red Rising"
+  },
+  {
+    "quote": "Kematian melahirkan kematian yang melahirkan kematian...",
+    "author": "Sevro au Barca",
+    "novel": "Morning Star"
+  },
+  {
+    "quote": "Aku pernah melihat surga, aku pernah melihat neraka, dan aku tahu masa depan kami adalah perang.",
+    "author": "Sefi the Quiet",
+    "novel": "Morning Star"
+  },
+  {
+    "quote": "A popular man arouses the jealousy of the powerful.",
+    "author": "Duke Leto Atreides",
+    "novel": "Dune"
+  },
+  {
+    "quote": "I must not fear. Fear is the mind-killer. Fear is the little death that brings total obliteration.",
+    "author": "Paul Atreides",
+    "novel": "Dune"
+  },
+  {
+    "quote": "The mystery of life isn't a problem to solve, but a reality to experience.",
+    "author": "Gaius Helen Mohiam",
+    "novel": "Dune"
+  },
+  {
+    "quote": "A society cannot make a man a monster. But it can give him the excuse to become one.",
+    "author": "Piter de Vries",
+    "novel": "Dune"
+  },
+  {
+    "quote": "You will not break me. Fuck you all. You will not break me.",
+    "author": "Carl",
+    "novel": "Dungeon Crawler Carl"
+  },
+  {
+    "quote": "For every person that ticked away, I felt I was losing a part of myself, a part of my humanity.",
+    "author": "Carl",
+    "novel": "Dungeon Crawler Carl"
+  },
+  {
+    "quote": "If we get to the point where we don't help each other anymore, that's when we stop being human.",
+    "author": "Carl",
+    "novel": "Dungeon Crawler Carl"
+  },
+  {
+    "quote": "I don't want to do this without you. Carl, I lied before. I won't be fine on my own. I need you.",
+    "author": "Princess Donut",
+    "novel": "Dungeon Crawler Carl"
+  },
+  {
+    "quote": "Silence is a statement, Diago. Inaction picks a side. And when those lead to personal benefit, they are complicity.",
+    "author": "Vis Telimus",
+    "novel": "The Will of the Many"
+  },
+  {
+    "quote": "There comes a point in every man's life where he can rail against the unfairness of the world until he loses, or he can do his best in it. Remain a victim, or become a survivor.",
+    "author": "Vis Telimus",
+    "novel": "The Will of the Many"
+  },
+  {
+    "quote": "They ask something small of you. A thing you would prefer not to do, but is not so terrible. You think you are working your way up, but in fact they are changing you.",
+    "author": "Vis Telimus",
+    "novel": "The Will of the Many"
+  },
+  {
+    "quote": "Don't mistake inaction for neutrality.",
+    "author": "Vis Telimus",
+    "novel": "The Will of the Many"
+  },
+  {
+    "quote": "Hope. It is the only thing stronger than fear.",
+    "author": "President Snow",
+    "novel": "The Hunger Games"
+  },
+  {
+    "quote": "Nobody ever wins the Games. Period.",
+    "author": "Haymitch Abernathy",
+    "novel": "The Hunger Games"
+  },
+  {
+    "quote": "It's the things we love most that destroy us.",
+    "author": "President Snow",
+    "novel": "Mockingjay"
+  },
+  {
+    "quote": "But collective thinking is usually short-lived. We're fickle, stupid beings with poor memories and a great gift for self-destruction.",
+    "author": "Plutarch Heavensbee",
+    "novel": "Mockingjay"
+  },
+  {
+    "quote": "Witness.",
+    "author": "Karsa Orlong",
+    "novel": "Deadhouse Gates"
+  },
+  {
+    "quote": "We humans do not understand compassion. In each moment of our lives, we betray it.",
+    "author": "Anomander Rake",
+    "novel": "Gardens of the Moon"
+  },
+  {
+    "quote": "I will not be free of it. I will not be free of you. I will not be free of this world. I will not be free of my own heart.",
+    "author": "Ganoes Paran",
+    "novel": "Gardens of the Moon"
+  },
+  {
+    "quote": "No one as observed as I was is free. Like light particles, the unobserved man is free to become whatever is in him and the world allows. But beneath the eye and auspice of the state, he can be only what his betters demand of him.",
+    "author": "Hadrian Marlowe",
+    "novel": "Empire of Silence"
+  },
+  {
+    "quote": "Joy is a wind, Hadrian. It will pick you up only to smash you against the rocks again.",
+    "author": "Gibson",
+    "novel": "Empire of Silence"
+  },
+  {
+    "quote": "There is no struggle too vast, no odds too overwhelming, for even should we fail - should we fall - we will know that we have lived.",
+    "author": "Anomander Rake",
+    "novel": "Gardens of the Moon"
+  },
+  {
+    "quote": "Hate is its own violence, my prince. Your only choice is whether to let it hurt them, or you.",
+    "author": "Vis Telimus",
+    "novel": "The Will of the Many"
+  },
+  {
+    "quote": "Death is only meaningless if it does not change us, Vis.",
+    "author": "Vis Telimus",
+    "novel": "The Will of the Many"
+  },
+  {
+    "quote": "Nervousness means there's a fear to be faced ahead, Diago. The man who is never nervous, never does anything hard. The man who is never nervous, never grows.",
+    "author": "Vis Telimus",
+    "novel": "The Will of the Many"
+  },
+  {
+    "quote": "You think an Octavus who gives his Will is somehow less responsible than the Sextus who kills with it? The weak and poor endure in the Hierarchy because the alternatives are harder, not because there are none.",
+    "author": "Vis Telimus",
+    "novel": "The Will of the Many"
+  },
+  {
+    "quote": "I warned you from the start that the Telimus name is not universally beloved. I chose you because I expected there to be obstacles. That is what separates us, Vis. There are those who see what should be, and complain that they do not get their due. And then there are those who see what is, and figure out how to use it to their advantage.",
+    "author": "Vis Telimus",
+    "novel": "The Will of the Many"
+  },
+  {
+    "quote": "I have a message for President Snow. You can torture us and bomb us and burn our districts to the ground. But do you see that? Fire is catching... And if we burn... you burn with us!",
+    "author": "Katniss Everdeen",
+    "novel": "Mockingjay"
+  },
+  {
+    "quote": "If you think for one second that the Capitol will ever treat us fairly, you are lying to yourself. Because we know who they are and what they do. This is what they do, and we must fight back.",
+    "author": "Katniss Everdeen",
+    "novel": "The Hunger Games"
+  },
+  {
+    "quote": "It must be a fragile system if it can be brought down by just a few berries.",
+    "author": "Katniss Everdeen",
+    "novel": "The Hunger Games"
+  },
+  {
+    "quote": "I'm not going to leave you. I'm not going to do that.",
+    "author": "Katniss Everdeen",
+    "novel": "The Hunger Games"
+  },
+  {
+    "quote": "The victors will be granted immunity, and you will announce that in front of the entire population of 13. You will hold yourself and your government responsible, or you will find another Mockingjay.",
+    "author": "Katniss Everdeen",
+    "novel": "Mockingjay"
+  },
+  {
+    "quote": "You have already taken everything from us. Do not ask us to give more than what we have. We are not going to fight or survive on your schedule.",
+    "author": "Carl",
+    "novel": "Dungeon Crawler Carl"
+  },
+  {
+    "quote": "We are, quite literally, fighting for our lives here. We are not willing participants, and I am getting sick of pretending we are.",
+    "author": "Carl",
+    "novel": "Dungeon Crawler Carl"
+  },
+  {
+    "quote": "Every cat show I have ever done is an interview. I was bred for this. Let me do my thing.",
+    "author": "Princess Donut",
+    "novel": "Dungeon Crawler Carl"
+  },
+  {
+    "quote": "I'm a cat. Cats don't wear pants. Don't be so droll.",
+    "author": "Princess Donut",
+    "novel": "Dungeon Crawler Carl"
+  },
+  {
+    "quote": "I don't want to do this without you. Carl, I lied before. I won't be fine on my own. I need you.",
+    "author": "Princess Donut",
+    "novel": "Dungeon Crawler Carl"
+  },
 ]
 

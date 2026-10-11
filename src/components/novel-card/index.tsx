@@ -20,11 +20,19 @@ type NovelCardProps = {
   titleClassName?: string;
   blurData64?: string;
   loading?: "lazy" | "eager"
-
+  showAlias?: boolean;
 }
 
-const NovelCard = ({ novelSummary, imageSizes, titleClassName, blurData64, size = "sm", loading = "lazy" }: NovelCardProps) => {
-  const { author, ratingValue, status, title, slug } = novelSummary;
+const NovelCard = ({
+  novelSummary,
+  imageSizes,
+  titleClassName,
+  blurData64,
+  size = "sm",
+  loading = "lazy",
+  showAlias = false
+}: NovelCardProps) => {
+  const { author, ratingValue, status, title, slug, alias } = novelSummary;
   return (
     <>
       <div className="relative aspect-[2/3] overflow-hidden rounded-r-md shadow-sm transition-all duration-300 ease-in-out group-hover:-translate-y-2 group-hover:shadow-md shadow-accent">
@@ -45,6 +53,7 @@ const NovelCard = ({ novelSummary, imageSizes, titleClassName, blurData64, size 
 
       <Tooltip delayDuration={300}>
         <TooltipTrigger className="text-start cursor-pointer">
+          {showAlias && <p className="text-xs text-muted-foreground italic">{alias}</p>}
           <h3
             className={cn("tracking-tight font-semibold leading-tight text-foreground/90 capitalize line-clamp-2 break-words hyphens-auto group-hover:text-foreground/60 transition-colors duration-300 text-xs md:text-sm", titleClassName)}
           >

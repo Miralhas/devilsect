@@ -45,7 +45,7 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
           </div>
         </div>
         <div className="w-full col-span-1 flex flex-col gap-4">
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex items-center gap-4">
               <Badge variant="cool">{statusMap[novel.status]}</Badge>
               <div className="flex items-center gap-1 ">
@@ -58,7 +58,12 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
               </div>
             </div>
             <div className="space-y-1">
-              <h1 className="capitalize text-2xl md:text-3xl font-bold">{novel.title}</h1>
+              <div>
+                {novel.series && (
+                  <Link href={`/series/${novel.series.slug}`} className="md:text-lg italic leading-none text-foreground/70">{novel.alias}</Link>
+                )}
+                <h1 className="capitalize text-xl md:text-3xl font-bold">{novel.title}</h1>
+              </div>
               <p className="text-muted-foreground font-normal text-sm md:text-[15px] ml-0.5">Author: <Link href={`/authors/${novel.author.toLowerCase()}`} className="text-accent font-semibold">{novel.author}</Link></p>
             </div>
           </div>

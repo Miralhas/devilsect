@@ -1,20 +1,30 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/utils/common-utils";
 
-const SkeletonLoader = () => {
+type Props = {
+  className?: string
+  title?: string;
+};
+
+const SkeletonLoader = ({ className, title = "Related Novels" }: Props) => {
   return (
-    <section className="w-full px-5 md:px-10 mt-24">
-      <div className="max-w-[1024px] mx-auto w-full space-y-4.5">
-        <p className="text-xl md:text-3xl font-semibold tracking-tight text-white">Related Novels</p>
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
-          <Skeleton className="h-full w-full relative aspect-[2/3]" />
-          <Skeleton className="h-full w-full relative aspect-[2/3]" />
-          <Skeleton className="h-full w-full relative aspect-[2/3]" />
-          <Skeleton className="h-full w-full relative aspect-[2/3]" />
-          <Skeleton className="h-full w-full relative aspect-[2/3]" />
-          <Skeleton className="h-full w-full relative aspect-[2/3]" />
-        </div>
+    <div className={cn("mx-auto w-full space-y-4.5", className)}>
+      <div className="py-2 border-b border-zinc-50/15">
+        <h2 className="text-zinc-300 text-xl md:text-2xl tracking-tight font-medium">{title}</h2>
       </div>
-    </section>
+      <div className="grid grid-cols-3 md:grid-cols-10 gap-3">
+        <Skeleton className="h-full w-full relative aspect-[2/3]" />
+        <Skeleton className="h-full w-full relative aspect-[2/3]" />
+        <Skeleton className="h-full w-full relative aspect-[2/3]" />
+        <Skeleton className="h-full w-full relative aspect-[2/3]" />
+        <Skeleton className="h-full w-full relative aspect-[2/3]" />
+        <Skeleton className="h-full w-full relative aspect-[2/3]" />
+        <Skeleton className="h-full w-full relative aspect-[2/3]" />
+        <Skeleton className="h-full w-full relative aspect-[2/3]" />
+        <Skeleton className="h-full w-full relative aspect-[2/3]" />
+        <Skeleton className="h-full w-full relative aspect-[2/3]" />
+      </div>
+    </div>
   )
 }
 

@@ -25,11 +25,16 @@ const adminRoutes = [
   "/dashboard"
 ];
 
+const redirectToHome = [
+  "/series"
+]
+
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(path);
   const isAdminRoute = adminRoutes.includes(path);
   const isAuthRoute = authRoutes.includes(path);
+  const isRedirectToHome = redirectToHome.includes(path);
 
   const cookie = (await cookies()).get(SESSION_COOKIE_NAME)?.value;
   const session = await decrypt(cookie);
@@ -39,6 +44,10 @@ export default async function middleware(req: NextRequest) {
 
   if (underMaintenance && path !== "/maintenance") {
     return NextResponse.redirect(new URL("/maintenance", req.nextUrl))
+  }
+
+  if (isRedirectToHome) {
+    return NextResponse.redirect(new URL('/', req.nextUrl));
   }
 
   if (isAuthenticated) {

@@ -10,4 +10,4 @@ export const allUsersQueryOptions = (params: PaginationSchemaParams, session?: R
 });
 
 export const useGetAllUsers = (params: PaginationSchemaParams, session?: RequestCookie) => useQuery(allUsersQueryOptions(params, session));
-export const allUsersInitialParams: Required<PaginationSchemaParams> = { page: 0, size: 50 };
+export const allUsersInitialParams: Required<PaginationSchemaParams> = { page: 0, size: 9999 };

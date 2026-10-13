@@ -10,7 +10,7 @@ type Checkpoint = {
 }
 
 const useCheckpoint = (chapter: Chapter) => {
-  const { slug } = chapter
+  const { slug } = chapter;
 
   const handleScroll = useDebouncedCallback(() => {
     const position = window.scrollY || window.pageYOffset;
@@ -36,7 +36,7 @@ const useCheckpoint = (chapter: Chapter) => {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', onScroll);
-      handleScroll.flush();
+      handleScroll.cancel();
     }
   }, [handleScroll]);
 

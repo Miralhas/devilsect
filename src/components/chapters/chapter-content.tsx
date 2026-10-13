@@ -1,7 +1,6 @@
 'use client'
 
 import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
-import useCheckpoint from "@/hooks/use-checkpoint";
 import { Chapter } from "@/types/chapter";
 import { cn } from "@/utils/common-utils";
 
@@ -15,7 +14,6 @@ const ChapterContent = ({ chapter, onClickCallback }: Props) => {
   const { fontSize, lineHeight, fontFamily, textColor, opacity } = useReaderSettingsContext();
   const opacityDecimal = (opacity / 100);
   const { title, body } = chapter;
-  useCheckpoint(chapter);
 
   return (
     <>

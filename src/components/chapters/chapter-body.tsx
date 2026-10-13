@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import DisabledLink from "../disabled-link";
 import ChapterContent from "./chapter-content";
 import Settings from "./settings";
+import useCheckpoint from "@/hooks/use-checkpoint";
 
 const ChapterBody = ({ chapter, shallowUser }: { chapter: Chapter; shallowUser: User | undefined }) => {
   const { previous, next, novelStatus } = chapter;
@@ -28,6 +29,7 @@ const ChapterBody = ({ chapter, shallowUser }: { chapter: Chapter; shallowUser: 
   const { autoScroll } = useReaderSettingsContext();
   const mutation = useAddChapterToUserHistory();
   const { onAutoScrollPauseChange, autoScrollPause } = useAutoScroll(chapterContentRef);
+  useCheckpoint(chapter);
 
   useEffect(() => {
     if (shallowUser) {

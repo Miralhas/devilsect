@@ -1,3 +1,4 @@
+import { ClassValue } from "clsx";
 import { ChapterSummary } from "./chapter";
 
 export type DisplayStatus = 'Ongoing' | 'Completed';
@@ -59,7 +60,7 @@ export type NovelBanner = {
   status: NovelStatus;
   mc: string;
   slug: string;
-  className: string;
+  className: ClassValue;
 };
 
 export type EldersChoice = {

@@ -55,4 +55,13 @@ export const BANNERS: NovelBanner[] = [
     slug: "barbarian-quest",
     className: "-right-12 md:-right-15 max-w-[250px] md:max-w-[400px] md:top-auto md:-bottom-64"
   },
+  {
+    name: "The Sun Eater",
+    description: `It was not his war. On the wrong planet, at the right time, for the best reasons, Hadrian Marlowe started down a path that could only end in fire. The galaxy remembers him as a hero: the man who burned every last alien Cielcin from the sky. They remember him as a monster: the devil who destroyed a sun, casually annihilating four billion human lives–even the Emperor himself–against Imperial orders. But Hadrian was not a hero. He was not a monster. He was not even a soldier...`,
+    src: "https://static.devilsect.com/wallpaper_sun-eater-1.webp",
+    status: "COMPLETED",
+    mc: "https://static.devilsect.com/sun-eater-character.png",
+    slug: "empire-of-silence",
+    className: "-right-16 md:-right-20 max-w-[380px] md:max-w-[460px] top-auto -bottom-28 md:-bottom-48"
+  },
 ] 

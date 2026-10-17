@@ -32,7 +32,7 @@ const InfoSection = async ({ novel }: { novel: Novel }) => {
             magnifiedClassName="md:object-contain "
             default={`https://static.devilsect.com/No-Image-Placeholder.svg`}
           />
-          <div className="absolute inset-0 md:hidden w-full h-full">
+          <div className="absolute inset-0 md:hidden">
             <Image
               fill
               quality={1}

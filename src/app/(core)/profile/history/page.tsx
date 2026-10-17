@@ -7,6 +7,7 @@ import { getUserLibraryQueryOptionsSession } from "@/service/library/queries/use
 import {
   dehydrate,
   HydrationBoundary,
+  noop,
   QueryClient,
 } from '@tanstack/react-query';
 import { Metadata } from "next";
@@ -16,6 +17,8 @@ export const metadata: Metadata = {
   title: "Your Reading History"
 };
 
+export const instant = false;
+
 const HistoryPage = async () => {
   const session = await getSession();
   const queryClient = new QueryClient();
@@ -24,7 +27,10 @@ const HistoryPage = async () => {
     redirect("/error")
   }
 
-  await queryClient.prefetchQuery(getUserLibraryQueryOptionsSession(initialHistoryParams, session!));
+  await queryClient.query(getUserLibraryQueryOptionsSession(
+    initialHistoryParams,
+    session!
+  )).catch(noop);
 
   return (
     <section className="p-4 md:p-10 space-y-12">

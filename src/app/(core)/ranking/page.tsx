@@ -1,11 +1,12 @@
 import DesktopGridTable from "@/components/ranking/grid-table/desktop-grid-table";
 import GridTableHeader from "@/components/ranking/grid-table/grid-table-header";
 import MobileGridTable from "@/components/ranking/grid-table/mobile-grid-table";
+import { generateBreadcrumbJsonLDSchema } from "@/lib/json-ld/bread-crumb-schema";
 import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
 import { Metadata } from "next";
 import BayesianScoreDescription from "./bayesian-score-description";
-import { generateBreadcrumbJsonLDSchema } from "@/lib/json-ld/bread-crumb-schema";
+import { cacheLife } from "next/cache";
 
 export const metadata: Metadata = {
   title: "Ranking",
@@ -13,6 +14,9 @@ export const metadata: Metadata = {
 };
 
 const RankingPage = async () => {
+  "use cache"
+  cacheLife('days');
+
   const query = await getNovelSummaries({ size: 100, sort: SortKey.BAYESIAN_RANKING });
 
   return (
@@ -28,7 +32,7 @@ const RankingPage = async () => {
       <MobileGridTable novels={query.results} />
       <BayesianScoreDescription />
     </section>
-  )
+  );
 }
 
 export default RankingPage;

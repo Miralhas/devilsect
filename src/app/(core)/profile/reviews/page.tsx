@@ -8,6 +8,7 @@ import { getShallowUser } from "@/service/user/api/get-shallow-user";
 import {
   dehydrate,
   HydrationBoundary,
+  noop,
   QueryClient,
 } from '@tanstack/react-query';
 import { Metadata } from "next";
@@ -16,6 +17,8 @@ import { redirect } from "next/navigation";
 export const metadata: Metadata = {
   title: "Your Reviews"
 };
+
+export const instant = false;
 
 const ReviewsPage = async () => {
   const session = await getSession();
@@ -28,7 +31,10 @@ const ReviewsPage = async () => {
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(getUserReviewsQueryOptions({ params: initialCommentParams, session }))
+  await queryClient.query(getUserReviewsQueryOptions({
+    params: initialCommentParams,
+    session
+  })).catch(noop)
 
   return (
     <section className="p-4 md:p-10 space-y-12">

@@ -40,7 +40,7 @@ const ContactUsPage = () => {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export default ContactUsPage;

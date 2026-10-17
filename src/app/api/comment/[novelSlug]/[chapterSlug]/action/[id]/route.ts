@@ -4,7 +4,7 @@ import { ApiResponseError } from "@/types/api";
 import { CommentInput } from "@/types/threaded-comment";
 import { NextRequest, NextResponse } from "next/server";
 
-export const DELETE = async (_: NextRequest, { params }: { params: Promise<{ novelSlug: string; id: number; chapterSlug: string }> }) => {
+export const DELETE = async (_: NextRequest, { params }: RouteContext<'/api/comment/[novelSlug]/[chapterSlug]/action/[id]'>) => {
   try {
     const { id, novelSlug, chapterSlug } = await params;
     const session = (await getSession())?.value;
@@ -37,7 +37,10 @@ export const DELETE = async (_: NextRequest, { params }: { params: Promise<{ nov
   }
 }
 
-export const PUT = async (req: NextRequest, { params }: { params: Promise<{ novelSlug: string; id: number; chapterSlug: string }> }) => {
+export const PUT = async (
+  req: NextRequest,
+  { params }: RouteContext<'/api/comment/[novelSlug]/[chapterSlug]/action/[id]'>
+) => {
   try {
     const { id, novelSlug, chapterSlug } = await params;
     const session = (await getSession())?.value;

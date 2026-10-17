@@ -11,6 +11,7 @@ import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
 import { putView } from "@/service/novels/api/put-view";
 import { capitalize, getNovelDescription } from "@/utils/string-utils";
 import type { Metadata } from 'next';
+import { cacheLife } from 'next/cache';
 import { Suspense } from "react";
 
 type NovelPageProps = {
@@ -24,6 +25,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: NovelPageProps): Promise<Metadata> {
+  "use cache"
+  cacheLife('days');
+
   const { slug } = await params;
   const novel = await getNovelBySlug(slug);
   return {
@@ -32,9 +36,10 @@ export async function generateMetadata({ params }: NovelPageProps): Promise<Meta
   }
 }
 
-export const revalidate = 86400;
-
 const NovelPage = async ({ params }: NovelPageProps) => {
+  'use cache'
+  cacheLife('days');
+
   const { slug } = await params;
   const novel = await getNovelBySlug(slug);
 
@@ -61,7 +66,7 @@ const NovelPage = async ({ params }: NovelPageProps) => {
         </div>
       </Suspense>
     </section>
-  )
+  );
 }
 
 const Fallback = () => {

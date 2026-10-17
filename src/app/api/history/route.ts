@@ -30,7 +30,7 @@ export const PUT = async (req: NextRequest) => {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 
-  revalidateTag("library");
+  revalidateTag("library", { expire: 0 });
   revalidatePath("/profile/history");
   revalidatePath("/profile/library");
   return NextResponse.json({ status: 200 });

@@ -8,18 +8,17 @@ import {
 } from "@/components/ui/carousel";
 import wsrvLoader from "@/components/wsrvLoader";
 import { statusMap } from "@/utils/api-utils";
+import { cn } from "@/utils/common-utils";
+import { arrayShuffler } from "@/utils/server-utils";
 import { StarIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { BANNERS } from "./banners-data";
-import { cn } from "@/utils/common-utils";
-import { arrayShuffler } from "@/utils/array-utils";
-
 
 const CarouselNovel = async () => {
 
   const banners = BANNERS;
-  arrayShuffler(banners);
+  await arrayShuffler(banners);
 
   return (
     <Carousel

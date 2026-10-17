@@ -14,6 +14,7 @@ import SkeletonLoader from "../search/skeleton-loader";
 const SeriesBooks = ({ series }: { series: Series }) => {
   const router = useRouter();
   const [params, setParams] = useQueryStates(nuqsNovelSummariesParams);
+
   const query = useGetNovelSummaries({
     enabled: true,
     params: {

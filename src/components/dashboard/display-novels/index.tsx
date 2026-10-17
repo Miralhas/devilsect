@@ -1,13 +1,15 @@
 import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary, noop, QueryClient } from "@tanstack/react-query";
 import NovelsDataTable from "./novels-data-table";
-
 
 const DisplayNovels = async () => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(novelSummariesQueryOptions({ params: novelSummariesInitialParams, enabled: true }));
-  
+  await queryClient.query(novelSummariesQueryOptions({
+    params: novelSummariesInitialParams,
+    enabled: true
+  })).catch(noop);
+
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>

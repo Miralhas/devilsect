@@ -7,6 +7,8 @@ import { getAuthorsQueryOptions } from "@/service/info/queries/use-get-all-autho
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { VenetianMask } from "lucide-react";
 import { Metadata } from "next";
+import { noop } from '@tanstack/react-query'
+import { cacheLife } from "next/cache";
 
 export const metadata: Metadata = {
   title: "Authors",
@@ -14,11 +16,14 @@ export const metadata: Metadata = {
 };
 
 const AuthorsPage = async () => {
+  "use cache"
+  cacheLife('weeks');
+
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(getAuthorsQueryOptions({
+  await queryClient.query(getAuthorsQueryOptions({
     ...initialAuthorsParams,
-  }));
+  })).catch(noop);
 
   return (
     <div className="space-y-6">
@@ -41,7 +46,7 @@ const AuthorsPage = async () => {
         </HydrationBoundary>
       </div>
     </div>
-  )
+  );
 }
 
 export default AuthorsPage;

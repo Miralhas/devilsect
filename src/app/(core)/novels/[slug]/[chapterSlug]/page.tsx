@@ -15,6 +15,8 @@ type ChapterPageProps = {
 }
 
 export async function generateMetadata({ params }: ChapterPageProps): Promise<Metadata> {
+  "use cache"
+  
   const { chapterSlug, slug } = await params;
   const chapter = await getChapterBySlug(chapterSlug, slug);
   return {
@@ -43,7 +45,7 @@ const ChapterPage = async ({ params }: ChapterPageProps) => {
       <Separator />
       <ChapterComments novelSlug={slug} chapterSlug={chapterSlug} currentUser={shallowUser} />
     </Container>
-  )
+  );
 }
 
 export default ChapterPage;

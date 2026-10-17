@@ -10,13 +10,14 @@ const nextConfig: NextConfig = {
       new URL(`${env.APP_URL}/**`),
       new URL(`${env.NEXT_PUBLIC_CDN_URL}/**`),
     ],
+    qualities: [1, 10, 20, 70, 75, 100],
     loader: 'custom',
   },
   experimental: {
     optimizePackageImports: ["zod", "motion", "sonner"],
     inlineCss: true,
-    reactCompiler: true,
   },
+  reactCompiler: true,
   turbopack: {
     rules: {
       ".svg": {
@@ -27,4 +28,10 @@ const nextConfig: NextConfig = {
   }
 };
 
-withPlaceholder(nextConfig);
+const config: NextConfig = {
+  ...withPlaceholder(nextConfig),
+  cacheComponents: true,
+  partialPrefetching: true,
+}
+
+export default config;

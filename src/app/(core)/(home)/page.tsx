@@ -16,11 +16,13 @@ import Trending from "@/components/home/trending";
 import UserHistory from "@/components/home/user-history";
 import { generateHomeJsonLDSchema } from "@/lib/json-ld/home-schema";
 import { BookCheckIcon, EyeIcon, GraduationCapIcon, LoaderIcon, TrendingUpIcon } from "lucide-react";
+import { cacheLife } from "next/cache";
 import { Suspense } from "react";
 
-export const revalidate = 43200; // 12 hours
+const HomePage = async () => {
+  'use cache'
+  cacheLife('days')
 
-const HomePage = () => {
   return (
     <div className="min-h-screen">
       <script
@@ -62,7 +64,7 @@ const HomePage = () => {
         </Suspense>
       </div>
     </div>
-  )
+  );
 }
 
 export default HomePage;

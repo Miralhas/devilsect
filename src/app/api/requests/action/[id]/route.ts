@@ -4,7 +4,7 @@ import { Action } from "@/types/request";
 import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 import { NextRequest, NextResponse } from "next/server";
 
-export const PUT = async (req: NextRequest, { params }: { params: Promise<{ id: number }> }) => {
+export const PUT = async (req: NextRequest, { params }: RouteContext<'/api/requests/action/[id]'>) => {
   const session = await getSession();
   const actionType = (await req.json() as { action: Action }).action;
 

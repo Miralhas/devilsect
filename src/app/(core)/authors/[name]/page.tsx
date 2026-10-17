@@ -3,13 +3,17 @@ import PageHeader from "@/components/page-header";
 import { generateAuthorJsonLDSchema } from "@/lib/json-ld/author-schema";
 import { getAuthorByName } from "@/service/info/api/get-author-by-name";
 import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary, noop, QueryClient } from "@tanstack/react-query";
 import { UserPenIcon } from "lucide-react";
 import { Metadata } from "next";
+import { cacheLife } from "next/cache";
 
 type Props = { params: Promise<{ name: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  "use cache"
+  cacheLife('days');
+  
   const authorName = decodeURIComponent((await params).name);
   const author = await getAuthorByName(authorName);
 
@@ -20,19 +24,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const AuthorPage = async ({ params }: Props) => {
+  "use cache"
+  cacheLife('days');
+
   const authorName = decodeURIComponent((await params).name);
   const author = await getAuthorByName(authorName);
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(novelSummariesQueryOptions({
+  await queryClient.query(novelSummariesQueryOptions({
     enabled: true,
     params: {
       ...novelSummariesInitialParams,
       size: 18,
       author: author.name
     }
-  }));
+  })).catch(noop);;
+
+
   return (
     <>
       <script
@@ -51,7 +60,7 @@ const AuthorPage = async ({ params }: Props) => {
         <AuthorNovels author={author} />
       </HydrationBoundary>
     </>
-  )
+  );
 }
 
 export default AuthorPage;

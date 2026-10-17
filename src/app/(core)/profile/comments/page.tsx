@@ -5,13 +5,15 @@ import { initialCommentParams } from "@/lib/schemas/search-params/comment-params
 import { deleteSession, getSession } from "@/lib/sessions";
 import { getUserCommentsQueryOptions } from "@/service/comments/queries/use-get-user-comments";
 import { getShallowUser } from "@/service/user/api/get-shallow-user";
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary, noop, QueryClient } from "@tanstack/react-query";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Your Comments"
 };
+
+export const instant = false;
 
 const CommentsPage = async () => {
   const session = await getSession();
@@ -24,7 +26,10 @@ const CommentsPage = async () => {
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(getUserCommentsQueryOptions({ params: initialCommentParams, session }))
+  await queryClient.query(getUserCommentsQueryOptions({
+    params: initialCommentParams,
+    session
+  })).catch(noop)
 
   return (
     <section className="p-4 md:p-10 space-y-12">

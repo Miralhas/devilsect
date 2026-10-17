@@ -4,7 +4,7 @@ import { ApiResponseError } from "@/types/api";
 import { Rating } from "@/types/rating";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (req: NextRequest, { params }: { params: Promise<{ novelId: number }> }) => {
+export const GET = async (req: NextRequest, { params }: RouteContext<'/api/user/ratings/[novelId]'>) => {
   try {
     const novelId = (await params).novelId;
     const session = (await getSession())?.value;

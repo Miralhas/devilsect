@@ -3,16 +3,21 @@ import SkeletonLoader from "@/components/novel/novel-detail/related-novels/skele
 import PageHeader from "@/components/page-header";
 import SeriesBooks from "@/components/series/series-books";
 import { generateSeriesJsonLDSchema } from "@/lib/json-ld/series-schema";
-import { novelListInitalParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
+import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
+import { novelListInitalParams, novelSummariesInitialParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
 import { getSeriesBySlug } from "@/service/series/api/get-series-by-slug";
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary, noop, QueryClient } from "@tanstack/react-query";
 import { SquareLibrary } from "lucide-react";
 import { Metadata } from "next";
+import { cacheLife } from "next/cache";
 import { Suspense } from "react";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  "use cache"
+  cacheLife('days');
+
   const { slug } = await params;
   const series = await getSeriesBySlug(slug);
 
@@ -23,17 +28,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const SeriesDetailPage = async ({ params }: Props) => {
+  "use cache"
+  cacheLife('days');
+
   const { slug } = await params;
   const series = await getSeriesBySlug(slug);
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(novelSummariesQueryOptions({
+  await queryClient.query(novelSummariesQueryOptions({
     enabled: true,
     params: {
-      ...novelListInitalParams,
+      ...novelSummariesInitialParams,
       series: series.slug,
+      sort: SortKey.OLDEST_RELEASES,
     }
-  }));
+  })).catch(noop);
 
   return (
     <>
@@ -57,7 +66,7 @@ const SeriesDetailPage = async ({ params }: Props) => {
         <RelatedNovels genre="book" className="mt-36" title="Related Books" />
       </Suspense>
     </>
-  )
+  );
 }
 
 export default SeriesDetailPage;

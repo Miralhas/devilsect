@@ -4,7 +4,7 @@ import TagsFilter from "@/components/tags/tags-filter";
 import { generateBreadcrumbJsonLDSchema } from "@/lib/json-ld/bread-crumb-schema";
 import { TagsParams } from "@/lib/schemas/tags-schema";
 import { getTagsInitialParams, getTagsQueryOptions } from "@/service/info/queries/use-get-tags";
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary, noop, QueryClient } from "@tanstack/react-query";
 import { TagsIcon } from "lucide-react";
 import { Metadata } from "next";
 
@@ -17,11 +17,11 @@ const TagsPage = async ({ searchParams }: { searchParams: Promise<{ letter?: str
   const { letter, q } = await searchParams;
 
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(getTagsQueryOptions({
+  await queryClient.query(getTagsQueryOptions({
     ...getTagsInitialParams,
     firstLetter: (letter as TagsParams["firstLetter"]) ?? getTagsInitialParams.firstLetter,
     q: q ?? getTagsInitialParams.q
-  }));
+  })).catch(noop);
 
   return (
     <div  className="space-y-6">
@@ -44,7 +44,7 @@ const TagsPage = async ({ searchParams }: { searchParams: Promise<{ letter?: str
         </HydrationBoundary>
       </div>
     </div>
-  )
+  );
 }
 
 export default TagsPage;

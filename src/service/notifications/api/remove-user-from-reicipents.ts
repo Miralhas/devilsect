@@ -1,11 +1,11 @@
 import { env } from "@/env";
-import { getSession } from "@/lib/sessions"
+import { getAccessToken } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
 import { ApiResponseError } from "@/types/api";
 import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 
 export const removeUserFromRecipients = async (notificationId: number) => {
-  const session = await getSession();
+  const session = await getAccessToken();
 
   if (!session) {
     throw new Error(INVALID_SESSION_MESSAGE)

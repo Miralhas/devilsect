@@ -2,7 +2,6 @@ import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { Atkinson_Hyperlegible, Inter, Manrope, Roboto, Tilt_Warp } from 'next/font/google';
-import Script from "next/script";
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import 'react-image-crop/dist/ReactCrop.css';
 import "./globals.css";
@@ -69,11 +68,6 @@ export default function RootLayout({
           <NuqsAdapter>{children}</NuqsAdapter>
         </Providers>
         <Toaster richColors />
-        <Script
-          src="https://rybbit.devilsect.com/api/script.js"
-          data-site-id="1"
-          defer
-        />
       </body>
     </html>
   );

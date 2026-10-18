@@ -1,9 +1,9 @@
-import { decrypt, deleteSession, updateSession } from '@/lib/sessions';
-import { cookies } from 'next/headers';
+import { getAuthTokens, getCurrentUser, refreshTokens } from '@/lib/sessions';
 import { NextRequest, NextResponse } from 'next/server';
-import { isAdminCheck } from "./utils/api-utils";
-import { SESSION_COOKIE_NAME } from './utils/constants';
 import { env } from './env';
+import { isAdminCheck } from "./utils/api-utils";
+import { LoginResponse } from './types/authentication';
+import { ACCESS_TOKEN_COOKIE_NAME } from './utils/constants';
 
 // has to be unauthenticated to access
 const authRoutes = [
@@ -12,13 +12,8 @@ const authRoutes = [
   "/reset-password",
 ];
 
-const protectedRoutes = [
+const protectedDynamicRoutes = [
   '/profile',
-  '/profile/library',
-  '/profile/history',
-  '/profile/reviews',
-  '/profile/comments',
-  '/profile/inbox',
 ];
 
 const adminRoutes = [
@@ -29,46 +24,46 @@ const redirectToHome = [
   "/series"
 ]
 
-export default async function proxy(req: NextRequest) {
-  const path = req.nextUrl.pathname;
-  const isProtectedRoute = protectedRoutes.includes(path);
+export default async function proxy(request: NextRequest) {
+  const path = request.nextUrl.pathname;
+  const underMaintenance = env.NEXT_PUBLIC_MAINTENANCE;
+  const isProtectedDynamicRoute = protectedDynamicRoutes.some(r => path.includes(r));
   const isAdminRoute = adminRoutes.includes(path);
-  const isAuthRoute = authRoutes.includes(path);
+  const isUnauthenticatedOnly = authRoutes.includes(path);
   const isRedirectToHome = redirectToHome.includes(path);
 
-  const cookie = (await cookies()).get(SESSION_COOKIE_NAME)?.value;
-  const session = await decrypt(cookie);
-  const isAuthenticated = cookie && !!session?.sub;
+  const { hasAccessToken, hasRefreshToken, refreshToken } = await getAuthTokens();
 
-  const underMaintenance = env.NEXT_PUBLIC_MAINTENANCE;
+  // Access Token expired and user has the refresh token stored in cookies.
+  if (!hasAccessToken && hasRefreshToken) {
+    await refreshTokens(refreshToken!);
+  }
+
+  const user = await getCurrentUser();
+
+  if (isAdminRoute && !isAdminCheck(user)) {
+    if (!user) return NextResponse.redirect(new URL('/login', request.nextUrl));
+    return NextResponse.redirect(new URL('/', request.nextUrl));
+  }
 
   if (underMaintenance && path !== "/maintenance") {
-    return NextResponse.redirect(new URL("/maintenance", req.nextUrl))
+    return NextResponse.redirect(new URL("/maintenance", request.nextUrl))
   }
 
   if (isRedirectToHome) {
-    return NextResponse.redirect(new URL('/', req.nextUrl));
+    return NextResponse.redirect(new URL('/', request.nextUrl));
   }
 
-  if (isAuthenticated) {
-    await updateSession(cookie);
+  if (user && isUnauthenticatedOnly) {
+    return NextResponse.redirect(new URL('/', request.nextUrl));
   }
 
-  if (isAuthenticated && isAuthRoute) {
-    return NextResponse.redirect(new URL('/', req.nextUrl));
+  if (!user && isProtectedDynamicRoute) {
+    return NextResponse.redirect(new URL(`/login?redirect=${path}`, request.nextUrl));
   }
 
-  if (isAdminRoute && !isAdminCheck(session?.user)) {
-    if (isAuthenticated) return NextResponse.redirect(new URL('/', req.nextUrl));
-    return NextResponse.redirect(new URL('/login', req.nextUrl));
-  }
-
-  if (isProtectedRoute && !isAuthenticated) {
-    await deleteSession();
-    return NextResponse.redirect(new URL('/login', req.nextUrl));
-  }
-
-  return NextResponse.next();
+  return NextResponse.next(
+);
 }
 
 export const config = {

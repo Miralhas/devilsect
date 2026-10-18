@@ -7,7 +7,6 @@ const nextConfig: NextConfig = {
   output: "standalone",
   images: {
     remotePatterns: [
-      new URL(`${env.APP_URL}/**`),
       new URL(`${env.NEXT_PUBLIC_CDN_URL}/**`),
     ],
     qualities: [1, 10, 20, 70, 75, 100],

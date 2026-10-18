@@ -1,11 +1,11 @@
 import { env } from "@/env";
-import { getSession } from "@/lib/sessions";
+import { getAccessToken } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
 import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 
 export const deleteNovelLibraryBookmark = async (libraryId: number) => {
-  const url = `${env.APP_URL}/library/bookmark/${libraryId}`;
-  const session = await getSession();
+  const url = `${env.NEXT_PUBLIC_BASE_URL}/library/bookmark/${libraryId}`;
+  const session = await getAccessToken();
   if (!session) throw new Error(INVALID_SESSION_MESSAGE);
 
   const myHeaders = new Headers();

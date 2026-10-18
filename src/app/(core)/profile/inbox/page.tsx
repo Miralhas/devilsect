@@ -5,6 +5,8 @@ import ProfileHeader from "@/components/profile/profile-header";
 import { getUserNotifications } from "@/service/notifications/api/get-user-notifications";
 import { Metadata } from "next";
 
+export const instant = false
+
 export const metadata: Metadata = {
   title: "Your Inbox"
 };

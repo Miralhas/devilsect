@@ -2,7 +2,17 @@ import LoginForm from "@/components/authentication/login/form";
 import LogoImage from "@/components/logo-image";
 import Link from "next/link";
 
-const LoginPage = () => {
+export const instant = false;
+
+type KeyValue = { [key: string]: string | undefined };
+
+type Props = {
+  searchParams: Promise<KeyValue>;
+}
+
+const LoginPage = async ({ searchParams }: Props) => {
+  const params = await searchParams;
+
   return (
     <div className="w-full max-w-[400px] border border-neutral-900 bg-secondary/60 rounded-lg overflow-hidden p-1 transition-all duration-300 space-y-2 relative backdrop-blur-sm z-50">
       <div className="flex flex-col gap-1.5 p-4">
@@ -17,7 +27,7 @@ const LoginPage = () => {
         <h1 className="text-2xl font-bold tracking-tight text-accent-foreground self-center">Sign in</h1>
       </div>
       <div className="relative p-4 pt-0 transition-all duration-300 space-y-4">
-        <LoginForm />
+        <LoginForm redirectUri={params["redirect"]} />
         <div className="flex justify-center text-sm gap-1 font-medium leading-relaxed ">
           Don&apos;t have an account? <Link href="/signup" className="transition-colors duration-200 hover:text-red-800 underline">Sign up</Link>
         </div>
@@ -25,5 +35,6 @@ const LoginPage = () => {
     </div>
   )
 }
+
 
 export default LoginPage;

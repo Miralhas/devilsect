@@ -1,9 +1,9 @@
 'use client'
 
-import { useCurrentUser } from "@/service/user/queries/use-get-current-user";
 import { User } from "@/types/authentication";
 import { PropsWithChildren, useState } from "react";
 import { createContext } from "./create-context";
+import { useAuthContext } from "./use-auth-context";
 
 type GlobalLoginState = {
   open: boolean;
@@ -24,7 +24,7 @@ const { ContextProvider, useContext } = createContext<GlobalLoginState & GlobalL
 
 export const GlobalLoginProvider = ({ children }: PropsWithChildren) => {
   const [open, setOpen] = useState(initialValues["open"]);
-  const query = useCurrentUser();
+  const { authState } = useAuthContext();
 
   const handleOpen = () => setOpen(prev => !prev);
   const close = () => setOpen(false);
@@ -34,7 +34,7 @@ export const GlobalLoginProvider = ({ children }: PropsWithChildren) => {
       open,
       handleOpen,
       close,
-      currentUser: query.data
+      currentUser: authState?.user
     }}>
       {children}
     </ContextProvider>

@@ -1,10 +1,10 @@
 import { env } from "@/env";
-import { getSession } from "@/lib/sessions"
+import { getAccessToken } from "@/lib/sessions";
 import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 import { NextResponse } from "next/server";
 
 export const PUT = async () => {
-  const session = await getSession();
+  const session = await getAccessToken();
 
   if (!session) {
     return NextResponse.json({ error: INVALID_SESSION_MESSAGE }, { status: 401 });

@@ -1,7 +1,7 @@
 import ChapterComments from "@/components/chapters/chapter-comments";
 import Container from "@/components/container";
 import { Separator } from "@/components/ui/separator";
-import { getShallowUser } from "@/service/user/api/get-shallow-user";
+import { getCurrentUser } from "@/lib/sessions";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ type Props = {
 
 const ChapterCommentsPage = async ({ params }: Props) => {
   const { chapterSlug, slug } = await params;
-  const shallowUser = await getShallowUser();
+  const shallowUser = await getCurrentUser();
 
   return (
     <Container className="max-w-[1024px] p-0 block pb-12 gap-0 min-h-screen space-y-16 pt-12">

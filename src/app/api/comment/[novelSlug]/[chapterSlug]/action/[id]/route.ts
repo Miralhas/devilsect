@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { getSession } from "@/lib/sessions";
+import { getAccessToken } from "@/lib/sessions";
 import { ApiResponseError } from "@/types/api";
 import { CommentInput } from "@/types/threaded-comment";
 import { NextRequest, NextResponse } from "next/server";
@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const DELETE = async (_: NextRequest, { params }: RouteContext<'/api/comment/[novelSlug]/[chapterSlug]/action/[id]'>) => {
   try {
     const { id, novelSlug, chapterSlug } = await params;
-    const session = (await getSession())?.value;
+    const session = (await getAccessToken())?.value;
 
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized: Missing or invalid session' }, { status: 401 });
@@ -17,7 +17,7 @@ export const DELETE = async (_: NextRequest, { params }: RouteContext<'/api/comm
     myHeaders.append("Authorization", `Bearer ${session}`);
     myHeaders.append("Content-Type", "application/json");
 
-    const url = `${env.APP_URL}/novels/${novelSlug}/chapters/${chapterSlug}/reviews/${id}`;
+    const url = `${env.NEXT_PUBLIC_BASE_URL}/novels/${novelSlug}/chapters/${chapterSlug}/reviews/${id}`;
 
     const res = await fetch(url, {
       method: "DELETE",
@@ -43,7 +43,7 @@ export const PUT = async (
 ) => {
   try {
     const { id, novelSlug, chapterSlug } = await params;
-    const session = (await getSession())?.value;
+    const session = (await getAccessToken())?.value;
     const commentInput = await req.json() as CommentInput;
 
     if (!session) {
@@ -54,7 +54,7 @@ export const PUT = async (
     myHeaders.append("Authorization", `Bearer ${session}`);
     myHeaders.append("Content-Type", "application/json");
 
-    const url = `${env.APP_URL}/novels/${novelSlug}/chapters/${chapterSlug}/reviews/${id}`;
+    const url = `${env.NEXT_PUBLIC_BASE_URL}/novels/${novelSlug}/chapters/${chapterSlug}/reviews/${id}`;
 
     const res = await fetch(url, {
       method: "PUT",

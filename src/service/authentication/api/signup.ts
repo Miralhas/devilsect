@@ -4,7 +4,7 @@ import { ApiError } from "@/service/api-error";
 import { ApiResponseError } from "@/types/api";
 
 export const signup = async (data: SignupInput) => {
-  const res = await fetch(env.APP_URL + "/auth/signup", {
+  const res = await fetch(env.NEXT_PUBLIC_BASE_URL + "/auth/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)

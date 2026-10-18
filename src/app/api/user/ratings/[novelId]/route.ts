@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { getSession } from "@/lib/sessions";
+import { getAccessToken } from "@/lib/sessions";
 import { ApiResponseError } from "@/types/api";
 import { Rating } from "@/types/rating";
 import { NextRequest, NextResponse } from "next/server";
@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async (req: NextRequest, { params }: RouteContext<'/api/user/ratings/[novelId]'>) => {
   try {
     const novelId = (await params).novelId;
-    const session = (await getSession())?.value;
+    const session = (await getAccessToken())?.value;
 
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized: Missing or invalid session' }, { status: 401 });
@@ -17,7 +17,7 @@ export const GET = async (req: NextRequest, { params }: RouteContext<'/api/user/
     myHeaders.append("Authorization", `Bearer ${session}`);
     myHeaders.append("Content-Type", "application/json");
 
-    const url = `${env.APP_URL}/users/ratings/${novelId}`;
+    const url = `${env.NEXT_PUBLIC_BASE_URL}/users/ratings/${novelId}`;
 
     const res = await fetch(url, {
       method: "GET",

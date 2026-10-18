@@ -8,15 +8,13 @@ import { initialHistoryParams, mapSortKey, nuqsUserLibrarySeachParams } from "@/
 import { useGetUserLibraryWithSession } from "@/service/library/queries/use-get-user-library-with-session";
 import { formatDate } from "@/utils/date-utils";
 import { BookOpenText } from "lucide-react";
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import Link from "next/link";
 import { useQueryStates } from "nuqs";
 import SizeFilter from "../library/library-filters/size-filter";
 import SortFilter from "../library/library-filters/sort-filter";
 import BookmarkButtonIcon from "./bookmark-button-icon";
 import RemoveBookmarkButtonIcon from "./remove-bookmark-icon";
-
-const HistoryGrid = ({ session }: { session: RequestCookie }) => {
+const HistoryGrid = ({ session }: { session: string }) => {
   const [searchParams] = useQueryStates(nuqsUserLibrarySeachParams);
 
   const query = useGetUserLibraryWithSession({

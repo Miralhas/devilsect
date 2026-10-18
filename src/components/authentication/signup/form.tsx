@@ -8,19 +8,24 @@ import {
 import AuthenticationInput from "@/components/ui/authentication-input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useAuthContext } from "@/contexts/use-auth-context";
 import { SignupInput, signUpSchema } from "@/lib/schemas/signup";
-import { signupAction } from "@/service/authentication/actions/signup-action";
-import { actionErrorMessage } from "@/utils/string-utils";
+import { useLoginMutation } from "@/service/authentication/mutations/use-login-mutation";
+import { useSignUpMutation } from "@/service/authentication/mutations/use-signup-mutation";
+import { isApiError } from "@/utils/common-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";
-import { startTransition, useActionState, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import GoogleAuthButton from "../google-auth-button";
 
 const SignupForm = () => {
-  const [formState, formAction, isPending] = useActionState(signupAction, { success: false });
+  const { login } = useAuthContext();
+  const signUpMutation = useSignUpMutation();
+  const loginMutation = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 
   const toggleShowPassword = () => setShowPassword(prev => !prev);
   const toggleShowConfirmPassword = () => setShowConfirmPassword(prev => !prev);
@@ -33,20 +38,41 @@ const SignupForm = () => {
 
   const { errors: clientErrors } = form.formState;
 
-  const onSubmit = form.handleSubmit((data: SignupInput) => {
-    startTransition(() => formAction(data));
-  });
+  const onSubmit = (input: SignupInput) => {
+    signUpMutation.mutate(input, {
+      onSuccess: () => {
+        loginMutation.mutate(input, {
+          onSuccess: async (tokens) => await login(tokens)
+        })
+      },
+      onError: (error) => {
+        form.setError('root', { message: isApiError(error) ? error.detail : error.message })
+        if (isApiError(error) && error.errors) {
+          Object.entries(error.errors).map(([key, value]) => {
+            form.setError(
+              key as keyof SignupInput,
+              {
+                type: error.status.toString(),
+                message: value,
+              });
+          });
+        }
+      },
+    })
+  };
+
+  const isPending = signUpMutation.isPending || loginMutation.isPending;
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-5">
-        
-        {formState.errors?.error ? (
+
+        {form.formState.errors?.root ? (
           <Alert variant="destructive" className="bg-primary/20 border border-accent/70 rounded-sm text-red-700">
             <AlertCircle className="h-4 w-4" />
             <AlertTitle className="font-semibold mb-1">Error Signing Up</AlertTitle>
             <AlertDescription className="font-light tracking-wider">
-              {formState.errors.error}
+              {form.formState.errors.root.message}
             </AlertDescription>
           </Alert>
         ) : null}
@@ -57,14 +83,11 @@ const SignupForm = () => {
             id="email"
             placeholder="wanglin@email.com"
             disabled={isPending}
-            aria-invalid={Boolean(clientErrors.email) || Boolean(formState.errors?.email)}
+            aria-invalid={Boolean(clientErrors.email)}
             {...form.register("email")}
           />
           {clientErrors.email ? (
             <p className="text-red-700/80 text-sm">{clientErrors.email.message}</p>
-          ) : null}
-          {formState.errors?.email ? (
-            <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.email)}</p>
           ) : null}
         </div>
 
@@ -75,14 +98,11 @@ const SignupForm = () => {
             type="text"
             placeholder="WangLin"
             disabled={isPending}
-            aria-invalid={Boolean(clientErrors.username) || Boolean(formState.errors?.username)}
+            aria-invalid={Boolean(clientErrors.username)}
             {...form.register("username")}
           />
           {clientErrors.username ? (
             <p className="text-red-700/80 text-sm">{clientErrors.username.message}</p>
-          ) : null}
-          {formState.errors?.username ? (
-            <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.username)}</p>
           ) : null}
         </div>
 
@@ -94,7 +114,7 @@ const SignupForm = () => {
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               disabled={isPending}
-              aria-invalid={Boolean(clientErrors.password) || Boolean(formState.errors?.password)}
+              aria-invalid={Boolean(clientErrors.password)}
               className="pr-9"
               {...form.register("password")}
             />
@@ -107,9 +127,6 @@ const SignupForm = () => {
           {clientErrors.password ? (
             <p className="text-red-700/80 text-sm">{clientErrors.password.message}</p>
           ) : null}
-          {formState.errors?.password ? (
-            <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.password)}</p>
-          ) : null}
         </div>
 
         <div className="grid gap-3">
@@ -120,7 +137,7 @@ const SignupForm = () => {
               type={showConfirmPassword ? "text" : "password"}
               placeholder="••••••••"
               disabled={isPending}
-              aria-invalid={Boolean(clientErrors.confirmPassword) || Boolean(formState.errors?.confirmPassword)}
+              aria-invalid={Boolean(clientErrors.confirmPassword)}
               {...form.register("confirmPassword")}
             />
             <span className="absolute right-0 top-0 m-2.5 mr-4 text-muted-foreground cursor-pointer hover:text-accent-foreground/90 transition-colors duration-200" onClick={toggleShowConfirmPassword}>
@@ -129,9 +146,6 @@ const SignupForm = () => {
           </div>
           {clientErrors.confirmPassword ? (
             <p className="text-red-700/80 text-sm">{clientErrors.confirmPassword.message}</p>
-          ) : null}
-          {formState.errors?.confirmPassword ? (
-            <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.confirmPassword)}</p>
           ) : null}
         </div>
 

@@ -2,9 +2,8 @@ import ProfileHeader from "@/components/profile/profile-header";
 import CommentList from "@/components/profile/user-comments-and-reviews/chapter-comment/comment-list";
 import CommentsPageHeader from "@/components/profile/user-comments-and-reviews/chapter-comment/comments-page-header";
 import { initialCommentParams } from "@/lib/schemas/search-params/comment-params-schema";
-import { deleteSession, getSession } from "@/lib/sessions";
+import { deleteSession, getAuthState } from "@/lib/sessions";
 import { getUserCommentsQueryOptions } from "@/service/comments/queries/use-get-user-comments";
-import { getShallowUser } from "@/service/user/api/get-shallow-user";
 import { dehydrate, HydrationBoundary, noop, QueryClient } from "@tanstack/react-query";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
@@ -16,10 +15,9 @@ export const metadata: Metadata = {
 export const instant = false;
 
 const CommentsPage = async () => {
-  const session = await getSession();
-  const user = await getShallowUser();
+  const authstate = await getAuthState();
 
-  if (!user) {
+  if (!authstate) {
     await deleteSession();
     redirect("/login");
   }
@@ -28,7 +26,7 @@ const CommentsPage = async () => {
 
   await queryClient.query(getUserCommentsQueryOptions({
     params: initialCommentParams,
-    session
+    session: authstate.accessToken
   })).catch(noop)
 
   return (
@@ -37,7 +35,7 @@ const CommentsPage = async () => {
       <div className="space-y-6">
         <CommentsPageHeader />
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <CommentList session={session} user={user} />
+          <CommentList session={authstate.accessToken} user={authstate.user} />
         </HydrationBoundary>
       </div>
     </section>

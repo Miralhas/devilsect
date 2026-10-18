@@ -8,15 +8,15 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { createWsrvLoader } from "@/components/wsrvLoader";
+import { useAuthContext } from "@/contexts/use-auth-context";
 import { env } from "@/env";
-import useLogout from "@/hooks/use-logout";
 import { User } from "@/types/authentication";
 import { BookOpenText, HistoryIcon, LogOutIcon, Mail, UserIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const UserAccount = ({ user }: { user: User }) => {
-  const handleLogout = useLogout();
+  const { logout } = useAuthContext();
 
   return (
     <DropdownMenu>
@@ -57,7 +57,7 @@ const UserAccount = ({ user }: { user: User }) => {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator className="mt-3" />
-        <DropdownMenuItem className="flex items-center" onClick={handleLogout}>
+        <DropdownMenuItem className="flex items-center" onClick={logout}>
           <LogOutIcon className="text-zinc-200 mt-[2px]" />
           Log out
         </DropdownMenuItem>

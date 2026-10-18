@@ -1,12 +1,12 @@
+import { getAuthState } from "@/service/authentication/api/get-auth-state";
 import { queryOptions, useQuery } from "@tanstack/react-query";
-import { getCurrentUserClientSide } from "../api/get-current-user-client-side";
 import { userKeys } from "./query-keys";
 
-const currentUserQueryOptions = () => queryOptions({
-  queryFn: getCurrentUserClientSide,
+const getAuthStateQueryOptions = () => queryOptions({
+  queryFn: getAuthState,
   queryKey: userKeys.all,
-  retry: 1,
   refetchOnWindowFocus: false,
+  retry: 1,
 });
 
-export const useCurrentUser = () => useQuery(currentUserQueryOptions());
+export const useGetAuthState = () => useQuery(getAuthStateQueryOptions());

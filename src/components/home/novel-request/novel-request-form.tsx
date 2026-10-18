@@ -10,9 +10,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useGlobalLoginContext } from "@/contexts/global-login-context";
+import { useAuthContext } from "@/contexts/use-auth-context";
 import { NovelRequestInput, novelRequestSchema } from "@/lib/schemas/novel-request";
 import { useSendNovelRequest } from "@/service/requests/mutations/use-send-novel-request";
-import { useCurrentUser } from "@/service/user/queries/use-get-current-user";
 import { ONE_DAY_IN_SECONDS } from "@/utils/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { hasCookie, setCookie } from 'cookies-next/client';
@@ -24,10 +24,10 @@ import { toast } from "sonner";
 const COOKIE_NAME = "novel_request_timer";
 
 const NovelRequestForm = () => {
-  const query = useCurrentUser();
+  const { authState } = useAuthContext();
+  const isAuthenticated = !!authState;
   const { handleOpen } = useGlobalLoginContext();
   const mutation = useSendNovelRequest();
-  const isAuthenticated = !!query.data;
 
   const alreadySentRequestToday = hasCookie(COOKIE_NAME);
 

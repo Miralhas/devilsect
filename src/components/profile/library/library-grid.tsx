@@ -17,7 +17,7 @@ const getProgressPercentage = (current: number, total: number) => {
   return Math.min((current / total) * 100, 100);
 };
 
-const LibraryGrid = ({ session }: { session: RequestCookie }) => {
+const LibraryGrid = ({ session }: { session: string }) => {
   const [searchParams] = useQueryStates(nuqsUserLibrarySeachParams);
 
   const query = useGetUserLibraryWithSession({

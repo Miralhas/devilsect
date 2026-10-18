@@ -1,12 +1,12 @@
 import { env } from "@/env";
 import { deleteSession } from "@/lib/sessions";
 import { UserInfo } from "@/types/authentication";
-import { SESSION_COOKIE_NAME } from "@/utils/constants";
+import { ACCESS_TOKEN_COOKIE_NAME } from "@/utils/constants";
 import { cookies } from "next/headers";
 
 export const getCurrentUserInfo = async (): Promise<UserInfo | undefined> => {
   const cookieStore = await cookies();
-  const session = cookieStore.get(SESSION_COOKIE_NAME);
+  const session = cookieStore.get(ACCESS_TOKEN_COOKIE_NAME);
 
   // return undefined if there is no current user
   if (!session) return undefined;

@@ -6,9 +6,3 @@ export type ApiResponseError = {
   instance: string;
   errors?: Record<string, string>;
 }
-
-export type ApiLoginResponse = {
-  accessToken: string;
-  accessTokenExpiresIn: number;
-}
-

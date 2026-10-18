@@ -6,14 +6,11 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import LogoLink from "../logo-link";
-import LoginButton from "./login-button";
 import MenuButton from "./menu-button";
 import SearchInput from "./search-input";
+import UserLinks from "./user-links";
 
 const MobileMenu = dynamic(() => import("./mobile-menu"), { ssr: false });
-
-const UserLinks = dynamic(() => import("./user-links"), { ssr: false, loading: () => <LoginButton isLoading /> });
-
 
 export type NavLink = {
   title: string;

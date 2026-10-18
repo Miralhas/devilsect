@@ -6,7 +6,7 @@ import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 type Props = {
   params: CommentParams;
-  session?: RequestCookie;
+  session?: string;
 };
 
 export const getUserCommentsQueryOptions = ({ params, session }: Props) => queryOptions({

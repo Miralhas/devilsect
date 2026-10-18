@@ -3,7 +3,7 @@ import LibraryGrid from "@/components/profile/library/library-grid";
 import LibraryHeader from "@/components/profile/library/library-header";
 import ProfileHeader from "@/components/profile/profile-header";
 import { initialLibraryParams } from "@/lib/schemas/search-params/user-library-params-schema";
-import { getSession } from "@/lib/sessions";
+import { getAuthState } from "@/lib/sessions";
 import { getUserLibraryQueryOptionsSession } from "@/service/library/queries/use-get-user-library-with-session";
 import { dehydrate, HydrationBoundary, noop, QueryClient } from "@tanstack/react-query";
 import { Metadata } from "next";
@@ -16,14 +16,16 @@ export const metadata: Metadata = {
 export const instant = false;
 
 const LibraryPage = async () => {
-  const session = await getSession();
+  const authstate = await getAuthState();
 
-  if (!session) redirect("/error");
+  if (!authstate) {
+    redirect("/login");
+  }
 
   const queryClient = new QueryClient();
   await queryClient.query(getUserLibraryQueryOptionsSession(
     initialLibraryParams,
-    session!
+    authstate.accessToken
   )).catch(noop);
 
   return (
@@ -35,7 +37,7 @@ const LibraryPage = async () => {
           <LibraryFilters />
         </div>
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <LibraryGrid session={session} />
+          <LibraryGrid session={authstate.accessToken} />
         </HydrationBoundary>
       </div>
     </div>

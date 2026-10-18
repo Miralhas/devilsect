@@ -4,9 +4,9 @@ import Header from "@/components/chapters/header";
 import Container from "@/components/container";
 import { Separator } from "@/components/ui/separator";
 import { generateChapterJsonLDSchema } from "@/lib/json-ld/chapter-schema";
+import { getCurrentUser } from "@/lib/sessions";
 import { getChapterBySlug } from "@/service/chapters/api/get-chapter-by-slug";
 import { putView } from "@/service/novels/api/put-view";
-import { getShallowUser } from "@/service/user/api/get-shallow-user";
 import { capitalize } from "@/utils/string-utils";
 import { Metadata } from "next";
 
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: ChapterPageProps): Promise<Me
 const ChapterPage = async ({ params }: ChapterPageProps) => {
   const { chapterSlug, slug } = await params;
   const chapter = await getChapterBySlug(chapterSlug, slug);
-  const shallowUser = await getShallowUser();
+  const shallowUser = await getCurrentUser();
   putView(slug);
 
   return (

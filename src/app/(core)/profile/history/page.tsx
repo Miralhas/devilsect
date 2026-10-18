@@ -2,7 +2,7 @@ import HistoryGrid from "@/components/profile/history/history-grid";
 import HistoryHeader from "@/components/profile/history/history-header";
 import ProfileHeader from "@/components/profile/profile-header";
 import { initialHistoryParams } from "@/lib/schemas/search-params/user-library-params-schema";
-import { getSession } from "@/lib/sessions";
+import { getAuthState } from "@/lib/sessions";
 import { getUserLibraryQueryOptionsSession } from "@/service/library/queries/use-get-user-library-with-session";
 import {
   dehydrate,
@@ -20,16 +20,16 @@ export const metadata: Metadata = {
 export const instant = false;
 
 const HistoryPage = async () => {
-  const session = await getSession();
   const queryClient = new QueryClient();
+  const authstate = await getAuthState();
 
-  if (!session) {
-    redirect("/error")
+  if (!authstate) {
+    redirect("/login");
   }
 
   await queryClient.query(getUserLibraryQueryOptionsSession(
     initialHistoryParams,
-    session!
+    authstate.accessToken,
   )).catch(noop);
 
   return (
@@ -38,7 +38,7 @@ const HistoryPage = async () => {
       <div className="w-full space-y-8">
         <HydrationBoundary state={dehydrate(queryClient)}>
           <HistoryHeader />
-          <HistoryGrid session={session!} />
+          <HistoryGrid session={authstate.accessToken} />
         </HydrationBoundary>
       </div>
     </section>

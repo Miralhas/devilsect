@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { getSession } from "@/lib/sessions";
+import { getAccessToken } from "@/lib/sessions";
 import { ApiResponseError } from "@/types/api";
 import { Vote } from "@/types/threaded-comment";
 import { NextRequest, NextResponse } from "next/server";
@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = async (req: NextRequest, { params }: { params: Promise<{ commentId: string }> }) => {
   try {
     const commentId = (await params).commentId;
-    const session = (await getSession())?.value;
+    const session = (await getAccessToken())?.value;
     const vote = await req.json() as Vote;
 
     if (!session) {
@@ -18,7 +18,7 @@ export const POST = async (req: NextRequest, { params }: { params: Promise<{ com
     myHeaders.append("Authorization", `Bearer ${session}`);
     myHeaders.append("Content-Type", "application/json");
 
-    const url = `${env.APP_URL}/comments/${commentId}/vote`;
+    const url = `${env.NEXT_PUBLIC_BASE_URL}/comments/${commentId}/vote`;
 
     const res = await fetch(url, {
       method: "POST",

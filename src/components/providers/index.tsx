@@ -1,6 +1,7 @@
 'use client'
 
 import { GlobalLoginProvider } from '@/contexts/global-login-context';
+import { AuthProvider } from '@/contexts/use-auth-context';
 
 import {
   environmentManager,
@@ -36,9 +37,11 @@ const Providers = ({ children }: PropsWithChildren) => {
   const queryClient = getQueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <GlobalLoginProvider>
-        {children}
-      </GlobalLoginProvider>
+      <AuthProvider>
+        <GlobalLoginProvider>
+          {children}
+        </GlobalLoginProvider>
+      </AuthProvider>
     </QueryClientProvider>
   )
 }

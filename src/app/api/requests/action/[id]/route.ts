@@ -1,11 +1,11 @@
 import { env } from "@/env";
-import { getSession } from "@/lib/sessions";
+import { getAccessToken } from "@/lib/sessions";
 import { Action } from "@/types/request";
 import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 import { NextRequest, NextResponse } from "next/server";
 
 export const PUT = async (req: NextRequest, { params }: RouteContext<'/api/requests/action/[id]'>) => {
-  const session = await getSession();
+  const session = await getAccessToken();
   const actionType = (await req.json() as { action: Action }).action;
 
   if (!session) {

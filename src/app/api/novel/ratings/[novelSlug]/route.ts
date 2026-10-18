@@ -1,12 +1,12 @@
 import { env } from "@/env";
-import { getSession } from "@/lib/sessions";
+import { getAccessToken } from "@/lib/sessions";
 import { ApiResponseError } from "@/types/api";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest, { params }: { params: Promise<{ novelSlug: string }> }) => {
   try {
     const novelSlug = (await params).novelSlug;
-    const session = (await getSession())?.value;
+    const session = (await getAccessToken())?.value;
     const ratingValue = (await req.json() as { ratingValue: number }).ratingValue;
 
     if (!session) {
@@ -17,7 +17,7 @@ export const POST = async (req: NextRequest, { params }: { params: Promise<{ nov
     myHeaders.append("Authorization", `Bearer ${session}`);
     myHeaders.append("Content-Type", "application/json");
 
-    const url = `${env.APP_URL}/metrics/${novelSlug}/rating`;
+    const url = `${env.NEXT_PUBLIC_BASE_URL}/metrics/${novelSlug}/rating`;
 
     const res = await fetch(url, {
       method: "POST",

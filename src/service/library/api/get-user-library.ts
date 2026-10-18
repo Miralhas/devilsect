@@ -1,6 +1,6 @@
 import { env } from "@/env";
 import { UserLibraryParams, UserLibraryParamsSchema } from "@/lib/schemas/search-params/user-library-params-schema";
-import { getSession } from "@/lib/sessions";
+import { getAccessToken } from "@/lib/sessions";
 import { ApiResponseError } from "@/types/api";
 import { Library } from "@/types/library";
 import { PaginatedQuery } from "@/types/pagination";
@@ -9,7 +9,7 @@ import { buildQueryString } from "@/utils/string-utils";
 export const getUserLibrary = async (
   params: UserLibraryParams, cache: RequestCache = "default"
 ): Promise<PaginatedQuery<Library[]> | undefined> => {
-  const session = await getSession();
+  const session = await getAccessToken();
   if (!session) return;
 
   const myHeaders = new Headers();

@@ -14,7 +14,6 @@ const MobileMenu = dynamic(() => import("./mobile-menu"), { ssr: false });
 
 const UserLinks = dynamic(() => import("./user-links"), { ssr: false, loading: () => <LoginButton isLoading /> });
 
-
 export type NavLink = {
   title: string;
   href: string;
@@ -28,6 +27,9 @@ export const LEFT_SIDE_NAV_LINKS: NavLink[] = [
 ]
 
 const Header = () => {
+  "use no memo"
+  "use no forget"
+
   const [isNavHidden, setIsNavHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);

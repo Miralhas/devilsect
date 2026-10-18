@@ -19,4 +19,4 @@ export const mapRoles = (roles: Role[]) => {
   return roleMap["USER"];
 };
 
-export const isAdminCheck = (user?: User) => user?.roles.some(r => r === Role.ADMIN);
+export const isAdminCheck = (user?: User | null) => user?.roles.some(r => r === Role.ADMIN);

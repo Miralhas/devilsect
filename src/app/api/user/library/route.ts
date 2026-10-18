@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { getSession } from "@/lib/sessions";
+import { getAccessToken } from "@/lib/sessions";
 import { ApiResponseError } from "@/types/api";
 import { Library } from "@/types/library";
 import { PaginatedQuery } from "@/types/pagination";
@@ -8,7 +8,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   try {
-    const session = (await getSession())?.value;
+    const session = (await getAccessToken())?.value;
 
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized: Missing or invalid session' }, { status: 401 });
@@ -21,7 +21,7 @@ export const GET = async (req: NextRequest) => {
     const searchParams = new URLSearchParams(new URL(req.url).searchParams.toString())
     const queryString = buildQueryString(Object.fromEntries(searchParams));
 
-    const url = `${env.APP_URL}/library${queryString}`;
+    const url = `${env.NEXT_PUBLIC_BASE_URL}/library${queryString}`;
 
     const res = await fetch(url, {
       method: "GET",

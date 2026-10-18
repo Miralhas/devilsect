@@ -5,6 +5,7 @@ import { getGenres } from "@/service/info/api/get-genres";
 import { getAllNovelSlugs } from "@/service/novels/api/get-all-novel-slugs";
 import { TagIcon } from "lucide-react";
 import { Metadata } from "next";
+import { cacheLife } from "next/cache";
 
 export const metadata: Metadata = {
   title: "Genres",
@@ -12,6 +13,9 @@ export const metadata: Metadata = {
 };
 
 const GenresPage = async () => {
+  "use cache"
+  cacheLife('max');
+
   const genresPromise = getGenres();
   const slugsPromise = getAllNovelSlugs();
   const [genres, slugs] = await Promise.all([genresPromise, slugsPromise]);
@@ -32,7 +36,7 @@ const GenresPage = async () => {
       />
       <GenresContainer genres={genres} slugs={slugs.results} />
     </>
-  )
+  );
 }
 
 export default GenresPage;

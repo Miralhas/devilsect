@@ -1,8 +1,7 @@
-
 const NewAnnouncementPage = () => {
   return (
     <section>
-      <p>{new Date().toISOString()}</p>
+      <p>announcement</p>
     </section>
   )
 }

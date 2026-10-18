@@ -26,8 +26,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useAuthContext } from "@/contexts/use-auth-context"
 import { env } from "@/env"
-import useLogout from "@/hooks/use-logout"
 import { User } from "@/types/authentication"
 import Link from "next/link"
 
@@ -37,7 +37,7 @@ type Props = {
 
 export function NavUser({ user }: Props) {
   const { isMobile } = useSidebar();
-  const logout = useLogout();
+  const { logout } = useAuthContext()
 
   return (
     <SidebarMenu>

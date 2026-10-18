@@ -145,7 +145,7 @@ const DmcaPage = () => {
         </section>
       </div>
     </>
-  )
+  );
 }
 
 export default DmcaPage;

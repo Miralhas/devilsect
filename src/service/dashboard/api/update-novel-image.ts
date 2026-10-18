@@ -1,15 +1,15 @@
 import { env } from "@/env";
-import { getSession } from "@/lib/sessions";
+import { getAccessToken } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
 import { ApiResponseError } from "@/types/api";
 import { Novel } from "@/types/novel";
 import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 
 export const updateNovelImage = async (novel:Novel, formData: FormData) => {
-  const session = await getSession();
+  const session = await getAccessToken();
   if (!session) throw new Error(INVALID_SESSION_MESSAGE);
 
-  const res = await fetch(`${env.APP_URL}/novels/${novel.slug}/image`, {
+  const res = await fetch(`${env.NEXT_PUBLIC_BASE_URL}/novels/${novel.slug}/image`, {
     headers: { "Authorization": `Bearer ${session.value}` },
     body: formData,
     method: "PUT"

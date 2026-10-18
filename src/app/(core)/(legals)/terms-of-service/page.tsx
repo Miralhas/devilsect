@@ -528,7 +528,7 @@ const TermsOfServicePage = () => {
         </section>
       </div>
     </>
-  )
+  );
 }
 
 export default TermsOfServicePage;

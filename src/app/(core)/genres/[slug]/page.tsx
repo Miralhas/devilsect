@@ -4,9 +4,10 @@ import { generateGenreJsonLDSchema } from "@/lib/json-ld/genre-schema";
 import { getGenreBySlug } from "@/service/info/api/get-genre-by-name";
 import { getGenres } from "@/service/info/api/get-genres";
 import { novelSummariesInitialParams, novelSummariesQueryOptions } from "@/service/novels/queries/use-get-novel-summaries";
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary, noop, QueryClient } from "@tanstack/react-query";
 import { TagIcon } from "lucide-react";
 import { Metadata } from "next";
+import { cacheLife } from "next/cache";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -16,6 +17,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  "use cache"
+  cacheLife('days');
+
   const { slug } = await params;
   const genre = await getGenreBySlug(slug);
 
@@ -26,18 +30,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const GenrePage = async ({ params }: Props) => {
+  "use cache"
+  cacheLife('days');
+
   const { slug } = await params;
   const genre = await getGenreBySlug(slug);
 
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(novelSummariesQueryOptions({
+  await queryClient.query(novelSummariesQueryOptions({
     enabled: true,
     params: {
       ...novelSummariesInitialParams,
       genres: genre.name,
       size: 18,
     }
-  }));
+  })).catch(noop);;
 
   return (
     <>
@@ -57,7 +64,7 @@ const GenrePage = async ({ params }: Props) => {
         <GenreNovels genre={genre} />
       </HydrationBoundary>
     </>
-  )
+  );
 }
 
 export default GenrePage;

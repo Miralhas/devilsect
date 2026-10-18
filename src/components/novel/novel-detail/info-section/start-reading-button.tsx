@@ -1,8 +1,8 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
+import { useAuthContext } from "@/contexts/use-auth-context";
 import { useGetUserLibrary } from "@/service/library/queries/use-get-user-library";
-import { useCurrentUser } from "@/service/user/queries/use-get-current-user";
 import { Novel } from "@/types/novel";
 import Link from "next/link";
 import BookmarkNovel from "./bookmark-novel";
@@ -13,14 +13,14 @@ type StartReadingButtonProps = {
 };
 
 const StartReadingButton = ({ novel }: StartReadingButtonProps) => {
-  const { data: user, isLoading: userLoading } = useCurrentUser();
+  const { authState, isLoading } = useAuthContext();
   const { data: paginatedUserLibrary, isLoading: libraryLoading } = useGetUserLibrary({ novelSlug: novel.slug, size: 1 });
 
   if (libraryLoading) {
     return <StartReadingButtonLoading />
   }
 
-  if (userLoading) {
+  if (isLoading) {
     return <StartReadingButtonLoading />
   }
 
@@ -30,7 +30,7 @@ const StartReadingButton = ({ novel }: StartReadingButtonProps) => {
 
   return (
     <div className="gap-2 flex flex-col w-full lg:max-w-[335px]">
-      {user && (
+      {authState?.user && (
         <BookmarkNovel hasNovelOnHistory={hasNovelOnHistory} isBookmarked={isBookmarked} novel={novel} libraryId={libraryId} />
       )}
       <Button variant="pure" asChild className="transition-opacity ease-in-out duration-300 hover:opacity-80 bg-gradient-to-r from-accent to-primary/60 text-lg h-[60px] text-white font-bold capitalize tracking-tighter">

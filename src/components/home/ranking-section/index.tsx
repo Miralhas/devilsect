@@ -1,9 +1,9 @@
 import SectionHeader from "@/components/section-header";
 import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
+import { arrayShuffler } from "@/utils/server-utils";
 import { Trophy } from "lucide-react";
 import DesktopRanking from "./desktop-ranking";
-import { arrayShuffler } from "@/utils/array-utils";
 
 const RankingSection = async () => {
   const bayesianP = getNovelSummaries({ size: 10, sort: SortKey.BAYESIAN_RANKING });
@@ -13,7 +13,7 @@ const RankingSection = async () => {
 
   const [bayesian, newTrends, views, rated] = await Promise.all([bayesianP, newTrendsP, viewsP, ratedP]);
 
-  arrayShuffler(views.results);
+  await arrayShuffler(views.results);
 
   newTrends.results = newTrends.results.sort((a, b) => {
     return b.bayesianScore - a.bayesianScore

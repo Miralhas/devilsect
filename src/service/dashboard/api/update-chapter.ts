@@ -1,15 +1,15 @@
 import { env } from "@/env";
 import { UpdateChapterInput } from "@/lib/schemas/update-chapter-schema";
-import { getSession } from "@/lib/sessions";
+import { getAccessToken } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
 import { ApiResponseError } from "@/types/api";
 import { Chapter } from "@/types/chapter";
 import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 
 export const updateChapter = async (chapter: Chapter, data: UpdateChapterInput) => {
-  const url = `${env.APP_URL}/novels/${chapter.novelSlug}/chapters/${chapter.slug}`;
+  const url = `${env.NEXT_PUBLIC_BASE_URL}/novels/${chapter.novelSlug}/chapters/${chapter.slug}`;
 
-  const session = await getSession();
+  const session = await getAccessToken();
   if (!session) throw new Error(INVALID_SESSION_MESSAGE);
 
   const myHeaders = new Headers();

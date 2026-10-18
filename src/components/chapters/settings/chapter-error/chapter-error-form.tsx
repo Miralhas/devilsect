@@ -12,11 +12,11 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
 import { useSendFixChapterRequest } from "@/service/requests/mutations/use-send-fix-chapter-request"
 import { useGlobalLoginContext } from "@/contexts/global-login-context"
-import { useCurrentUser } from "@/service/user/queries/use-get-current-user"
 import { useParams } from "next/navigation"
 import { useCallback, useMemo } from "react"
 import { hasCookie, setCookie } from "cookies-next/client"
 import { ONE_DAY_IN_SECONDS } from "@/utils/constants"
+import { useAuthContext } from "@/contexts/use-auth-context"
 
 const FIX_CHAPTER_ERRORS = [
   {
@@ -59,8 +59,8 @@ export type ChapterErrorRequestInput = z.infer<typeof chapterErrorRequestSchema>
 
 const ChapterErrorForm = ({ handleClose }: { handleClose: () => void; }) => {
   const { slug, chapterSlug } = useParams<{ slug: string, chapterSlug: string }>();
-  const query = useCurrentUser();
-  const isAuthenticated = !!query.data;
+  const { authState } = useAuthContext();
+  const isAuthenticated = !!authState;
   const { handleOpen } = useGlobalLoginContext();
   const mutation = useSendFixChapterRequest();
 

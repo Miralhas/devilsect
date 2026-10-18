@@ -6,15 +6,15 @@ import { useGlobalLoginContext } from "@/contexts/global-login-context";
 import { useCallback, useMemo } from "react";
 import { hasCookie, setCookie } from "cookies-next/client";
 import { ONE_DAY_IN_SECONDS } from "@/utils/constants";
-import { useCurrentUser } from "@/service/user/queries/use-get-current-user";
 import { useSendChapterRequest } from "@/service/requests/mutations/use-send-chapter-request";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
+import { useAuthContext } from "@/contexts/use-auth-context";
 
 const ChapterRequestButton = () => {
   const { slug } = useParams<{ slug: string }>()
-  const query = useCurrentUser();
-  const isAuthenticated = !!query.data;
+  const { authState } = useAuthContext();
+  const isAuthenticated = !!authState;
   const { handleOpen } = useGlobalLoginContext();
   const mutation = useSendChapterRequest();
 

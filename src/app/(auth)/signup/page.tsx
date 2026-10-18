@@ -1,8 +1,12 @@
 import SignupForm from "@/components/authentication/signup/form";
 import LogoImage from "@/components/logo-image";
+import { cacheLife } from "next/cache";
 import Link from "next/link";
 
-const SignupPage = () => {
+const SignupPage = async () => {
+  "use cache"
+  cacheLife('max');
+  
   return (
     <div className="w-full max-w-md border border-neutral-900 bg-secondary/60 rounded-lg overflow-hidden p-1 transition-all duration-300 space-y-2 relative backdrop-blur-sm z-50">
       <div className="flex flex-col gap-1.5 p-4">

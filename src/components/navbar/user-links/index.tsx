@@ -1,16 +1,16 @@
 'use client'
 
 import LoginButton from "@/components/navbar/login-button";
-import { useCurrentUser } from "@/service/user/queries/use-get-current-user";
+import { useAuthContext } from "@/contexts/use-auth-context";
 import { BookOpenText, HistoryIcon } from "lucide-react";
 import Link from "next/link";
 import UserAccount from "./user-account";
 import UserInbox from "./user-inbox";
 
 const UserLinks = () => {
-  const { data, isLoading, isError } = useCurrentUser();
+  const { authState, isLoading } = useAuthContext();
 
-  if (isLoading || isError || !data) {
+  if (isLoading || !authState) {
     return <LoginButton isLoading={isLoading} />
   }
 
@@ -30,7 +30,7 @@ const UserLinks = () => {
 
       <div className="w-px h-4 bg-zinc-700" />
 
-      <UserAccount user={data} />
+      <UserAccount user={authState.user} />
     </div>
   )
 }

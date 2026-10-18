@@ -8,19 +8,22 @@ import {
 import AuthenticationInput from "@/components/ui/authentication-input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useAuthContext } from "@/contexts/use-auth-context";
 import { LoginInput, loginSchema } from "@/lib/schemas/login";
-import { loginAction } from "@/service/authentication/actions/login-action";
-import { actionErrorMessage } from "@/utils/string-utils";
+import { useLoginMutation } from "@/service/authentication/mutations/use-login-mutation";
+import { isApiError } from "@/utils/common-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
-import { startTransition, useActionState, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import GoogleAuthButton from "../google-auth-button";
 
 const LoginForm = ({ redirectUri = "/" }: { redirectUri?: string }) => {
-  const [formState, formAction, isPending] = useActionState(loginAction, { success: false });
+  const mutation = useLoginMutation();
+  const { login } = useAuthContext();
   const [showPassword, setShowPassword] = useState(false);
+
   const toggleShowPassword = () => setShowPassword(prev => !prev);
 
   const form = useForm<LoginInput>({
@@ -31,21 +34,36 @@ const LoginForm = ({ redirectUri = "/" }: { redirectUri?: string }) => {
 
   const { errors: clientErrors } = form.formState;
 
-  const onSubmit = form.handleSubmit((data: LoginInput) => {
-    startTransition(() => formAction({ ...data, redirectUri }));
-  });
+  const onSubmit = (input: LoginInput) => {
+    mutation.mutate(input, {
+      onSuccess: async (tokens) => await login(tokens, redirectUri),
+      onError: (error) => {
+        form.setError('root', { message: isApiError(error) ? error.detail : error.message })
+        if (isApiError(error) && error.errors) {
+          Object.entries(error.errors).map(([key, value]) => {
+            form.setError(
+              key as keyof LoginInput,
+              {
+                type: error.status.toString(),
+                message: value,
+              });
+          });
+        }
+      },
+    });
+  };
+
+  const isPending = mutation.isPending;
 
   return (
-    <form
-      onSubmit={onSubmit}
-    >
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-5">
-        {formState.errors?.error ? (
+        {form.formState.errors.root ? (
           <Alert variant="destructive" className="bg-primary/20 border border-accent/70 rounded-sm text-red-700">
             <AlertCircle className="h-4 w-4" />
             <AlertTitle className="font-semibold mb-1">Error Logging In</AlertTitle>
             <AlertDescription className="font-light tracking-wider">
-              {formState.errors.error}.
+              {form.formState.errors.root.message}.
             </AlertDescription>
           </Alert>
         ) : null}
@@ -56,14 +74,11 @@ const LoginForm = ({ redirectUri = "/" }: { redirectUri?: string }) => {
             id="email"
             placeholder="example@email.com"
             disabled={isPending}
-            aria-invalid={Boolean(clientErrors.email) || Boolean(formState.errors?.email)}
+            aria-invalid={Boolean(clientErrors.email)}
             {...form.register("email")}
           />
           {clientErrors.email ? (
             <p className="text-red-700/80 text-sm">{clientErrors.email.message}</p>
-          ) : null}
-          {formState.errors?.email ? (
-            <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.email)}</p>
           ) : null}
         </div>
 
@@ -78,7 +93,7 @@ const LoginForm = ({ redirectUri = "/" }: { redirectUri?: string }) => {
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               disabled={isPending}
-              aria-invalid={Boolean(clientErrors.password) || Boolean(formState.errors?.password)}
+              aria-invalid={Boolean(clientErrors.password)}
               className="pr-9"
               {...form.register("password")}
             />
@@ -90,9 +105,6 @@ const LoginForm = ({ redirectUri = "/" }: { redirectUri?: string }) => {
           </div>
           {clientErrors.password ? (
             <p className="text-red-700/80 text-sm">{clientErrors.password.message}</p>
-          ) : null}
-          {formState.errors?.password ? (
-            <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.password)}</p>
           ) : null}
         </div>
 

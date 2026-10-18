@@ -14,7 +14,7 @@ import UserChapterCommentContainer from "./user-chapter-comment-container";
 
 type Props = {
   user: User;
-  session: RequestCookie | undefined;
+  session?: string;
 }
 
 const CommentList = ({ session, user }: Props) => {

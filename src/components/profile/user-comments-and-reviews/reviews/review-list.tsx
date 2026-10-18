@@ -6,7 +6,6 @@ import { initialCommentParams, SortKey } from "@/lib/schemas/search-params/comme
 import { useGetUserReviews } from "@/service/comments/queries/use-get-user-reviews";
 import { User } from "@/types/authentication";
 import { StarIcon } from "lucide-react";
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { redirect } from "next/navigation";
 import { PropsWithChildren, useState } from "react";
 import UserCommentFilters from "../user-comment-filters";
@@ -14,7 +13,7 @@ import UserReviewContainer from "./review";
 
 type Props = {
   user: User;
-  session: RequestCookie | undefined;
+  session: string;
 }
 
 const ReviewList = ({ user, session }: Props) => {

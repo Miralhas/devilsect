@@ -24,7 +24,7 @@ const SearchPage = async () => {
       </section>
       <PopularNovels />
     </>
-  )
+  );
 }
 
 export default SearchPage;

@@ -2,11 +2,12 @@ import HistoryGrid from "@/components/profile/history/history-grid";
 import HistoryHeader from "@/components/profile/history/history-header";
 import ProfileHeader from "@/components/profile/profile-header";
 import { initialHistoryParams } from "@/lib/schemas/search-params/user-library-params-schema";
-import { getSession } from "@/lib/sessions";
+import { getAuthState } from "@/lib/sessions";
 import { getUserLibraryQueryOptionsSession } from "@/service/library/queries/use-get-user-library-with-session";
 import {
   dehydrate,
   HydrationBoundary,
+  noop,
   QueryClient,
 } from '@tanstack/react-query';
 import { Metadata } from "next";
@@ -16,15 +17,20 @@ export const metadata: Metadata = {
   title: "Your Reading History"
 };
 
-const HistoryPage = async () => {
-  const session = await getSession();
-  const queryClient = new QueryClient();
+export const instant = false;
 
-  if (!session) {
-    redirect("/error")
+const HistoryPage = async () => {
+  const queryClient = new QueryClient();
+  const authstate = await getAuthState();
+
+  if (!authstate) {
+    redirect("/login");
   }
 
-  await queryClient.prefetchQuery(getUserLibraryQueryOptionsSession(initialHistoryParams, session!));
+  await queryClient.query(getUserLibraryQueryOptionsSession(
+    initialHistoryParams,
+    authstate.accessToken,
+  )).catch(noop);
 
   return (
     <section className="p-4 md:p-10 space-y-12">
@@ -32,7 +38,7 @@ const HistoryPage = async () => {
       <div className="w-full space-y-8">
         <HydrationBoundary state={dehydrate(queryClient)}>
           <HistoryHeader />
-          <HistoryGrid session={session!} />
+          <HistoryGrid session={authstate.accessToken} />
         </HydrationBoundary>
       </div>
     </section>

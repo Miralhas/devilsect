@@ -1,16 +1,16 @@
 import { env } from "@/env";
-import { getSession } from "@/lib/sessions";
+import { getAuthState } from "@/lib/sessions";
 import { NotificationUnion } from "@/types/notification";
 import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 
 export const getUserNotifications = async (): Promise<NotificationUnion[]> => {
-  const session = await getSession();
+  const session = await getAuthState();
 
   if (!session) throw new Error(INVALID_SESSION_MESSAGE);
 
   const res = await fetch(env.NEXT_PUBLIC_BASE_URL + "/users/notifications", {
     method: "GET",
-    headers: { "Authorization": `Bearer ${session.value}` }
+    headers: { "Authorization": `Bearer ${session.accessToken}` }
   });
 
   if (!res.ok) {

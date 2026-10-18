@@ -1,9 +1,10 @@
 'use client'
 
 import { GlobalLoginProvider } from '@/contexts/global-login-context';
+import { AuthProvider } from '@/contexts/use-auth-context';
 
 import {
-  isServer,
+  environmentManager,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
@@ -24,7 +25,7 @@ function makeQueryClient() {
 let browserQueryClient: QueryClient | undefined = undefined;
 
 function getQueryClient() {
-  if (isServer) {
+  if (environmentManager.isServer()) {
     return makeQueryClient();
   } else {
     if (!browserQueryClient) browserQueryClient = makeQueryClient();
@@ -36,9 +37,11 @@ const Providers = ({ children }: PropsWithChildren) => {
   const queryClient = getQueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <GlobalLoginProvider>
-        {children}
-      </GlobalLoginProvider>
+      <AuthProvider>
+        <GlobalLoginProvider>
+          {children}
+        </GlobalLoginProvider>
+      </AuthProvider>
     </QueryClientProvider>
   )
 }

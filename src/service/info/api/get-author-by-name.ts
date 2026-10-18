@@ -3,7 +3,7 @@ import { AuthorInfo } from "@/types/novel";
 import { notFound } from "next/navigation";
 
 export const getAuthorByName = async (name: string): Promise<AuthorInfo> => {
-  const url = `${env.APP_URL}/authors/${name}`;
+  const url = `${env.NEXT_PUBLIC_BASE_URL}/authors/${name}`;
 
   const res = await fetch(url, {
     method: "GET",

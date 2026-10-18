@@ -4,7 +4,7 @@ import { ApiError } from "@/service/api-error";
 import { ApiResponseError } from "@/types/api";
 
 export const resetPassword = async (data: ResetPasswordTokenInput) => {
-  const res = await fetch(env.APP_URL + `/auth/reset-password/${data.token}`, {
+  const res = await fetch(env.NEXT_PUBLIC_BASE_URL + `/auth/reset-password/${data.token}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ newPassword: data.newPassword })

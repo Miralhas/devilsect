@@ -21,7 +21,6 @@ const CommentReplies = ({ comment, depth, showChildren, currentUser }: Props) =>
           transition={{
             height: { duration: 0.2, ease: "easeInOut" },
             opacity: { duration: 0.1, ease: "easeInOut" },
-            exit: { duration: 0, ease: "easeOut" }
           }}
           style={{ overflow: "hidden" }}
         >

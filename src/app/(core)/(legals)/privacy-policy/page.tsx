@@ -327,7 +327,7 @@ const PrivacyPolicyPage = () => {
         </div>
       </section>
     </>
-  )
+  );
 }
 
 export default PrivacyPolicyPage;

@@ -3,9 +3,9 @@ import LibraryGrid from "@/components/profile/library/library-grid";
 import LibraryHeader from "@/components/profile/library/library-header";
 import ProfileHeader from "@/components/profile/profile-header";
 import { initialLibraryParams } from "@/lib/schemas/search-params/user-library-params-schema";
-import { getSession } from "@/lib/sessions";
+import { getAuthState } from "@/lib/sessions";
 import { getUserLibraryQueryOptionsSession } from "@/service/library/queries/use-get-user-library-with-session";
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary, noop, QueryClient } from "@tanstack/react-query";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
@@ -13,13 +13,20 @@ export const metadata: Metadata = {
   title: "Your Library"
 };
 
-const LibraryPage = async () => {
-  const session = await getSession();
+export const instant = false;
 
-  if (!session) redirect("/error");
+const LibraryPage = async () => {
+  const authstate = await getAuthState();
+
+  if (!authstate) {
+    redirect("/login");
+  }
 
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(getUserLibraryQueryOptionsSession(initialLibraryParams, session!));
+  await queryClient.query(getUserLibraryQueryOptionsSession(
+    initialLibraryParams,
+    authstate.accessToken
+  )).catch(noop);
 
   return (
     <div className="p-4 md:p-10 space-y-12">
@@ -30,7 +37,7 @@ const LibraryPage = async () => {
           <LibraryFilters />
         </div>
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <LibraryGrid session={session} />
+          <LibraryGrid session={authstate.accessToken} />
         </HydrationBoundary>
       </div>
     </div>

@@ -30,7 +30,6 @@ const NewComment = ({ isAuthenticated, onSubmit }: Props) => {
         transition={{
           height: { duration: 0.1, ease: "easeInOut" },
           opacity: { duration: 0.1, ease: "easeInOut" },
-          exit: { duration: 0.1, ease: "easeInOut" }
         }}
         key={showEditor ? "editor" : "button"}
       >

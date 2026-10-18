@@ -26,13 +26,6 @@ const GlobalLoginDialog = () => {
   return (
     <Dialog onOpenChange={handleOpen} open={open}>
       <DialogContent className="md:!max-w-[400px]">
-        <DialogHeader className="sr-only">
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your account
-            and remove your data from our servers.
-          </DialogDescription>
-        </DialogHeader>
         <div className="mt-1 w-full rounded-lg overflow-hidden p-1 transition-all duration-300 space-y-2 relative backdrop-blur-sm z-50">
           <div className="flex flex-col gap-1.5 md:p-4">
             <h1 className="text-2xl font-bold tracking-tight text-accent-foreground self-center">Sign in</h1>

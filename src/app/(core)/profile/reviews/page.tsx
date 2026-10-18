@@ -2,12 +2,12 @@ import ProfileHeader from "@/components/profile/profile-header";
 import ReviewList from "@/components/profile/user-comments-and-reviews/reviews/review-list";
 import ReviewPageHeader from "@/components/profile/user-comments-and-reviews/reviews/review-page-header";
 import { initialCommentParams } from "@/lib/schemas/search-params/comment-params-schema";
-import { deleteSession, getSession } from "@/lib/sessions";
+import { deleteSession, getAuthState } from "@/lib/sessions";
 import { getUserReviewsQueryOptions } from "@/service/comments/queries/use-get-user-reviews";
-import { getShallowUser } from "@/service/user/api/get-shallow-user";
 import {
   dehydrate,
   HydrationBoundary,
+  noop,
   QueryClient,
 } from '@tanstack/react-query';
 import { Metadata } from "next";
@@ -17,18 +17,22 @@ export const metadata: Metadata = {
   title: "Your Reviews"
 };
 
-const ReviewsPage = async () => {
-  const session = await getSession();
-  const user = await getShallowUser();
+export const instant = false;
 
-  if (!user) {
+const ReviewsPage = async () => {
+  const authstate = await getAuthState();
+
+  if (!authstate) {
     await deleteSession();
     redirect("/login");
   }
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(getUserReviewsQueryOptions({ params: initialCommentParams, session }))
+  await queryClient.query(getUserReviewsQueryOptions({
+    params: initialCommentParams,
+    session: authstate.accessToken,
+  })).catch(noop)
 
   return (
     <section className="p-4 md:p-10 space-y-12">
@@ -36,7 +40,7 @@ const ReviewsPage = async () => {
       <div className="space-y-6">
         <ReviewPageHeader />
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <ReviewList session={session} user={user} />
+          <ReviewList session={authstate.accessToken} user={authstate.user} />
         </HydrationBoundary>
       </div>
     </section>

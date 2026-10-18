@@ -151,7 +151,7 @@ const CookiesPolicyPage = () => {
         </section>
       </div>
     </>
-  )
+  );
 }
 
 export default CookiesPolicyPage;

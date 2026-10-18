@@ -2,7 +2,6 @@ import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { Atkinson_Hyperlegible, Inter, Manrope, Roboto, Tilt_Warp } from 'next/font/google';
-import Script from "next/script";
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import 'react-image-crop/dist/ReactCrop.css';
 import "./globals.css";
@@ -64,16 +63,11 @@ export default function RootLayout({
       <body
         className={`vsc-initialized antialiased text-zinc-200 relative font-main notranslate`}
       >
-        <a id="skip-to-main-content" className="absolute -top-[100vh] z-[999]" href="#main-content">Skip to main content</a>
+        <a id="skip-to-main-content" className="absolute top-[-100vh] z-999" href="#main-content">Skip to main content</a>
         <Providers>
           <NuqsAdapter>{children}</NuqsAdapter>
         </Providers>
         <Toaster richColors />
-        <Script
-          src="https://rybbit.devilsect.com/api/script.js"
-          data-site-id="1"
-          defer
-        />
       </body>
     </html>
   );

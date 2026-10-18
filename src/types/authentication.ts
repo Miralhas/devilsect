@@ -11,6 +11,7 @@ export type User = {
   email: string;
   roles: Role[];
 }
+
 export type UserInfo = User & {
   createdAt: string;
   readCount: number;
@@ -20,3 +21,15 @@ export type UserInfo = User & {
   lastActivity: string;
   registerType: string;
 }
+
+export type LoginResponse = {
+  refreshToken: string;
+  accessToken: string;
+  accessTokenExpiresIn: number;
+  refreshTokenExpiresIn: number;
+};
+
+export type AuthState = {
+  user: User;
+  accessToken: string;
+};

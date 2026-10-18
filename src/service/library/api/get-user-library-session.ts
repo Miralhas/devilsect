@@ -5,13 +5,12 @@ import { Library } from "@/types/library";
 import { PaginatedQuery } from "@/types/pagination";
 import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 import { buildQueryString } from "@/utils/string-utils";
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
-export const getUserLibrarySession = async (params: UserLibraryParams, session: RequestCookie) => {
+export const getUserLibrarySession = async (params: UserLibraryParams, session: string) => {
   if (!session) throw new Error(INVALID_SESSION_MESSAGE);
 
   const myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${session?.value}`);
+  myHeaders.append("Authorization", `Bearer ${session}`);
 
   const parsed = UserLibraryParamsSchema.parse(params);
 

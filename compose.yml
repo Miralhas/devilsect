@@ -1,5 +1,6 @@
 services:
   app:
+    image: ghcr.io/miralhas/devilsect:latest
     build:
       context: .
       args:

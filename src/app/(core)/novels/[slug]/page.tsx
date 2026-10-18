@@ -1,3 +1,4 @@
+import { BANNERS } from "@/components/home/hero-section/carousel-novel/banners-data";
 import AboutSection from "@/components/novel/novel-detail/about-section";
 import InfoSection from "@/components/novel/novel-detail/info-section";
 import NovelReviews from "@/components/novel/novel-detail/novel-reviews";
@@ -8,7 +9,6 @@ import { generateNovelJsonLDSchema } from "@/lib/json-ld/novel-schema";
 import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-schema";
 import { getAllNovelSlugs } from "@/service/novels/api/get-all-novel-slugs";
 import { getNovelBySlug } from "@/service/novels/api/get-novel-by-slug";
-import { getNovelSummaries } from "@/service/novels/api/get-novel-summaries";
 import { putView } from "@/service/novels/api/put-view";
 import { Novel } from "@/types/novel";
 import { capitalize, getNovelDescription } from "@/utils/string-utils";
@@ -20,10 +20,19 @@ type NovelPageProps = {
   params: Promise<{ slug: string }>;
 }
 
+const getStaticParamsNovels = async () => {
+  const latest = getAllNovelSlugs({ sort: SortKey.NEWEST_RELEASES, size: 14 });
+  const trending = getAllNovelSlugs({ sort: SortKey.BAYESIAN_RANKING, size: 10 });
+  const viewed = getAllNovelSlugs({ sort: SortKey.MOST_VIEWED, size: 10 });
+  const rated = getAllNovelSlugs({ sort: SortKey.MOST_RATED, size: 10 });
+  const results = await Promise.all([latest, trending, viewed, rated]);
+  const banner = BANNERS.map(({ slug }) => slug);
+  const params = results.reduce((acc: string[], curr) => acc.concat(curr.results), [])
+  return [...params, ...banner].map(slug => ({ slug }));
+}
+
 export async function generateStaticParams() {
-  const novels = await getAllNovelSlugs();
-  const { results } = novels;
-  return results.map(slug => ({ slug }));
+  return getStaticParamsNovels();
 }
 
 export async function generateMetadata({ params }: NovelPageProps): Promise<Metadata> {

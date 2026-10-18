@@ -21,7 +21,7 @@ import { Suspense } from "react";
 
 const HomePage = async () => {
   'use cache'
-  cacheLife('days')
+  cacheLife('days');
 
   return (
     <div className="min-h-screen">

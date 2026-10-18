@@ -15,6 +15,6 @@ export async function GET(req: NextRequest) {
     maxAge: 60, // 1min
     sameSite: "lax"
   });
-
-  redirect(`${env.NEXT_PUBLIC_BASE_URL.replace("/api", "")}/oauth2/authorization/google`);
+  
+  redirect(`${env.NEXT_PUBLIC_ROOT_URL}/oauth2/authorization/google`);
 }

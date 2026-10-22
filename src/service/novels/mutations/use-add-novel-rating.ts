@@ -1,5 +1,4 @@
 import { userKeys } from "@/service/user/queries/query-keys";
-import { Novel } from "@/types/novel";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postNovelRating } from "../api/post-novel-rating";
 import { novelKeys } from "../queries/query-keys";
@@ -7,7 +6,7 @@ import { novelKeys } from "../queries/query-keys";
 export const useAddNovelRating = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (params: { novel: Novel; ratingValue: number }) => postNovelRating(params),
+    mutationFn: postNovelRating,
     onError: (error) => {
       console.log(`[useAddUserRatingOnNovel] - Error when trying to add rating to novel.': ${error}`);
     },

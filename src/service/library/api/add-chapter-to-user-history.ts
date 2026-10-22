@@ -1,14 +1,27 @@
+import { env } from "@/env";
+import { ApiError } from "@/service/api-error";
+import { withAuth } from "@/service/with-auth-request";
+import { ApiResponseError } from "@/types/api";
+import { AuthState } from "@/types/authentication";
 import { Chapter } from "@/types/chapter";
 
-const UNAUTHORIZED_STATUS_CODE = 401;
+const request = async (authState: AuthState, chapter: Chapter) => {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${authState.accessToken}`);
+  myHeaders.append("Content-Type", "application/json");
 
-export const addChapterToUserHistory = async (chapter: Chapter) => {
-  const res = await fetch("/api/history", {
-    method: 'PUT',
-    body: JSON.stringify({ chapterId: chapter.id, novelId: chapter.novelId })
+  const url = `${env.NEXT_PUBLIC_BASE_URL}/library`;
+
+  const res = await fetch(url, {
+    method: "PUT",
+    headers: myHeaders,
+    body: JSON.stringify({ chapterId: chapter.id, novelId: chapter.novelId }),
   });
-  
-  if (!res.ok && res.status != UNAUTHORIZED_STATUS_CODE) {
-    throw new Error("Failed to update user history")
+
+  if (!res.ok) {
+    const data = await res.json() as ApiResponseError;
+    throw new ApiError(data);
   }
 }
+
+export const addChapterToUserHistory = withAuth(request);

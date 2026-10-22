@@ -2,8 +2,6 @@ import { getAuthTokens, getCurrentUser, refreshTokens } from '@/lib/sessions';
 import { NextRequest, NextResponse } from 'next/server';
 import { env } from './env';
 import { isAdminCheck } from "./utils/api-utils";
-import { LoginResponse } from './types/authentication';
-import { ACCESS_TOKEN_COOKIE_NAME } from './utils/constants';
 
 // has to be unauthenticated to access
 const authRoutes = [

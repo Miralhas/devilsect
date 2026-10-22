@@ -5,13 +5,8 @@ import { SortKey } from "@/lib/schemas/search-params/user-library-params-schema"
 import { useGetUserLibrary } from "@/service/library/queries/use-get-user-library";
 import { HistoryIcon } from "lucide-react";
 import HistoryNovels from "./history-novels";
-import { useAuthContext } from "@/contexts/use-auth-context";
 
 const UserHistory = () => {
-  const { authState } = useAuthContext();
-
-  if (!authState) return null;
-
   const libraryQuery = useGetUserLibrary({ size: 6, sort: SortKey.LAST_READ });
 
   const noResults = !libraryQuery.data || libraryQuery.data?.results.length <= 0;

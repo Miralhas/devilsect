@@ -5,6 +5,7 @@ import { useGlobalLoginContext } from "@/contexts/global-login-context";
 import { useAddNovelRating } from "@/service/novels/mutations/use-add-novel-rating";
 import { useGetNovelMetrics } from "@/service/novels/queries/use-get-novel-metrics";
 import { Novel } from "@/types/novel";
+import { cn } from "@/utils/common-utils";
 import Rating from '@mui/material/Rating';
 import { StarIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -65,7 +66,7 @@ const NovelRating = ({ novel }: { novel: Novel }) => {
 
   return (
     <div className="space-y-0.5">
-      <div className="flex gap-1 items-center ">
+      <div className={cn("flex gap-1 items-center", mutation.isPending && "animate-pulse")}>
         <Rating
           value={rating}
           precision={0.5}
@@ -76,7 +77,7 @@ const NovelRating = ({ novel }: { novel: Novel }) => {
         />
         <RatingLabel size={query.data.ratingSize} value={query.data.ratingValue ?? 0} />
         {userClicked ? (
-          <Button variant="pure" size="sm" className="text-xs text-muted-foreground duration-300 underline gap-x-0.25 transition-opacity hover:opacity-70" onClick={handleMutation}>
+          <Button variant="pure" size="sm" className="text-xs text-muted-foreground duration-300 underline gap-x-0.25 transition-opacity hover:opacity-70" onClick={handleMutation} disabled={mutation.isPending}>
             Confirm Rating: {rating}
             <StarIcon className="size-3 text-muted-foreground" fill="#9f9fa9" />
           </Button>

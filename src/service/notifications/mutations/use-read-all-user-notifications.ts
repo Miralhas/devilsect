@@ -4,7 +4,7 @@ import { readAllUserNotifications } from "../api/read-all-user-notifications";
 
 export const useReadAllUserNotifications = () => {
   const client = useQueryClient();
-  
+
   return useMutation({
     mutationFn: readAllUserNotifications,
     onSuccess: () => {

@@ -6,7 +6,7 @@ import { libraryKeys } from "../queries/query-keys";
 export const useAddChapterToUserHistory = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (chapter: Chapter) => addChapterToUserHistory(chapter),
+    mutationFn: addChapterToUserHistory,
     onError: (error) => {
       console.log(`[useAddChapterToUserHistory] - Error when trying to add chapter to user history.': ${error}`);
     },

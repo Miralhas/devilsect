@@ -1,14 +1,32 @@
+import { env } from "@/env";
+import { ApiError } from "@/service/api-error";
+import { withAuth } from "@/service/with-auth-request";
+import { ApiResponseError } from "@/types/api";
+import { AuthState } from "@/types/authentication";
+
 type Params = {
   commentId: number;
   novelSlug: string
 }
 
-export const deleteNovelReview = async ({ commentId, novelSlug }: Params) => {
-  const res = await fetch(`/api/comment/${novelSlug}/action/${commentId}`, {
+const request = async (authState: AuthState, params: Params) => {
+  const { commentId, novelSlug } = params;
+
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${authState.accessToken}`);
+  myHeaders.append("Content-Type", "application/json");
+
+  const url = `${env.NEXT_PUBLIC_BASE_URL}/novels/${novelSlug}/reviews/${commentId}`;
+
+  const res = await fetch(url, {
     method: "DELETE",
+    headers: myHeaders,
   });
-  
+
   if (!res.ok) {
-    throw new Error("Failed to DELETE novel review!")
+    const data = await res.json() as ApiResponseError;
+    throw new ApiError(data);
   }
 }
+
+export const deleteNovelReview = withAuth(request);

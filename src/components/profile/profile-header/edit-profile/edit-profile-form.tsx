@@ -10,28 +10,20 @@ import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { EditProfileInput, editProfileSchema } from "@/lib/schemas/edit-profile-schema";
-import { editProfileAction } from "@/service/user/actions/edit-profile-action";
+import { revalidatePath } from "@/service/actions";
+import { useEditProfile } from "@/service/user/mutations/use-edit-profile-mutation";
 import { User } from "@/types/authentication";
-import { actionErrorMessage } from "@/utils/string-utils";
+import { isApiError } from "@/utils/common-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";
-import { startTransition, useActionState, useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-
-
 const EditProfileForm = ({ user, handleClose }: { user: User; handleClose: () => void }) => {
-  const [formState, formAction, isPending] = useActionState(editProfileAction, { success: undefined });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  useEffect(() => {
-    if (formState.success) {
-      toast.success("Profile updated successfully!")
-      handleClose()
-    }
-  }, [formState, handleClose])
+  const mutation = useEditProfile();
 
   const toggleShowPassword = () => setShowPassword(prev => !prev);
   const toggleShowConfirmPassword = () => setShowConfirmPassword(prev => !prev);
@@ -42,20 +34,42 @@ const EditProfileForm = ({ user, handleClose }: { user: User; handleClose: () =>
     mode: "onSubmit"
   });
 
-  const { errors: clientErrors, isDirty, } = form.formState;
+  const { errors, isDirty } = form.formState;
 
-  const onSubmit = form.handleSubmit((data: EditProfileInput) => {
-    startTransition(() => formAction(data));
-  });
+  const onSubmit = (input: EditProfileInput) => {
+    mutation.mutate(input, {
+      onSuccess: () => {
+        toast.success("Profile updated successfully!");
+        revalidatePath("/profile");
+        handleClose();
+      },
+      onError: (error) => {
+        console.log(error)
+        form.setError('root', { message: isApiError(error) ? error.detail : error.message })
+        if (isApiError(error) && error.errors) {
+          Object.entries(error.errors).map(([key, value]) => {
+            form.setError(
+              key as keyof EditProfileInput,
+              {
+                type: error.status.toString(),
+                message: value,
+              });
+          });
+        }
+      },
+    })
+  };
+
+  const isPending = mutation.isPending
 
   return (
-    <form className="space-y-5" onSubmit={onSubmit}>
-      {formState.errors?.error ? (
+    <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
+      {errors.root ? (
         <Alert variant="destructive" className="bg-primary/20 border border-accent/70 rounded-sm text-red-900">
           <AlertCircle className="h-4 w-4" />
           <AlertTitle className="font-semibold mb-1">Error editing profile</AlertTitle>
           <AlertDescription className="tracking-wider">
-            {formState.errors.error}
+            {errors.root.message}
           </AlertDescription>
         </Alert>
       ) : null}
@@ -66,14 +80,11 @@ const EditProfileForm = ({ user, handleClose }: { user: User; handleClose: () =>
           type="text"
           placeholder="Username"
           disabled={isPending}
-          aria-invalid={Boolean(clientErrors.username) || Boolean(formState.errors?.username)}
+          aria-invalid={Boolean(errors.username)}
           {...form.register("username")}
         />
-        {clientErrors.username ? (
-          <p className="text-red-700/80 text-sm">{clientErrors.username.message}</p>
-        ) : null}
-        {formState.errors?.username ? (
-          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.username)}</p>
+        {errors.username ? (
+          <p className="text-red-700/80 text-sm">{errors.username.message}</p>
         ) : null}
       </div>
 
@@ -85,7 +96,7 @@ const EditProfileForm = ({ user, handleClose }: { user: User; handleClose: () =>
             type={showPassword ? "text" : "password"}
             placeholder="••••••••"
             disabled={isPending}
-            aria-invalid={Boolean(clientErrors.password) || Boolean(formState.errors?.password)}
+            aria-invalid={Boolean(errors.password)}
             className="pr-9"
             {...form.register("password")}
           />
@@ -95,11 +106,8 @@ const EditProfileForm = ({ user, handleClose }: { user: User; handleClose: () =>
             {showPassword ? <EyeOffIcon className="size-4" /> : <EyeIcon className="size-4" />}
           </span>
         </div>
-        {clientErrors.password ? (
-          <p className="text-red-700/80 text-sm">{clientErrors.password.message}</p>
-        ) : null}
-        {formState.errors?.password ? (
-          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.password)}</p>
+        {errors.password ? (
+          <p className="text-red-700/80 text-sm">{errors.password.message}</p>
         ) : null}
       </div>
 
@@ -111,18 +119,15 @@ const EditProfileForm = ({ user, handleClose }: { user: User; handleClose: () =>
             type={showConfirmPassword ? "text" : "password"}
             placeholder="••••••••"
             disabled={isPending}
-            aria-invalid={Boolean(clientErrors.confirmPassword) || Boolean(formState.errors?.confirmPassword)}
+            aria-invalid={Boolean(errors.confirmPassword)}
             {...form.register("confirmPassword")}
           />
           <span className="absolute right-0 top-0 m-2.5 mr-4 text-muted-foreground cursor-pointer hover:text-accent-foreground/90 transition-colors duration-200" onClick={toggleShowConfirmPassword}>
             {showConfirmPassword ? <EyeOffIcon className="size-4" /> : <EyeIcon className="size-4" />}
           </span>
         </div>
-        {clientErrors.confirmPassword ? (
-          <p className="text-red-700/80 text-sm">{clientErrors.confirmPassword.message}</p>
-        ) : null}
-        {formState.errors?.confirmPassword ? (
-          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.confirmPassword)}</p>
+        {errors.confirmPassword ? (
+          <p className="text-red-700/80 text-sm">{errors.confirmPassword.message}</p>
         ) : null}
       </div>
       <div className="grid grid-cols-2 gap-4">

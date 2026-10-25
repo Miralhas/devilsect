@@ -1,17 +1,17 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { deleteNotificationAction } from "@/service/notifications/actions/delete-notification-action";
+import { revalidatePath } from "@/service/actions";
+import { useRemoveNotification } from "@/service/notifications/mutations/remove-notification-mutation";
 import { cn } from "@/utils/common-utils";
 import { XIcon } from "lucide-react";
-import { startTransition, useActionState } from "react";
 
 const DeleteNotification = ({ notificationId }: { notificationId: number }) => {
-  const [, action, isPending] = useActionState(deleteNotificationAction, { success: undefined });
+  const { mutate, isPending } = useRemoveNotification();
 
-  const onDelete = () => {
-    startTransition(() => action(notificationId));
-  }
+  const onDelete = () => mutate(notificationId, {
+    onSuccess: () => revalidatePath("/profile/inbox"),
+  });
 
   return (
     <Button

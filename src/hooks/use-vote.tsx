@@ -1,4 +1,4 @@
-import { deleteVoteAction } from "@/service/comments/actions/delete-vote-action";
+import { useRemoveVoteMutation } from "@/service/comments/mutations/use-remove-vote-mutation";
 import { useVoteMutation } from "@/service/comments/mutations/use-vote-mutation";
 import { User } from "@/types/authentication";
 import { ThreadedComment, Vote } from "@/types/threaded-comment";
@@ -13,6 +13,7 @@ const useVote = ({ comment, user }: { comment: ThreadedComment; user?: User }) =
   const isBackendUpvoter = isBackendVoter && isBackendVoter.type === "UPVOTE";
   const isBackendDownvoter = isBackendVoter && isBackendVoter.type === "DOWNVOTE";
   const voteMutation = useVoteMutation(comment.id);
+  const removeVoteMutation = useRemoveVoteMutation();
 
   const onDeleteVote = () => {
     onDeleteUpvote();
@@ -69,7 +70,7 @@ const useVote = ({ comment, user }: { comment: ThreadedComment; user?: User }) =
   }
 
   const onDeleteVoteMutation = async () => {
-    await deleteVoteAction(comment.id)
+    removeVoteMutation.mutate(comment.id,{onSuccess: () => console.log('x')});
   }
 
   const onUpvoteMutation = (vote: Vote) => {

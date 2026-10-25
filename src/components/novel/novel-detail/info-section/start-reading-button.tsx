@@ -1,50 +1,47 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { useAuthContext } from "@/contexts/use-auth-context";
 import { useGetUserLibrary } from "@/service/library/queries/use-get-user-library";
 import { Novel } from "@/types/novel";
 import Link from "next/link";
-import BookmarkNovel from "./bookmark-novel";
 import StartReadingButtonLoading from "./start-reading-button-loading";
+import BookmarkNovel from "./bookmark-novel";
 
 type StartReadingButtonProps = {
   novel: Novel;
 };
 
 const StartReadingButton = ({ novel }: StartReadingButtonProps) => {
-  const { authState, isLoading } = useAuthContext();
-  const { data: paginatedUserLibrary, isLoading: libraryLoading } = useGetUserLibrary({ novelSlug: novel.slug, size: 1 });
+  const { data, isLoading } = useGetUserLibrary({
+    novelSlug: novel.slug,
+    size: 1,
+  });
 
-  if (libraryLoading) {
-    return <StartReadingButtonLoading />
-  }
+  if (isLoading) return <StartReadingButtonLoading />
 
-  if (isLoading) {
-    return <StartReadingButtonLoading />
-  }
+  const library = data?.results[0];
 
-  const hasNovelOnHistory = !!paginatedUserLibrary && paginatedUserLibrary?.totalItems > 0;
-  const isBookmarked = hasNovelOnHistory && paginatedUserLibrary.results[0].bookmarked;
-  const libraryId = paginatedUserLibrary?.results[0]?.libraryElementId;
+  const href = library?.chapterNumber
+    ? `/novels/${novel.slug}/${library.chapterSlug}`
+    : `/novels/${novel.slug}/${novel.firstChapter.slug}`;
+
+  const label = library?.chapterNumber
+    ? `Read Chapter ${library.chapterNumber}`
+    : "Start Reading";
 
   return (
-    <div className="gap-2 flex flex-col w-full lg:max-w-[335px]">
-      {authState?.user && (
-        <BookmarkNovel hasNovelOnHistory={hasNovelOnHistory} isBookmarked={isBookmarked} novel={novel} libraryId={libraryId} />
-      )}
-      <Button variant="pure" asChild className="transition-opacity ease-in-out duration-300 hover:opacity-80 bg-gradient-to-r from-accent to-primary/60 text-lg h-[60px] text-white font-bold capitalize tracking-tighter">
-        {hasNovelOnHistory && paginatedUserLibrary.results[0].chapterNumber ? (
-          <Link href={`/novels/${novel.slug}/${paginatedUserLibrary?.results[0].chapterSlug}`}>
-            Read Chapter {''}
-            {paginatedUserLibrary?.results[0].chapterNumber}
-          </Link>
-        ) : (
-          <Link href={`/novels/${novel.slug}/${novel.firstChapter.slug}`}>Start Reading</Link>
-        )}
+    <div className="flex w-full flex-col gap-2 lg:max-w-[335px]">
+      <BookmarkNovel novel={novel} library={library} />
+
+      <Button
+        variant="pure"
+        asChild
+        className="h-[60px] bg-linear-to-r from-accent to-primary/60 text-lg font-bold capitalize tracking-tighter text-white transition-opacity duration-300 ease-in-out hover:opacity-80"
+      >
+        <Link href={href}>{label}</Link>
       </Button>
     </div>
-  )
-}
+  );
+};
 
 export default StartReadingButton;

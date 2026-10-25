@@ -3,8 +3,6 @@ import AuthenticationInput from "@/components/ui/authentication-input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { SendResetPasswordInput } from "@/lib/schemas/reset-password";
-import { AuthenticationFormState } from "@/types/action-state";
-import { actionErrorMessage } from "@/utils/string-utils";
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
@@ -12,12 +10,11 @@ import { FieldErrors, UseFormRegister } from "react-hook-form";
 type SendEmailFormProps = {
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
   register: UseFormRegister<SendResetPasswordInput>;
-  clientErrors: FieldErrors<SendResetPasswordInput>;
-  actionErrors?: AuthenticationFormState["errors"];
+  errors: FieldErrors<SendResetPasswordInput>;
   isPending: boolean;
 };
 
-const SendEmailForm = ({ actionErrors, clientErrors, onSubmit, register, isPending }: SendEmailFormProps) => {
+const SendEmailForm = ({ errors, onSubmit, register, isPending }: SendEmailFormProps) => {
   return (
     <>
       <h1 className="text-2xl font-bold tracking-tight text-accent-foreground text-center mb-5">Reset Password</h1>
@@ -26,12 +23,12 @@ const SendEmailForm = ({ actionErrors, clientErrors, onSubmit, register, isPendi
           Enter your email address and we&apos;ll send you a verification code to reset your password.
         </p>
         <form onSubmit={onSubmit} className="space-y-4">
-          {actionErrors?.error ? (
+          {errors?.root ? (
             <Alert variant="destructive" className="bg-primary/20 border border-accent/70 rounded-sm text-red-700">
               <AlertCircle className="h-4 w-4" />
               <AlertTitle className="font-semibold mb-1">Error Reseting Password</AlertTitle>
               <AlertDescription className="font-light tracking-wider">
-                {actionErrors.error}
+                {errors.root.message}
               </AlertDescription>
             </Alert>
           ) : null}
@@ -41,14 +38,11 @@ const SendEmailForm = ({ actionErrors, clientErrors, onSubmit, register, isPendi
               id="email"
               placeholder="example@email.com"
               disabled={isPending}
-              aria-invalid={Boolean(clientErrors.email) || Boolean(actionErrors?.email)}
+              aria-invalid={Boolean(errors.email)}
               {...register("email")}
             />
-            {clientErrors.email ? (
-              <p className="text-red-700/80 text-sm">{clientErrors.email.message}</p>
-            ) : null}
-            {actionErrors?.email ? (
-              <p className="text-red-700/80 text-sm">{actionErrorMessage(actionErrors.email)}</p>
+            {errors.email ? (
+              <p className="text-red-700/80 text-sm">{errors.email.message}</p>
             ) : null}
           </div>
           <div className="grid">

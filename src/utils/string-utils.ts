@@ -23,11 +23,6 @@ export const capitalize = (val: string) => {
   return val1?.split(" ").map(w => w[0]?.toUpperCase() + w?.slice(1)).join(" ");
 }
 
-export const actionErrorMessage = (error: string | string[]) => {
-  if (Array.isArray(error)) return error.join(", ");
-  return error;
-};
-
 export const stripHtml = (html: string): string => {
   return html.replace(/<[^>]*>?/gm, "").trim();
 }

@@ -1,25 +1,27 @@
 import { env } from "@/env";
 import { UpdateChapterInput } from "@/lib/schemas/update-chapter-schema";
-import { getAccessToken } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
+import { withAuth } from "@/service/with-auth-request";
 import { ApiResponseError } from "@/types/api";
+import { AuthState } from "@/types/authentication";
 import { Chapter } from "@/types/chapter";
-import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
 
-export const updateChapter = async (chapter: Chapter, data: UpdateChapterInput) => {
+type Params = {
+  chapter: Chapter,
+  input: UpdateChapterInput,
+}
+
+const request = async (authState: AuthState, { chapter, input }: Params) => {
   const url = `${env.NEXT_PUBLIC_BASE_URL}/novels/${chapter.novelSlug}/chapters/${chapter.slug}`;
 
-  const session = await getAccessToken();
-  if (!session) throw new Error(INVALID_SESSION_MESSAGE);
-
   const myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${session?.value}`);
+  myHeaders.append("Authorization", `Bearer ${authState.accessToken}`);
   myHeaders.append("Content-Type", "application/json");
 
   const res = await fetch(url, {
     method: "PUT",
     headers: myHeaders,
-    body: JSON.stringify(data)
+    body: JSON.stringify(input)
   });
 
   if (!res.ok) {
@@ -27,3 +29,5 @@ export const updateChapter = async (chapter: Chapter, data: UpdateChapterInput) 
     return new ApiError(data);
   }
 }
+
+export const updateChapter = withAuth(request);

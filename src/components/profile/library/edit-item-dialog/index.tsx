@@ -14,7 +14,7 @@ import { Library } from "@/types/library";
 import { cn } from "@/utils/common-utils";
 import { SquarePen } from "lucide-react";
 import { useState } from "react";
-import RemoveBookmarkButton from "../../remove-bookmark-button";
+import RemoveBookmarkButton from "./remove-bookmark-button";
 import CompleteActionButton from "./complete-action-button";
 
 const EditItemDialog = ({ display, item }: { display: "MOBILE" | "DESKTOP", item: Library; }) => {
@@ -41,8 +41,8 @@ const EditItemDialog = ({ display, item }: { display: "MOBILE" | "DESKTOP", item
           </DialogDescription>
         </DialogHeader>
         <div className="grid w-full p-6 gap-4">
-          <RemoveBookmarkButton setOpen={setOpen} item={item} />
-          <CompleteActionButton setOpen={setOpen} item={item} />
+          <RemoveBookmarkButton item={item} />
+          <CompleteActionButton item={item} />
         </div>
       </DialogContent>
     </Dialog>

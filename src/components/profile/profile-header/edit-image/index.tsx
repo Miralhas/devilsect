@@ -2,11 +2,11 @@
 
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import { env } from "@/env";
-import { editProfilePictureAction } from "@/service/user/actions/profile-picture-action";
+import { useEditProfilePicture } from "@/service/user/mutations/use-edit-profile-picture";
 import { User } from "@/types/authentication";
-import { cn } from "@/utils/common-utils";
+import { cn, isApiError } from "@/utils/common-utils";
 import { Pencil } from "lucide-react";
-import { ChangeEvent, startTransition, useActionState, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { toast } from "sonner";
 import EditImageModal from "./edit-image-modal";
 
@@ -16,23 +16,9 @@ const EditImage = ({ user }: { user: User }) => {
   const inputref = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const [open, setOpen] = useState(false);
-  const [state, action, isPending] = useActionState(editProfilePictureAction, { success: undefined });
+  const mutation = useEditProfilePicture();
 
   const imgUrl = `${env.NEXT_PUBLIC_BASE_URL}/users/${user.id}/image#${new Date().getTime().toString()}`;
-
-  useEffect(() => {
-    if (state.success === undefined) return;
-    if (state.success && imageRef.current) {
-      imageRef.current.src = `${imgUrl.split("#")[0]}#${state.message}`;
-      imageRef.current.srcset = "";
-      (document.querySelector(".user-profile-header-image") as HTMLImageElement).src = `${imgUrl.split("#")[0]}#${state.message}`;
-      (document.querySelector(".user-profile-header-image") as HTMLImageElement).srcset = ""
-      toast.success("Profile image updated successfully!");
-      return;
-    }
-
-    toast.error(state.message, { description: state.success });
-  }, [state, imgUrl]);
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -48,15 +34,32 @@ const EditImage = ({ user }: { user: User }) => {
     }
   }
 
-  const onStartTransition = (file: Blob) => {
+  const onSubmit = (file: Blob) => {
     const formData = new FormData();
     formData.append("file", file, `${user.username}-image.webp`);
-    startTransition(() => action({ formData, userId: user.id }));
+    mutation.mutate({ formData, userId: user.id }, {
+      onSuccess: () => {
+        if (imageRef.current) {
+          const newDate = new Date().getTime().toString()
+          imageRef.current.src = `${imgUrl.split("#")[0]}#${newDate}`;
+          imageRef.current.srcset = "";
+          (document.querySelector(".user-profile-header-image") as HTMLImageElement).src = `${imgUrl.split("#")[0]}#${newDate}`;
+          (document.querySelector(".user-profile-header-image") as HTMLImageElement).srcset = ""
+          toast.success("Profile image updated successfully!");
+          return;
+        }
+      },
+      onError: (error) => toast.error("Failed to update profile picture", {
+        description: isApiError(error) ? error.detail : error.message,
+      }),
+    })
   }
+
+  const isPending = mutation.isPending
 
   return (
     <>
-      <EditImageModal open={open} setOpen={setOpen} imageFile={file} onStartTransition={onStartTransition} />
+      <EditImageModal open={open} setOpen={setOpen} imageFile={file} onMutate={onSubmit} />
       <div className="relative group" onClick={onAvatarClick}>
         <div className="absolute -inset-1 bg-gradient-to-br from-primary to-accent/20 rounded-full blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
         <div className={cn("rounded-full size-32 md:size-36 aspect-square overflow-hidden relative", isPending && "animate-pulse")}>

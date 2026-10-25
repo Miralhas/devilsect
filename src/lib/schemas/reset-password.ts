@@ -13,13 +13,22 @@ export const resetPasswordTokenSchema = z.object({
     .string()
     .min(6, { message: "Reset password tokens must be 6 characters long" })
     .max(6, { message: "Reset password tokens must be 6 characters long" })
-    .regex(OTP_TOKEN_REGEX, {message: "Reset password token must contain only digits [0 ~ 9]"}),
+    .regex(OTP_TOKEN_REGEX, { message: "Reset password token must contain only digits [0 ~ 9]" }),
   newPassword: z
     .string()
     .min(4, {
       message: "Password must be at least 4 characters long",
     }),
-})
+  confirmPassword: z
+    .string()
+    .min(4, {
+      message: "Password must be at least 4 characters long",
+    }),
+}).refine(value => value.newPassword === value.confirmPassword, {
+  message: "Passwords must be the same",
+  path: ["confirmPassword"]
+});
+
 
 export type ResetPasswordTokenInput = z.infer<typeof resetPasswordTokenSchema>;
 

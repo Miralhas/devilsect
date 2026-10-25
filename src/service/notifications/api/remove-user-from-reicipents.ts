@@ -1,18 +1,12 @@
 import { env } from "@/env";
-import { getAccessToken } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
+import { withAuth } from "@/service/with-auth-request";
 import { ApiResponseError } from "@/types/api";
-import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
+import { AuthState } from "@/types/authentication";
 
-export const removeUserFromRecipients = async (notificationId: number) => {
-  const session = await getAccessToken();
-
-  if (!session) {
-    throw new Error(INVALID_SESSION_MESSAGE)
-  }
-
+const request = async (authState: AuthState, notificationId: number) => {
   const myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${session.value}`);
+  myHeaders.append("Authorization", `Bearer ${authState.accessToken}`);
   const url = `${env.NEXT_PUBLIC_BASE_URL}/notifications/recipients/${notificationId}`;
 
   const res = await fetch(url, {
@@ -22,6 +16,8 @@ export const removeUserFromRecipients = async (notificationId: number) => {
 
   if (!res.ok) {
     const error: ApiResponseError = await res.json();
-    throw new ApiError(error)
+    throw new ApiError(error);
   }
 }
+
+export const removeUserFromRecipients = withAuth(request);

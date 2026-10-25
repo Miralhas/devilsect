@@ -1,16 +1,14 @@
 import { env } from "@/env";
-import { getAccessToken } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
+import { withAuth } from "@/service/with-auth-request";
 import { ApiResponseError } from "@/types/api";
-import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
+import { AuthState } from "@/types/authentication";
 
-export const deleteNovelLibraryComplete = async (libraryId: number) => {
+const request = async (authState: AuthState, libraryId: number) => {
   const url = `${env.NEXT_PUBLIC_BASE_URL}/library/complete/${libraryId}`;
-  const session = await getAccessToken();
-  if (!session) throw new Error(INVALID_SESSION_MESSAGE);
 
   const myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${session?.value}`);
+  myHeaders.append("Authorization", `Bearer ${authState.accessToken}`);
 
   const res = await fetch(url, {
     method: "DELETE",
@@ -22,3 +20,5 @@ export const deleteNovelLibraryComplete = async (libraryId: number) => {
     throw new ApiError(data);
   }
 }
+
+export const markAsIncomplete = withAuth(request);

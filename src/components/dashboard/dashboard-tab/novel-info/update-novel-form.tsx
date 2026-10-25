@@ -12,11 +12,11 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { UpdateNovelInput, updateNovelSchema } from "@/lib/schemas/update-novel-schema";
-import { updateNovelAction } from "@/service/dashboard/actions/update-novel-action";
+import { useUpdateNovel } from "@/service/dashboard/mutations/use-update-novel";
 import { Genre, Novel, NovelStatus, Tag } from "@/types/novel";
-import { actionErrorMessage } from "@/utils/string-utils";
+import { isApiError } from "@/utils/common-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { startTransition, useActionState, useEffect } from "react";
+import { redirect } from "next/navigation";
 import { useController, useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 import DescriptionPreviewModal from "./description-preview-modal";
@@ -24,19 +24,7 @@ import NovelGenres from "./novel-genres";
 import TagsCombobox from "./tags-combobox";
 
 const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
-  const action = updateNovelAction.bind(null, novel)
-  const [formState, formAction, isPending] = useActionState(action, { success: undefined });
-
-  useEffect(() => {
-    if (formState.success === undefined) {
-      return;
-    } else if (formState.success) {
-      toast.success("Novel updated successfully!");
-    } else {
-      toast.error("Failed to update novel!", { description: formState.errors!["error"] ?? "" });
-    };
-  }, [formState.success, formState.errors]);
-
+  const { isPending, mutate } = useUpdateNovel();
 
   const form = useForm<UpdateNovelInput>({
     resolver: zodResolver(updateNovelSchema),
@@ -63,12 +51,22 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
     control: form.control,
   });
 
-  const { errors: clientErrors, isDirty } = form.formState;
+  const { errors, isDirty } = form.formState;
 
-  const description = useWatch({ control: form.control, name: "description", defaultValue: novel.description});
+  const description = useWatch({ control: form.control, name: "description", defaultValue: novel.description });
 
-  const onSubmit = form.handleSubmit((data: UpdateNovelInput) => {
-    startTransition(() => formAction(data));
+  const onSubmit = form.handleSubmit((input: UpdateNovelInput) => {
+    mutate({ novel, input }, {
+      onSuccess: ({ slug }) => {
+        toast.success("Novel updated successfully!");
+        if (slug !== novel.slug) redirect(`/dashboard/${slug}`, "replace")
+      },
+      onError: (error) => {
+        toast.error("Failed to update novel!", {
+          description: isApiError(error) ? error.detail : error.message,
+        });
+      },
+    })
   });
 
   const onReset = () => {
@@ -106,14 +104,11 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
           type="text"
           defaultValue={novel.title}
           placeholder="Novel title"
-          aria-invalid={Boolean(clientErrors.title) || Boolean(formState.errors?.title)}
+          aria-invalid={Boolean(errors.title)}
           {...form.register("title")}
         />
-        {clientErrors.title ? (
-          <p className="text-red-700/80 text-sm">{clientErrors.title.message}</p>
-        ) : null}
-        {formState.errors?.title ? (
-          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.title)}</p>
+        {errors.title ? (
+          <p className="text-red-700/80 text-sm">{errors.title.message}</p>
         ) : null}
       </div>
 
@@ -124,14 +119,11 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
           type="text"
           defaultValue={novel.alias !== null ? novel.alias : undefined}
           placeholder="Novel alias"
-          aria-invalid={Boolean(clientErrors.alias) || Boolean(formState.errors?.alias)}
+          aria-invalid={Boolean(errors.alias)}
           {...form.register("alias")}
         />
-        {clientErrors.alias ? (
-          <p className="text-red-700/80 text-sm">{clientErrors.alias.message}</p>
-        ) : null}
-        {formState.errors?.alias ? (
-          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.alias)}</p>
+        {errors.alias ? (
+          <p className="text-red-700/80 text-sm">{errors.alias.message}</p>
         ) : null}
       </div>
 
@@ -142,14 +134,11 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
           type="text"
           defaultValue={novel.author}
           placeholder="Novel author"
-          aria-invalid={Boolean(clientErrors.author) || Boolean(formState.errors?.author)}
+          aria-invalid={Boolean(errors.author)}
           {...form.register("author")}
         />
-        {clientErrors.author ? (
-          <p className="text-red-700/80 text-sm">{clientErrors.author.message}</p>
-        ) : null}
-        {formState.errors?.author ? (
-          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.author)}</p>
+        {errors.author ? (
+          <p className="text-red-700/80 text-sm">{errors.author.message}</p>
         ) : null}
       </div>
 
@@ -157,8 +146,8 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
         <Label htmlFor="status" className="font-semibold text-muted-foreground">Status</Label>
         <Select
           defaultValue={novel.status}
-          onValueChange={(val: NovelStatus) => form.setValue("status", val, {shouldDirty: true})}
-          aria-invalid={Boolean(clientErrors.status) || Boolean(formState.errors?.status)}
+          onValueChange={(val: NovelStatus) => form.setValue("status", val, { shouldDirty: true })}
+          aria-invalid={Boolean(errors.status)}
           {...form.register("status")}
         >
           <SelectTrigger id="status" className="w-[180px]">
@@ -170,11 +159,8 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
           </SelectContent>
         </Select>
 
-        {clientErrors.status ? (
-          <p className="text-red-700/80 text-sm">{clientErrors.status.message}</p>
-        ) : null}
-        {formState.errors?.status ? (
-          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.status)}</p>
+        {errors.status ? (
+          <p className="text-red-700/80 text-sm">{errors.status.message}</p>
         ) : null}
       </div>
 
@@ -187,15 +173,12 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
           id="description"
           defaultValue={novel.description}
           placeholder="Novel description"
-          aria-invalid={Boolean(clientErrors.description) || Boolean(formState.errors?.description)}
+          aria-invalid={Boolean(errors.description)}
           rows={7}
           {...form.register("description")}
         />
-        {clientErrors.description ? (
-          <p className="text-red-700/80 text-sm">{clientErrors.description.message}</p>
-        ) : null}
-        {formState.errors?.description ? (
-          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.description)}</p>
+        {errors.description ? (
+          <p className="text-red-700/80 text-sm">{errors.description.message}</p>
         ) : null}
       </div>
 
@@ -204,11 +187,8 @@ const UpdateNovelForm = ({ novel }: { novel: Novel }) => {
           <span className="text-xs relative top-0.25 font-light">{genresField.value.length} selected</span>
         </Label>
         <NovelGenres selectedGenres={genresField.value} handleGenres={handleGenres} />
-        {clientErrors.genres ? (
-          <p className="text-red-700/80 text-sm">{clientErrors.genres.message}</p>
-        ) : null}
-        {formState.errors?.genres ? (
-          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.genres)}</p>
+        {errors.genres ? (
+          <p className="text-red-700/80 text-sm">{errors.genres.message}</p>
         ) : null}
       </div>
 

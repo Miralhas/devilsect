@@ -3,29 +3,19 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import { Button } from "@/components/ui/button";
 import { env } from "@/env";
-import { updateNovelImageAction } from "@/service/dashboard/actions/update-novel-image-action";
+import { useUpdateNovelCover } from "@/service/dashboard/mutations/use-update-novel-cover";
 import { Novel } from "@/types/novel";
+import { isApiError } from "@/utils/common-utils";
 import { CameraIcon } from "lucide-react";
-import { ChangeEvent, startTransition, useActionState, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 const EditNovelImage = ({ novel }: { novel: Novel }) => {
-  const action = updateNovelImageAction.bind(null, novel);
   const inputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const [imgSrc, setImgSrc] = useState('');
-
-  const [state, imageAction, isPending] = useActionState(action, { success: undefined });
-
-  useEffect(() => {
-    if (state.success === undefined) return;
-    if (state.success) {
-      toast.success("Image updated successfully!");
-    } else {
-      toast.success("Failed to update image. Try again later!", { description: state.message });
-    }
-  }, [state]);
+  const { mutate, isPending } = useUpdateNovelCover();
 
   useEffect(() => {
     if (!file) return;
@@ -80,7 +70,12 @@ const EditNovelImage = ({ novel }: { novel: Novel }) => {
       const formData = new FormData();
       formData.append("file", blob, `${novel.title}-cover.webp`);
 
-      startTransition(() => imageAction({ formData: formData }));
+      mutate({ novel, formData }, {
+        onSuccess: () => toast.success("Image updated successfully!"),
+        onError: (error) => toast.error("Failed to update image", {
+          description: isApiError(error) ? error.detail : error.message
+        }),
+      })
     }
   }
 

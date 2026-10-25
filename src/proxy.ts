@@ -40,7 +40,7 @@ export default async function proxy(request: NextRequest) {
   const user = await getCurrentUser();
 
   if (isAdminRoute && !isAdminCheck(user)) {
-    if (!user) return NextResponse.redirect(new URL('/login', request.nextUrl));
+    if (!user) return NextResponse.redirect(new URL(`/login?redirect=${path}`, request.nextUrl));
     return NextResponse.redirect(new URL('/', request.nextUrl));
   }
 

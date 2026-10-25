@@ -6,30 +6,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { UpdateChapterInput, updateChapterSchema } from "@/lib/schemas/update-chapter-schema";
-import { updateChapterAction } from "@/service/dashboard/actions/update-chapter-action";
+import { purgeNovelCache } from "@/service/actions";
+import { useUpdateChapter } from "@/service/dashboard/mutations/use-update-chapter";
 import { Chapter } from "@/types/chapter";
-import { actionErrorMessage } from "@/utils/string-utils";
+import { isApiError } from "@/utils/common-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { startTransition, useActionState, useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 import DescriptionPreviewModal from "../dashboard-tab/novel-info/description-preview-modal";
 
 const UpdateChapterForm = ({ chapter }: { chapter: Chapter }) => {
-  const action = updateChapterAction.bind(null, chapter);
-  const [formState, formAction, isPending] = useActionState(action, { success: undefined });
   const [numberDisabled, setNumberDisabled] = useState(true);
-
-  useEffect(() => {
-    if (formState.success === undefined) {
-      return;
-    } else if (formState.success) {
-      toast.success("Novel updated successfully!");
-    } else {
-      toast.error("Failed to update novel!");
-    };
-  }, [formState.success]);
-
+  const { mutate, isPending } = useUpdateChapter();
 
   const form = useForm<UpdateChapterInput>({
     resolver: zodResolver(updateChapterSchema),
@@ -37,12 +26,20 @@ const UpdateChapterForm = ({ chapter }: { chapter: Chapter }) => {
     mode: "onSubmit"
   });
 
-  const body = useWatch({ control: form.control, name: "body", defaultValue: chapter.body});
+  const body = useWatch({ control: form.control, name: "body", defaultValue: chapter.body });
 
-  const { errors: clientErrors, isDirty } = form.formState;
+  const { errors, isDirty } = form.formState;
 
-  const onSubmit = form.handleSubmit((data: UpdateChapterInput) => {
-    startTransition(() => formAction(data));
+  const onSubmit = form.handleSubmit((input: UpdateChapterInput) => {
+    mutate({ chapter, input }, {
+      onSuccess: () => {
+        toast.success("Chapter updated successfully!");
+        return purgeNovelCache(chapter.novelSlug);
+      },
+      onError: (error) => toast.error("Failed to update chapter!", {
+        description: isApiError(error) ? error.detail : error.message
+      }),
+    })
   });
 
   const onReset = () => {
@@ -58,14 +55,11 @@ const UpdateChapterForm = ({ chapter }: { chapter: Chapter }) => {
           type="text"
           defaultValue={chapter.title}
           placeholder="Chapter title"
-          aria-invalid={Boolean(clientErrors.title) || Boolean(formState.errors?.title)}
+          aria-invalid={Boolean(errors.title)}
           {...form.register("title")}
         />
-        {clientErrors.title ? (
-          <p className="text-red-700/80 text-sm">{clientErrors.title.message}</p>
-        ) : null}
-        {formState.errors?.title ? (
-          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.title)}</p>
+        {errors.title ? (
+          <p className="text-red-700/80 text-sm">{errors.title.message}</p>
         ) : null}
       </div>
 
@@ -78,15 +72,12 @@ const UpdateChapterForm = ({ chapter }: { chapter: Chapter }) => {
           id="description"
           defaultValue={chapter.body}
           placeholder="Chapter body"
-          aria-invalid={Boolean(clientErrors.body) || Boolean(formState.errors?.body)}
+          aria-invalid={Boolean(errors.body)}
           rows={7}
           {...form.register("body")}
         />
-        {clientErrors.body ? (
-          <p className="text-red-700/80 text-sm">{clientErrors.body.message}</p>
-        ) : null}
-        {formState.errors?.body ? (
-          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.body)}</p>
+        {errors.body ? (
+          <p className="text-red-700/80 text-sm">{errors.body.message}</p>
         ) : null}
       </div>
 
@@ -103,15 +94,12 @@ const UpdateChapterForm = ({ chapter }: { chapter: Chapter }) => {
           type="number"
           defaultValue={chapter.number}
           placeholder="Chapter number"
-          aria-invalid={Boolean(clientErrors.number) || Boolean(formState.errors?.number)}
-          onChange={(e) => form.setValue("number", e.target.valueAsNumber, {shouldDirty: true})}
+          aria-invalid={Boolean(errors.number)}
+          onChange={(e) => form.setValue("number", e.target.valueAsNumber, { shouldDirty: true })}
           disabled={numberDisabled}
         />
-        {clientErrors.number ? (
-          <p className="text-red-700/80 text-sm">{clientErrors.number.message}</p>
-        ) : null}
-        {formState.errors?.number ? (
-          <p className="text-red-700/80 text-sm">{actionErrorMessage(formState.errors.number)}</p>
+        {errors.number ? (
+          <p className="text-red-700/80 text-sm">{errors.number.message}</p>
         ) : null}
       </div>
 

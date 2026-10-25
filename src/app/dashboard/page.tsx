@@ -1,6 +1,6 @@
 import DisplayNovels from "@/components/dashboard/display-novels";
 import DisplayUsers from "@/components/dashboard/display-users";
-import PurgeCache from "@/components/dashboard/purge-cache";
+import PurgeAllCache from "@/components/dashboard/purge-cache";
 import DashboardSearch from "@/components/dashboard/search/dashboard-search";
 
 const LayoutPage = () => {
@@ -9,7 +9,7 @@ const LayoutPage = () => {
       <div className="flex w-full items-center justify-center">
         <DashboardSearch />
       </div>
-      <PurgeCache />
+      <PurgeAllCache />
       <DisplayUsers />
       <DisplayNovels />
     </section>

@@ -1,15 +1,12 @@
 import { env } from "@/env";
-import { getAccessToken } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
+import { withAuth } from "@/service/with-auth-request";
 import { ApiResponseError } from "@/types/api";
-import { INVALID_SESSION_MESSAGE } from "@/utils/constants";
+import { AuthState } from "@/types/authentication";
 
-export const deleteVote = async (commentId: number) => {
-  const session = (await getAccessToken())?.value;
-  if (!session) throw new Error(INVALID_SESSION_MESSAGE);
-
+const request = async (authState: AuthState, commentId: number) => {
   const myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${session}`);
+  myHeaders.append("Authorization", `Bearer ${authState.accessToken}`);
   myHeaders.append("Content-Type", "application/json");
 
   const url = `${env.NEXT_PUBLIC_BASE_URL}/comments/${commentId}/vote`;
@@ -24,3 +21,5 @@ export const deleteVote = async (commentId: number) => {
     throw new ApiError(error);
   }
 }
+
+export const deleteVote = withAuth(request);

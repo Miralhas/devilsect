@@ -1,14 +1,11 @@
 import { env } from "@/env";
-import { getAccessToken } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
+import { withAuth } from "@/service/with-auth-request";
 import { ApiResponseError } from "@/types/api";
-
-export const updateUserImage = async (userId: number, formData: FormData) => {
-  const session = await getAccessToken();
-  if (!session) throw new Error("Unauthorized: Missing or invalid session");
-
+import { AuthState } from "@/types/authentication";
+const request = async (authState: AuthState, userId: number, formData: FormData) => {
   const res = await fetch(`${env.NEXT_PUBLIC_BASE_URL}/users/${userId}/image`, {
-    headers: { "Authorization": `Bearer ${session.value}` },
+    headers: { "Authorization": `Bearer ${authState.accessToken}` },
     body: formData,
     method: "PUT"
   });
@@ -18,3 +15,5 @@ export const updateUserImage = async (userId: number, formData: FormData) => {
     throw new ApiError(data);
   }
 }
+
+export const updateUserImage = withAuth(request);

@@ -23,7 +23,7 @@ type Props = {
   setOpen: Dispatch<SetStateAction<boolean>>;
   open: boolean;
   imageFile: File | null;
-  onStartTransition: (file: Blob) => void;
+  onMutate: (file: Blob) => void;
 }
 
 const SCALE = 1;
@@ -51,7 +51,7 @@ function centerAspectCrop(
   )
 }
 
-const EditImageModal = ({ open, setOpen, imageFile, onStartTransition }: Props) => {
+const EditImageModal = ({ open, setOpen, imageFile, onMutate }: Props) => {
   const [imgSrc, setImgSrc] = useState('');
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -118,7 +118,7 @@ const EditImageModal = ({ open, setOpen, imageFile, onStartTransition }: Props) 
     })
 
     setOpen(false);
-    onStartTransition(blob);
+    onMutate(blob);
   }
 
   useDebounceEffect(

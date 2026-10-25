@@ -3,16 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import Link from "next/link";
-import { useEffect } from "react";
-import { toast } from "sonner";
 
 const SuccessFullPasswordReset = () => {
-  useEffect(() => {
-    toast.success("Successfull Password Reset",
-      { description: "Your password has been reset successfully" }
-    );
-  }, []);
-
   return (
     <div className="w-full space-y-8 mt-6 font-roboto pb-4">
       <h1 className="text-2xl font-bold tracking-tight text-accent-foreground text-center">Password Reset Successful</h1>
@@ -26,7 +18,7 @@ const SuccessFullPasswordReset = () => {
         Your password has been reset succesfully.
       </p>
       <Button asChild variant="cool-secondary" className="w-full">
-        <Link href="/login">Login Page</Link>
+        <Link href="/login">Login page</Link>
       </Button>
     </div>
   )

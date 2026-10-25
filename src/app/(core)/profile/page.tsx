@@ -8,7 +8,9 @@ export const metadata: Metadata = {
   title: "Your Profile"
 };
 
-const ProfilePage = () => {
+export const instant = false
+
+const ProfilePage = async () => {
   return (
     <section className="p-4 md:p-10 space-y-12">
       <ProfileHeader />

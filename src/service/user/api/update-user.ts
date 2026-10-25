@@ -1,16 +1,17 @@
+'use client'
+
 import { env } from "@/env";
 import { EditProfileInput } from "@/lib/schemas/edit-profile-schema";
-import { getAccessToken } from "@/lib/sessions";
 import { ApiError } from "@/service/api-error";
+import { withAuth } from "@/service/with-auth-request";
 import { ApiResponseError } from "@/types/api";
+import { AuthState } from "@/types/authentication";
 
-export const updateUser = async (data: EditProfileInput) => {
-  const session = await getAccessToken();
-  if (!session) throw new Error("Unauthorized: Missing or invalid session");
-
+const request = async (authState: AuthState, data: EditProfileInput) => {
   const url = `${env.NEXT_PUBLIC_BASE_URL}/users`;
+  
   const myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${session?.value}`);
+  myHeaders.append("Authorization", `Bearer ${authState.accessToken}`);
   myHeaders.append("Content-Type", "application/json");
 
   const res = await fetch(url, {
@@ -24,3 +25,5 @@ export const updateUser = async (data: EditProfileInput) => {
     throw new ApiError(data);
   }
 }
+
+export const updateUser = withAuth(request);

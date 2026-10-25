@@ -1,22 +1,26 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { purgeNovelCache } from "@/service/dashboard/actions/purge-data-cache";
+import { purgeNovelCache } from "@/service/actions";
 import { cn } from "@/utils/common-utils";
-import { startTransition, useActionState, useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 const PurgeNovelCache = ({ novelSlug }: { novelSlug: string }) => {
-  const purgeAction = purgeNovelCache.bind(null, novelSlug)
-  const [state, action, pending] = useActionState(purgeAction, false);
-
-  useEffect(() => {
-    if (state) toast.success("Cache purged successfully!");
-  }, [state]);
+  const { mutate, isPending } = useMutation({
+    mutationFn: purgeNovelCache,
+    onSuccess: () => toast.success("Cache purged successfully!")
+  })
 
   return (
-    <Button onClick={() => startTransition(() => action(true))} disabled={pending} variant="cool" size="sm" className={cn("w-full max-w-[130px] text-xs", pending && "animate-pulse")}>
-      {pending ? "Purging..." : "Purge Novel Cache"}
+    <Button
+      onClick={() => mutate(novelSlug)}
+      disabled={isPending}
+      variant="cool"
+      size="sm"
+      className={cn("w-full max-w-[130px] text-xs", isPending && "animate-pulse")}
+    >
+      {isPending ? "Purging..." : "Purge Novel Cache"}
     </Button>
   )
 }

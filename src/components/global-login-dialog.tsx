@@ -2,26 +2,26 @@
 
 import {
   Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle
+  DialogContent
 } from "@/components/ui/dialog";
-import { useGlobalLoginContext } from "@/contexts/global-login-context";
+import { useGlobalLoginStore } from "@/contexts/global-login-context";
+import { useAuthContext } from "@/contexts/use-auth-context";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import LoginForm from "./authentication/login/form";
 
 const GlobalLoginDialog = () => {
-  const { handleOpen, open, close, currentUser: user } = useGlobalLoginContext();
+  const { open, close, handleOpen } = useGlobalLoginStore((state) => state);
+  const { authState } = useAuthContext();
+  const isAuthenticated = !!authState;
   const pathname = usePathname();
 
   useEffect(() => {
-    if (user && open) {
+    if (isAuthenticated && open) {
       close();
     }
-  }, [user, close, open]);
+  }, [isAuthenticated, close, open]);
 
   return (
     <Dialog onOpenChange={handleOpen} open={open}>

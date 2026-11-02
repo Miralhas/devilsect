@@ -7,8 +7,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Slider } from "@/components/ui/slider"
-import { AVAILABLE_COLORS, AVAILABLE_FONTS, useReaderSettingsContext } from "@/contexts/reader-settings-context"
-
+import { useReaderSettingsStore } from "@/contexts/reader-settings-context"
+import { AVAILABLE_COLORS, AVAILABLE_FONTS } from "@/stores/reader-settings-store"
 import { Check, MinusIcon, PlusIcon, TypeIcon } from "lucide-react"
 import AutoScroll from "./auto-scroll"
 
@@ -30,7 +30,8 @@ const FontSettings = () => {
     fontFamily,
     textColor,
     opacity,
-  } = useReaderSettingsContext();
+  } = useReaderSettingsStore(state => state);
+
   return (
     <>
       <Popover>

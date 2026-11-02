@@ -9,7 +9,7 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useGlobalLoginContext } from "@/contexts/global-login-context";
+import { useGlobalLoginStore } from "@/contexts/global-login-context";
 import { useAuthContext } from "@/contexts/use-auth-context";
 import { NovelRequestInput, novelRequestSchema } from "@/lib/schemas/novel-request";
 import { useSendNovelRequest } from "@/service/requests/mutations/use-send-novel-request";
@@ -26,7 +26,7 @@ const COOKIE_NAME = "novel_request_timer";
 const NovelRequestForm = () => {
   const { authState } = useAuthContext();
   const isAuthenticated = !!authState;
-  const { handleOpen } = useGlobalLoginContext();
+  const { handleOpen } = useGlobalLoginStore(state => state);
   const mutation = useSendNovelRequest();
 
   const alreadySentRequestToday = hasCookie(COOKIE_NAME);

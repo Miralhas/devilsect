@@ -1,7 +1,8 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { useGlobalLoginContext } from "@/contexts/global-login-context";
+import { useGlobalLoginStore } from "@/contexts/global-login-context";
+import { useAuthContext } from "@/contexts/use-auth-context";
 import { useBookmark } from "@/hooks/use-bookmark";
 import { Library } from "@/types/library";
 import { Novel } from "@/types/novel";
@@ -14,10 +15,12 @@ type BookmarkNovelProps = {
 
 const BookmarkNovel = ({ novel, library }: BookmarkNovelProps) => {
   const { isPending, onBookmark } = useBookmark();
-  const { currentUser, handleOpen } = useGlobalLoginContext();
+  const { handleOpen } = useGlobalLoginStore(state => state);
+  const { authState } = useAuthContext();
+  const isAuthenticated = !!authState;
 
   const handleClick = () => {
-    if (!currentUser) return handleOpen();
+    if (!isAuthenticated) return handleOpen();
 
     if (library?.bookmarked) {
       onBookmark({

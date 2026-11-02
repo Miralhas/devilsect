@@ -1,6 +1,6 @@
 'use client'
 
-import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
+import { useReaderSettingsStore } from "@/contexts/reader-settings-context";
 import { Chapter } from "@/types/chapter";
 import { cn } from "@/utils/common-utils";
 
@@ -11,7 +11,13 @@ type Props = {
 
 
 const ChapterContent = ({ chapter, onClickCallback }: Props) => {
-  const { fontSize, lineHeight, fontFamily, textColor, opacity } = useReaderSettingsContext();
+  const {
+    fontSize,
+    lineHeight,
+    fontFamily,
+    textColor,
+    opacity
+  } = useReaderSettingsStore(state => state);
   const opacityDecimal = (opacity / 100);
   const { title, body } = chapter;
 

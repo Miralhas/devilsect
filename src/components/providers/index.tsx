@@ -1,6 +1,7 @@
 'use client'
 
 import { GlobalLoginProvider } from '@/contexts/global-login-context';
+import { ReaderProvider } from '@/contexts/reader-settings-context';
 import { AuthProvider } from '@/contexts/use-auth-context';
 
 import {
@@ -38,9 +39,11 @@ const Providers = ({ children }: PropsWithChildren) => {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <GlobalLoginProvider>
-          {children}
-        </GlobalLoginProvider>
+        <ReaderProvider>
+          <GlobalLoginProvider>
+            {children}
+          </GlobalLoginProvider>
+        </ReaderProvider>
       </AuthProvider>
     </QueryClientProvider>
   )

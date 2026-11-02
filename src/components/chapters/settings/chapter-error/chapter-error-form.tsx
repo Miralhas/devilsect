@@ -4,19 +4,19 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useController, useForm } from "react-hook-form"
 import { z } from "zod"
 
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { toast } from "sonner"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AlertCircle } from "lucide-react"
+import { useGlobalLoginStore } from "@/contexts/global-login-context"
+import { useAuthContext } from "@/contexts/use-auth-context"
 import { useSendFixChapterRequest } from "@/service/requests/mutations/use-send-fix-chapter-request"
-import { useGlobalLoginContext } from "@/contexts/global-login-context"
+import { ONE_DAY_IN_SECONDS } from "@/utils/constants"
+import { hasCookie, setCookie } from "cookies-next/client"
+import { AlertCircle } from "lucide-react"
 import { useParams } from "next/navigation"
 import { useCallback, useMemo } from "react"
-import { hasCookie, setCookie } from "cookies-next/client"
-import { ONE_DAY_IN_SECONDS } from "@/utils/constants"
-import { useAuthContext } from "@/contexts/use-auth-context"
+import { toast } from "sonner"
 
 const FIX_CHAPTER_ERRORS = [
   {
@@ -61,7 +61,7 @@ const ChapterErrorForm = ({ handleClose }: { handleClose: () => void; }) => {
   const { slug, chapterSlug } = useParams<{ slug: string, chapterSlug: string }>();
   const { authState } = useAuthContext();
   const isAuthenticated = !!authState;
-  const { handleOpen } = useGlobalLoginContext();
+  const { handleOpen } = useGlobalLoginStore(state => state);;
   const mutation = useSendFixChapterRequest();
 
   const COOKIE_NAME = useMemo(() => {

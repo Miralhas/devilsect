@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useGlobalLoginContext } from "@/contexts/global-login-context";
+import { useGlobalLoginStore } from "@/contexts/global-login-context";
 import useVote from "@/hooks/use-vote";
 import { User } from "@/types/authentication";
 import { ThreadedComment } from "@/types/threaded-comment";
@@ -9,7 +9,7 @@ import { LucideThumbsDown, LucideThumbsUp } from "lucide-react";
 const Vote = ({ comment, user }: { comment: ThreadedComment; user?: User }) => {
   const isAuthenticated = user !== undefined;
   const { onDownVote, onUpVote, voteCount, isDownvoter, isUpvoter } = useVote({ comment, user });
-  const { handleOpen } = useGlobalLoginContext();
+  const { handleOpen } = useGlobalLoginStore(state => state);
 
   return (
     <div className="flex items-center gap-2">

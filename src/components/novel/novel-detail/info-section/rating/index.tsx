@@ -1,7 +1,8 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { useGlobalLoginContext } from "@/contexts/global-login-context";
+import { useGlobalLoginStore } from "@/contexts/global-login-context";
+import { useAuthContext } from "@/contexts/use-auth-context";
 import { useAddNovelRating } from "@/service/novels/mutations/use-add-novel-rating";
 import { useGetNovelMetrics } from "@/service/novels/queries/use-get-novel-metrics";
 import { Novel } from "@/types/novel";
@@ -18,8 +19,9 @@ const NovelRating = ({ novel }: { novel: Novel }) => {
   const [rating, setRating] = useState(query.data.ratingValue ?? 0);
   const [userClicked, setUserClicked] = useState(false);
   const mutation = useAddNovelRating();
-  const { handleOpen, currentUser } = useGlobalLoginContext();
-  const isAuthenticated = !!currentUser;
+  const { handleOpen } = useGlobalLoginStore((state) => state);
+  const { authState } = useAuthContext();
+  const isAuthenticated = !!authState;
 
   useEffect(() => {
     if (!userClicked) return;

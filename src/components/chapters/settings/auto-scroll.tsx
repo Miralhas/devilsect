@@ -1,16 +1,15 @@
 'use client'
 
-import { Button } from "@/components/ui/button"
-import { useReaderSettingsContext } from "@/contexts/reader-settings-context"
-
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
+import { useReaderSettingsStore } from "@/contexts/reader-settings-context"
 import { MinusIcon, PlusIcon } from "lucide-react"
 
 const AUTO_SCROLL_MIN_SPEED = 0.5;
@@ -22,7 +21,7 @@ const AutoScroll = () => {
     onAutoScrollActiveChange,
     increaseAutoScrollSpeed,
     decreaseAutoScrollSpeed,
-  } = useReaderSettingsContext();
+  } = useReaderSettingsStore(state => state);
 
   return (
     <Accordion type="single" className="w-full" collapsible>

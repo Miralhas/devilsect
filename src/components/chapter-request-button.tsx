@@ -1,21 +1,21 @@
 'use client'
 
-import { SendIcon } from "lucide-react";
-import { Button } from "./ui/button";
-import { useGlobalLoginContext } from "@/contexts/global-login-context";
-import { useCallback, useMemo } from "react";
-import { hasCookie, setCookie } from "cookies-next/client";
-import { ONE_DAY_IN_SECONDS } from "@/utils/constants";
-import { useSendChapterRequest } from "@/service/requests/mutations/use-send-chapter-request";
-import { toast } from "sonner";
-import { useParams } from "next/navigation";
+import { useGlobalLoginStore } from "@/contexts/global-login-context";
 import { useAuthContext } from "@/contexts/use-auth-context";
+import { useSendChapterRequest } from "@/service/requests/mutations/use-send-chapter-request";
+import { ONE_DAY_IN_SECONDS } from "@/utils/constants";
+import { hasCookie, setCookie } from "cookies-next/client";
+import { SendIcon } from "lucide-react";
+import { useParams } from "next/navigation";
+import { useCallback, useMemo } from "react";
+import { toast } from "sonner";
+import { Button } from "./ui/button";
 
 const ChapterRequestButton = () => {
   const { slug } = useParams<{ slug: string }>()
   const { authState } = useAuthContext();
   const isAuthenticated = !!authState;
-  const { handleOpen } = useGlobalLoginContext();
+  const { handleOpen } = useGlobalLoginStore(state => state);
   const mutation = useSendChapterRequest();
 
   const COOKIE_NAME = useMemo(() => {

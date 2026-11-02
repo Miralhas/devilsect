@@ -1,14 +1,14 @@
 'use client'
 
-import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
+import { useReaderSettingsStore } from "@/contexts/reader-settings-context";
 import { RefObject, useEffect, useRef } from "react";
 
 const useAutoScroll = (divRef: RefObject<HTMLDivElement | null>) => {
   const {
     autoScroll: { active, pause, speed },
     autoScrollPause,
-    onAutoScrollPauseChange
-  } = useReaderSettingsContext();
+    onAutoScrollToggle
+  } = useReaderSettingsStore(state => state);
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const requestIdRef = useRef<number>(undefined);
@@ -51,7 +51,7 @@ const useAutoScroll = (divRef: RefObject<HTMLDivElement | null>) => {
     };
   }, [divRef]);
 
-  return { onAutoScrollPauseChange, autoScrollPause };
+  return { onAutoScrollToggle, autoScrollPause };
 };
 
 export default useAutoScroll;

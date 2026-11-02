@@ -1,8 +1,9 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { useReaderSettingsContext } from "@/contexts/reader-settings-context";
+import { useReaderSettingsStore } from "@/contexts/reader-settings-context";
 import useAutoScroll from "@/hooks/use-auto-scroll";
+import useCheckpoint from "@/hooks/use-checkpoint";
 import { useAddChapterToUserHistory } from "@/service/library/mutations/add-chapter-to-user-history";
 import { User } from "@/types/authentication";
 import { Chapter } from "@/types/chapter";
@@ -13,7 +14,6 @@ import { useEffect, useRef, useState } from "react";
 import DisabledLink from "../disabled-link";
 import ChapterContent from "./chapter-content";
 import Settings from "./settings";
-import useCheckpoint from "@/hooks/use-checkpoint";
 
 const ChapterBody = ({ chapter, shallowUser }: { chapter: Chapter; shallowUser: User | undefined }) => {
   const { previous, next, novelStatus } = chapter;
@@ -26,9 +26,9 @@ const ChapterBody = ({ chapter, shallowUser }: { chapter: Chapter; shallowUser: 
   })
   const divRef = useRef<HTMLDivElement>(null);
   const chapterContentRef = useRef<HTMLDivElement>(null);
-  const { autoScroll } = useReaderSettingsContext();
+  const { autoScroll } = useReaderSettingsStore(state => state);
   const mutation = useAddChapterToUserHistory();
-  const { onAutoScrollPauseChange, autoScrollPause } = useAutoScroll(chapterContentRef);
+  const { onAutoScrollToggle, autoScrollPause } = useAutoScroll(chapterContentRef);
   useCheckpoint(chapter);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const ChapterBody = ({ chapter, shallowUser }: { chapter: Chapter; shallowUser: 
           chapter={chapter}
           onClickCallback={() => {
             setIsNavHidden(prev => !prev);
-            onAutoScrollPauseChange();
+            onAutoScrollToggle();
           }}
         />
 

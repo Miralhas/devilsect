@@ -1,44 +1,21 @@
 'use client'
 
-import { User } from "@/types/authentication";
-import { PropsWithChildren, useState } from "react";
-import { createContext } from "./create-context";
-import { useAuthContext } from "./use-auth-context";
+import { PropsWithChildren, useState } from 'react';
 
-type GlobalLoginState = {
-  open: boolean;
-  currentUser: User | undefined;
-}
+import { createGlobalLoginStore, GlobalLoginStore } from '@/stores/global-login-store';
+import { createContext } from './create-store-context';
 
-type GlobalLoginActions = {
-  handleOpen: () => void;
-  close: () => void;
-}
+export type GlobalLoginApi = ReturnType<typeof createGlobalLoginStore>;
 
-const initialValues: GlobalLoginState = {
-  open: false,
-  currentUser: undefined,
-}
-
-const { ContextProvider, useContext } = createContext<GlobalLoginState & GlobalLoginActions>();
+const { ContextProvider, useStore } = createContext<GlobalLoginStore, GlobalLoginApi>();
 
 export const GlobalLoginProvider = ({ children }: PropsWithChildren) => {
-  const [open, setOpen] = useState(initialValues["open"]);
-  const { authState } = useAuthContext();
-
-  const handleOpen = () => setOpen(prev => !prev);
-  const close = () => setOpen(false);
-
+  const [store] = useState(() => createGlobalLoginStore());
   return (
-    <ContextProvider value={{
-      open,
-      handleOpen,
-      close,
-      currentUser: authState?.user
-    }}>
+    <ContextProvider value={store}>
       {children}
     </ContextProvider>
   )
 }
 
-export const useGlobalLoginContext = useContext;
+export const useGlobalLoginStore = useStore;

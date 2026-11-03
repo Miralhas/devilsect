@@ -85,15 +85,6 @@ export const createReaderSettingsStore = (initState: ReaderSettingsState = initi
       autoScrollPause: () => set({ autoScroll: { ...get().autoScroll, pause: true } }),
       autoScrollUnpause: () => set({ autoScroll: { ...get().autoScroll, pause: false } }),
     }), {
-      partialize: (s) => ({
-        fontSize: s.fontSize,
-        spacing: s.spacing,
-        lineHeight: s.lineHeight,
-        fontFamily: s.fontFamily,
-        textColor: s.textColor,
-        opacity: s.opacity,
-        autoScroll: { ...initState.autoScroll, speed: s.autoScroll.speed },
-      }),
       name: 'reader',
       storage: createJSONStorage(() => localStorage),
     })

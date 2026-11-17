@@ -120,7 +120,7 @@ const LoginForm = ({ redirectUri = "/" }: { redirectUri?: string }) => {
           <GoogleAuthButton redirectUri={redirectUri} />
         </div>
       </div>
-    </form >
+    </form>
   )
 }
 

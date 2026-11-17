@@ -18,6 +18,7 @@ import { Suspense } from "react";
 
 type NovelPageProps = {
   params: Promise<{ slug: string }>;
+  download?: boolean;
 }
 
 const getStaticParamsNovels = async () => {
@@ -47,22 +48,22 @@ export async function generateMetadata({ params }: NovelPageProps): Promise<Meta
   }
 }
 
-const NovelPage = async ({ params }: NovelPageProps) => {
+const NovelPage = async ({ params, download = false }: NovelPageProps) => {
   const { slug } = await params;
   putView(slug);
 
-  const novel = await getNovelBySlug(slug);
-
   return (
     <section id="main-content" className="min-h-[100vh] pb-10 space-y-6">
-      <CachedWrapper novel={novel} />
+      <CachedWrapper slug={slug} download={download} />
     </section>
   );
 }
 
-const CachedWrapper = async ({ novel }: { novel: Novel }) => {
+const CachedWrapper = async ({ slug, download }: { slug: string; download: boolean }) => {
   'use cache'
   cacheLife('days');
+
+  const novel = await getNovelBySlug(slug);
 
   return (
     <>
@@ -75,7 +76,7 @@ const CachedWrapper = async ({ novel }: { novel: Novel }) => {
       />
 
       <InfoSection novel={novel} />
-      <AboutSection novel={novel} />
+      <AboutSection novel={novel} download={download} />
       <Separator orientation="horizontal" className="mb-12" />
       <NovelReviews slug={novel.slug} />
       <Suspense fallback={<Fallback />}>

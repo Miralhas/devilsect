@@ -124,8 +124,8 @@ const DownloadTab = ({ novel }: { novel: Novel }) => {
         </Alert>
       ) : null}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
-        <div className="flex justify-between items-center">
-          <div className="grid grid-cols-2 gap-2 max-w-[320px]">
+        <div className="md:flex space-y-2 justify-between items-center">
+          <div className="grid grid-cols-2 gap-2 w-full md:max-w-[320px]">
             <Controller
               name="start"
               control={form.control}
@@ -162,9 +162,15 @@ const DownloadTab = ({ novel }: { novel: Novel }) => {
               )}
             />
           </div>
-          <div className="space-x-2">
+          <div className="grid grid-cols-1 md:block md:space-x-2 gap-2">
             <Button type="submit" variant="cool" disabled={!!jobId}>Start Download</Button>
-            <Button type="button" onClick={onReset} variant="cool-secondary">Reset</Button>
+            <Button
+              type="button"
+              onClick={onReset}
+              variant="cool-secondary"
+              className="row-start-1"
+            >
+              Reset</Button>
           </div>
         </div>
       </form>

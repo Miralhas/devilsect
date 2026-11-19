@@ -1,10 +1,12 @@
-import { BookOpenText, HistoryIcon, UserIcon } from "lucide-react";
+import { BookOpenText, HistoryIcon, LayoutDashboardIcon, UserIcon } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { Separator } from "../ui/separator";
 import { LEFT_SIDE_NAV_LINKS, NavLink } from "./header";
 import SearchInput from "./search-input";
 import { RefObject } from "react";
+import { useAuthContext } from "@/contexts/use-auth-context";
+import { isAdminCheck } from "@/utils/api-utils";
 
 type MobileMenuProps = {
   containerRef: RefObject<HTMLDivElement | null>;
@@ -12,6 +14,9 @@ type MobileMenuProps = {
 }
 
 const MobileMenu = ({ containerRef, toggleMenu }: MobileMenuProps) => {
+  const { authState } = useAuthContext();
+  const isAdmin = !!authState && isAdminCheck(authState.user);
+
   return (
     <motion.div
       className="bg-secondary w-full absolute z-10 origin-top-right lg:hidden shadow-2xl"
@@ -47,6 +52,12 @@ const MobileMenu = ({ containerRef, toggleMenu }: MobileMenuProps) => {
         <li className="flex flex-col">
           <NavItem href="/profile/history" title="History" icon={HistoryIcon} />
         </li>
+
+        {isAdmin && (
+          <li className="flex flex-col">
+            <NavItem href="/dashboard" title="Dashboard" icon={LayoutDashboardIcon} />
+          </li>
+        )}
       </ul>
     </motion.div>
   )

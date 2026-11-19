@@ -11,12 +11,14 @@ import { createWsrvLoader } from "@/components/wsrvLoader";
 import { useAuthContext } from "@/contexts/use-auth-context";
 import { env } from "@/env";
 import { User } from "@/types/authentication";
-import { BookOpenText, HistoryIcon, LogOutIcon, Mail, UserIcon } from "lucide-react";
+import { isAdminCheck } from "@/utils/api-utils";
+import { BookOpenText, HistoryIcon, LayoutDashboardIcon, LogOutIcon, Mail, UserIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const UserAccount = ({ user }: { user: User }) => {
-  const { logout } = useAuthContext();
+  const { logout, authState } = useAuthContext();
+  const isAdmin = !!authState && isAdminCheck(authState.user);
 
   return (
     <DropdownMenu>
@@ -57,6 +59,17 @@ const UserAccount = ({ user }: { user: User }) => {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator className="mt-3" />
+        {isAdmin && (
+          <>
+            <DropdownMenuItem asChild>
+              <Link href="/dashboard">
+                <LayoutDashboardIcon className="text-zinc-200 mt-[2px]" />
+                Dashboard
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator className="mt-3" />
+          </>
+        )}
         <DropdownMenuItem className="flex items-center" onClick={logout}>
           <LogOutIcon className="text-zinc-200 mt-[2px]" />
           Log out

@@ -170,7 +170,8 @@ const DownloadTab = ({ novel }: { novel: Novel }) => {
               variant="cool-secondary"
               className="row-start-1"
             >
-              Reset</Button>
+              Reset
+            </Button>
           </div>
         </div>
       </form>

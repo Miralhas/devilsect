@@ -23,7 +23,7 @@ const DownloadDetail = ({ id, onFailedJob }: Props) => {
 
   const {
     progress,
-    finish,
+    onFinish,
     onStart,
     onStop
   } = useSimulatedProgressBar({ limit: 98, speed: 0.05 });
@@ -37,7 +37,9 @@ const DownloadDetail = ({ id, onFailedJob }: Props) => {
   useEffect(() => { onStart(); }, []);
 
   useEffect(() => {
-    if (completed) finish();
+    if (completed) {
+      onFinish();
+    };
 
     if (job && failed) {
       onStop();

@@ -10,10 +10,13 @@ type Params = {
 
 const getElapsed = (startedAt: number) => (Date.now() - startedAt) / 1000;
 
-const useSimulatedProgressBar = ({ limit, speed = 0.05, state = false }: Params) => {
+const useSimulatedProgressBar = ({ limit: defaultLimit, speed = 0.05, state = false }: Params) => {
   const startedAt = useRef<number>(Date.now());
   const [progress, setProgress] = useState<number>(0);
+  const [delay, setDelay] = useState<number>(100);
   const [start, setStart] = useState(state);
+  const [finish, setFinish] = useState(false);
+  const [limit, setLimit] = useState(defaultLimit);
 
   useEffect(() => {
     if (!start) return;
@@ -21,15 +24,19 @@ const useSimulatedProgressBar = ({ limit, speed = 0.05, state = false }: Params)
 
     const timer = setTimeout(() => {
       const elapsed = getElapsed(startedAt.current);
-      const nextProgress = 100 * (1 - Math.exp(-speed * elapsed));
+      const nextProgress = finish ? progress + 1 : 100 * (1 - Math.exp(-speed * elapsed));
 
       setProgress(Math.min(nextProgress, limit));
-    }, 100);
+    }, delay);
 
     return () => clearTimeout(timer);
-  }, [progress, limit, speed, start]);
+  }, [progress, limit, speed, start, delay]);
 
-  const finish = () => setProgress(100);
+  const onFinish = () => {
+    setFinish(true);
+    setDelay(10);
+    setLimit(100);
+  };
 
   const onStart = () => {
     reset();
@@ -37,7 +44,7 @@ const useSimulatedProgressBar = ({ limit, speed = 0.05, state = false }: Params)
   }
 
   const onStop = () => setStart(false);
-  
+
   const reset = () => {
     setProgress(0);
     startedAt.current = Date.now();
@@ -45,7 +52,7 @@ const useSimulatedProgressBar = ({ limit, speed = 0.05, state = false }: Params)
 
   return {
     progress,
-    finish,
+    onFinish,
     reset,
     onStart,
     onStop

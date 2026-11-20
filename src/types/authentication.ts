@@ -22,6 +22,12 @@ export type UserInfo = User & {
   registerType: string;
 }
 
+export type UserInfoReadOnly = Omit<UserInfo, 'email' | 'registerType'>;
+
+export type DynamicProfileData =
+  | { readOnly: false; user: UserInfo }
+  | { readOnly: true; user: UserInfoReadOnly };
+
 export type LoginResponse = {
   refreshToken: string;
   accessToken: string;

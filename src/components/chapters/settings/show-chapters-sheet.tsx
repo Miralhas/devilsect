@@ -1,4 +1,5 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetClose,
@@ -10,7 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import { env } from "@/env";
 import { Chapter } from "@/types/chapter";
-import { BookOpenText, Menu } from "lucide-react";
+import { BookOpenText, DownloadIcon, Menu } from "lucide-react";
 import Link from "next/link";
 import ChapterAccordion from "./chapters-accordion";
 
@@ -21,7 +22,7 @@ const ShowChaptersSheet = ({ chapter }: { chapter: Chapter }) => {
         <SheetTrigger asChild>
           <div className="flex gap-3 items-center cursor-pointer">
             <Menu className="text-muted-foreground size-7" />
-            <p className="text-sm md:text-[15px] font-semibold tracking-tight leading-7 text-white line-clamp-1 w-full max-w-[50px] xs:max-w-[140px] md:max-w-[300px]">
+            <p className="sr-only xs:not-sr-only text-sm md:text-[15px] font-semibold tracking-tight leading-7 text-white line-clamp-1 w-full max-w-[50px] xs:max-w-[140px] md:max-w-[300px]">
               {chapter.title}
             </p>
           </div>
@@ -49,6 +50,14 @@ const ShowChaptersSheet = ({ chapter }: { chapter: Chapter }) => {
               <div className="flex items-center gap-1.5 text-muted-foreground">
                 <BookOpenText className="size-4" />
                 <p className="text-[12px] mb-0.5">{chapter.novelChaptersCount} Chapters</p>
+              </div>
+              <div className="mt-auto">
+                <Button className="text-foreground/70 hover:text-foreground rounded-sm text-xs h-7" variant='cool' size='sm' asChild>
+                  <Link href={`/novels/${chapter.novelSlug}/download`}>
+                    Download
+                    <DownloadIcon className="size-3.5" />
+                  </Link>
+                </Button>
               </div>
             </div>
           </SheetHeader>

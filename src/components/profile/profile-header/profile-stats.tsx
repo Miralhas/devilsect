@@ -1,8 +1,8 @@
-import { UserInfo } from "@/types/authentication";
+import { UserInfoReadOnly } from "@/types/authentication";
 
-const ProfileStats = ({ user }: { user: UserInfo }) => {
+const ProfileStats = ({ user }: { user: UserInfoReadOnly }) => {
   return (
-    <div className="w-full grid grid-cols-2 justify-center md:grid-cols-4 gap-3 md:gap-6">
+    <div className="w-full grid grid-cols-2 justify-center md:grid-cols-4 gap-3 md:gap-6 md:max-h-[90px] md:mt-auto">
       <div className="col-span-1 bg-secondary/40 rounded-xl border border-zinc-500/20 p-4  flex flex-col items-center md:items-start">
         <p className="text-xl font-bold">{user.readCount}</p>
         <p className="md:text-lg text-muted-foreground">Read</p>

@@ -2,8 +2,8 @@ import HistoryGrid from "@/components/profile/history/history-grid";
 import HistoryHeader from "@/components/profile/history/history-header";
 import ProfileHeader from "@/components/profile/profile-header";
 import { initialHistoryParams } from "@/lib/schemas/search-params/user-library-params-schema";
-import { getAuthState } from "@/lib/sessions";
-import { getUserLibraryQueryOptionsSession } from "@/service/library/queries/use-get-user-library-with-session";
+import { getUserLibraryByUsernameQueryOptions } from "@/service/library/queries/use-get-user-library-by-username";
+import { getDynamicProfile } from "@/service/user/api/get-dynamic-profile";
 import {
   dehydrate,
   HydrationBoundary,
@@ -19,26 +19,27 @@ export const metadata: Metadata = {
 
 export const instant = false;
 
-const HistoryPage = async () => {
-  const queryClient = new QueryClient();
-  const authstate = await getAuthState();
+const HistoryPage = async (props: PageProps<"/profile/[username]/history">) => {
+  const { username } = await props.params;
+  const profile = await getDynamicProfile(username);
 
-  if (!authstate) {
+  if (!profile) {
     redirect("/login");
   }
 
-  await queryClient.query(getUserLibraryQueryOptionsSession(
+  const queryClient = new QueryClient();
+  await queryClient.query(getUserLibraryByUsernameQueryOptions(
+    profile.user.username,
     initialHistoryParams,
-    authstate.accessToken,
   )).catch(noop);
 
   return (
     <section className="p-4 md:p-10 space-y-12">
-      <ProfileHeader />
+      <ProfileHeader username={username} />
       <div className="w-full space-y-8">
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <HistoryHeader />
-          <HistoryGrid session={authstate.accessToken} />
+          <HistoryHeader profile={profile} />
+          <HistoryGrid profile={profile} />
         </HydrationBoundary>
       </div>
     </section>

@@ -16,11 +16,12 @@ import { User } from "@/types/authentication";
 import { isApiError } from "@/utils/common-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, EyeIcon, EyeOffIcon } from "lucide-react";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-const EditProfileForm = ({ user, handleClose }: { user: User; handleClose: () => void }) => {
+const EditProfileForm = ({ user }: { user: User }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const mutation = useEditProfile();
@@ -41,7 +42,7 @@ const EditProfileForm = ({ user, handleClose }: { user: User; handleClose: () =>
       onSuccess: () => {
         toast.success("Profile updated successfully!");
         revalidatePath("/profile");
-        handleClose();
+        redirect('/profile');
       },
       onError: (error) => {
         console.log(error)

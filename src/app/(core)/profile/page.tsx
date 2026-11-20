@@ -8,14 +8,16 @@ export const metadata: Metadata = {
   title: "Your Profile"
 };
 
-export const instant = false
+export const instant = false;
 
-const ProfilePage = async () => {
+const ProfilePage = async (props: PageProps<"/profile/[username]">) => {
+  const { username } = await props.params;
+
   return (
     <section className="p-4 md:p-10 space-y-12">
-      <ProfileHeader />
+      <ProfileHeader username={username} />
       <Suspense fallback={<ProfileLoading />}>
-        <UserInfoGrid />
+        <UserInfoGrid username={username} />
       </Suspense>
     </section>
   )

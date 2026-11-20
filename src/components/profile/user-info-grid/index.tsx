@@ -1,12 +1,16 @@
 import { getCurrentUserInfo } from "@/service/user/api/get-current-user-info";
+import { getCurrentUserInfoReadOnly } from "@/service/user/api/get-current-user-info-read-only";
+import { UserInfo } from "@/types/authentication";
 import { roleMap } from "@/utils/api-utils";
 import { formatFullDate } from "@/utils/date-utils";
 import { UserIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import RoleBadge from "../profile-header/role-badge";
 
-const UserInfoGrid = async () => {
-  const user = await getCurrentUserInfo();
+const UserInfoGrid = async ({ username }: { username?: string }) => {
+  const isReadOnly = !!username;
+  const user = await (isReadOnly ? getCurrentUserInfoReadOnly(username) : getCurrentUserInfo());
+
   if (!user) redirect("/login");
 
   const lastActivity = user.lastActivity ? formatFullDate(user.lastActivity) : "No activity recorded yet.";
@@ -29,19 +33,9 @@ const UserInfoGrid = async () => {
           </div>
         </div>
 
-        <div className="border-b">
-          <div className="md:grid md:grid-cols-[minmax(0,0.20fr)_minmax(0,1fr)] md:gap-5 space-y-2 md:space-y-0 p-4 duration-300 ease-in-out transition-colors hover:bg-secondary/55">
-            <p className="text-muted-foreground font-medium">Email</p>
-            <p className="text-zinc-300/90 font-medium tracking-tight">{user.email}</p>
-          </div>
-        </div>
-
-        <div className="border-b">
-          <div className="md:grid md:grid-cols-[minmax(0,0.20fr)_minmax(0,1fr)] md:gap-5 space-y-2 md:space-y-0 p-4 duration-300 ease-in-out transition-colors hover:bg-secondary/55">
-            <p className="text-muted-foreground font-medium">Register Type</p>
-            <p className="text-zinc-300/90 font-medium tracking-tight">{user.registerType}</p>
-          </div>
-        </div>
+        {!isReadOnly && (
+          <ProtectedInfo info={user as UserInfo} />
+        )}
 
         <div className="border-b">
           <div className="md:grid md:grid-cols-[minmax(0,0.20fr)_minmax(0,1fr)] md:gap-5 space-y-2 md:space-y-0 p-4 duration-300 ease-in-out transition-colors hover:bg-secondary/55">
@@ -68,6 +62,26 @@ const UserInfoGrid = async () => {
 
       </div>
     </div>
+  )
+}
+
+const ProtectedInfo = ({ info }: { info: UserInfo }) => {
+
+  return (
+    <>
+      <div className="border-b">
+        <div className="md:grid md:grid-cols-[minmax(0,0.20fr)_minmax(0,1fr)] md:gap-5 space-y-2 md:space-y-0 p-4 duration-300 ease-in-out transition-colors hover:bg-secondary/55">
+          <p className="text-muted-foreground font-medium">Email</p>
+          <p className="text-zinc-300/90 font-medium tracking-tight">{info.email}</p>
+        </div>
+      </div>
+      <div className="border-b">
+        <div className="md:grid md:grid-cols-[minmax(0,0.20fr)_minmax(0,1fr)] md:gap-5 space-y-2 md:space-y-0 p-4 duration-300 ease-in-out transition-colors hover:bg-secondary/55">
+          <p className="text-muted-foreground font-medium">Register Type</p>
+          <p className="text-zinc-300/90 font-medium tracking-tight">{info.registerType}</p>
+        </div>
+      </div>
+    </>
   )
 }
 

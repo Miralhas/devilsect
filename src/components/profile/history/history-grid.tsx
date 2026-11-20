@@ -5,7 +5,7 @@ import Loading from "@/components/loading";
 import BookCoverOverlay from "@/components/novel-card/book-cover-overlay";
 import { env } from "@/env";
 import { initialHistoryParams, mapSortKey, nuqsUserLibrarySeachParams } from "@/lib/schemas/search-params/user-library-params-schema";
-import { useGetUserLibraryWithSession } from "@/service/library/queries/use-get-user-library-with-session";
+import { useGetUserLibraryByUsername } from "@/service/library/queries/use-get-user-library-by-username";
 import { formatDate } from "@/utils/date-utils";
 import { BookOpenText } from "lucide-react";
 import Link from "next/link";
@@ -14,14 +14,16 @@ import SizeFilter from "../library/library-filters/size-filter";
 import SortFilter from "../library/library-filters/sort-filter";
 import BookmarkButtonIcon from "./bookmark-button-icon";
 import RemoveBookmarkButtonIcon from "./remove-bookmark-icon";
-const HistoryGrid = ({ session }: { session: string }) => {
+import { DynamicProfileData } from "@/types/authentication";
+
+const HistoryGrid = ({ profile }: { profile: DynamicProfileData }) => {
   const [searchParams] = useQueryStates(nuqsUserLibrarySeachParams);
 
-  const query = useGetUserLibraryWithSession({
+  const query = useGetUserLibraryByUsername(profile.user.username, {
     ...initialHistoryParams,
     sort: mapSortKey(searchParams.sort),
     size: searchParams.size
-  }, session);
+  });
 
   const getProgressPercentage = (current: number, total: number) => {
     return Math.min((current / total) * 100, 100);
@@ -40,11 +42,11 @@ const HistoryGrid = ({ session }: { session: string }) => {
           <BookOpenText className="size-6" />
         </div>
         <h3 className="text-lg font-medium mb-1 md:mb-2">
-          No books in your history
+          No books in {profile.readOnly ? `${profile.user.username}'s ` : 'your'} history
         </h3>
-        <p className="text-sm md:text-base text-muted-foreground max-w-xs md:max-w-sm">
+        {!profile.readOnly && <p className="text-sm md:text-base text-muted-foreground max-w-xs md:max-w-sm">
           Start reading some novels to build your personal library and track your progress.
-        </p>
+        </p>}
       </div>
     );
   }
@@ -133,13 +135,15 @@ const HistoryGrid = ({ session }: { session: string }) => {
                     </div>
                   </div>
 
-                  <div className="text-sm text-muted-foreground absolute top-0 right-0 transition-all duration-300 hover:scale-105 hover:text-accent">
-                    {item.bookmarked ? (
-                      <RemoveBookmarkButtonIcon item={item} />
-                    ) : (
-                      <BookmarkButtonIcon item={item} />
-                    )}
-                  </div>
+                  {!profile.readOnly && (
+                    <div className="text-sm text-muted-foreground absolute top-0 right-0 transition-all duration-300 hover:scale-105 hover:text-accent">
+                      {item.bookmarked ? (
+                        <RemoveBookmarkButtonIcon item={item} />
+                      ) : (
+                        <BookmarkButtonIcon item={item} />
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Desktop Layout */}
@@ -194,13 +198,15 @@ const HistoryGrid = ({ session }: { session: string }) => {
                   <div className="text-sm text-muted-foreground text-center">
                     {formatDate(item.lastReadAt)}
                   </div>
-                  <div className="text-sm text-muted-foreground text-center transition-all duration-300 hover:scale-105 hover:text-accent justify-self-start">
-                    {item.bookmarked ? (
-                      <RemoveBookmarkButtonIcon item={item} />
-                    ) : (
-                      <BookmarkButtonIcon item={item} />
-                    )}
-                  </div>
+                  {!profile.readOnly && (
+                    <div className="text-sm text-muted-foreground text-center transition-all duration-300 hover:scale-105 hover:text-accent justify-self-start">
+                      {item.bookmarked ? (
+                        <RemoveBookmarkButtonIcon item={item} />
+                      ) : (
+                        <BookmarkButtonIcon item={item} />
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             );

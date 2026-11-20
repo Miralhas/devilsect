@@ -9,6 +9,7 @@ import { formatFullDateBR } from "@/utils/date-utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { UserIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export const columns: ColumnDef<UserInfo>[] = [
   {
@@ -25,7 +26,9 @@ export const columns: ColumnDef<UserInfo>[] = [
     enableSorting: false,
   },
   { accessorKey: "id", header: "Id" },
-  { accessorKey: "username", header: "Username" },
+  { accessorKey: "Username", cell: ({ row }) => (
+    <Link href={`/profile/${row.original.username}`}>{row.original.username}</Link>
+  ) },
   { accessorKey: "email", header: "Email" },
   {
     accessorKey: "createdAt", header: "Created At", cell: ({ row }) => {

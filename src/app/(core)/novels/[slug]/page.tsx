@@ -10,7 +10,6 @@ import { SortKey } from "@/lib/schemas/search-params/novel-summaries-params-sche
 import { getAllNovelSlugs } from "@/service/novels/api/get-all-novel-slugs";
 import { getNovelBySlug } from "@/service/novels/api/get-novel-by-slug";
 import { putView } from "@/service/novels/api/put-view";
-import { Novel } from "@/types/novel";
 import { capitalize, getNovelDescription } from "@/utils/string-utils";
 import type { Metadata } from 'next';
 import { cacheLife } from 'next/cache';

@@ -1,9 +1,10 @@
 'use client'
 
+import { DynamicProfileData } from "@/types/authentication";
 import { BookmarkPlus, HistoryIcon } from "lucide-react";
 import { useLayoutEffect, useRef } from "react";
 
-const HistoryHeader = () => {
+const HistoryHeader = ({ profile }: { profile: DynamicProfileData }) => {
   const divRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -25,7 +26,11 @@ const HistoryHeader = () => {
         <h2 className="text-xl md:text-3xl font-semibold">Reading History</h2>
       </div>
       <p className="text-sm text-muted-foreground ">
-        View and return to the novels you’ve recently read.
+        {profile.readOnly ? (
+          `View ${profile.user.username}'s recently read novels.`
+        ) : (
+          'View and return to the novels you’ve recently read.'
+        )}
       </p>
       <div className="w-full bg-secondary/40 mt-4 p-4 space-y-2 border">
         <p className="text-muted-foreground text-sm">

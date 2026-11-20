@@ -26,7 +26,7 @@ const EditProfileModal = ({ open, setOpen, user }: Props) => {
           </DialogDescription>
         </DialogHeader>
         <div className="my-4 space-y-10">
-          <EditProfileForm user={user} handleClose={() => setOpen(false)} />
+          <EditProfileForm user={user} />
         </div>
       </DialogContent>
     </Dialog>

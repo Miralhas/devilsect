@@ -3,29 +3,29 @@
 import Loading from "@/components/loading";
 import { env } from "@/env";
 import { initialLibraryParams, mapFilter, mapSortKey, nuqsUserLibrarySeachParams } from "@/lib/schemas/search-params/user-library-params-schema";
-import { useGetUserLibraryWithSession } from "@/service/library/queries/use-get-user-library-with-session";
+import { useGetUserLibraryByUsername } from "@/service/library/queries/use-get-user-library-by-username";
 import { formatDate } from "@/utils/date-utils";
 import { BookOpenText } from "lucide-react";
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import Link from "next/link";
 import { useQueryStates } from "nuqs";
 import DynamicBlurImage from "../../dynamic-blur-image";
 import BookCoverOverlay from "../../novel-card/book-cover-overlay";
 import EditItemDialog from "./edit-item-dialog";
+import { DynamicProfileData } from "@/types/authentication";
 
 const getProgressPercentage = (current: number, total: number) => {
   return Math.min((current / total) * 100, 100);
 };
 
-const LibraryGrid = ({ session }: { session: string }) => {
+const LibraryGrid = ({ profile }: { profile: DynamicProfileData }) => {
   const [searchParams] = useQueryStates(nuqsUserLibrarySeachParams);
 
-  const query = useGetUserLibraryWithSession({
+  const query = useGetUserLibraryByUsername(profile.user.username, {
     ...initialLibraryParams,
     sort: mapSortKey(searchParams.sort),
     size: searchParams.size,
     filter: mapFilter(searchParams.filter)
-  }, session);
+  });
 
   const noResults = !query.data || query.data?.results.length <= 0;
 
@@ -40,11 +40,12 @@ const LibraryGrid = ({ session }: { session: string }) => {
           <BookOpenText className="size-6" />
         </div>
         <h3 className="text-lg font-medium mb-1 md:mb-2">
-          No books in your library
+          No books in {profile.readOnly ? `${profile.user.username}'s ` : 'your'} library
         </h3>
-        <p className="text-sm md:text-base text-muted-foreground max-w-xs md:max-w-sm">
+        {!profile.readOnly && <p className="text-sm md:text-base text-muted-foreground max-w-xs md:max-w-sm">
           Start reading some novels to build your personal library and track your progress.
         </p>
+        }
       </div>
     );
   }
@@ -127,10 +128,11 @@ const LibraryGrid = ({ session }: { session: string }) => {
                     <span>{formatDate(item.lastReadAt)}</span>
                   </div>
                 </div>
-
-                <div className="text-sm text-muted-foreground absolute top-0 right-0 transition-all duration-300 hover:scale-105 hover:text-accent">
-                  <EditItemDialog display="MOBILE" item={item} />
-                </div>
+                {!profile.readOnly && (
+                  <div className="text-sm text-muted-foreground absolute top-0 right-0 transition-all duration-300 hover:scale-105 hover:text-accent">
+                    <EditItemDialog display="MOBILE" item={item} />
+                  </div>
+                )}
               </div>
 
               {/* Desktop Layout */}
@@ -185,9 +187,11 @@ const LibraryGrid = ({ session }: { session: string }) => {
                 <div className="text-sm text-muted-foreground text-center">
                   {formatDate(item.lastReadAt)}
                 </div>
-                <div className="text-sm text-muted-foreground text-center transition-all duration-300 hover:scale-105 hover:text-accent">
-                  <EditItemDialog display="DESKTOP" item={item} />
-                </div>
+                {!profile.readOnly && (
+                  <div className="text-sm text-muted-foreground text-center transition-all duration-300 hover:scale-105 hover:text-accent">
+                    <EditItemDialog display="DESKTOP" item={item} />
+                  </div>
+                )}
               </div>
             </div>
           );

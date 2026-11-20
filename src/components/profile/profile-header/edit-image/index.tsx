@@ -3,7 +3,7 @@
 import DynamicBlurImage from "@/components/dynamic-blur-image";
 import { env } from "@/env";
 import { useEditProfilePicture } from "@/service/user/mutations/use-edit-profile-picture";
-import { User } from "@/types/authentication";
+import { UserInfoReadOnly } from "@/types/authentication";
 import { cn, isApiError } from "@/utils/common-utils";
 import { Pencil } from "lucide-react";
 import { ChangeEvent, useRef, useState } from 'react';
@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import EditImageModal from "./edit-image-modal";
 
 
-const EditImage = ({ user }: { user: User }) => {
+const EditImage = ({ user }: { user: UserInfoReadOnly }) => {
   const [file, setFile] = useState<File | null>(null);
   const inputref = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);

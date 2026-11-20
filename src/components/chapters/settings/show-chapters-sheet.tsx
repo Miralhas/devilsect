@@ -52,7 +52,7 @@ const ShowChaptersSheet = ({ chapter }: { chapter: Chapter }) => {
                 <p className="text-[12px] mb-0.5">{chapter.novelChaptersCount} Chapters</p>
               </div>
               <div className="mt-auto">
-                <Button className="text-foreground/70 hover:text-foreground rounded-sm text-xs h-7" variant='cool' size='sm' asChild>
+                <Button className="rounded-sm text-xs h-7 text-foreground" variant='cool' size='sm' asChild>
                   <Link href={`/novels/${chapter.novelSlug}/download`}>
                     Download
                     <DownloadIcon className="size-3.5" />
